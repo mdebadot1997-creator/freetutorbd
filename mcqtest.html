@@ -32,6 +32,10 @@
             background: #f5f5f5;
             color: #333;
             line-height: 1.6;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
         /* Header Styles */
@@ -210,6 +214,29 @@
             font-weight: 500;
         }
         
+        /* All Subjects Button */
+        .all-subjects-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .all-subjects-btn:hover {
+            background: #219653;
+        }
+        
         .sidebar-ad {
             min-height: 250px;
             display: flex;
@@ -219,29 +246,6 @@
             border: 1px dashed #ddd;
             border-radius: 4px;
             color: #95a5a6;
-        }
-        
-        /* All Categories Button */
-        .all-categories-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .all-categories-btn:hover {
-            background: #219653;
         }
         
         /* Main Content */
@@ -305,7 +309,6 @@
         .question-item {
             margin-bottom: 30px;
             page-break-inside: avoid;
-            position: relative;
         }
         
         .question-text {
@@ -314,7 +317,6 @@
             margin-bottom: 15px;
             color: #2c3e50;
             font-weight: 500;
-            padding-right: 40px; /* Space for tick mark */
         }
         
         .options-grid {
@@ -330,13 +332,21 @@
             gap: 10px;
             padding: 8px 0;
             border-bottom: 1px dotted #eee;
-            position: relative;
+            cursor: pointer;
         }
         
         .option-label {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 600;
-            color: var(--primary-color);
-            min-width: 30px;
+            color: #666;
+            transition: all 0.3s;
+            flex-shrink: 0;
         }
         
         .option-text {
@@ -344,29 +354,11 @@
             color: #444;
         }
         
-        /* Tick Mark */
-        .tick-mark {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent-color);
-            font-size: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .option-row.selected .tick-mark {
-            opacity: 1;
-        }
-        
-        /* Radio Buttons - Custom Style */
-        .option-input {
-            display: none;
-        }
-        
+        /* Selected Option Style */
         .option-input:checked + .option-label {
-            color: var(--accent-color);
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
         }
         
         .option-input:checked + .option-label + .option-text {
@@ -374,8 +366,9 @@
             font-weight: 500;
         }
         
-        .option-input:checked ~ .tick-mark {
-            opacity: 1;
+        /* Hidden Radio Inputs */
+        .option-input {
+            display: none;
         }
         
         /* Question Bottom Ad */
@@ -586,7 +579,7 @@
             height: 100vh;
             background: white;
             z-index: 1001;
-            transition: left 0.3s;
+            transition: left 0.3s ease;
             overflow-y: auto;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
@@ -610,6 +603,33 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
+            padding: 5px;
+        }
+        
+        .mobile-sidebar-content {
+            padding: 20px;
+        }
+        
+        .mobile-all-subjects-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .mobile-all-subjects-btn:hover {
+            background: #219653;
         }
         
         .overlay {
@@ -621,10 +641,12 @@
             height: 100%;
             background: rgba(0,0,0,0.5);
             z-index: 1000;
+            transition: opacity 0.3s;
         }
         
         .overlay.active {
             display: block;
+            opacity: 1;
         }
         
         /* Responsive Design */
@@ -657,6 +679,7 @@
             
             .main-container {
                 padding: 15px;
+                flex-direction: column;
             }
             
             .exam-info {
@@ -684,45 +707,10 @@
                 font-size: 10px;
             }
             
-            /* Mobile Menu */
-            .mobile-nav {
-                display: none;
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: var(--primary-color);
-                z-index: 999;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            
-            .mobile-nav.active {
-                display: block;
-            }
-            
-            .mobile-nav-links {
-                display: flex;
-                flex-direction: column;
-                padding: 20px;
-            }
-            
-            .mobile-nav-links a {
-                color: white;
-                text-decoration: none;
-                padding: 12px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                font-size: 16px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .mobile-nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            .mobile-nav-links a:hover {
-                color: var(--secondary-color);
+            .timer {
+                min-width: 80px;
+                font-size: 14px;
+                padding: 6px 12px;
             }
         }
         
@@ -735,9 +723,14 @@
                 padding: 15px;
             }
             
+            .question-paper {
+                padding: 10px;
+            }
+            
             .submit-btn {
                 width: 100%;
                 padding: 15px 20px;
+                font-size: 16px;
             }
             
             .score-display {
@@ -749,19 +742,44 @@
                 padding: 20px 0 15px;
             }
             
-            .tick-mark {
-                right: 5px;
-                font-size: 18px;
+            .option-label {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
             }
             
             .question-text {
-                padding-right: 35px;
+                font-size: 15px;
             }
         }
         
-        @media (min-width: 769px) {
-            .mobile-nav {
-                display: none !important;
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                display: none;
+                z-index: 999;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links a {
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
             }
         }
     </style>
@@ -780,7 +798,7 @@
                 </div>
             </div>
             
-            <nav class="nav-links">
+            <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="active"><i class="fas fa-home"></i> হোম</a>
                 <a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
                 <a href="model-test.html"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
@@ -790,16 +808,6 @@
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
-        </div>
-        
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav" id="mobileNav">
-            <div class="mobile-nav-links">
-                <a href="index.html"><i class="fas fa-home"></i> হোম</a>
-                <a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
-                <a href="model-test.html"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
-                <a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a>
-            </div>
         </div>
     </header>
 
@@ -814,12 +822,6 @@
     <div class="main-container">
         <!-- Sidebar (Desktop) -->
         <aside class="sidebar">
-            <!-- All Categories Button -->
-            <button class="all-categories-btn" onclick="loadAllCategoriesQuestions()">
-                <i class="fas fa-layer-group"></i>
-                সব বিষয়ের প্রশ্ন
-            </button>
-            
             <!-- Categories Section -->
             <div class="sidebar-section">
                 <h3 class="sidebar-title">
@@ -828,13 +830,12 @@
                 </h3>
                 <ul class="category-list" id="categoryList">
                     <!-- Categories will be loaded dynamically -->
-                    <li class="category-item">
-                        <div class="item-name">
-                            <span>লোড হচ্ছে...</span>
-                            <span class="item-count">0</span>
-                        </div>
-                    </li>
                 </ul>
+                
+                <!-- All Subjects Button -->
+                <button class="all-subjects-btn" onclick="loadAllSubjectsTest()">
+                    <i class="fas fa-globe"></i> সব বিষয়ের টেস্ট
+                </button>
             </div>
 
             <!-- Jobs Section -->
@@ -845,11 +846,6 @@
                 </h3>
                 <ul class="jobs-list" id="jobsList">
                     <!-- Jobs will be loaded dynamically -->
-                    <li class="job-item">
-                        <div class="item-name">
-                            <span>লোড হচ্ছে...</span>
-                        </div>
-                    </li>
                 </ul>
             </div>
 
@@ -939,32 +935,46 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        
-        <!-- All Categories Button (Mobile) -->
-        <div style="padding: 15px;">
-            <button class="all-categories-btn" onclick="loadAllCategoriesQuestions(); closeMobileSidebar();">
-                <i class="fas fa-layer-group"></i>
-                সব বিষয়ের প্রশ্ন
-            </button>
-        </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">
-                <i class="fas fa-folder"></i>
-                প্রশ্নব্যাংক বিভাগ
-            </h3>
-            <ul class="category-list" id="mobileCategoryList">
-                <!-- Categories will be loaded dynamically -->
-            </ul>
-        </div>
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">
-                <i class="fas fa-briefcase"></i>
-                সাম্প্রতিক চাকরি
-            </h3>
-            <ul class="jobs-list" id="mobileJobsList">
-                <!-- Jobs will be loaded dynamically -->
-            </ul>
+        <div class="mobile-sidebar-content">
+            <!-- Mobile Navigation -->
+            <div style="margin-bottom: 30px;">
+                <a href="index.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
+                    <i class="fas fa-home"></i> হোম
+                </a>
+                <a href="prosnobank.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
+                    <i class="fas fa-question-circle"></i> প্রশ্নব্যাংক
+                </a>
+                <a href="model-test.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
+                    <i class="fas fa-file-alt"></i> মডেল টেস্ট
+                </a>
+                <a href="jobs.html" style="display: block; padding: 12px 0; color: #333; text-decoration: none;">
+                    <i class="fas fa-briefcase"></i> চাকরি
+                </a>
+            </div>
+
+            <!-- Mobile Categories -->
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: var(--primary-color); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-folder"></i> প্রশ্নব্যাংক বিভাগ
+                </h4>
+                <ul class="category-list" id="mobileCategoryList">
+                    <!-- Categories will be loaded dynamically -->
+                </ul>
+                
+                <button class="mobile-all-subjects-btn" onclick="loadAllSubjectsTest()">
+                    <i class="fas fa-globe"></i> সব বিষয়ের টেস্ট
+                </button>
+            </div>
+
+            <!-- Mobile Jobs -->
+            <div>
+                <h4 style="color: var(--primary-color); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-briefcase"></i> সাম্প্রতিক চাকরি
+                </h4>
+                <ul class="jobs-list" id="mobileJobsList">
+                    <!-- Jobs will be loaded dynamically -->
+                </ul>
+            </div>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
@@ -1053,70 +1063,12 @@
             });
         }
 
-        // Load All Categories Questions
-        function loadAllCategoriesQuestions() {
-            document.getElementById('examTitle').textContent = "সব বিষয়ের প্রশ্ন - MCQ টেস্ট";
-            currentCategory = 'all';
+        // Load All Subjects Test
+        function loadAllSubjectsTest() {
+            document.getElementById('examTitle').textContent = "সব বিষয়ের মিক্সড টেস্ট";
             loadMixedQuestions();
             resetTest();
             closeMobileSidebar();
-        }
-
-        function loadMixedQuestions() {
-            const questionPaper = document.getElementById('questionPaper');
-            questionPaper.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
-            
-            // Get questions from all categories
-            db.collection('questions').get()
-                .then(snapshot => {
-                    if (!snapshot.empty) {
-                        const allQuestions = [];
-                        snapshot.forEach(doc => {
-                            allQuestions.push({
-                                id: doc.id,
-                                ...doc.data()
-                            });
-                        });
-                        
-                        // Shuffle and get 14 random questions
-                        const shuffled = allQuestions.sort(() => 0.5 - Math.random());
-                        currentQuestions = shuffled.slice(0, 14);
-                        
-                        displayQuestions();
-                    } else {
-                        loadSampleMixedQuestions();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error loading mixed questions:", error);
-                    loadSampleMixedQuestions();
-                });
-        }
-
-        function loadSampleMixedQuestions() {
-            currentQuestions = [];
-            const sampleCategories = [
-                "বাংলাদেশ বিষয়াবলী",
-                "আন্তর্জাতিক বিষয়াবলী", 
-                "ভূগোল",
-                "বাংলা সাহিত্য",
-                "সাধারণ বিজ্ঞান"
-            ];
-            
-            for (let i = 1; i <= 14; i++) {
-                const category = sampleCategories[Math.floor(Math.random() * sampleCategories.length)];
-                currentQuestions.push({
-                    id: `mixed_${i}`,
-                    question: `নমুনা প্রশ্ন ${i} (${category}): বাংলাদেশের স্বাধীনতা দিবস কত তারিখ?`,
-                    option1: "২৬ মার্চ",
-                    option2: "১৬ ডিসেম্বর", 
-                    option3: "২১ ফেব্রুয়ারি",
-                    option4: "১ এপ্রিল",
-                    correctAnswer: 1,
-                    category: category
-                });
-            }
-            displayQuestions();
         }
 
         // Load Jobs
@@ -1171,33 +1123,86 @@
                 });
         }
 
-        // Load Questions
+        // Load Mixed Questions from all categories
+        function loadMixedQuestions() {
+            currentCategory = 'Mixed';
+            const questionPaper = document.getElementById('questionPaper');
+            questionPaper.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
+            
+            // Get questions from all categories
+            const promises = [];
+            const mixedQuestions = [];
+            
+            // Get 2 questions from each category
+            categories.forEach(category => {
+                promises.push(
+                    db.collection('questions')
+                        .where('category', '==', category.name)
+                        .limit(2)
+                        .get()
+                        .then(snapshot => {
+                            snapshot.forEach(doc => {
+                                mixedQuestions.push({
+                                    id: doc.id,
+                                    ...doc.data()
+                                });
+                            });
+                        })
+                );
+            });
+            
+            Promise.all(promises)
+                .then(() => {
+                    // Shuffle questions
+                    const shuffled = mixedQuestions.sort(() => 0.5 - Math.random());
+                    currentQuestions = shuffled.slice(0, 14);
+                    
+                    if (currentQuestions.length < 14) {
+                        getRandomQuestions(14 - currentQuestions.length);
+                    } else {
+                        displayQuestions();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading mixed questions:", error);
+                    loadSampleQuestions();
+                });
+        }
+
+        // Load Questions by Category
         function loadQuestions(category = '') {
             currentCategory = category;
             const questionPaper = document.getElementById('questionPaper');
             questionPaper.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
             
+            if (category === '') {
+                loadMixedQuestions();
+                return;
+            }
+            
             // Get questions from Firebase
             let query = db.collection('questions');
             
-            if (category && category !== 'all') {
+            if (category) {
                 query = query.where('category', '==', category);
+                document.getElementById('examTitle').textContent = `${category} - MCQ টেস্ট`;
             }
             
-            query.limit(20).get()
+            query.limit(14).get()
                 .then(snapshot => {
                     if (!snapshot.empty) {
-                        const allQuestions = [];
+                        currentQuestions = [];
                         snapshot.forEach(doc => {
-                            allQuestions.push({
+                            currentQuestions.push({
                                 id: doc.id,
                                 ...doc.data()
                             });
                         });
                         
-                        // Shuffle and get 14 random questions
-                        const shuffled = allQuestions.sort(() => 0.5 - Math.random());
-                        currentQuestions = shuffled.slice(0, 14);
+                        // If we don't have enough questions, get random ones
+                        if (currentQuestions.length < 14) {
+                            getRandomQuestions(14 - currentQuestions.length);
+                        }
                         
                         displayQuestions();
                     } else {
@@ -1206,6 +1211,30 @@
                 })
                 .catch(error => {
                     console.error("Error loading questions:", error);
+                    loadSampleQuestions();
+                });
+        }
+
+        function getRandomQuestions(count) {
+            db.collection('questions').get()
+                .then(snapshot => {
+                    const allQuestions = [];
+                    snapshot.forEach(doc => {
+                        allQuestions.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                    
+                    // Shuffle and get random questions
+                    const shuffled = allQuestions.sort(() => 0.5 - Math.random());
+                    const randomQuestions = shuffled.slice(0, count);
+                    
+                    currentQuestions = [...currentQuestions, ...randomQuestions];
+                    displayQuestions();
+                })
+                .catch(error => {
+                    console.error("Error getting random questions:", error);
                     loadSampleQuestions();
                 });
         }
@@ -1220,7 +1249,7 @@
                     option2: "১৬ ডিসেম্বর",
                     option3: "২১ ফেব্রুয়ারি",
                     option4: "১ এপ্রিল",
-                    correctAnswer: 1,
+                    correctAnswer: Math.floor(Math.random() * 4) + 1,
                     category: "বাংলাদেশ বিষয়াবলী"
                 });
             }
@@ -1239,49 +1268,41 @@
                             ${questionNumber}. ${question.question}
                         </div>
                         <div class="options-grid">
-                            <div class="option-row" data-option="1">
+                            <div class="option-row" onclick="selectOption('q${questionNumber}', '1', '${question.id}')">
                                 <input type="radio" 
                                        id="q${questionNumber}_opt1" 
                                        name="q${questionNumber}" 
                                        value="1"
-                                       class="option-input"
-                                       onchange="saveAnswer('${question.id}', 1); showTickMark(this)">
+                                       class="option-input">
                                 <label class="option-label" for="q${questionNumber}_opt1">ক</label>
                                 <div class="option-text">${question.option1}</div>
-                                <div class="tick-mark">✓</div>
                             </div>
-                            <div class="option-row" data-option="2">
+                            <div class="option-row" onclick="selectOption('q${questionNumber}', '2', '${question.id}')">
                                 <input type="radio" 
                                        id="q${questionNumber}_opt2" 
                                        name="q${questionNumber}" 
                                        value="2"
-                                       class="option-input"
-                                       onchange="saveAnswer('${question.id}', 2); showTickMark(this)">
+                                       class="option-input">
                                 <label class="option-label" for="q${questionNumber}_opt2">খ</label>
                                 <div class="option-text">${question.option2}</div>
-                                <div class="tick-mark">✓</div>
                             </div>
-                            <div class="option-row" data-option="3">
+                            <div class="option-row" onclick="selectOption('q${questionNumber}', '3', '${question.id}')">
                                 <input type="radio" 
                                        id="q${questionNumber}_opt3" 
                                        name="q${questionNumber}" 
                                        value="3"
-                                       class="option-input"
-                                       onchange="saveAnswer('${question.id}', 3); showTickMark(this)">
+                                       class="option-input">
                                 <label class="option-label" for="q${questionNumber}_opt3">গ</label>
                                 <div class="option-text">${question.option3}</div>
-                                <div class="tick-mark">✓</div>
                             </div>
-                            <div class="option-row" data-option="4">
+                            <div class="option-row" onclick="selectOption('q${questionNumber}', '4', '${question.id}')">
                                 <input type="radio" 
                                        id="q${questionNumber}_opt4" 
                                        name="q${questionNumber}" 
                                        value="4"
-                                       class="option-input"
-                                       onchange="saveAnswer('${question.id}', 4); showTickMark(this)">
+                                       class="option-input">
                                 <label class="option-label" for="q${questionNumber}_opt4">ঘ</label>
                                 <div class="option-text">${question.option4}</div>
-                                <div class="tick-mark">✓</div>
                             </div>
                         </div>
                     </div>
@@ -1293,17 +1314,19 @@
             restoreAnswers();
         }
 
-        function showTickMark(radioButton) {
-            // Remove selected class from all options in this question
-            const questionItem = radioButton.closest('.question-item');
-            const allOptionRows = questionItem.querySelectorAll('.option-row');
-            allOptionRows.forEach(row => {
-                row.classList.remove('selected');
+        function selectOption(questionName, optionValue, questionId) {
+            // Uncheck all options for this question
+            const options = document.querySelectorAll(`input[name="${questionName}"]`);
+            options.forEach(option => {
+                option.checked = false;
             });
             
-            // Add selected class to the clicked option
-            const selectedRow = radioButton.closest('.option-row');
-            selectedRow.classList.add('selected');
+            // Check the selected option
+            const selectedOption = document.querySelector(`input[name="${questionName}"][value="${optionValue}"]`);
+            if (selectedOption) {
+                selectedOption.checked = true;
+                saveAnswer(questionId, parseInt(optionValue));
+            }
         }
 
         function saveAnswer(questionId, answer) {
@@ -1318,14 +1341,13 @@
             if (savedAnswers) {
                 userAnswers = JSON.parse(savedAnswers);
                 
-                // Restore radio button states and tick marks
+                // Restore radio button states
                 currentQuestions.forEach((question, index) => {
                     const questionNumber = index + 1;
                     if (userAnswers[question.id]) {
                         const radioBtn = document.querySelector(`input[name="q${questionNumber}"][value="${userAnswers[question.id]}"]`);
                         if (radioBtn) {
                             radioBtn.checked = true;
-                            showTickMark(radioBtn);
                         }
                     }
                 });
@@ -1333,7 +1355,6 @@
         }
 
         function loadCategoryQuestions(categoryName) {
-            document.getElementById('examTitle').textContent = `${categoryName} - MCQ টেস্ট`;
             loadQuestions(categoryName);
             resetTest();
             closeMobileSidebar();
@@ -1390,6 +1411,26 @@
             
             // Clear saved answers
             localStorage.removeItem('mcqAnswers');
+            
+            // Track test completion in Firebase
+            saveTestResult(score, totalQuestions, percentage);
+        }
+
+        function saveTestResult(score, total, percentage) {
+            const testResult = {
+                score: score,
+                total: total,
+                percentage: percentage,
+                category: currentCategory,
+                timestamp: new Date(),
+                userAgent: navigator.userAgent
+            };
+            
+            // Save to Firebase
+            db.collection('testResults').add(testResult)
+                .catch(error => {
+                    console.error("Error saving test result:", error);
+                });
         }
 
         function displayAnswerReview(score, totalQuestions) {
@@ -1455,15 +1496,10 @@
             
             startTimer();
             
-            // Clear all radio buttons and tick marks
+            // Clear all radio buttons
             const radioButtons = document.querySelectorAll('.option-input');
             radioButtons.forEach(radio => {
                 radio.checked = false;
-            });
-            
-            const optionRows = document.querySelectorAll('.option-row');
-            optionRows.forEach(row => {
-                row.classList.remove('selected');
             });
             
             // Clear localStorage
@@ -1498,18 +1534,38 @@
                 .catch(error => console.error("Error loading question ad:", error));
         }
 
-        // Mobile Menu Functions
+        // Mobile Navigation Functions
         function setupEventListeners() {
-            // Mobile menu
-            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+            // Mobile menu button
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            const mobileSidebarBtn = document.getElementById('mobileSidebarBtn');
+            
+            // Toggle mobile navigation
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                }
+            });
+            
+            // Mobile sidebar
+            document.getElementById('mobileMenuBtn').addEventListener('click', openMobileSidebar);
+            document.getElementById('mobileSidebarClose').addEventListener('click', closeMobileSidebar);
+            document.getElementById('overlay').addEventListener('click', closeMobileSidebar);
             
             // Submit button
             document.getElementById('submitBtn').addEventListener('click', submitTest);
             
             // Test again button
             document.getElementById('testAgainBtn').addEventListener('click', function() {
-                if (currentCategory === 'all') {
-                    loadAllCategoriesQuestions();
+                if (currentCategory === 'Mixed') {
+                    loadMixedQuestions();
                 } else {
                     loadQuestions(currentCategory);
                 }
@@ -1526,32 +1582,16 @@
             });
         }
 
-        function toggleMobileMenu() {
-            const mobileNav = document.getElementById('mobileNav');
-            mobileNav.classList.toggle('active');
-        }
-
         function openMobileSidebar() {
             document.getElementById('mobileSidebar').classList.add('active');
             document.getElementById('overlay').classList.add('active');
+            document.getElementById('navLinks').classList.remove('active');
         }
 
         function closeMobileSidebar() {
             document.getElementById('mobileSidebar').classList.remove('active');
             document.getElementById('overlay').classList.remove('active');
         }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            
-            if (mobileNav.classList.contains('active') && 
-                !mobileNav.contains(event.target) && 
-                !mobileMenuBtn.contains(event.target)) {
-                mobileNav.classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
