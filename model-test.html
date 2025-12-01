@@ -560,20 +560,7 @@
             <p style="color: #555; text-align: center; margin-bottom: 30px;">প্রস্তুতি নিন বিনামূল্যে, আপনার দক্ষতা যাচাই করুন</p>
             
             <div class="test-grid" id="tests-container">
-                <div class="test-card">
-                    <h3>বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১</h3>
-                    <div class="test-meta">
-                        <span class="meta-item"><i class="fas fa-clock"></i> ৬০ মিনিট</span>
-                        <span class="meta-item"><i class="fas fa-question-circle"></i> ১০০ প্রশ্ন</span>
-                        <span class="meta-item"><i class="fas fa-star"></i> ১০০ মার্কস</span>
-                    </div>
-                    <p style="color: #666; margin-bottom: 20px;">বিসিএস প্রিলিমিনারি পরীক্ষার জন্য প্রস্তুতিমূলক টেস্ট</p>
-                    <button class="start-btn" onclick="startTest('test1')">
-                        <i class="fas fa-play-circle"></i> শুরু করুন
-                    </button>
-                </div>
-                
-                <!-- More tests will be loaded dynamically -->
+                <!-- Tests will be loaded here -->
             </div>
         </div>
         
@@ -636,28 +623,6 @@
                     
                     <div id="questions-container">
                         <!-- Questions will be loaded here -->
-                        <div class="question-card">
-                            <div class="question-number">১</div>
-                            <div class="question-text">বাংলাদেশের স্বাধীনতা দিবস কোন তারিখে?</div>
-                            <div class="options-container">
-                                <label class="option-label">
-                                    <input type="radio" name="q1" value="1" class="option-radio">
-                                    <span class="option-text">২৬ মার্চ</span>
-                                </label>
-                                <label class="option-label">
-                                    <input type="radio" name="q1" value="2" class="option-radio">
-                                    <span class="option-text">১৬ ডিসেম্বর</span>
-                                </label>
-                                <label class="option-label">
-                                    <input type="radio" name="q1" value="3" class="option-radio">
-                                    <span class="option-text">২১ ফেব্রুয়ারি</span>
-                                </label>
-                                <label class="option-label">
-                                    <input type="radio" name="q1" value="4" class="option-radio">
-                                    <span class="option-text">১ এপ্রিল</span>
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     
                     <!-- Bottom Ad -->
@@ -769,32 +734,27 @@
         let timeLeft = 0;
         let userAnswers = {};
         let testStarted = false;
-        let adsEnabled = true; // Change to false to hide ads
+        let adsEnabled = true;
 
         // ==================== PAGE LOAD ====================
         document.addEventListener('DOMContentLoaded', function() {
             loadLogo();
             loadTests();
             setupEventListeners();
-            
-            // Hide/show ads based on setting
             toggleAds(adsEnabled);
         });
 
         // ==================== LOGO LOADING ====================
         function loadLogo() {
-            // Try to load logo from Firebase
             db.collection('settings').doc('logo').get()
                 .then(doc => {
                     if (doc.exists && doc.data().url) {
                         document.getElementById('site-logo').src = doc.data().url;
                     } else {
-                        // Default logo
                         document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
                     }
                 })
                 .catch(() => {
-                    // Fallback logo
                     document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
                 });
         }
@@ -809,15 +769,6 @@
                     ad.classList.add('hidden');
                 }
             });
-            
-            // You can add AdSense or Adstra code here
-            if (show) {
-                // Example AdSense code (replace with your actual code)
-                /*
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
-                    crossorigin="anonymous"></script>
-                */
-            }
         }
 
         // ==================== TESTS LOADING ====================
@@ -830,7 +781,6 @@
                 </div>
             `;
             
-            // Load published tests from Firebase
             db.collection('exams').where('status', '==', 'published').get()
                 .then(snapshot => {
                     if (snapshot.empty) {
@@ -879,11 +829,9 @@
 
         // ==================== TEST START ====================
         function startTest(testId) {
-            // Show test page
             document.getElementById('test-selection-page').style.display = 'none';
             document.getElementById('test-page').style.display = 'block';
             
-            // Load test data
             db.collection('exams').doc(testId).get()
                 .then(doc => {
                     if (doc.exists) {
@@ -892,17 +840,14 @@
                             ...doc.data()
                         };
                         
-                        // Update test info
                         document.getElementById('test-title').textContent = currentTest.title;
                         document.getElementById('test-time').textContent = currentTest.timeLimit;
                         document.getElementById('test-questions').textContent = currentTest.totalQuestions;
                         document.getElementById('test-total-marks').textContent = currentTest.totalQuestions * currentTest.marksPerQuestion;
                         
-                        // Initialize timer
-                        timeLeft = currentTest.timeLimit * 60; // Convert to seconds
+                        timeLeft = currentTest.timeLimit * 60;
                         updateTimerDisplay();
                         
-                        // Load questions
                         loadQuestions();
                     }
                 })
@@ -922,18 +867,73 @@
                 </div>
             `;
             
-            // For now, we'll use sample questions
-            // In production, you should load questions from Firebase
-            setTimeout(() => {
-                showSampleQuestions();
-            }, 1000);
+            // Load questions from Firebase
+            db.collection('questions').limit(20).get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        showSampleQuestions();
+                        return;
+                    }
+                    
+                    let html = '';
+                    let questionCount = 0;
+                    
+                    snapshot.forEach(doc => {
+                        const question = doc.data();
+                        questionCount++;
+                        
+                        html += `
+                            <div class="question-card">
+                                <div class="question-number">${questionCount}</div>
+                                <div class="question-text">${question.question}</div>
+                                <div class="options-container">
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 1)">
+                                        <input type="radio" name="q${questionCount}" value="1" class="option-radio">
+                                        <span class="option-text">${question.option1}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 2)">
+                                        <input type="radio" name="q${questionCount}" value="2" class="option-radio">
+                                        <span class="option-text">${question.option2}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 3)">
+                                        <input type="radio" name="q${questionCount}" value="3" class="option-radio">
+                                        <span class="option-text">${question.option3}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 4)">
+                                        <input type="radio" name="q${questionCount}" value="4" class="option-radio">
+                                        <span class="option-text">${question.option4}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    questionsContainer.innerHTML = html;
+                    
+                    // Store questions data
+                    currentTest.questions = [];
+                    snapshot.forEach(doc => {
+                        const q = doc.data();
+                        currentTest.questions.push({
+                            id: currentTest.questions.length + 1,
+                            question: q.question,
+                            options: [q.option1, q.option2, q.option3, q.option4],
+                            correctAnswer: q.correctAnswer
+                        });
+                    });
+                    
+                    checkIfAllAnswered();
+                })
+                .catch(error => {
+                    console.error('Error loading questions:', error);
+                    showSampleQuestions();
+                });
         }
 
         function showSampleQuestions() {
             const questionsContainer = document.getElementById('questions-container');
             let html = '';
             
-            // Sample questions (replace with actual questions from Firebase)
             const sampleQuestions = [
                 {
                     id: 1,
@@ -952,18 +952,6 @@
                     question: "বাংলাদেশের জাতীয় ফুল কোনটি?",
                     options: ["গোলাপ", "কদম", "শাপলা", "গাঁদা"],
                     correctAnswer: 3
-                },
-                {
-                    id: 4,
-                    question: "বাংলাদেশের রাজধানীর নাম কি?",
-                    options: ["চট্টগ্রাম", "ঢাকা", "খুলনা", "রাজশাহী"],
-                    correctAnswer: 2
-                },
-                {
-                    id: 5,
-                    question: "বাংলাদেশের মুক্তিযুদ্ধ কত সালে হয়?",
-                    options: ["১৯৬৫", "১৯৭১", "১৯৮১", "১৯৯১"],
-                    correctAnswer: 2
                 }
             ];
             
@@ -973,28 +961,36 @@
                         <div class="question-number">${index + 1}</div>
                         <div class="question-text">${q.question}</div>
                         <div class="options-container">
-                            ${q.options.map((option, optIndex) => `
-                                <label class="option-label" onclick="selectAnswer(${q.id}, ${optIndex + 1})">
-                                    <input type="radio" name="q${q.id}" value="${optIndex + 1}" class="option-radio">
-                                    <span class="option-text">${option}</span>
-                                </label>
-                            `).join('')}
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 1)">
+                                <input type="radio" name="q${q.id}" value="1" class="option-radio">
+                                <span class="option-text">${q.options[0]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 2)">
+                                <input type="radio" name="q${q.id}" value="2" class="option-radio">
+                                <span class="option-text">${q.options[1]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 3)">
+                                <input type="radio" name="q${q.id}" value="3" class="option-radio">
+                                <span class="option-text">${q.options[2]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 4)">
+                                <input type="radio" name="q${q.id}" value="4" class="option-radio">
+                                <span class="option-text">${q.options[3]}</span>
+                            </label>
                         </div>
                     </div>
                 `;
             });
             
             questionsContainer.innerHTML = html;
-            
-            // Store question data
             currentTest.questions = sampleQuestions;
+            checkIfAllAnswered();
         }
 
         // ==================== ANSWER SELECTION ====================
         function selectAnswer(questionId, answerIndex) {
             userAnswers[questionId] = answerIndex;
             
-            // Update UI
             const labels = document.querySelectorAll(`input[name="q${questionId}"]`);
             labels.forEach((label, index) => {
                 const parent = label.parentElement;
@@ -1005,7 +1001,6 @@
                 }
             });
             
-            // Check if all questions answered
             checkIfAllAnswered();
         }
 
@@ -1013,9 +1008,8 @@
             if (currentTest && currentTest.questions) {
                 const totalQuestions = currentTest.questions.length;
                 const answeredQuestions = Object.keys(userAnswers).length;
-                
-                // Enable submit button if all questions answered
                 const submitBtn = document.getElementById('submit-btn');
+                
                 if (answeredQuestions === totalQuestions) {
                     submitBtn.disabled = false;
                 }
@@ -1037,8 +1031,7 @@
                     timeUp();
                 }
                 
-                // Warning when 5 minutes left
-                if (timeLeft === 300) { // 5 minutes = 300 seconds
+                if (timeLeft === 300) {
                     showTimeWarning();
                 }
             }, 1000);
@@ -1051,7 +1044,6 @@
             
             timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            // Add warning class when less than 5 minutes
             if (timeLeft < 300) {
                 timerElement.classList.add('warning');
             } else {
@@ -1070,7 +1062,6 @@
 
         // ==================== FORM VALIDATION ====================
         function setupEventListeners() {
-            // User info form validation
             const userNameInput = document.getElementById('user-name');
             const userPhoneInput = document.getElementById('user-phone');
             const submitBtn = document.getElementById('submit-btn');
@@ -1079,15 +1070,12 @@
                 const nameValid = userNameInput.value.trim().length > 0;
                 const phoneValid = /^(?:\+88|01)?(?:\d{11}|\d{13})$/.test(userPhoneInput.value.trim());
                 
-                // Update display name
                 if (nameValid) {
                     document.getElementById('display-name').textContent = userNameInput.value.trim();
                 }
                 
-                // Enable/disable submit button
                 submitBtn.disabled = !(nameValid && phoneValid);
                 
-                // Start timer when form is valid and test hasn't started
                 if (nameValid && phoneValid && !testStarted) {
                     testStarted = true;
                     startTimer();
@@ -1100,7 +1088,6 @@
 
         // ==================== TEST SUBMISSION ====================
         function submitTest() {
-            // Validate user info
             const userName = document.getElementById('user-name').value.trim();
             const userPhone = document.getElementById('user-phone').value.trim();
             const userEmail = document.getElementById('user-email').value.trim();
@@ -1110,7 +1097,6 @@
                 return;
             }
             
-            // Calculate score
             let score = 0;
             let totalQuestions = currentTest.questions.length;
             
@@ -1120,10 +1106,8 @@
                 }
             });
             
-            // Calculate time taken
             const timeTaken = (currentTest.timeLimit * 60) - timeLeft;
             
-            // Prepare result data
             const resultData = {
                 userName: userName,
                 phoneNumber: userPhone,
@@ -1139,13 +1123,9 @@
                 browserInfo: navigator.userAgent
             };
             
-            // Save to Firebase
             db.collection('results').add(resultData)
                 .then(docRef => {
-                    // Show success modal
                     showResultModal(score, totalQuestions * (currentTest.marksPerQuestion || 1), timeTaken);
-                    
-                    // Reset for next test
                     resetTest();
                 })
                 .catch(error => {
@@ -1176,7 +1156,6 @@
 
         function closeModal() {
             document.getElementById('result-modal').style.display = 'none';
-            // Go back to test selection
             document.getElementById('test-selection-page').style.display = 'block';
             document.getElementById('test-page').style.display = 'none';
         }
@@ -1191,7 +1170,6 @@
                 timerInterval = null;
             }
             
-            // Reset form
             document.getElementById('user-name').value = '';
             document.getElementById('user-phone').value = '';
             document.getElementById('user-email').value = '';
@@ -1200,24 +1178,21 @@
 
         // ==================== UTILITY FUNCTIONS ====================
         function getIPAddress() {
-            // This is a simple method; for production use a proper IP detection service
             return localStorage.getItem('user_ip') || 'Unknown';
         }
 
-        // ==================== INITIALIZATION ====================
-        // You can add AdSense code here
         function initializeAds() {
             if (adsEnabled) {
-                // Example: Add AdSense script
-                const adScript = document.createElement('script');
-                adScript.async = true;
-                adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-                adScript.setAttribute('data-ad-client', 'YOUR_AD_CLIENT_ID');
-                document.head.appendChild(adScript);
+                // Add your AdSense or Adstra code here
+                // Example:
+                // const adScript = document.createElement('script');
+                // adScript.async = true;
+                // adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+                // adScript.setAttribute('data-ad-client', 'YOUR_AD_CLIENT_ID');
+                // document.head.appendChild(adScript);
             }
         }
 
-        // Initialize ads on page load
         window.addEventListener('load', initializeAds);
 
     </script>
