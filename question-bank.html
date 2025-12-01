@@ -15,12 +15,9 @@
         }
         
         body {
-            background: #f8f9fa;
+            background: #ffffff;
             color: #333;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         
         /* Header */
@@ -37,47 +34,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 15px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         
-        .logo-icon {
-            font-size: 32px;
+        .logo h1 {
             color: #3498db;
-        }
-        
-        .logo-text h1 {
-            color: #3498db;
-            font-size: 24px;
-            margin-bottom: 2px;
-        }
-        
-        .logo-text p {
-            color: #bdc3c7;
-            font-size: 13px;
+            font-size: 22px;
         }
         
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
         
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 0;
-        }
-        
-        .nav-links a:hover {
-            color: #3498db;
         }
         
         .nav-links a.active {
@@ -89,393 +69,282 @@
         .main-container {
             display: flex;
             max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-            flex: 1;
-            gap: 30px;
+            margin: 20px auto;
+            padding: 0 15px;
+            gap: 20px;
         }
         
         /* Left Sidebar - Categories */
         .sidebar-left {
-            width: 250px;
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            height: fit-content;
+            width: 220px;
+        }
+        
+        .category-section, .jobs-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
         }
         
         .section-title {
             color: #2c3e50;
-            font-size: 18px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            font-size: 16px;
             font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #dee2e6;
         }
         
-        .category-list {
+        .category-list, .jobs-list {
             list-style: none;
         }
         
-        .category-item {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f1f1f1;
+        .category-item, .job-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
             cursor: pointer;
-            transition: all 0.3s;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
         }
         
-        .category-item:hover {
-            background: #f0f7ff;
+        .category-item:last-child, .job-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-item:hover, .job-item:hover {
             color: #3498db;
         }
         
         .category-item.active {
-            background: #e3f2fd;
             color: #3498db;
-            border-left: 3px solid #3498db;
-        }
-        
-        .category-name {
-            font-size: 15px;
             font-weight: 500;
         }
         
-        .question-count {
+        .item-count {
             background: #e3f2fd;
             color: #3498db;
-            padding: 2px 8px;
-            border-radius: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
             font-size: 12px;
-            font-weight: 500;
         }
         
-        /* Jobs Section */
-        .jobs-section {
-            margin-top: 30px;
-        }
-        
-        .job-item {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f1f1f1;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .job-item:hover {
-            background: #f0f7ff;
-            color: #3498db;
-        }
-        
-        .job-position {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 3px;
-        }
-        
-        .job-company {
-            font-size: 13px;
-            color: #666;
-        }
-        
-        /* Main Content */
+        /* Main Content - Questions */
         .content {
             flex: 1;
         }
         
-        /* Right Sidebar - Ads */
-        .sidebar-right {
-            width: 250px;
+        .questions-container {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
         }
         
-        .ad-container {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            text-align: center;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px dashed #ddd;
-        }
-        
-        .ad-placeholder {
-            color: #95a5a6;
-        }
-        
-        .ad-placeholder i {
-            font-size: 30px;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        /* Questions Area */
-        .questions-header {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .questions-title {
+        .current-category {
             color: #2c3e50;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
         }
         
-        .questions-subtitle {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .questions-list {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        /* Question Item */
+        /* Question Item - Simple Line Design */
         .question-item {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
         }
         
         .question-item:last-child {
             border-bottom: none;
         }
         
+        .question-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .question-number {
             color: #3498db;
             font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 16px;
+            min-width: 70px;
+            font-size: 14px;
         }
         
         .question-text {
-            font-size: 16px;
-            margin-bottom: 20px;
+            flex: 1;
+            font-size: 15px;
             color: #2c3e50;
             line-height: 1.5;
         }
         
-        .options-list {
-            margin-bottom: 20px;
+        .answer-toggle {
+            color: #27ae60;
+            background: none;
+            border: 1px solid #27ae60;
+            padding: 5px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 13px;
+            min-width: 80px;
+            text-align: center;
+            transition: all 0.3s;
         }
         
-        .option {
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 8px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: border-color 0.3s;
-        }
-        
-        .option:hover {
-            border-color: #3498db;
-            background: #f8f9fa;
-        }
-        
-        .option-letter {
-            background: #3498db;
+        .answer-toggle:hover {
+            background: #27ae60;
             color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+        
+        .answer-content {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            border-left: 3px solid #27ae60;
             font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .option-text {
-            flex: 1;
-        }
-        
-        .answer-section {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f0f7ff;
-            border-radius: 5px;
-            border: 1px solid #cce5ff;
+            color: #2c3e50;
             display: none;
         }
         
-        .answer-header {
-            color: #0066cc;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 15px;
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
         }
         
-        .correct-answer {
-            color: #0066cc;
-            font-size: 15px;
+        .page-btn {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 13px;
+            min-width: 30px;
+            text-align: center;
         }
         
-        .show-answer-btn {
+        .page-btn.active {
             background: #3498db;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-        
-        .show-answer-btn:hover {
-            background: #2980b9;
-        }
-        
-        /* Search Bar */
-        .search-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .search-box {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-        
-        .search-input:focus {
-            outline: none;
             border-color: #3498db;
         }
         
-        .search-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
+        .page-btn:hover:not(.active) {
+            background: #e9ecef;
         }
         
         /* Footer */
         .footer {
             background: #2c3e50;
             color: white;
-            padding: 40px 0 20px;
-            margin-top: 50px;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-section h4 {
-            color: #3498db;
-            font-size: 16px;
-            margin-bottom: 15px;
-            font-weight: 600;
+            padding: 20px 0;
+            margin-top: 30px;
+            text-align: center;
         }
         
         .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
         
         .footer-links a {
             color: #bdc3c7;
             text-decoration: none;
             font-size: 14px;
-            transition: color 0.3s;
         }
         
         .footer-links a:hover {
             color: #3498db;
         }
         
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        .copyright {
             color: #95a5a6;
             font-size: 13px;
         }
         
-        .footer-bottom-links {
-            margin-bottom: 10px;
-        }
-        
-        .footer-bottom-links a {
-            color: #bdc3c7;
-            text-decoration: none;
-            font-size: 13px;
-            margin: 0 10px;
-        }
-        
-        .footer-bottom-links a:hover {
-            color: #3498db;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .main-container {
-                flex-direction: column;
-            }
-            
-            .sidebar-left, .sidebar-right {
-                width: 100%;
-            }
-        }
-        
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
             
             .nav-links {
                 gap: 15px;
             }
             
-            .search-box {
+            .main-container {
                 flex-direction: column;
+                gap: 15px;
             }
             
-            .search-btn {
-                padding: 12px;
+            .sidebar-left {
+                width: 100%;
             }
+            
+            .question-line {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .question-number {
+                min-width: auto;
+            }
+            
+            .answer-toggle {
+                align-self: flex-end;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            /* Mobile: শুধু Copyright দেখাবে */
+            .footer-links {
+                display: none;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            /* Desktop: সবকিছু দেখাবে */
+            .footer-links {
+                display: flex;
+            }
+        }
+        
+        /* Right Sidebar - Ads */
+        .sidebar-right {
+            width: 220px;
+        }
+        
+        .ad-space {
+            background: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 13px;
+            text-align: center;
         }
     </style>
 </head>
@@ -484,13 +353,7 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>FreeTutorBD</h1>
-                    <p>প্রশ্নব্যাংক</p>
-                </div>
+                <h1>FreeTutorBD</h1>
             </div>
             
             <nav class="nav-links">
@@ -504,144 +367,72 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Left Sidebar - Categories -->
+        <!-- Left Sidebar - Categories & Jobs -->
         <aside class="sidebar-left">
-            <div>
-                <h3 class="section-title">বিষয়ভিত্তিক প্রশ্ন</h3>
+            <div class="category-section">
+                <div class="section-title">বিষয়ভিত্তিক প্রশ্ন</div>
                 <ul class="category-list" id="category-list">
                     <!-- Categories will be loaded dynamically -->
                     <li class="category-item active">
-                        <span class="category-name">সব প্রশ্ন</span>
-                        <span class="question-count" id="all-questions-count">0</span>
+                        <span>সব প্রশ্ন</span>
+                        <span class="item-count" id="all-count">0</span>
                     </li>
                 </ul>
             </div>
             
             <div class="jobs-section">
-                <h3 class="section-title">চাকরি</h3>
-                <div id="jobs-list">
+                <div class="section-title">চাকরি</div>
+                <ul class="jobs-list" id="jobs-list">
                     <!-- Jobs will be loaded dynamically -->
-                    <div class="job-item">
-                        <div class="job-position">সহকারী প্রোগ্রামার</div>
-                        <div class="job-company">আইসিটি বিভাগ</div>
-                    </div>
-                </div>
+                </ul>
             </div>
         </aside>
 
         <!-- Main Content - Questions -->
         <main class="content">
-            <!-- Search Bar -->
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" class="search-input" id="search-input" placeholder="প্রশ্ন খুঁজুন...">
-                    <button class="search-btn" id="search-btn">
-                        <i class="fas fa-search"></i> খুঁজুন
-                    </button>
+            <div class="questions-container">
+                <div class="current-category" id="current-category-title">
+                    সব প্রশ্ন (<span id="current-count">0</span>টি)
                 </div>
-            </div>
-
-            <!-- Questions Header -->
-            <div class="questions-header">
-                <h2 class="questions-title" id="current-category-title">সব প্রশ্ন</h2>
-                <p class="questions-subtitle" id="current-category-count">মোট <span id="total-questions-show">0</span>টি প্রশ্ন</p>
-            </div>
-
-            <!-- Questions List -->
-            <div class="questions-list" id="questions-list">
-                <!-- Questions will be loaded dynamically -->
-                <div style="text-align: center; padding: 40px; color: #666;">
-                    <i class="fas fa-spinner fa-spin fa-2x" style="margin-bottom: 20px;"></i>
-                    <p>প্রশ্ন লোড হচ্ছে...</p>
+                
+                <div id="questions-list">
+                    <!-- Questions will be loaded dynamically -->
+                    <div style="text-align: center; padding: 30px; color: #666;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>প্রশ্ন লোড হচ্ছে...</p>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <!-- Pagination will be loaded dynamically -->
                 </div>
             </div>
         </main>
 
         <!-- Right Sidebar - Ads -->
         <aside class="sidebar-right">
-            <!-- Top Ad -->
-            <div class="ad-container" id="ad-top">
-                <div class="ad-placeholder">
-                    <i class="fas fa-ad"></i>
-                    <p>বিজ্ঞাপন</p>
-                    <small>250x200</small>
-                </div>
+            <div class="ad-space">
+                বিজ্ঞাপনের জন্য<br>এই স্থান
             </div>
-            
-            <!-- Middle Ad -->
-            <div class="ad-container" id="ad-middle">
-                <div class="ad-placeholder">
-                    <i class="fas fa-ad"></i>
-                    <p>বিজ্ঞাপন</p>
-                    <small>250x200</small>
-                </div>
+            <div class="ad-space">
+                বিজ্ঞাপনের জন্য<br>এই স্থান
             </div>
-            
-            <!-- Bottom Ad -->
-            <div class="ad-container" id="ad-bottom">
-                <div class="ad-placeholder">
-                    <i class="fas fa-ad"></i>
-                    <p>বিজ্ঞাপন</p>
-                    <small>250x200</small>
-                </div>
+            <div class="ad-space">
+                বিজ্ঞাপনের জন্য<br>এই স্থান
             </div>
         </aside>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>সাপোর্ট</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">সাহায্য কেন্দ্র</a></li>
-                        <li><a href="#">টিউটোরিয়াল</a></li>
-                        <li><a href="#">সাধারণ প্রশ্ন</a></li>
-                        <li><a href="#">রিপোর্ট সমস্যা</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>যোগাযোগ</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:contact@freetutorbd.com">contact@freetutorbd.com</a></li>
-                        <li><a href="tel:+8801700000000">+৮৮০ ১৭০০-০০০০০০</a></li>
-                        <li><a href="#">ফেসবুক পেজ</a></li>
-                        <li><a href="#">টেলিগ্রাম গ্রুপ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>FAQ</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">কিভাবে ব্যবহার করব?</a></li>
-                        <li><a href="#">কিভাবে টেস্ট দিব?</a></li>
-                        <li><a href="#">প্রশ্ন কিভাবে যোগ করব?</a></li>
-                        <li><a href="#">রেজাল্ট কিভাবে দেখব?</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>প্রাইভেসি পলিসি</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">ডেটা প্রাইভেসি</a></li>
-                        <li><a href="#">কুকি পলিসি</a></li>
-                        <li><a href="#">গোপনীয়তা নীতি</a></li>
-                        <li><a href="#">সুরক্ষা নীতি</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <div class="footer-bottom-links">
-                    <a href="#">টার্মস অফ সার্ভিস</a>
-                    <a href="#">প্রাইভেসি পলিসি</a>
-                    <a href="#">কুকি পলিসি</a>
-                    <a href="#">যোগাযোগ</a>
-                </div>
-                <p>&copy; ২০২৪ FreeTutorBD. সকল স্বত্ব সংরক্ষিত।</p>
-            </div>
+        <div class="footer-links">
+            <a href="#">FAQ</a>
+            <a href="#">প্রাইভেসি পলিসি</a>
+            <a href="#">টার্মস অফ সার্ভিস</a>
+        </div>
+        <div class="copyright">
+            © ২০২৪ FreeTutorBD. সকল স্বত্ব সংরক্ষিত।
         </div>
     </footer>
 
@@ -667,10 +458,12 @@
 
         // Global Variables
         let allQuestions = [];
-        let allCategories = [];
+        let categories = [];
         let currentCategory = 'all';
+        let currentPage = 1;
+        const questionsPerPage = 20;
 
-        // Predefined Categories
+        // Default Categories
         const defaultCategories = [
             "বাংলাদেশ বিষয়াবলী",
             "আন্তর্জাতিক বিষয়াবলী",
@@ -684,10 +477,10 @@
             "বর্তমান affairs"
         ];
 
-        // Load Data from Firebase
+        // Load Data
         async function loadData() {
             try {
-                // Load questions
+                // Load questions from Firebase
                 const questionsSnapshot = await db.collection('questions').get();
                 allQuestions = [];
                 questionsSnapshot.forEach(doc => {
@@ -696,25 +489,25 @@
 
                 // Load categories from Firebase
                 const categoriesSnapshot = await db.collection('categories').get();
-                allCategories = ['all']; // 'all' for showing all questions
+                categories = ['all'];
                 
                 categoriesSnapshot.forEach(doc => {
                     const cat = doc.data();
-                    if (!allCategories.includes(cat.nameBn)) {
-                        allCategories.push(cat.nameBn);
+                    if (!categories.includes(cat.nameBn)) {
+                        categories.push(cat.nameBn);
                     }
                 });
 
-                // Add default categories if not in Firebase
+                // Add default categories
                 defaultCategories.forEach(cat => {
-                    if (!allCategories.includes(cat)) {
-                        allCategories.push(cat);
+                    if (!categories.includes(cat)) {
+                        categories.push(cat);
                     }
                 });
 
                 // Update UI
                 updateCategoryList();
-                updateQuestionsDisplay();
+                displayQuestions();
                 loadJobs();
 
             } catch (error) {
@@ -725,29 +518,29 @@
         // Update Category List
         function updateCategoryList() {
             const categoryList = document.getElementById('category-list');
+            
+            // Clear existing list (keeping "All" item)
+            const allItem = categoryList.querySelector('.category-item');
             categoryList.innerHTML = '';
             
-            // Add "All Questions" option
-            const allCount = allQuestions.length;
-            const allItem = document.createElement('li');
-            allItem.className = 'category-item' + (currentCategory === 'all' ? ' active' : '');
-            allItem.innerHTML = `
-                <span class="category-name">সব প্রশ্ন</span>
-                <span class="question-count">${allCount}</span>
-            `;
-            allItem.onclick = () => selectCategory('all');
+            // Update "All" count
+            const allCount = document.createElement('span');
+            allCount.className = 'item-count';
+            allCount.id = 'all-count';
+            allCount.textContent = allQuestions.length;
+            allItem.querySelector('.item-count').replaceWith(allCount);
             categoryList.appendChild(allItem);
             
             // Add other categories
-            allCategories.forEach(category => {
+            categories.forEach(category => {
                 if (category !== 'all') {
                     const questionCount = allQuestions.filter(q => q.category === category).length;
                     if (questionCount > 0) {
                         const categoryItem = document.createElement('li');
-                        categoryItem.className = 'category-item' + (currentCategory === category ? ' active' : '');
+                        categoryItem.className = 'category-item';
                         categoryItem.innerHTML = `
-                            <span class="category-name">${category}</span>
-                            <span class="question-count">${questionCount}</span>
+                            <span>${category}</span>
+                            <span class="item-count">${questionCount}</span>
                         `;
                         categoryItem.onclick = () => selectCategory(category);
                         categoryList.appendChild(categoryItem);
@@ -759,15 +552,20 @@
         // Select Category
         function selectCategory(category) {
             currentCategory = category;
+            currentPage = 1;
+            
+            // Update active state
             document.querySelectorAll('.category-item').forEach(item => {
                 item.classList.remove('active');
             });
             event.target.closest('.category-item').classList.add('active');
-            updateQuestionsDisplay();
+            
+            // Display questions
+            displayQuestions();
         }
 
-        // Update Questions Display
-        function updateQuestionsDisplay() {
+        // Display Questions with Pagination
+        function displayQuestions() {
             let filteredQuestions = [];
             let categoryTitle = '';
             
@@ -779,76 +577,125 @@
                 categoryTitle = currentCategory;
             }
             
-            // Update header
-            document.getElementById('current-category-title').textContent = categoryTitle;
-            document.getElementById('current-category-count').innerHTML = `মোট <span id="total-questions-show">${filteredQuestions.length}</span>টি প্রশ্ন`;
+            // Update title
+            document.getElementById('current-category-title').innerHTML = `
+                ${categoryTitle} (<span id="current-count">${filteredQuestions.length}</span>টি)
+            `;
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+            const startIndex = (currentPage - 1) * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, filteredQuestions.length);
+            const pageQuestions = filteredQuestions.slice(startIndex, endIndex);
             
             // Display questions
             const questionsList = document.getElementById('questions-list');
-            if (filteredQuestions.length === 0) {
+            
+            if (pageQuestions.length === 0) {
                 questionsList.innerHTML = `
                     <div style="text-align: center; padding: 40px; color: #666;">
-                        <i class="fas fa-inbox fa-3x" style="margin-bottom: 20px;"></i>
-                        <h3>কোন প্রশ্ন পাওয়া যায়নি</h3>
-                        <p>এই বিভাগে এখনো কোন প্রশ্ন যোগ করা হয়নি</p>
+                        <i class="fas fa-inbox fa-2x" style="margin-bottom: 15px;"></i>
+                        <p>কোন প্রশ্ন পাওয়া যায়নি</p>
                     </div>
                 `;
+                document.getElementById('pagination').style.display = 'none';
                 return;
             }
             
+            // Display page questions
             questionsList.innerHTML = '';
-            filteredQuestions.forEach((question, index) => {
+            pageQuestions.forEach((question, index) => {
+                const questionNumber = startIndex + index + 1;
                 const questionItem = document.createElement('div');
                 questionItem.className = 'question-item';
                 questionItem.innerHTML = `
-                    <div class="question-number">প্রশ্ন ${index + 1}</div>
-                    <div class="question-text">${question.question}</div>
-                    
-                    <div class="options-list">
-                        <div class="option">
-                            <div class="option-letter">ক</div>
-                            <div class="option-text">${question.option1}</div>
-                        </div>
-                        <div class="option">
-                            <div class="option-letter">খ</div>
-                            <div class="option-text">${question.option2}</div>
-                        </div>
-                        <div class="option">
-                            <div class="option-letter">গ</div>
-                            <div class="option-text">${question.option3}</div>
-                        </div>
-                        <div class="option">
-                            <div class="option-letter">ঘ</div>
-                            <div class="option-text">${question.option4}</div>
-                        </div>
+                    <div class="question-line">
+                        <div class="question-number">${questionNumber}.</div>
+                        <div class="question-text">${question.question}</div>
+                        <button class="answer-toggle" onclick="toggleAnswer(${questionNumber})">
+                            উত্তর দেখুন
+                        </button>
                     </div>
-                    
-                    <button class="show-answer-btn" onclick="toggleAnswer(${index})">
-                        <i class="fas fa-eye"></i> উত্তর দেখুন
-                    </button>
-                    
-                    <div class="answer-section" id="answer-${index}">
-                        <div class="answer-header">সঠিক উত্তর:</div>
-                        <div class="correct-answer">
-                            ${['ক', 'খ', 'গ', 'ঘ'][question.correctAnswer - 1]}) ${[question.option1, question.option2, question.option3, question.option4][question.correctAnswer - 1]}
-                        </div>
+                    <div class="answer-content" id="answer-${questionNumber}">
+                        ${['ক', 'খ', 'গ', 'ঘ'][question.correctAnswer - 1]}) ${[question.option1, question.option2, question.option3, question.option4][question.correctAnswer - 1]}
                     </div>
                 `;
                 questionsList.appendChild(questionItem);
             });
+            
+            // Display pagination if needed
+            if (totalPages > 1) {
+                displayPagination(totalPages);
+                document.getElementById('pagination').style.display = 'flex';
+            } else {
+                document.getElementById('pagination').style.display = 'none';
+            }
         }
 
-        // Toggle Answer Visibility
-        function toggleAnswer(index) {
-            const answerDiv = document.getElementById(`answer-${index}`);
-            const button = event.target.closest('.show-answer-btn');
+        // Display Pagination
+        function displayPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'page-btn';
+                prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                prevBtn.onclick = () => changePage(currentPage - 1);
+                pagination.appendChild(prevBtn);
+            }
+            
+            // Page numbers
+            const maxPagesToShow = 5;
+            let startPage = Math.max(1, currentPage - 2);
+            let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+            
+            if (endPage - startPage < maxPagesToShow - 1) {
+                startPage = Math.max(1, endPage - maxPagesToShow + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => changePage(i);
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'page-btn';
+                nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                nextBtn.onclick = () => changePage(currentPage + 1);
+                pagination.appendChild(nextBtn);
+            }
+        }
+
+        // Change Page
+        function changePage(page) {
+            currentPage = page;
+            displayQuestions();
+            
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Toggle Answer
+        function toggleAnswer(questionNumber) {
+            const answerDiv = document.getElementById(`answer-${questionNumber}`);
+            const button = event.target.closest('.answer-toggle');
             
             if (answerDiv.style.display === 'block') {
                 answerDiv.style.display = 'none';
-                button.innerHTML = '<i class="fas fa-eye"></i> উত্তর দেখুন';
+                button.textContent = 'উত্তর দেখুন';
             } else {
                 answerDiv.style.display = 'block';
-                button.innerHTML = '<i class="fas fa-eye-slash"></i> উত্তর লুকান';
+                button.textContent = 'উত্তর লুকান';
             }
         }
 
@@ -857,14 +704,17 @@
             const jobsList = document.getElementById('jobs-list');
             
             try {
-                const jobsSnapshot = await db.collection('jobs').orderBy('createdAt', 'desc').limit(5).get();
+                const jobsSnapshot = await db.collection('jobs')
+                    .orderBy('createdAt', 'desc')
+                    .limit(5)
+                    .get();
                 
                 if (jobsSnapshot.empty) {
                     jobsList.innerHTML = `
-                        <div class="job-item">
-                            <div class="job-position">কোন চাকরি নেই</div>
-                            <div class="job-company">এখনো যোগ করা হয়নি</div>
-                        </div>
+                        <li class="job-item">
+                            <span>চাকরি নেই</span>
+                            <span class="item-count">0</span>
+                        </li>
                     `;
                     return;
                 }
@@ -872,12 +722,12 @@
                 jobsList.innerHTML = '';
                 jobsSnapshot.forEach(doc => {
                     const job = doc.data();
-                    const jobItem = document.createElement('div');
+                    const jobItem = document.createElement('li');
                     jobItem.className = 'job-item';
                     jobItem.onclick = () => window.location.href = 'jobs.html';
                     jobItem.innerHTML = `
-                        <div class="job-position">${job.position}</div>
-                        <div class="job-company">${job.company}</div>
+                        <span>${job.position}</span>
+                        <span class="item-count">${formatDate(job.deadline)}</span>
                     `;
                     jobsList.appendChild(jobItem);
                 });
@@ -885,112 +735,22 @@
             } catch (error) {
                 console.error("Error loading jobs:", error);
                 jobsList.innerHTML = `
-                    <div class="job-item">
-                        <div class="job-position">চাকরি লোড করতে সমস্যা</div>
-                        <div class="job-company">পরে চেষ্টা করুন</div>
-                    </div>
+                    <li class="job-item">
+                        <span>লোড হতে সমস্যা</span>
+                        <span class="item-count">!</span>
+                    </li>
                 `;
             }
         }
 
-        // Search Functionality
-        document.getElementById('search-btn').addEventListener('click', performSearch);
-        document.getElementById('search-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') performSearch();
-        });
-
-        function performSearch() {
-            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
-            
-            if (!searchTerm) {
-                alert('অনুগ্রহ করে কিছু লিখুন');
-                return;
-            }
-            
-            let searchResults = [];
-            if (currentCategory === 'all') {
-                searchResults = allQuestions.filter(q => 
-                    q.question.toLowerCase().includes(searchTerm) ||
-                    (q.option1 && q.option1.toLowerCase().includes(searchTerm)) ||
-                    (q.option2 && q.option2.toLowerCase().includes(searchTerm)) ||
-                    (q.option3 && q.option3.toLowerCase().includes(searchTerm)) ||
-                    (q.option4 && q.option4.toLowerCase().includes(searchTerm))
-                );
-            } else {
-                searchResults = allQuestions.filter(q => 
-                    q.category === currentCategory &&
-                    (q.question.toLowerCase().includes(searchTerm) ||
-                    (q.option1 && q.option1.toLowerCase().includes(searchTerm)) ||
-                    (q.option2 && q.option2.toLowerCase().includes(searchTerm)) ||
-                    (q.option3 && q.option3.toLowerCase().includes(searchTerm)) ||
-                    (q.option4 && q.option4.toLowerCase().includes(searchTerm)))
-                );
-            }
-            
-            if (searchResults.length === 0) {
-                alert('"' + searchTerm + '" এর সাথে মিলে এমন কোন প্রশ্ন পাওয়া যায়নি');
-            } else {
-                // Temporarily show search results
-                const questionsList = document.getElementById('questions-list');
-                questionsList.innerHTML = '';
-                
-                searchResults.forEach((question, index) => {
-                    const questionItem = document.createElement('div');
-                    questionItem.className = 'question-item';
-                    questionItem.innerHTML = `
-                        <div class="question-number">ফলাফল ${index + 1}</div>
-                        <div class="question-text">${question.question}</div>
-                        
-                        <div class="options-list">
-                            <div class="option">
-                                <div class="option-letter">ক</div>
-                                <div class="option-text">${question.option1}</div>
-                            </div>
-                            <div class="option">
-                                <div class="option-letter">খ</div>
-                                <div class="option-text">${question.option2}</div>
-                            </div>
-                            <div class="option">
-                                <div class="option-letter">গ</div>
-                                <div class="option-text">${question.option3}</div>
-                            </div>
-                            <div class="option">
-                                <div class="option-letter">ঘ</div>
-                                <div class="option-text">${question.option4}</div>
-                            </div>
-                        </div>
-                        
-                        <button class="show-answer-btn" onclick="toggleAnswer(${index})">
-                            <i class="fas fa-eye"></i> উত্তর দেখুন
-                        </button>
-                        
-                        <div class="answer-section" id="answer-${index}">
-                            <div class="answer-header">সঠিক উত্তর:</div>
-                            <div class="correct-answer">
-                                ${['ক', 'খ', 'গ', 'ঘ'][question.correctAnswer - 1]}) ${[question.option1, question.option2, question.option3, question.option4][question.correctAnswer - 1]}
-                            </div>
-                        </div>
-                    `;
-                    questionsList.appendChild(questionItem);
-                });
-                
-                // Update header for search results
-                document.getElementById('current-category-title').textContent = 'খোঁজার ফলাফল';
-                document.getElementById('current-category-count').innerHTML = `মোট <span id="total-questions-show">${searchResults.length}</span>টি প্রশ্ন পাওয়া গেছে`;
-            }
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            return dateString.split('-').reverse().join('/');
         }
 
-        // Load Ads (placeholder for now)
-        function loadAds() {
-            // This function can be expanded to load actual ads from Firebase
-            console.log("Loading ads...");
-        }
-
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            loadAds();
-        });
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadData);
 
     </script>
 </body>
