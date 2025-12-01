@@ -238,51 +238,6 @@
             font-weight: 500;
         }
 
-        /* Result Section - Now at top after header */
-        .result-section {
-            background: #f8f9fa;
-            padding: 15px 25px;
-            border-bottom: 1px solid #e0e0e0;
-            display: none;
-        }
-
-        .result-section.show {
-            display: block;
-        }
-
-        .result-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .score-display {
-            font-size: 28px;
-            font-weight: 600;
-            color: #27ae60;
-        }
-
-        .score-details {
-            color: #666;
-            font-size: 16px;
-        }
-
-        .test-again-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .test-again-btn:hover {
-            background: #2980b9;
-        }
-
         .test-content {
             padding: 25px;
         }
@@ -310,28 +265,24 @@
             color: #333;
         }
 
-        /* Options - 2 options per row */
+        /* Options - Plain Text (No Box) */
         .options-container {
             margin-bottom: 15px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
         }
 
         .option-row {
             display: flex;
             align-items: flex-start;
-            padding: 10px 12px;
+            margin-bottom: 8px;
+            padding: 5px 0;
             cursor: pointer;
-            transition: all 0.3s;
-            border-radius: 4px;
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
+            transition: background 0.3s;
         }
 
         .option-row:hover {
-            background: #e3f2fd;
-            border-color: #3498db;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
 
         .option-letter {
@@ -444,6 +395,50 @@
             border-radius: 0 0 8px 8px;
         }
 
+        .result-summary {
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .result-summary.show {
+            display: block;
+        }
+
+        .score-display {
+            font-size: 32px;
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .score-details {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .test-again-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: none;
+        }
+
+        .test-again-btn.show {
+            display: inline-block;
+        }
+
+        .test-again-btn:hover {
+            background: #2980b9;
+        }
+
         .submit-btn {
             background: #27ae60;
             color: white;
@@ -547,16 +542,6 @@
                 gap: 10px;
                 text-align: center;
             }
-
-            .options-container {
-                grid-template-columns: 1fr;
-            }
-
-            .result-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
         }
 
         @media (max-width: 480px) {
@@ -658,19 +643,6 @@
                 <div class="test-timer" id="timer">07:00</div>
             </div>
 
-            <!-- Result Section - Now at top after header -->
-            <div class="result-section" id="result-section">
-                <div class="result-content">
-                    <div>
-                        <div class="score-display" id="score-display">0/14</div>
-                        <div class="score-details" id="score-details">0% সঠিক উত্তর</div>
-                    </div>
-                    <button class="test-again-btn" id="test-again-btn">
-                        <i class="fas fa-redo"></i> আবার টেস্ট দিন
-                    </button>
-                </div>
-            </div>
-
             <!-- Test Content -->
             <div class="test-content" id="test-content">
                 <!-- Questions will be loaded here -->
@@ -685,7 +657,15 @@
 
                 <!-- Submit Section -->
                 <div class="submit-section">
+                    <div class="result-summary" id="result-summary">
+                        <div class="score-display" id="score-display">0/14</div>
+                        <div class="score-details" id="score-details">0% সঠিক উত্তর</div>
+                    </div>
+
                     <button class="submit-btn" id="submit-btn">উত্তর জমা দিন</button>
+                    <button class="test-again-btn" id="test-again-btn">
+                        <i class="fas fa-redo"></i> আবার টেস্ট দিন
+                    </button>
                 </div>
             </div>
         </main>
@@ -1160,7 +1140,6 @@
                         const wrongOption = document.querySelector(
                             `.option-row[data-index="${index}"][data-option="${userAnswer}"]`
                         );
-                       
                         if (wrongOption) {
                             wrongOption.classList.add('wrong');
                         }
