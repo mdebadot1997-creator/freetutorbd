@@ -93,6 +93,9 @@
         </a>
     </div>
     
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    
     <script>
         // Firebase Configuration
         const firebaseConfig = {
@@ -123,7 +126,7 @@
                         // Redirect to admin panel
                         window.location.href = "admin-panel.html";
                     } else {
-                        alert("⚠️ আপনি অ্যাডমিন নন! শুধুমাত্র mdebadothossen লগইন করতে পারবেন।");
+                        alert("⚠️ আপনি অ্যাডমিন নন! শুধুমাত্র mdebadot1997@gmail.com লগইন করতে পারবেন।");
                         auth.signOut();
                     }
                 })
@@ -131,13 +134,9 @@
                     alert("Login error: " + error.message);
                 });
         }
-        
-        // Check if already logged in as admin
-        auth.onAuthStateChanged(user => {
-            if (user && user.email === "mdebadot1997@gmail.com" && window.location.pathname.includes('admin-login.html')) {
-                window.location.href = "admin-panel.html";
-            }
-        });
     </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </body>
 </html>
