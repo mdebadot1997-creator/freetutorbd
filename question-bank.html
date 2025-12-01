@@ -323,30 +323,6 @@
             background: #2980b9;
         }
         
-        /* All Questions Button */
-        .all-questions-btn {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 auto 40px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
-        }
-        
-        .all-questions-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
-        }
-        
         /* Questions Container */
         .questions-container {
             display: none;
@@ -386,7 +362,7 @@
             background: #7f8c8d;
         }
         
-        /* Questions List */
+        /* Questions List - Simple Design */
         .questions-list {
             display: flex;
             flex-direction: column;
@@ -413,84 +389,39 @@
         
         .question-text {
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #2c3e50;
             line-height: 1.6;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
         
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .option {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 12px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .option-letter {
-            background: #3498db;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+        .answer-row {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        
-        .option-text {
-            flex: 1;
-            color: #2c3e50;
-        }
-        
-        .correct-option {
-            background: #d4edda;
-            border-left-color: #28a745;
-        }
-        
-        .correct-option .option-letter {
-            background: #28a745;
-        }
-        
-        .answer-section {
-            margin-top: 20px;
-            padding: 20px;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
             background: #d4edda;
             border-radius: 8px;
             border: 1px solid #c3e6cb;
         }
         
-        .answer-header {
-            color: #155724;
+        .answer-label {
+            background: #28a745;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
+            font-size: 16px;
+            flex-shrink: 0;
         }
         
-        .correct-answer {
+        .answer-text {
             color: #155724;
             font-size: 17px;
             line-height: 1.5;
-        }
-        
-        .correct-answer strong {
-            color: #0c4128;
+            flex: 1;
         }
         
         /* Search Bar */
@@ -577,6 +508,9 @@
             color: #bdc3c7;
             text-decoration: none;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .footer-links a:hover {
@@ -589,6 +523,27 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             color: #95a5a6;
             font-size: 14px;
+        }
+        
+        /* Footer Links Section */
+        .footer-links-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links-section a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links-section a:hover {
+            color: #2980b9;
+            text-decoration: underline;
         }
         
         /* Ad Sections */
@@ -678,11 +633,6 @@
             <!-- Page Title -->
             <h1 class="page-title">প্রশ্নব্যাংক</h1>
 
-            <!-- All Questions Button -->
-            <button class="all-questions-btn" onclick="viewAllQuestions()">
-                <i class="fas fa-list"></i> সব প্রশ্ন একসাথে দেখুন
-            </button>
-
             <!-- Search Bar -->
             <div class="search-container">
                 <div class="search-box">
@@ -766,7 +716,16 @@
                 <div class="footer-section">
                     <h4>যোগাযোগ</h4>
                     <p><i class="fas fa-envelope"></i> contact@freetutorbd.com</p>
+                    <p><i class="fas fa-phone"></i> +৮৮০ ১৭XX-XXXXXX</p>
                 </div>
+            </div>
+            
+            <!-- Footer Links -->
+            <div class="footer-links-section">
+                <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> প্রাইভেসি পলিসি</a>
+                <a href="#"><i class="fas fa-file-contract"></i> টার্মস অফ সার্ভিস</a>
+                <a href="#"><i class="fas fa-envelope"></i> যোগাযোগ</a>
             </div>
             
             <div class="footer-bottom">
@@ -851,9 +810,9 @@
                     });
                 }
                 
-                // Add "All Questions" category at the beginning
+                // Add "সকল প্রশ্ন" category at the beginning
                 categories.unshift({
-                    name: "সব প্রশ্ন",
+                    name: "সকল প্রশ্ন",
                     questionCount: allQuestions.length
                 });
                 
@@ -866,7 +825,7 @@
                 const sampleCategories = getSampleCategories();
                 allQuestions = getSampleQuestions();
                 sampleCategories.unshift({
-                    name: "সব প্রশ্ন",
+                    name: "সকল প্রশ্ন",
                     questionCount: allQuestions.length
                 });
                 displayCategories(sampleCategories);
@@ -931,11 +890,6 @@
             });
         }
 
-        // View All Questions
-        function viewAllQuestions() {
-            viewCategory("সব প্রশ্ন");
-        }
-
         // View Questions of a Category
         function viewCategory(categoryName) {
             currentCategory = categoryName;
@@ -960,7 +914,7 @@
             questionsList.innerHTML = '<div class="loading">প্রশ্ন লোড হচ্ছে...</div>';
             
             // Filter questions by category
-            if (categoryName === "সব প্রশ্ন") {
+            if (categoryName === "সকল প্রশ্ন") {
                 filteredQuestions = [...allQuestions];
             } else {
                 filteredQuestions = allQuestions.filter(q => q.category === categoryName);
@@ -980,38 +934,22 @@
             // Display questions
             questionsList.innerHTML = '';
             filteredQuestions.forEach((question, index) => {
-                const correctOption = question.correctAnswer;
-                const options = [
-                    { letter: 'ক', text: question.option1 },
-                    { letter: 'খ', text: question.option2 },
-                    { letter: 'গ', text: question.option3 },
-                    { letter: 'ঘ', text: question.option4 }
-                ];
+                const correctOptionIndex = question.correctAnswer - 1;
+                const options = [question.option1, question.option2, question.option3, question.option4];
+                const optionLetters = ['ক', 'খ', 'গ', 'ঘ'];
                 
                 const questionCard = document.createElement('div');
                 questionCard.className = 'question-card';
                 questionCard.innerHTML = `
                     <div class="question-number">
-                        প্রশ্ন ${index + 1} (${question.category})
+                        প্রশ্ন ${index + 1} ${categoryName !== "সকল প্রশ্ন" ? `(${question.category})` : ''}
                     </div>
                     <div class="question-text">${question.question}</div>
                     
-                    <div class="options-list">
-                        ${options.map((option, i) => `
-                            <div class="option ${i + 1 === correctOption ? 'correct-option' : ''}">
-                                <div class="option-letter">${option.letter}</div>
-                                <div class="option-text">${option.text}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div class="answer-section">
-                        <div class="answer-header">
-                            <i class="fas fa-check-circle"></i>
-                            <span>সঠিক উত্তর</span>
-                        </div>
-                        <div class="correct-answer">
-                            <strong>${options[correctOption - 1].letter}) ${options[correctOption - 1].text}</strong>
+                    <div class="answer-row">
+                        <div class="answer-label">উত্তর</div>
+                        <div class="answer-text">
+                            ${optionLetters[correctOptionIndex]}) ${options[correctOptionIndex]}
                         </div>
                     </div>
                 `;
@@ -1043,7 +981,7 @@
                 return;
             }
             
-            if (currentCategory && currentCategory !== "সব প্রশ্ন") {
+            if (currentCategory && currentCategory !== "সকল প্রশ্ন") {
                 // Search within current category
                 const results = filteredQuestions.filter(q => 
                     q.question.toLowerCase().includes(searchTerm) ||
@@ -1073,9 +1011,9 @@
                 if (results.length === 0) {
                     alert('কোন মিল পাওয়া যায়নি');
                 } else {
-                    viewCategory("সব প্রশ্ন");
+                    viewCategory("সকল প্রশ্ন");
                     filteredQuestions = results;
-                    loadCategoryQuestions("সব প্রশ্ন");
+                    loadCategoryQuestions("সকল প্রশ্ন");
                 }
             }
         }
@@ -1105,6 +1043,24 @@
                 link.addEventListener('click', function() {
                     document.getElementById('mobile-nav').classList.remove('active');
                     document.getElementById('mobile-menu-btn').innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Footer links
+            document.querySelectorAll('.footer-links-section a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.textContent.trim();
+                    
+                    if (page.includes('FAQ')) {
+                        alert('FAQ পৃষ্ঠা শীঘ্রই আসছে!');
+                    } else if (page.includes('প্রাইভেসি')) {
+                        alert('প্রাইভেসি পলিসি পৃষ্ঠা শীঘ্রই আসছে!');
+                    } else if (page.includes('টার্মস')) {
+                        alert('টার্মস অফ সার্ভিস পৃষ্ঠা শীঘ্রই আসছে!');
+                    } else if (page.includes('যোগাযোগ')) {
+                        alert('যোগাযোগ পৃষ্ঠা শীঘ্রই আসছে!');
+                    }
                 });
             });
         }
