@@ -15,7 +15,6 @@
         
         body {
             background: #f0f2f5;
-            color: #333;
         }
         
         .container {
@@ -92,16 +91,6 @@
             border-color: #3498db;
         }
         
-        .option.correct {
-            background: #d4edda;
-            border-color: #28a745;
-        }
-        
-        .option.wrong {
-            background: #f8d7da;
-            border-color: #dc3545;
-        }
-        
         .navigation {
             display: flex;
             justify-content: space-between;
@@ -156,28 +145,59 @@
             margin-top: 30px;
             text-align: left;
         }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>MCQ টেস্ট</h1>
+            <h1 id="categoryTitle">MCQ টেস্ট</h1>
             <div class="timer" id="timer">30:00</div>
         </div>
         
         <div id="quizContainer" class="quiz-container">
-            <!-- Questions will load here -->
-            <div id="loading">টেস্ট লোড হচ্ছে...</div>
+            <div style="text-align: center; padding: 40px;">
+                <h2>টেস্ট শুরু করুন</h2>
+                <p style="margin: 20px 0; color: #666;">নিচের বিষয় নির্বাচন করে টেস্ট শুরু করুন</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin: 30px 0;">
+                    <button class="option" onclick="startTest('বাংলাদেশ বিষয়াবলী')">
+                        বাংলাদেশ বিষয়াবলী
+                    </button>
+                    <button class="option" onclick="startTest('আন্তর্জাতিক বিষয়াবলী')">
+                        আন্তর্জাতিক বিষয়াবলী
+                    </button>
+                    <button class="option" onclick="startTest('ভূগোল')">
+                        ভূগোল
+                    </button>
+                    <button class="option" onclick="startTest('বাংলা সাহিত্য')">
+                        বাংলা সাহিত্য
+                    </button>
+                    <button class="option" onclick="startTest('সাধারণ বিজ্ঞান')">
+                        সাধারণ বিজ্ঞান
+                    </button>
+                    <button class="option" onclick="startTest('গাণিতিক যুক্তি')">
+                        গাণিতিক যুক্তি
+                    </button>
+                </div>
+                
+                <a href="index.html" class="back-to-home">
+                    <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+                </a>
+            </div>
         </div>
         
-        <div class="navigation">
-            <button class="btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">
+        <div class="navigation" id="navigation" style="display: none;">
+            <button class="btn" id="prevBtn" onclick="prevQuestion()">
                 <i class="fas fa-arrow-left"></i> আগের প্রশ্ন
             </button>
             <div>
-                <button class="btn" id="reviewBtn" onclick="markForReview()">
-                    <i class="fas fa-flag"></i> রিভিউ করুন
-                </button>
                 <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
                     পরবর্তী প্রশ্ন <i class="fas fa-arrow-right"></i>
                 </button>
@@ -210,66 +230,28 @@
                 <!-- Review will load here -->
             </div>
             
-            <button class="btn btn-success" onclick="restartTest()" style="margin-top: 30px;">
+            <button class="btn btn-success" onclick="restartTest()" style="margin-top: 20px;">
                 <i class="fas fa-redo"></i> আবার টেস্ট দিন
             </button>
+            <br>
+            <a href="index.html" class="back-to-home" style="margin-top: 15px;">
+                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+            </a>
         </div>
     </div>
     
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
-            authDomain: "freetutorbd-19380.firebaseapp.com",
-            projectId: "freetutorbd-19380",
-            storageBucket: "freetutorbd-19380.firebasestorage.app",
-            messagingSenderId: "741837856466",
-            appId: "1:741837856466:web:8b5a3b34183991e2f9570b"
-        };
-        
-        // Initialize Firebase
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const db = firebase.firestore();
-        
         let questions = [];
         let currentQuestion = 0;
         let userAnswers = [];
         let timer = 30 * 60; // 30 minutes
         let timerInterval;
+        let currentCategory = '';
         
-        // Load Questions based on Category
-        function loadQuestions() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category') || 'বাংলাদেশ বিষয়াবলী';
-            
-            db.collection('questions')
-                .where('categoryId', '==', category)
-                .limit(10)
-                .get()
-                .then(snapshot => {
-                    if (snapshot.empty) {
-                        // If no questions in DB, use sample questions
-                        loadSampleQuestions(category);
-                    } else {
-                        questions = [];
-                        snapshot.forEach(doc => {
-                            questions.push({ id: doc.id, ...doc.data() });
-                        });
-                        startTest();
-                    }
-                })
-                .catch(() => {
-                    loadSampleQuestions(category);
-                });
-        }
-        
-        function loadSampleQuestions(category) {
-            // Sample questions for testing
-            questions = [
+        // Sample questions database
+        const questionDatabase = {
+            'বাংলাদেশ বিষয়াবলী': [
                 {
-                    id: '1',
                     question: 'বাংলাদেশের স্বাধীনতা দিবস কত তারিখ?',
                     option1: '২৬ মার্চ',
                     option2: '১৬ ডিসেম্বর',
@@ -278,7 +260,14 @@
                     correctAnswer: 1
                 },
                 {
-                    id: '2',
+                    question: 'বাংলাদেশের জাতীয় ফুলের নাম কি?',
+                    option1: 'গোলাপ',
+                    option2: 'কদম',
+                    option3: 'শাপলা',
+                    option4: 'গাঁদা',
+                    correctAnswer: 3
+                },
+                {
                     question: 'বাংলাদেশের জাতীয় পাখির নাম কি?',
                     option1: 'চিল',
                     option2: 'ময়না',
@@ -287,7 +276,6 @@
                     correctAnswer: 3
                 },
                 {
-                    id: '3',
                     question: 'পদ্মা সেতুর দৈর্ঘ্য কত কিলোমিটার?',
                     option1: '৫.২ কিমি',
                     option2: '৬.১৫ কিমি',
@@ -295,14 +283,61 @@
                     option4: '৮.২ কিমি',
                     correctAnswer: 2
                 }
-            ];
-            startTest();
-        }
+            ],
+            'আন্তর্জাতিক বিষয়াবলী': [
+                {
+                    question: 'জাতিসংঘের সদর দপ্তর কোথায় অবস্থিত?',
+                    option1: 'জেনেভা',
+                    option2: 'নিউইয়র্ক',
+                    option3: 'প্যারিস',
+                    option4: 'লন্ডন',
+                    correctAnswer: 2
+                },
+                {
+                    question: 'বিশ্ব স্বাস্থ্য সংস্থার সদর দপ্তর কোথায়?',
+                    option1: 'জেনেভা',
+                    option2: 'নিউইয়র্ক',
+                    option3: 'ওয়াশিংটন',
+                    option4: 'টোকিও',
+                    correctAnswer: 1
+                }
+            ],
+            'ভূগোল': [
+                {
+                    question: 'বিশ্বের দীর্ঘতম নদী কোনটি?',
+                    option1: 'আমাজন',
+                    option2: 'নীল',
+                    option3: 'ইয়াংসি',
+                    option4: 'মিসিসিপি',
+                    correctAnswer: 1
+                },
+                {
+                    question: 'বিশ্বের বৃহত্তম মহাদেশ কোনটি?',
+                    option1: 'আফ্রিকা',
+                    option2: 'এশিয়া',
+                    option3: 'উত্তর আমেরিকা',
+                    option4: 'ইউরোপ',
+                    correctAnswer: 2
+                }
+            ]
+        };
         
-        function startTest() {
+        function startTest(category) {
+            currentCategory = category;
+            document.getElementById('categoryTitle').textContent = category + ' - MCQ টেস্ট';
+            questions = questionDatabase[category] || questionDatabase['বাংলাদেশ বিষয়াবলী'];
+            
+            // Hide start screen
+            document.getElementById('quizContainer').innerHTML = '';
+            
+            // Start the test
             userAnswers = new Array(questions.length).fill(null);
+            currentQuestion = 0;
             displayQuestion();
             startTimer();
+            
+            // Show navigation
+            document.getElementById('navigation').style.display = 'flex';
         }
         
         function displayQuestion() {
@@ -336,10 +371,10 @@
                 </div>
             `;
             
-            // Show/hide navigation buttons
+            // Update navigation buttons
             document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'inline-flex' : 'none';
             document.getElementById('nextBtn').innerHTML = currentQuestion === questions.length - 1 
-                ? 'টেস্ট সম্পন্ন করুন <i class="fas fa-check"></i>' 
+                ? 'টেস্ট শেষ করুন <i class="fas fa-check"></i>' 
                 : 'পরবর্তী প্রশ্ন <i class="fas fa-arrow-right"></i>';
         }
         
@@ -364,12 +399,10 @@
             }
         }
         
-        function markForReview() {
-            // Mark current question for review
-            alert('এই প্রশ্নটি রিভিউ জন্য মার্ক করা হয়েছে');
-        }
-        
         function startTimer() {
+            clearInterval(timerInterval);
+            timer = 30 * 60;
+            
             timerInterval = setInterval(() => {
                 timer--;
                 const minutes = Math.floor(timer / 60);
@@ -413,12 +446,16 @@
             questions.forEach((q, index) => {
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === q.correctAnswer;
+                const userAnswerText = userAnswer ? 
+                    String.fromCharCode(64 + userAnswer) + '. ' + q['option' + userAnswer] : 
+                    'উত্তর দেননি';
+                const correctAnswerText = String.fromCharCode(64 + q.correctAnswer) + '. ' + q['option' + q.correctAnswer];
                 
                 reviewHTML += `
-                    <div style="margin: 20px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
+                    <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
                         <p><strong>প্রশ্ন ${index + 1}:</strong> ${q.question}</p>
-                        <p>আপনার উত্তর: ${userAnswer ? String.fromCharCode(64 + userAnswer) + '. ' + q['option' + userAnswer] : 'দেননি'}</p>
-                        <p>সঠিক উত্তর: ${String.fromCharCode(64 + q.correctAnswer)}. ${q['option' + q.correctAnswer]}</p>
+                        <p>আপনার উত্তর: ${userAnswerText}</p>
+                        ${!isCorrect ? `<p>সঠিক উত্তর: ${correctAnswerText}</p>` : ''}
                     </div>
                 `;
             });
@@ -427,41 +464,24 @@
             
             // Show result container
             document.getElementById('quizContainer').style.display = 'none';
-            document.querySelector('.navigation').style.display = 'none';
+            document.getElementById('navigation').style.display = 'none';
             document.getElementById('resultContainer').style.display = 'block';
-            
-            // Save result to Firebase if user is logged in
-            const user = firebase.auth().currentUser;
-            if (user) {
-                db.collection('test_results').add({
-                    userId: user.uid,
-                    email: user.email,
-                    category: new URLSearchParams(window.location.search).get('category'),
-                    score: correct,
-                    totalQuestions: questions.length,
-                    correctAnswers: correct,
-                    wrongAnswers: wrong,
-                    skippedQuestions: skipped,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            }
         }
         
         function restartTest() {
+            // Reset everything
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
-            timer = 30 * 60;
             
+            // Show quiz container
             document.getElementById('quizContainer').style.display = 'block';
-            document.querySelector('.navigation').style.display = 'flex';
+            document.getElementById('navigation').style.display = 'flex';
             document.getElementById('resultContainer').style.display = 'none';
             
+            // Restart
             displayQuestion();
             startTimer();
         }
-        
-        // Initialize
-        window.onload = loadQuestions;
     </script>
 </body>
 </html>
