@@ -24,11 +24,14 @@
         .header {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-header {
+            padding: 15px 0;
         }
         
         .header-container {
@@ -94,6 +97,36 @@
             height: 3px;
             background: #3498db;
             border-radius: 2px;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Header Ad */
+        .header-ad {
+            background: #ffc107;
+            text-align: center;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .ad-content {
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .ad-content a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
         }
         
         /* Main Layout */
@@ -221,16 +254,34 @@
             color: #2c3e50;
         }
         
-        /* Options - Plain Radio Buttons */
+        /* Options - 2 Column Layout */
         .options {
-            margin-left: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
         }
         
         .option {
-            margin-bottom: 12px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background: #d4edda;
+            border-color: #27ae60;
         }
         
         .option input[type="radio"] {
@@ -243,6 +294,7 @@
             font-size: 16px;
             color: #333;
             cursor: pointer;
+            flex: 1;
         }
         
         /* Submit Button */
@@ -438,6 +490,55 @@
             font-size: 14px;
         }
         
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            z-index: 1001;
+            padding: 20px;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu-logo {
+            color: #3498db;
+            font-size: 24px;
+        }
+        
+        .close-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .container {
@@ -450,6 +551,10 @@
             
             .right-sidebar {
                 order: 3;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
             }
             
             .test-header {
@@ -466,13 +571,28 @@
         }
         
         @media (max-width: 768px) {
+            .top-header {
+                padding: 10px 0;
+            }
+            
             .header-container {
-                flex-direction: column;
-                gap: 15px;
+                position: relative;
+            }
+            
+            .logo-text h1 {
+                font-size: 22px;
+            }
+            
+            .logo-icon {
+                font-size: 30px;
             }
             
             .nav-links {
-                gap: 20px;
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
             }
             
             .mobile-footer {
@@ -481,18 +601,6 @@
             
             .desktop-footer {
                 display: none;
-            }
-            
-            .footer-links {
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
             }
             
             .test-container, .categories-box, .jobs-box, .ad-box {
@@ -507,6 +615,30 @@
             .submit-btn {
                 padding: 12px 30px;
                 font-size: 16px;
+                width: 100%;
+            }
+            
+            .header-ad {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .test-container, .categories-box, .jobs-box {
+                padding: 15px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+            
+            .option {
+                padding: 12px;
+            }
+            
+            .option-label {
+                font-size: 15px;
             }
         }
     </style>
@@ -514,25 +646,58 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>FreeTutorBD</h1>
-                    <p>MCQ Test Platform</p>
-                </div>
+        <!-- Header Ad -->
+        <div class="header-ad">
+            <div class="ad-content">
+                🎉 বিশেষ অফার: আজই FreeTutorBD এ রেজিস্ট্রেশন করুন! <a href="#">রেজিস্ট্রেশন করুন</a>
             </div>
-            
-            <nav class="nav-links">
-                <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
-                <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
-                <a href="#"><i class="fas fa-briefcase"></i> Jobs</a>
-            </nav>
+        </div>
+        
+        <!-- Main Header -->
+        <div class="top-header">
+            <div class="header-container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>FreeTutorBD</h1>
+                        <p>MCQ Test Platform</p>
+                    </div>
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+                    <a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                    <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
+                    <a href="jobs.html"><i class="fas fa-briefcase"></i> Jobs</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" onclick="openMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <i class="fas fa-chalkboard-teacher"></i> FreeTutorBD
+            </div>
+            <button class="close-menu-btn" onclick="closeMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="#" onclick="closeMobileMenu()"><i class="fas fa-home"></i> Home</a>
+            <a href="prosnobank.html" onclick="closeMobileMenu()"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+            <a href="#" onclick="closeMobileMenu()"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
+            <a href="jobs.html" onclick="closeMobileMenu()"><i class="fas fa-briefcase"></i> Jobs</a>
+        </nav>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
@@ -542,10 +707,6 @@
                 <h3 class="box-title"><i class="fas fa-folder"></i> প্রশ্নব্যাংক ক্যাটাগরি</h3>
                 <ul class="category-list" id="categories-list">
                     <!-- Categories will be loaded dynamically -->
-                    <li class="category-item">
-                        <div class="category-name">বাংলাদেশ বিষয়াবলী</div>
-                        <div class="question-count">৫০০ প্রশ্ন</div>
-                    </li>
                 </ul>
             </div>
             
@@ -553,10 +714,6 @@
                 <h3 class="box-title"><i class="fas fa-briefcase"></i> চাকরি ক্যাটাগরি</h3>
                 <ul class="jobs-list" id="jobs-list">
                     <!-- Jobs will be loaded dynamically -->
-                    <li class="job-item">
-                        <div class="job-title">সরকারি চাকরি</div>
-                        <div class="job-count">২৫ টি চাকরি</div>
-                    </li>
                 </ul>
             </div>
         </aside>
@@ -571,35 +728,6 @@
                 
                 <div class="question-paper" id="question-paper">
                     <!-- Questions will be loaded dynamically -->
-                    <div class="question-item">
-                        <div class="question-number">প্রশ্ন ১:</div>
-                        <div class="question-text">বাংলাদেশের স্বাধীনতা দিবস কত তারিখ?</div>
-                        <div class="options">
-                            <div class="option">
-                                <input type="radio" name="q1" id="q1a" value="a">
-                                <label class="option-label" for="q1a">২৬ মার্চ</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" name="q1" id="q1b" value="b">
-                                <label class="option-label" for="q1b">১৬ ডিসেম্বর</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" name="q1" id="q1c" value="c">
-                                <label class="option-label" for="q1c">২১ ফেব্রুয়ারি</label>
-                            </div>
-                            <div class="option">
-                                <input type="radio" name="q1" id="q1d" value="d">
-                                <label class="option-label" for="q1d">১ এপ্রিল</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Ad after question 2 -->
-                    <div class="question-ad" id="question-ad-1">
-                        <i class="fas fa-ad"></i>
-                        <p>বিজ্ঞাপন</p>
-                        <small>এই স্থানটি বিজ্ঞাপনের জন্য সংরক্ষিত</small>
-                    </div>
                 </div>
                 
                 <div class="submit-section">
@@ -793,7 +921,18 @@
         let timerInterval;
         let testSubmitted = false;
 
-        // Load Categories
+        // Mobile Menu Functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenu').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Load Categories with Direct Links
         function loadCategories() {
             const categoriesList = document.getElementById('categories-list');
             categoriesList.innerHTML = '';
@@ -801,7 +940,9 @@
             categories.forEach(category => {
                 const li = document.createElement('li');
                 li.className = 'category-item';
-                li.onclick = () => loadCategoryQuestions(category.name);
+                li.onclick = () => {
+                    window.location.href = `prosnobank.html?category=${encodeURIComponent(category.name)}`;
+                };
                 li.innerHTML = `
                     <div class="category-name">${category.name}</div>
                     <div class="question-count">${category.count} প্রশ্ন</div>
@@ -810,7 +951,7 @@
             });
         }
 
-        // Load Jobs
+        // Load Jobs with Direct Links
         function loadJobs() {
             const jobsList = document.getElementById('jobs-list');
             
@@ -830,6 +971,9 @@
                         Object.entries(jobCounts).forEach(([category, count]) => {
                             const li = document.createElement('li');
                             li.className = 'job-item';
+                            li.onclick = () => {
+                                window.location.href = `jobs.html?category=${encodeURIComponent(category)}`;
+                            };
                             li.innerHTML = `
                                 <div class="job-title">${category}</div>
                                 <div class="job-count">${count} টি চাকরি</div>
@@ -859,6 +1003,9 @@
             sampleJobs.forEach(job => {
                 const li = document.createElement('li');
                 li.className = 'job-item';
+                li.onclick = () => {
+                    window.location.href = `jobs.html?category=${encodeURIComponent(job.category)}`;
+                };
                 li.innerHTML = `
                     <div class="job-title">${job.category}</div>
                     <div class="job-count">${job.count} টি চাকরি</div>
@@ -867,14 +1014,7 @@
             });
         }
 
-        // Load Questions for Category
-        function loadCategoryQuestions(categoryName) {
-            // Redirect to question bank page
-            alert(`"${categoryName}" এর প্রশ্ন ব্যাংক দেখানো হবে।`);
-            // window.location.href = `question-bank.html?category=${encodeURIComponent(categoryName)}`;
-        }
-
-        // Load Test Questions
+        // Load Test Questions with 2-Column Options
         function loadTestQuestions() {
             const questionPaper = document.getElementById('question-paper');
             const category = "বাংলাদেশ বিষয়াবলী";
@@ -890,7 +1030,7 @@
                     <div class="question-text">${q.question}</div>
                     <div class="options">
                         ${q.options.map((option, optIndex) => `
-                            <div class="option">
+                            <div class="option" onclick="selectOption(${index + 1}, '${String.fromCharCode(97 + optIndex)}')">
                                 <input type="radio" name="q${index + 1}" id="q${index + 1}${String.fromCharCode(97 + optIndex)}" value="${String.fromCharCode(97 + optIndex)}">
                                 <label class="option-label" for="q${index + 1}${String.fromCharCode(97 + optIndex)}">${option}</label>
                             </div>
@@ -910,6 +1050,21 @@
                         <small>এই স্থানটি বিজ্ঞাপনের জন্য সংরক্ষিত</small>
                     `;
                     questionPaper.appendChild(adDiv);
+                }
+            });
+        }
+
+        // Select Option
+        function selectOption(questionNumber, optionValue) {
+            const options = document.querySelectorAll(`.question-item:nth-child(${questionNumber}) .option`);
+            options.forEach(opt => {
+                opt.classList.remove('selected');
+                const input = opt.querySelector('input');
+                if (input.value === optionValue) {
+                    opt.classList.add('selected');
+                    input.checked = true;
+                } else {
+                    input.checked = false;
                 }
             });
         }
@@ -1040,6 +1195,14 @@
                         });
                     }
                 });
+            
+            // Load header ad
+            db.collection('ads').doc('header').get()
+                .then(doc => {
+                    if (doc.exists && doc.data().code) {
+                        document.querySelector('.header-ad .ad-content').innerHTML = doc.data().code;
+                    }
+                });
         }
 
         // Initialize everything
@@ -1050,12 +1213,11 @@
             loadAds();
             startTimer();
             
-            // Add click event to category items
-            document.querySelectorAll('.category-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const categoryName = this.querySelector('.category-name').textContent;
-                    window.location.href = `question-bank.html?category=${encodeURIComponent(categoryName)}`;
-                });
+            // Close mobile menu when clicking outside
+            document.getElementById('mobileMenu').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeMobileMenu();
+                }
             });
         });
 
@@ -1063,6 +1225,13 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && e.target.type !== 'radio') {
                 e.preventDefault();
+            }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
             }
         });
     </script>
