@@ -3,39 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মডেল টেস্ট - MCQ Platform</title>
-    
-    <!-- Font Awesome MUST BE IN HEAD -->
+    <title>FreeTutorBD - Model Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
         }
         
         body {
             background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
         }
         
-        .container {
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .header {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .site-name {
+            font-size: 24px;
+            font-weight: bold;
             color: white;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 30px;
         }
         
-        .model-tests {
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #FFD700;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        /* Test Selection Page */
+        .test-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
@@ -44,367 +91,1135 @@
         
         .test-card {
             background: white;
+            border-radius: 12px;
             padding: 25px;
-            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: all 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e0e0e0;
         }
         
         .test-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        .test-icon {
-            font-size: 50px;
+        .test-card h3 {
+            color: #2c3e50;
             margin-bottom: 15px;
-            color: #9b59b6;
+            font-size: 20px;
+        }
+        
+        .test-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #555;
         }
         
         .start-btn {
-            background: #9b59b6;
+            background: linear-gradient(135deg, #27ae60, #219653);
             color: white;
             border: none;
             padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: 600;
+            border-radius: 8px;
             font-size: 16px;
-            transition: background 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
             width: 100%;
+            transition: background 0.3s;
         }
         
         .start-btn:hover {
-            background: #8e44ad;
+            background: linear-gradient(135deg, #219653, #1e8449);
         }
         
-        .coming-soon {
-            background: #fff3cd;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 40px;
-            text-align: center;
-            border-left: 4px solid #ffc107;
+        /* Test Page */
+        .test-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
         }
         
-        .back-to-home {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background: #3498db;
+        .test-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 25px 30px;
+        }
+        
+        .test-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .test-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        /* User Info Form */
+        .user-form-section {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
             font-weight: 500;
         }
         
-        .back-to-home:hover {
-            background: #2980b9;
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
         
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
+        .form-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        /* Timer */
+        .timer-container {
+            background: #fff3cd;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffeaa7;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d35400;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid #d35400;
+        }
+        
+        .timer.warning {
+            color: #e74c3c;
+            border-color: #e74c3c;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* Questions Section */
+        .questions-section {
+            padding: 30px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .question-card:hover {
+            border-color: #3498db;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
             padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-label:hover {
+            border-color: #3498db;
+            background: #f0f7ff;
+        }
+        
+        .option-label.selected {
+            border-color: #27ae60;
+            background: #d4edda;
+        }
+        
+        .option-radio {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .option-text {
+            font-size: 16px;
+        }
+        
+        /* Submit Section */
+        .submit-section {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Ads */
+        .ad-container {
+            background: white;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-container.hidden {
             display: none;
+        }
+        
+        .ad-placeholder {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .modal-title {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .modal-message {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .modal-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .test-header {
+                padding: 20px;
+            }
+            
+            .questions-section {
+                padding: 20px;
+            }
+            
+            .question-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img id="site-logo" src="" alt="FreeTutorBD Logo">
+                <div class="site-name">FreeTutorBD</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#"><i class="fas fa-home"></i> হোম</a>
+                <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
+                <a href="#"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                <a href="#"><i class="fas fa-briefcase"></i> চাকরি</a>
+                <a href="#"><i class="fas fa-info-circle"></i> সম্পর্কে</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Ad Container - Header -->
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1><i class="fas fa-clock"></i> মডেল টেস্ট</h1>
-            <p>সময়সীমাযুদ্ধ মডেল টেস্ট দিয়ে নিজেকে যাচাই করুন</p>
-        </div>
-        
-        <!-- Error Message -->
-        <div class="error-message" id="errorMessage">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span id="errorText">Something went wrong</span>
-        </div>
-        
-        <!-- Model Tests Grid -->
-        <div class="model-tests">
-            <!-- Quick Model Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>দ্রুত মডেল টেস্ট</h3>
-                <p><strong>২০টি প্রশ্ন - ২০ মিনিট</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    সকল বিষয় থেকে মিশ্র প্রশ্ন, দ্রুত প্রস্তুতির জন্য
-                </p>
-                <button class="start-btn" onclick="startModelTest('quick')">
-                    <i class="fas fa-play"></i> শুরু করুন
-                </button>
+        <div class="ad-container" id="ad-header">
+            <div class="ad-placeholder">
+                <i class="fas fa-ad fa-2x"></i>
+                <p>বিজ্ঞাপন</p>
             </div>
-            
-            <!-- BCS Preparation Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h3>BCS প্রস্তুতি টেস্ট</h3>
-                <p><strong>১০০টি প্রশ্ন - ৩ ঘণ্টা</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    BCS পরীক্ষার আদলে, সম্পূর্ণ সিলেবাস কভার
-                </p>
-                <button class="start-btn" onclick="startModelTest('bcs')">
-                    <i class="fas fa-play"></i> শুরু করুন
-                </button>
-            </div>
-            
-            <!-- Bank Job Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-university"></i>
-                </div>
-                <h3>ব্যাংক জব টেস্ট</h3>
-                <p><strong>৮০টি প্রশ্ন - ২ ঘণ্টা</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    ব্যাংক নিয়োগ পরীক্ষার জন্য বিশেষায়িত
-                </p>
-                <button class="start-btn" onclick="startModelTest('bank')">
-                    <i class="fas fa-play"></i> শুরু করুন
-                </button>
-            </div>
-            
-            <!-- NTRCA Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>NTRCA টেস্ট</h3>
-                <p><strong>১০০টি প্রশ্ন - ৩ ঘণ্টা</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    শিক্ষক নিবন্ধন পরীক্ষার জন্য
-                </p>
-                <button class="start-btn" onclick="startModelTest('ntrca')">
-                    <i class="fas fa-play"></i> শুরু করুন
-                </button>
-            </div>
-            
-            <!-- Daily Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-calendar-day"></i>
-                </div>
-                <h3>ডেইলি টেস্ট</h3>
-                <p><strong>৩০টি প্রশ্ন - ৪৫ মিনিট</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    প্রতিদিন নতুন টেস্ট, নিয়মিত প্রাকটিস
-                </p>
-                <button class="start-btn" onclick="startModelTest('daily')">
-                    <i class="fas fa-play"></i> আজকের টেস্ট
-                </button>
-            </div>
-            
-            <!-- Custom Test -->
-            <div class="test-card">
-                <div class="test-icon">
-                    <i class="fas fa-sliders-h"></i>
-                </div>
-                <h3>কাস্টম টেস্ট</h3>
-                <p><strong>নিজের মত করে তৈরি করুন</strong></p>
-                <p style="color: #666; margin: 10px 0; font-size: 14px;">
-                    বিষয়, প্রশ্ন সংখ্যা, সময় নিজে ঠিক করুন
-                </p>
-                <button class="start-btn" onclick="showCustomTestOptions()">
-                    <i class="fas fa-cog"></i> কাস্টমাইজ করুন
-                </button>
-            </div>
-        </div>
-        
-        <!-- Custom Test Options (Hidden by default) -->
-        <div id="customTestOptions" style="display: none; margin-top: 30px; background: white; padding: 30px; border-radius: 10px;">
-            <h3 style="margin-bottom: 20px;">কাস্টম টেস্ট তৈরি করুন</h3>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
-                <div>
-                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">প্রশ্ন সংখ্যা</label>
-                    <select id="questionCount" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
-                        <option value="10">১০টি প্রশ্ন</option>
-                        <option value="20">২০টি প্রশ্ন</option>
-                        <option value="50">৫০টি প্রশ্ন</option>
-                        <option value="100">১০০টি প্রশ্ন</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">সময় (মিনিট)</label>
-                    <select id="testTime" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
-                        <option value="10">১০ মিনিট</option>
-                        <option value="20">২০ মিনিট</option>
-                        <option value="60">১ ঘণ্টা</option>
-                        <option value="180">৩ ঘণ্টা</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">বিষয়</label>
-                    <select id="testCategory" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
-                        <option value="all">সব বিষয়</option>
-                        <option value="bangladesh">বাংলাদেশ বিষয়াবলী</option>
-                        <option value="international">আন্তর্জাতিক</option>
-                        <option value="math">গণিত</option>
-                        <option value="english">ইংরেজি</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button onclick="createCustomTest()" style="background: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: 600;">
-                <i class="fas fa-plus-circle"></i> টেস্ট তৈরি করুন
-            </button>
-        </div>
-        
-        <!-- Coming Soon -->
-        <div class="coming-soon">
-            <h3><i class="fas fa-tools"></i> আরও আসছে শীঘ্রই!</h3>
-            <p style="margin: 10px 0;">• লিডারবোর্ড - অন্যান্য প্রার্থীদের সাথে প্রতিযোগিতা</p>
-            <p style="margin: 10px 0;">• সার্টিফিকেট - টেস্ট সম্পন্ন করলে সার্টিফিকেট ডাউনলোড</p>
-            <p style="margin: 10px 0;">• ডিটেইলড এনালিটিক্স - আপনার দুর্বলতা চিহ্নিত করুন</p>
-        </div>
-        
-        <!-- Navigation -->
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="quiz.html" class="back-to-home" style="margin-right: 10px;">
-                <i class="fas fa-question-circle"></i> MCQ টেস্ট
-            </a>
-            <a href="exam-preparation.html" class="back-to-home" style="margin-right: 10px;">
-                <i class="fas fa-book"></i> পরীক্ষা প্রস্তুতি
-            </a>
-            <a href="index.html" class="back-to-home">
-                <i class="fas fa-home"></i> হোম পেজ
-            </a>
         </div>
     </div>
     
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Test Selection Page -->
+        <div id="test-selection-page">
+            <h1 style="color: #2c3e50; margin-bottom: 10px; text-align: center;">মডেল টেস্ট</h1>
+            <p style="color: #555; text-align: center; margin-bottom: 30px;">প্রস্তুতি নিন বিনামূল্যে, আপনার দক্ষতা যাচাই করুন</p>
+            
+            <div class="test-grid" id="tests-container">
+                <div class="test-card">
+                    <h3>বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১</h3>
+                    <div class="test-meta">
+                        <span class="meta-item"><i class="fas fa-clock"></i> ৬০ মিনিট</span>
+                        <span class="meta-item"><i class="fas fa-question-circle"></i> ১০০ প্রশ্ন</span>
+                        <span class="meta-item"><i class="fas fa-star"></i> ১০০ মার্কস</span>
+                    </div>
+                    <p style="color: #666; margin-bottom: 20px;">বিসিএস প্রিলিমিনারি পরীক্ষার জন্য প্রস্তুতিমূলক টেস্ট</p>
+                    <button class="start-btn" onclick="startTest('test1')">
+                        <i class="fas fa-play-circle"></i> শুরু করুন
+                    </button>
+                </div>
+                
+                <!-- More tests will be loaded dynamically -->
+            </div>
+        </div>
+        
+        <!-- Test Page (Initially Hidden) -->
+        <div id="test-page" style="display: none;">
+            <div class="test-container">
+                <!-- Test Header -->
+                <div class="test-header">
+                    <h1 class="test-title" id="test-title">টেস্ট লোড হচ্ছে...</h1>
+                    <div class="test-info">
+                        <span class="info-item"><i class="fas fa-clock"></i> সময়: <span id="test-time">60</span> মিনিট</span>
+                        <span class="info-item"><i class="fas fa-question-circle"></i> প্রশ্ন: <span id="test-questions">0</span></span>
+                        <span class="info-item"><i class="fas fa-star"></i> মোট মার্কস: <span id="test-total-marks">0</span></span>
+                    </div>
+                </div>
+                
+                <!-- User Info Form -->
+                <div class="user-form-section">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;"><i class="fas fa-user-circle"></i> আপনার তথ্য দিন</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label">আপনার নাম *</label>
+                            <input type="text" id="user-name" class="form-input" placeholder="আপনার পুরো নাম" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">মোবাইল নম্বর *</label>
+                            <input type="tel" id="user-phone" class="form-input" placeholder="01XXXXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ইমেইল (ঐচ্ছিক)</label>
+                        <input type="email" id="user-email" class="form-input" placeholder="you@example.com">
+                    </div>
+                    <p style="color: #7f8c8d; font-size: 14px; margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i> আপনার তথ্য শুধুমাত্র রেজাল্ট দেখার জন্য ব্যবহৃত হবে
+                    </p>
+                </div>
+                
+                <!-- Timer -->
+                <div class="timer-container">
+                    <div>
+                        <strong>টেস্টার:</strong> <span id="display-name">নাম লিখুন</span>
+                    </div>
+                    <div class="timer" id="timer">
+                        60:00
+                    </div>
+                </div>
+                
+                <!-- Middle Ad -->
+                <div class="ad-container" id="ad-middle">
+                    <div class="ad-placeholder">
+                        <i class="fas fa-ad fa-2x"></i>
+                        <p>বিজ্ঞাপন</p>
+                    </div>
+                </div>
+                
+                <!-- Questions Section -->
+                <div class="questions-section" id="questions-section">
+                    <h3 style="color: #2c3e50; margin-bottom: 25px;"><i class="fas fa-question-circle"></i> প্রশ্নসমূহ</h3>
+                    
+                    <div id="questions-container">
+                        <!-- Questions will be loaded here -->
+                        <div class="question-card">
+                            <div class="question-number">১</div>
+                            <div class="question-text">বাংলাদেশের স্বাধীনতা দিবস কোন তারিখে?</div>
+                            <div class="options-container">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="1" class="option-radio">
+                                    <span class="option-text">২৬ মার্চ</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="2" class="option-radio">
+                                    <span class="option-text">১৬ ডিসেম্বর</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="3" class="option-radio">
+                                    <span class="option-text">২১ ফেব্রুয়ারি</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="4" class="option-radio">
+                                    <span class="option-text">১ এপ্রিল</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Ad -->
+                    <div class="ad-container" id="ad-bottom">
+                        <div class="ad-placeholder">
+                            <i class="fas fa-ad fa-2x"></i>
+                            <p>বিজ্ঞাপন</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button id="submit-btn" class="submit-btn" onclick="submitTest()" disabled>
+                        <i class="fas fa-paper-plane"></i> টেস্ট সাবমিট করুন
+                    </button>
+                    <p style="color: #7f8c8d; margin-top: 15px; font-size: 14px;">
+                        <i class="fas fa-exclamation-triangle"></i> একবার সাবমিট করলে আর পরিবর্তন করা যাবে না
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ad Container - Footer -->
+    <div class="container">
+        <div class="ad-container" id="ad-footer">
+            <div class="ad-placeholder">
+                <i class="fas fa-ad fa-2x"></i>
+                <p>বিজ্ঞাপন</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>FreeTutorBD</h3>
+                <p style="color: #bdc3c7; line-height: 1.6;">
+                    বাংলাদেশের বৃহত্তম ফ্রি লার্নিং প্ল্যাটফর্ম। প্রস্তুতি নিন বিনামূল্যে, সাফল্য পান সহজে।
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>দ্রুত লিংক</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> হোম</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> মডেল টেস্ট</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> প্রশ্নব্যাংক</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> চাকরি</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> যোগাযোগ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>যোগাযোগ</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> contact@freetutorbd.com</li>
+                    <li><i class="fas fa-phone"></i> +880 1XXX XXXXXX</li>
+                    <li><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2024 FreeTutorBD. সর্বস্বত্ব সংরক্ষিত।</p>
+            <p style="margin-top: 5px;">Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Bangladeshi Students</p>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h2 class="modal-title"><i class="fas fa-trophy"></i> টেস্ট সম্পন্ন!</h2>
+            <div class="modal-message" id="modal-message">
+                আপনার টেস্ট সফলভাবে সাবমিট হয়েছে। রেজাল্ট দেখতে নিচের বাটনে ক্লিক করুন।
+            </div>
+            <button class="modal-btn" onclick="closeModal()">
+                <i class="fas fa-check"></i> ঠিক আছে
+            </button>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script>
-        // Function to start model test
-        function startModelTest(testType) {
-            // Show loading
-            document.getElementById('errorMessage').style.display = 'none';
+        // ==================== FIREBASE CONFIGURATION ====================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
+            authDomain: "freetutorbd-19380.firebaseapp.com",
+            projectId: "freetutorbd-19380",
+            storageBucket: "freetutorbd-19380.firebasestorage.app",
+            messagingSenderId: "741837856466",
+            appId: "1:741837856466:web:8b5a3b34183991e2f9570b",
+            measurementId: "G-VMSB3D24F1"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ==================== GLOBAL VARIABLES ====================
+        let currentTest = null;
+        let timerInterval = null;
+        let timeLeft = 0;
+        let userAnswers = {};
+        let testStarted = false;
+        let adsEnabled = true; // Change to false to hide ads
+
+        // ==================== PAGE LOAD ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLogo();
+            loadTests();
+            setupEventListeners();
             
-            // Define test parameters based on type
-            const testConfigs = {
-                'quick': { questions: 20, time: 20, category: 'all', name: 'দ্রুত মডেল টেস্ট' },
-                'bcs': { questions: 100, time: 180, category: 'all', name: 'BCS প্রস্তুতি টেস্ট' },
-                'bank': { questions: 80, time: 120, category: 'all', name: 'ব্যাংক জব টেস্ট' },
-                'ntrca': { questions: 100, time: 180, category: 'all', name: 'NTRCA টেস্ট' },
-                'daily': { questions: 30, time: 45, category: 'all', name: 'ডেইলি টেস্ট' }
-            };
-            
-            const config = testConfigs[testType] || testConfigs['quick'];
-            
-            // Store test config in localStorage
-            localStorage.setItem('modelTestConfig', JSON.stringify(config));
-            
-            // Redirect to quiz page with parameters
-            window.location.href = `quiz.html?model-test=${testType}&questions=${config.questions}&time=${config.time}`;
+            // Hide/show ads based on setting
+            toggleAds(adsEnabled);
+        });
+
+        // ==================== LOGO LOADING ====================
+        function loadLogo() {
+            // Try to load logo from Firebase
+            db.collection('settings').doc('logo').get()
+                .then(doc => {
+                    if (doc.exists && doc.data().url) {
+                        document.getElementById('site-logo').src = doc.data().url;
+                    } else {
+                        // Default logo
+                        document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
+                    }
+                })
+                .catch(() => {
+                    // Fallback logo
+                    document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
+                });
         }
-        
-        // Function to show custom test options
-        function showCustomTestOptions() {
-            document.getElementById('customTestOptions').style.display = 'block';
-            window.scrollTo({
-                top: document.getElementById('customTestOptions').offsetTop - 20,
-                behavior: 'smooth'
+
+        // ==================== ADS MANAGEMENT ====================
+        function toggleAds(show) {
+            const ads = document.querySelectorAll('.ad-container');
+            ads.forEach(ad => {
+                if (show) {
+                    ad.classList.remove('hidden');
+                } else {
+                    ad.classList.add('hidden');
+                }
             });
-        }
-        
-        // Function to create custom test
-        function createCustomTest() {
-            const questionCount = document.getElementById('questionCount').value;
-            const testTime = document.getElementById('testTime').value;
-            const testCategory = document.getElementById('testCategory').value;
             
-            // Validate
-            if (!questionCount || !testTime) {
-                showError('দয়া করে সব তথ্য পূরণ করুন');
+            // You can add AdSense or Adstra code here
+            if (show) {
+                // Example AdSense code (replace with your actual code)
+                /*
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
+                    crossorigin="anonymous"></script>
+                */
+            }
+        }
+
+        // ==================== TESTS LOADING ====================
+        function loadTests() {
+            const testsContainer = document.getElementById('tests-container');
+            testsContainer.innerHTML = `
+                <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: #3498db;"></i>
+                    <p style="margin-top: 15px; color: #7f8c8d;">টেস্ট লোড হচ্ছে...</p>
+                </div>
+            `;
+            
+            // Load published tests from Firebase
+            db.collection('exams').where('status', '==', 'published').get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        testsContainer.innerHTML = `
+                            <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                                <i class="fas fa-exclamation-circle fa-2x" style="color: #e74c3c;"></i>
+                                <p style="margin-top: 15px; color: #7f8c8d;">কোন টেস্ট পাওয়া যায়নি</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const test = doc.data();
+                        const testId = doc.id;
+                        
+                        html += `
+                            <div class="test-card">
+                                <h3>${test.title}</h3>
+                                <div class="test-meta">
+                                    <span class="meta-item"><i class="fas fa-clock"></i> ${test.timeLimit} মিনিট</span>
+                                    <span class="meta-item"><i class="fas fa-question-circle"></i> ${test.totalQuestions} প্রশ্ন</span>
+                                    <span class="meta-item"><i class="fas fa-star"></i> ${test.totalQuestions * test.marksPerQuestion} মার্কস</span>
+                                </div>
+                                <p style="color: #666; margin-bottom: 20px;">${test.description || 'কোন বিবরণ নেই'}</p>
+                                <button class="start-btn" onclick="startTest('${testId}')">
+                                    <i class="fas fa-play-circle"></i> শুরু করুন
+                                </button>
+                            </div>
+                        `;
+                    });
+                    
+                    testsContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading tests:', error);
+                    testsContainer.innerHTML = `
+                        <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #e74c3c;"></i>
+                            <p style="margin-top: 15px; color: #7f8c8d;">টেস্ট লোড করতে সমস্যা হয়েছে</p>
+                        </div>
+                    `;
+                });
+        }
+
+        // ==================== TEST START ====================
+        function startTest(testId) {
+            // Show test page
+            document.getElementById('test-selection-page').style.display = 'none';
+            document.getElementById('test-page').style.display = 'block';
+            
+            // Load test data
+            db.collection('exams').doc(testId).get()
+                .then(doc => {
+                    if (doc.exists) {
+                        currentTest = {
+                            id: testId,
+                            ...doc.data()
+                        };
+                        
+                        // Update test info
+                        document.getElementById('test-title').textContent = currentTest.title;
+                        document.getElementById('test-time').textContent = currentTest.timeLimit;
+                        document.getElementById('test-questions').textContent = currentTest.totalQuestions;
+                        document.getElementById('test-total-marks').textContent = currentTest.totalQuestions * currentTest.marksPerQuestion;
+                        
+                        // Initialize timer
+                        timeLeft = currentTest.timeLimit * 60; // Convert to seconds
+                        updateTimerDisplay();
+                        
+                        // Load questions
+                        loadQuestions();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading test:', error);
+                    alert('টেস্ট লোড করতে সমস্যা হয়েছে');
+                });
+        }
+
+        // ==================== QUESTIONS LOADING ====================
+        function loadQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            questionsContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: #3498db;"></i>
+                    <p style="margin-top: 15px; color: #7f8c8d;">প্রশ্ন লোড হচ্ছে...</p>
+                </div>
+            `;
+            
+            // For now, we'll use sample questions
+            // In production, you should load questions from Firebase
+            setTimeout(() => {
+                showSampleQuestions();
+            }, 1000);
+        }
+
+        function showSampleQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            let html = '';
+            
+            // Sample questions (replace with actual questions from Firebase)
+            const sampleQuestions = [
+                {
+                    id: 1,
+                    question: "বাংলাদেশের স্বাধীনতা দিবস কোন তারিখে?",
+                    options: ["২৬ মার্চ", "১৬ ডিসেম্বর", "২১ ফেব্রুয়ারি", "১ এপ্রিল"],
+                    correctAnswer: 1
+                },
+                {
+                    id: 2,
+                    question: "বাংলাদেশের জাতীয় পাখি কোনটি?",
+                    options: ["ময়না", "দোয়েল", "কাক", "শালিক"],
+                    correctAnswer: 2
+                },
+                {
+                    id: 3,
+                    question: "বাংলাদেশের জাতীয় ফুল কোনটি?",
+                    options: ["গোলাপ", "কদম", "শাপলা", "গাঁদা"],
+                    correctAnswer: 3
+                },
+                {
+                    id: 4,
+                    question: "বাংলাদেশের রাজধানীর নাম কি?",
+                    options: ["চট্টগ্রাম", "ঢাকা", "খুলনা", "রাজশাহী"],
+                    correctAnswer: 2
+                },
+                {
+                    id: 5,
+                    question: "বাংলাদেশের মুক্তিযুদ্ধ কত সালে হয়?",
+                    options: ["১৯৬৫", "১৯৭১", "১৯৮১", "১৯৯১"],
+                    correctAnswer: 2
+                }
+            ];
+            
+            sampleQuestions.forEach((q, index) => {
+                html += `
+                    <div class="question-card">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${q.question}</div>
+                        <div class="options-container">
+                            ${q.options.map((option, optIndex) => `
+                                <label class="option-label" onclick="selectAnswer(${q.id}, ${optIndex + 1})">
+                                    <input type="radio" name="q${q.id}" value="${optIndex + 1}" class="option-radio">
+                                    <span class="option-text">${option}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            questionsContainer.innerHTML = html;
+            
+            // Store question data
+            currentTest.questions = sampleQuestions;
+        }
+
+        // ==================== ANSWER SELECTION ====================
+        function selectAnswer(questionId, answerIndex) {
+            userAnswers[questionId] = answerIndex;
+            
+            // Update UI
+            const labels = document.querySelectorAll(`input[name="q${questionId}"]`);
+            labels.forEach((label, index) => {
+                const parent = label.parentElement;
+                if (index + 1 === answerIndex) {
+                    parent.classList.add('selected');
+                } else {
+                    parent.classList.remove('selected');
+                }
+            });
+            
+            // Check if all questions answered
+            checkIfAllAnswered();
+        }
+
+        function checkIfAllAnswered() {
+            if (currentTest && currentTest.questions) {
+                const totalQuestions = currentTest.questions.length;
+                const answeredQuestions = Object.keys(userAnswers).length;
+                
+                // Enable submit button if all questions answered
+                const submitBtn = document.getElementById('submit-btn');
+                if (answeredQuestions === totalQuestions) {
+                    submitBtn.disabled = false;
+                }
+            }
+        }
+
+        // ==================== TIMER FUNCTIONS ====================
+        function startTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timeUp();
+                }
+                
+                // Warning when 5 minutes left
+                if (timeLeft === 300) { // 5 minutes = 300 seconds
+                    showTimeWarning();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const timerElement = document.getElementById('timer');
+            
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Add warning class when less than 5 minutes
+            if (timeLeft < 300) {
+                timerElement.classList.add('warning');
+            } else {
+                timerElement.classList.remove('warning');
+            }
+        }
+
+        function showTimeWarning() {
+            alert('⚠️ সতর্কতা: আপনার মাত্র ৫ মিনিট বাকি আছে! দ্রুত সাবমিট করুন।');
+        }
+
+        function timeUp() {
+            alert('⏰ সময় শেষ! টেস্ট স্বয়ংক্রিয়ভাবে সাবমিট হচ্ছে...');
+            submitTest();
+        }
+
+        // ==================== FORM VALIDATION ====================
+        function setupEventListeners() {
+            // User info form validation
+            const userNameInput = document.getElementById('user-name');
+            const userPhoneInput = document.getElementById('user-phone');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            function validateForm() {
+                const nameValid = userNameInput.value.trim().length > 0;
+                const phoneValid = /^(?:\+88|01)?(?:\d{11}|\d{13})$/.test(userPhoneInput.value.trim());
+                
+                // Update display name
+                if (nameValid) {
+                    document.getElementById('display-name').textContent = userNameInput.value.trim();
+                }
+                
+                // Enable/disable submit button
+                submitBtn.disabled = !(nameValid && phoneValid);
+                
+                // Start timer when form is valid and test hasn't started
+                if (nameValid && phoneValid && !testStarted) {
+                    testStarted = true;
+                    startTimer();
+                }
+            }
+            
+            userNameInput.addEventListener('input', validateForm);
+            userPhoneInput.addEventListener('input', validateForm);
+        }
+
+        // ==================== TEST SUBMISSION ====================
+        function submitTest() {
+            // Validate user info
+            const userName = document.getElementById('user-name').value.trim();
+            const userPhone = document.getElementById('user-phone').value.trim();
+            const userEmail = document.getElementById('user-email').value.trim();
+            
+            if (!userName || !userPhone) {
+                alert('নাম এবং মোবাইল নম্বর দিন');
                 return;
             }
             
-            const config = {
-                questions: parseInt(questionCount),
-                time: parseInt(testTime),
-                category: testCategory,
-                name: 'কাস্টম টেস্ট'
+            // Calculate score
+            let score = 0;
+            let totalQuestions = currentTest.questions.length;
+            
+            currentTest.questions.forEach(q => {
+                if (userAnswers[q.id] === q.correctAnswer) {
+                    score += currentTest.marksPerQuestion || 1;
+                }
+            });
+            
+            // Calculate time taken
+            const timeTaken = (currentTest.timeLimit * 60) - timeLeft;
+            
+            // Prepare result data
+            const resultData = {
+                userName: userName,
+                phoneNumber: userPhone,
+                userEmail: userEmail,
+                examId: currentTest.id,
+                examTitle: currentTest.title,
+                totalScore: score,
+                totalMarks: totalQuestions * (currentTest.marksPerQuestion || 1),
+                timeTaken: timeTaken,
+                answers: userAnswers,
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                ipAddress: getIPAddress() || 'Unknown',
+                browserInfo: navigator.userAgent
             };
             
-            // Store test config
-            localStorage.setItem('modelTestConfig', JSON.stringify(config));
-            
-            // Redirect to quiz page
-            window.location.href = `quiz.html?model-test=custom&questions=${config.questions}&time=${config.time}&category=${config.category}`;
-        }
-        
-        // Function to show error message
-        function showError(message) {
-            document.getElementById('errorText').textContent = message;
-            document.getElementById('errorMessage').style.display = 'block';
-            
-            // Hide error after 5 seconds
-            setTimeout(() => {
-                document.getElementById('errorMessage').style.display = 'none';
-            }, 5000);
-        }
-        
-        // Function to check if user is logged in (optional)
-        function checkLoginBeforeTest() {
-            // You can add Firebase auth check here later
-            return true;
-        }
-        
-        // Add click handlers for better error handling
-        document.addEventListener('DOMContentLoaded', function() {
-            // Make sure all buttons have proper event handlers
-            const buttons = document.querySelectorAll('.start-btn');
-            buttons.forEach(button => {
-                // Ensure onclick works
-                button.addEventListener('click', function(e) {
-                    // Optional: Check login status
-                    if (!checkLoginBeforeTest()) {
-                        e.preventDefault();
-                        showError('টেস্ট দিতে লগইন করুন');
-                        return;
-                    }
+            // Save to Firebase
+            db.collection('results').add(resultData)
+                .then(docRef => {
+                    // Show success modal
+                    showResultModal(score, totalQuestions * (currentTest.marksPerQuestion || 1), timeTaken);
+                    
+                    // Reset for next test
+                    resetTest();
+                })
+                .catch(error => {
+                    console.error('Error saving result:', error);
+                    alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে');
                 });
-            });
+        }
+
+        function showResultModal(score, totalMarks, timeTaken) {
+            const percentage = ((score / totalMarks) * 100).toFixed(1);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
             
-            // Add animation to cards
-            const cards = document.querySelectorAll('.test-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-                card.style.animation = 'fadeInUp 0.5s ease forwards';
-                card.style.opacity = '0';
-            });
-        });
-        
-        // Add CSS animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            const message = `
+                <div style="text-align: left; margin-bottom: 20px;">
+                    <p><strong>প্রাপ্ত মার্কস:</strong> ${score}/${totalMarks}</p>
+                    <p><strong>শতকরা হার:</strong> ${percentage}%</p>
+                    <p><strong>সময় নিয়েছেন:</strong> ${minutes} মিনিট ${seconds} সেকেন্ড</p>
+                    <p style="margin-top: 15px; color: #27ae60;">
+                        <i class="fas fa-check-circle"></i> আপনার রেজাল্ট সেভ করা হয়েছে
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('result-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').style.display = 'none';
+            // Go back to test selection
+            document.getElementById('test-selection-page').style.display = 'block';
+            document.getElementById('test-page').style.display = 'none';
+        }
+
+        function resetTest() {
+            currentTest = null;
+            userAnswers = {};
+            testStarted = false;
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
             }
-        `;
-        document.head.appendChild(style);
+            
+            // Reset form
+            document.getElementById('user-name').value = '';
+            document.getElementById('user-phone').value = '';
+            document.getElementById('user-email').value = '';
+            document.getElementById('submit-btn').disabled = true;
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function getIPAddress() {
+            // This is a simple method; for production use a proper IP detection service
+            return localStorage.getItem('user_ip') || 'Unknown';
+        }
+
+        // ==================== INITIALIZATION ====================
+        // You can add AdSense code here
+        function initializeAds() {
+            if (adsEnabled) {
+                // Example: Add AdSense script
+                const adScript = document.createElement('script');
+                adScript.async = true;
+                adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+                adScript.setAttribute('data-ad-client', 'YOUR_AD_CLIENT_ID');
+                document.head.appendChild(adScript);
+            }
+        }
+
+        // Initialize ads on page load
+        window.addEventListener('load', initializeAds);
+
     </script>
 </body>
 </html>
