@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পরীক্ষা প্রস্তুতি - MCQ Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .subject-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+        }
+        
+        .subject-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+        
+        .subject-card:hover .subject-icon {
+            color: white;
+        }
+        
+        .question-list {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .question-item {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .answer {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .show-answer {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-graduation-cap"></i> পরীক্ষা প্রস্তুতি</h1>
+            <p>বিষয়ভিত্তিক প্রশ্নোত্তর পড়ুন এবং প্রস্তুতি নিন</p>
+        </div>
+        
+        <div id="subjectsContainer" class="subjects-grid">
+            <!-- Subjects will load here -->
+        </div>
+        
+        <div id="questionsContainer" class="question-list">
+            <button class="back-btn" onclick="showSubjects()">
+                <i class="fas fa-arrow-left"></i> বিষয় তালিকায় ফিরে যান
+            </button>
+            <div id="questionsList"></div>
+        </div>
+    </div>
+    
+    <script>
+        const subjects = [
+            { id: 'bangladesh', icon: 'fas fa-landmark', name: 'বাংলাদেশ বিষয়াবলী' },
+            { id: 'international', icon: 'fas fa-globe-asia', name: 'আন্তর্জাতিক বিষয়াবলী' },
+            { id: 'geography', icon: 'fas fa-map', name: 'ভূগোল' },
+            { id: 'bangla', icon: 'fas fa-book', name: 'বাংলা সাহিত্য' },
+            { id: 'science', icon: 'fas fa-flask', name: 'সাধারণ বিজ্ঞান' },
+            { id: 'math', icon: 'fas fa-calculator', name: 'গাণিতিক যুক্তি' },
+            { id: 'abbreviation', icon: 'fas fa-abacus', name: 'শব্দ সংক্ষেপণ' },
+            { id: 'current', icon: 'fas fa-newspaper', name: 'বর্তমান affairs' }
+        ];
+        
+        function loadSubjects() {
+            const container = document.getElementById('subjectsContainer');
+            let html = '';
+            
+            subjects.forEach(subject => {
+                html += `
+                    <div class="subject-card" onclick="loadQuestions('${subject.id}')">
+                        <div class="subject-icon">
+                            <i class="${subject.icon}"></i>
+                        </div>
+                        <h3>${subject.name}</h3>
+                        <p style="margin-top: 10px; color: #666;">প্রস্তুতিমূলক প্রশ্নোত্তর দেখুন</p>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function loadQuestions(subjectId) {
+            const subject = subjects.find(s => s.id === subjectId);
+            
+            // Show questions container
+            document.getElementById('subjectsContainer').style.display = 'none';
+            document.getElementById('questionsContainer').style.display = 'block';
+            
+            // Load questions from Firebase or show sample
+            let questionsHTML = `
+                <h2 style="margin-bottom: 20px; color: #2c3e50;">${subject.name} - প্রশ্নোত্তর</h2>
+            `;
+            
+            // Sample questions
+            const sampleQuestions = [
+                {
+                    question: 'বাংলাদেশের সংবিধান কবে প্রথম গৃহীত হয়?',
+                    answer: '৪ নভেম্বর, ১৯৭২'
+                },
+                {
+                    question: 'বাংলাদেশের জাতীয় ফুলের নাম কি?',
+                    answer: 'শাপলা'
+                },
+                {
+                    question: 'বাংলাদেশের জাতীয় খেলা কি?',
+                    answer: 'কাবাডি'
+                },
+                {
+                    question: 'বাংলাদেশের বৃহত্তম জেলা কোনটি?',
+                    answer: 'রাঙামাটি (আয়তনে)'
+                },
+                {
+                    question: 'বাংলাদেশের প্রথম প্রধানমন্ত্রী কে ছিলেন?',
+                    answer: 'তাজউদ্দীন আহমদ'
+                }
+            ];
+            
+            sampleQuestions.forEach((q, index) => {
+                questionsHTML += `
+                    <div class="question-item">
+                        <h4>প্রশ্ন ${index + 1}: ${q.question}</h4>
+                        <button class="show-answer" onclick="toggleAnswer(${index})">
+                            উত্তর দেখুন
+                        </button>
+                        <div class="answer" id="answer-${index}">
+                            <strong>উত্তর:</strong> ${q.answer}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('questionsList').innerHTML = questionsHTML;
+        }
+        
+        function showSubjects() {
+            document.getElementById('subjectsContainer').style.display = 'grid';
+            document.getElementById('questionsContainer').style.display = 'none';
+        }
+        
+        function toggleAnswer(index) {
+            const answerDiv = document.getElementById(`answer-${index}`);
+            const btn = event.target;
+            
+            if (answerDiv.style.display === 'block') {
+                answerDiv.style.display = 'none';
+                btn.textContent = 'উত্তর দেখুন';
+            } else {
+                answerDiv.style.display = 'block';
+                btn.textContent = 'উত্তর লুকান';
+            }
+        }
+        
+        window.onload = loadSubjects;
+    </script>
+</body>
+</html>
