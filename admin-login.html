@@ -112,4 +112,32 @@
         
         // Admin Login Function
         function adminLogin() {
-            const provider = new fire
+            const provider = new firebase.auth.GoogleAuthProvider();
+            
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    
+                    // Check if it's the allowed admin
+                    if (user.email === "mdebadot1997@gmail.com") {
+                        // Redirect to admin panel
+                        window.location.href = "admin-panel.html";
+                    } else {
+                        alert("⚠️ আপনি অ্যাডমিন নন! শুধুমাত্র mdebadothossen লগইন করতে পারবেন।");
+                        auth.signOut();
+                    }
+                })
+                .catch((error) => {
+                    alert("Login error: " + error.message);
+                });
+        }
+        
+        // Check if already logged in as admin
+        auth.onAuthStateChanged(user => {
+            if (user && user.email === "mdebadot1997@gmail.com" && window.location.pathname.includes('admin-login.html')) {
+                window.location.href = "admin-panel.html";
+            }
+        });
+    </script>
+</body>
+</html>
