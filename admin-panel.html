@@ -224,7 +224,7 @@
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s;
-            background: #f8f9fa;
+            background: white;
         }
         
         .form-control:focus {
@@ -339,6 +339,7 @@
             width: 20px;
             height: 20px;
             cursor: pointer;
+            margin-top: 5px;
         }
         
         /* Selected Questions */
@@ -386,6 +387,32 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transform: translateY(-3px);
             border-color: #3498db;
+        }
+        
+        /* Dropdown/Select Styles - FIXED */
+        select.form-control {
+            appearance: auto !important;
+            -webkit-appearance: menulist !important;
+            -moz-appearance: menulist !important;
+            background-image: none !important;
+            padding-right: 15px !important;
+            color: #333 !important;
+            background-color: white !important;
+        }
+        
+        select.form-control option {
+            color: #333 !important;
+            background-color: white !important;
+            padding: 10px !important;
+            font-size: 16px !important;
+        }
+        
+        /* Fix for radio buttons and checkboxes */
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
         }
         
         /* Responsive */
@@ -832,10 +859,60 @@
                     </div>
                 </div>
                 
-                <!-- Other Tabs (Questions, Categories, Jobs, Results, Logo) -->
-                <!-- These tabs will have similar structure but simplified for this response -->
-                <!-- I'll provide full code for all tabs if you want -->
+                <!-- Questions Tab -->
+                <div id="questions-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-question-circle"></i>
+                            প্রশ্নব্যাংক
+                        </h3>
+                        <p>এই ট্যাবটি প্রশ্ন ম্যানেজমেন্টের জন্য।</p>
+                    </div>
+                </div>
                 
+                <!-- Categories Tab -->
+                <div id="categories-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-folder"></i>
+                            ক্যাটাগরি ম্যানেজমেন্ট
+                        </h3>
+                        <p>এই ট্যাবটি ক্যাটাগরি ম্যানেজমেন্টের জন্য।</p>
+                    </div>
+                </div>
+                
+                <!-- Jobs Tab -->
+                <div id="jobs-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-briefcase"></i>
+                            চাকরি ম্যানেজমেন্ট
+                        </h3>
+                        <p>এই ট্যাবটি চাকরি ম্যানেজমেন্টের জন্য।</p>
+                    </div>
+                </div>
+                
+                <!-- Results Tab -->
+                <div id="results-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-chart-bar"></i>
+                            রেজাল্ট দেখুন
+                        </h3>
+                        <p>এই ট্যাবটি টেস্ট রেজাল্ট দেখার জন্য।</p>
+                    </div>
+                </div>
+                
+                <!-- Logo Tab -->
+                <div id="logo-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-image"></i>
+                            লোগো ম্যানেজমেন্ট
+                        </h3>
+                        <p>এই ট্যাবটি লোগো পরিবর্তনের জন্য।</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -866,7 +943,7 @@
 
         // ==================== ADMIN SETTINGS ====================
         const allowedAdmins = [
-            "mdebadot1997@gmail.com",
+            "",
             "mdebadot1997@gmail.com"  // আপনার ইমেইল এখানে যোগ করুন
         ];
 
@@ -936,8 +1013,6 @@
                 if (tabId === 'exams') {
                     loadExams();
                     resetTestCreation();
-                } else if (tabId === 'results') {
-                    loadResults();
                 }
             });
         });
@@ -1059,17 +1134,7 @@
                 loadQuestionsBank();
                 
                 // Setup question source toggle
-                document.querySelectorAll('input[name="question-source"]').forEach(radio => {
-                    radio.addEventListener('change', function() {
-                        if (this.value === 'existing') {
-                            document.getElementById('existing-questions-section').style.display = 'block';
-                            document.getElementById('new-question-section').style.display = 'none';
-                        } else {
-                            document.getElementById('existing-questions-section').style.display = 'none';
-                            document.getElementById('new-question-section').style.display = 'block';
-                        }
-                    });
-                });
+                setupQuestionSourceToggle();
 
             } else if (currentStep === 2) {
                 // Validate step 2
@@ -1094,6 +1159,22 @@
                 // Update review
                 updateReviewSection();
             }
+        }
+
+        function setupQuestionSourceToggle() {
+            const radios = document.querySelectorAll('input[name="question-source"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'existing') {
+                        document.getElementById('existing-questions-section').style.display = 'block';
+                        document.getElementById('new-question-section').style.display = 'none';
+                        loadQuestionsBank();
+                    } else {
+                        document.getElementById('existing-questions-section').style.display = 'none';
+                        document.getElementById('new-question-section').style.display = 'block';
+                    }
+                });
+            });
         }
 
         function prevStep() {
@@ -1438,7 +1519,7 @@
 
         function searchExams() {
             const searchTerm = document.getElementById('exam-search').value.toLowerCase();
-            const exams = document.querySelectorAll('#exams-list > div > div > div');
+            const exams = document.querySelectorAll('#exams-list > div > div');
             
             exams.forEach(exam => {
                 const text = exam.textContent.toLowerCase();
