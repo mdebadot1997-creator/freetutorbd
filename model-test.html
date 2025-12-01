@@ -108,4 +108,52 @@
                 <p style="color: #666; margin: 10px 0;">সকল বিষয় থেকে মিশ্র প্রশ্ন</p>
                 <button class="start-btn" onclick="startModelTest('quick')">
                     <i class="fas fa-play"></i> শুরু করুন
-                </button
+                </button>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>BCS প্রস্তুতি টেস্ট</h3>
+                <p>১০০টি প্রশ্ন - ৩ ঘণ্টা</p>
+                <p style="color: #666; margin: 10px 0;">BCS পরীক্ষার আদলে</p>
+                <button class="start-btn" onclick="startModelTest('bcs')">
+                    <i class="fas fa-play"></i> শুরু করুন
+                </button>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>ব্যাংক জব টেস্ট</h3>
+                <p>৮০টি প্রশ্ন - ২ ঘণ্টা</p>
+                <p style="color: #666; margin: 10px 0;">ব্যাংক নিয়োগ পরীক্ষার জন্য</p>
+                <button class="start-btn" onclick="startModelTest('bank')">
+                    <i class="fas fa-play"></i> শুরু করুন
+                </button>
+            </div>
+        </div>
+        
+        <div class="coming-soon">
+            <h3><i class="fas fa-tools"></i> শীঘ্রই আসছে</h3>
+            <p>আরো মডেল টেস্ট এবং উন্নত ফিচার আসছে খুব শীঘ্রই!</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        function startModelTest(type) {
+            alert(`মডেল টেস্ট "${type}" শুরু করতে Quiz পেজে রিডাইরেক্ট করা হবে।\n\nএই ফিচারটি সম্পূর্ণ করতে কিছু সময় লাগবে।`);
+            // Redirect to quiz page with model test parameters
+            // window.location.href = `quiz.html?model-test=${type}`;
+        }
+    </script>
+</body>
+</html>
