@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>মডেল টেস্ট - MCQ Platform</title>
+    
+    <!-- Font Awesome MUST BE IN HEAD -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -63,11 +66,18 @@
             background: #9b59b6;
             color: white;
             border: none;
-            padding: 10px 25px;
+            padding: 12px 25px;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 15px;
             font-weight: 600;
+            font-size: 16px;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
         }
         
         .start-btn:hover {
@@ -76,9 +86,9 @@
         
         .coming-soon {
             background: #fff3cd;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            margin-top: 30px;
+            margin-top: 40px;
             text-align: center;
             border-left: 4px solid #ffc107;
         }
@@ -86,74 +96,315 @@
         .back-to-home {
             display: inline-block;
             margin-top: 30px;
-            color: #9b59b6;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        
+        .back-to-home:hover {
+            background: #2980b9;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
             <h1><i class="fas fa-clock"></i> মডেল টেস্ট</h1>
             <p>সময়সীমাযুদ্ধ মডেল টেস্ট দিয়ে নিজেকে যাচাই করুন</p>
         </div>
         
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorText">Something went wrong</span>
+        </div>
+        
+        <!-- Model Tests Grid -->
         <div class="model-tests">
+            <!-- Quick Model Test -->
             <div class="test-card">
                 <div class="test-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
                 <h3>দ্রুত মডেল টেস্ট</h3>
-                <p>২০টি প্রশ্ন - ২০ মিনিট</p>
-                <p style="color: #666; margin: 10px 0;">সকল বিষয় থেকে মিশ্র প্রশ্ন</p>
+                <p><strong>২০টি প্রশ্ন - ২০ মিনিট</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    সকল বিষয় থেকে মিশ্র প্রশ্ন, দ্রুত প্রস্তুতির জন্য
+                </p>
                 <button class="start-btn" onclick="startModelTest('quick')">
                     <i class="fas fa-play"></i> শুরু করুন
                 </button>
             </div>
             
+            <!-- BCS Preparation Test -->
             <div class="test-card">
                 <div class="test-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h3>BCS প্রস্তুতি টেস্ট</h3>
-                <p>১০০টি প্রশ্ন - ৩ ঘণ্টা</p>
-                <p style="color: #666; margin: 10px 0;">BCS পরীক্ষার আদলে</p>
+                <p><strong>১০০টি প্রশ্ন - ৩ ঘণ্টা</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    BCS পরীক্ষার আদলে, সম্পূর্ণ সিলেবাস কভার
+                </p>
                 <button class="start-btn" onclick="startModelTest('bcs')">
                     <i class="fas fa-play"></i> শুরু করুন
                 </button>
             </div>
             
+            <!-- Bank Job Test -->
             <div class="test-card">
                 <div class="test-icon">
                     <i class="fas fa-university"></i>
                 </div>
                 <h3>ব্যাংক জব টেস্ট</h3>
-                <p>৮০টি প্রশ্ন - ২ ঘণ্টা</p>
-                <p style="color: #666; margin: 10px 0;">ব্যাংক নিয়োগ পরীক্ষার জন্য</p>
+                <p><strong>৮০টি প্রশ্ন - ২ ঘণ্টা</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    ব্যাংক নিয়োগ পরীক্ষার জন্য বিশেষায়িত
+                </p>
                 <button class="start-btn" onclick="startModelTest('bank')">
                     <i class="fas fa-play"></i> শুরু করুন
                 </button>
             </div>
+            
+            <!-- NTRCA Test -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>NTRCA টেস্ট</h3>
+                <p><strong>১০০টি প্রশ্ন - ৩ ঘণ্টা</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    শিক্ষক নিবন্ধন পরীক্ষার জন্য
+                </p>
+                <button class="start-btn" onclick="startModelTest('ntrca')">
+                    <i class="fas fa-play"></i> শুরু করুন
+                </button>
+            </div>
+            
+            <!-- Daily Test -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-calendar-day"></i>
+                </div>
+                <h3>ডেইলি টেস্ট</h3>
+                <p><strong>৩০টি প্রশ্ন - ৪৫ মিনিট</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    প্রতিদিন নতুন টেস্ট, নিয়মিত প্রাকটিস
+                </p>
+                <button class="start-btn" onclick="startModelTest('daily')">
+                    <i class="fas fa-play"></i> আজকের টেস্ট
+                </button>
+            </div>
+            
+            <!-- Custom Test -->
+            <div class="test-card">
+                <div class="test-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3>কাস্টম টেস্ট</h3>
+                <p><strong>নিজের মত করে তৈরি করুন</strong></p>
+                <p style="color: #666; margin: 10px 0; font-size: 14px;">
+                    বিষয়, প্রশ্ন সংখ্যা, সময় নিজে ঠিক করুন
+                </p>
+                <button class="start-btn" onclick="showCustomTestOptions()">
+                    <i class="fas fa-cog"></i> কাস্টমাইজ করুন
+                </button>
+            </div>
         </div>
         
+        <!-- Custom Test Options (Hidden by default) -->
+        <div id="customTestOptions" style="display: none; margin-top: 30px; background: white; padding: 30px; border-radius: 10px;">
+            <h3 style="margin-bottom: 20px;">কাস্টম টেস্ট তৈরি করুন</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">প্রশ্ন সংখ্যা</label>
+                    <select id="questionCount" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
+                        <option value="10">১০টি প্রশ্ন</option>
+                        <option value="20">২০টি প্রশ্ন</option>
+                        <option value="50">৫০টি প্রশ্ন</option>
+                        <option value="100">১০০টি প্রশ্ন</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">সময় (মিনিট)</label>
+                    <select id="testTime" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
+                        <option value="10">১০ মিনিট</option>
+                        <option value="20">২০ মিনিট</option>
+                        <option value="60">১ ঘণ্টা</option>
+                        <option value="180">৩ ঘণ্টা</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">বিষয়</label>
+                    <select id="testCategory" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px;">
+                        <option value="all">সব বিষয়</option>
+                        <option value="bangladesh">বাংলাদেশ বিষয়াবলী</option>
+                        <option value="international">আন্তর্জাতিক</option>
+                        <option value="math">গণিত</option>
+                        <option value="english">ইংরেজি</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="createCustomTest()" style="background: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-plus-circle"></i> টেস্ট তৈরি করুন
+            </button>
+        </div>
+        
+        <!-- Coming Soon -->
         <div class="coming-soon">
-            <h3><i class="fas fa-tools"></i> শীঘ্রই আসছে</h3>
-            <p>আরো মডেল টেস্ট এবং উন্নত ফিচার আসছে খুব শীঘ্রই!</p>
+            <h3><i class="fas fa-tools"></i> আরও আসছে শীঘ্রই!</h3>
+            <p style="margin: 10px 0;">• লিডারবোর্ড - অন্যান্য প্রার্থীদের সাথে প্রতিযোগিতা</p>
+            <p style="margin: 10px 0;">• সার্টিফিকেট - টেস্ট সম্পন্ন করলে সার্টিফিকেট ডাউনলোড</p>
+            <p style="margin: 10px 0;">• ডিটেইলড এনালিটিক্স - আপনার দুর্বলতা চিহ্নিত করুন</p>
         </div>
         
+        <!-- Navigation -->
         <div style="text-align: center; margin-top: 40px;">
+            <a href="quiz.html" class="back-to-home" style="margin-right: 10px;">
+                <i class="fas fa-question-circle"></i> MCQ টেস্ট
+            </a>
+            <a href="exam-preparation.html" class="back-to-home" style="margin-right: 10px;">
+                <i class="fas fa-book"></i> পরীক্ষা প্রস্তুতি
+            </a>
             <a href="index.html" class="back-to-home">
-                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+                <i class="fas fa-home"></i> হোম পেজ
             </a>
         </div>
     </div>
     
     <script>
-        function startModelTest(type) {
-            alert(`মডেল টেস্ট "${type}" শুরু করতে Quiz পেজে রিডাইরেক্ট করা হবে।\n\nএই ফিচারটি সম্পূর্ণ করতে কিছু সময় লাগবে।`);
-            // Redirect to quiz page with model test parameters
-            // window.location.href = `quiz.html?model-test=${type}`;
+        // Function to start model test
+        function startModelTest(testType) {
+            // Show loading
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // Define test parameters based on type
+            const testConfigs = {
+                'quick': { questions: 20, time: 20, category: 'all', name: 'দ্রুত মডেল টেস্ট' },
+                'bcs': { questions: 100, time: 180, category: 'all', name: 'BCS প্রস্তুতি টেস্ট' },
+                'bank': { questions: 80, time: 120, category: 'all', name: 'ব্যাংক জব টেস্ট' },
+                'ntrca': { questions: 100, time: 180, category: 'all', name: 'NTRCA টেস্ট' },
+                'daily': { questions: 30, time: 45, category: 'all', name: 'ডেইলি টেস্ট' }
+            };
+            
+            const config = testConfigs[testType] || testConfigs['quick'];
+            
+            // Store test config in localStorage
+            localStorage.setItem('modelTestConfig', JSON.stringify(config));
+            
+            // Redirect to quiz page with parameters
+            window.location.href = `quiz.html?model-test=${testType}&questions=${config.questions}&time=${config.time}`;
         }
+        
+        // Function to show custom test options
+        function showCustomTestOptions() {
+            document.getElementById('customTestOptions').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('customTestOptions').offsetTop - 20,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Function to create custom test
+        function createCustomTest() {
+            const questionCount = document.getElementById('questionCount').value;
+            const testTime = document.getElementById('testTime').value;
+            const testCategory = document.getElementById('testCategory').value;
+            
+            // Validate
+            if (!questionCount || !testTime) {
+                showError('দয়া করে সব তথ্য পূরণ করুন');
+                return;
+            }
+            
+            const config = {
+                questions: parseInt(questionCount),
+                time: parseInt(testTime),
+                category: testCategory,
+                name: 'কাস্টম টেস্ট'
+            };
+            
+            // Store test config
+            localStorage.setItem('modelTestConfig', JSON.stringify(config));
+            
+            // Redirect to quiz page
+            window.location.href = `quiz.html?model-test=custom&questions=${config.questions}&time=${config.time}&category=${config.category}`;
+        }
+        
+        // Function to show error message
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+            
+            // Hide error after 5 seconds
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        }
+        
+        // Function to check if user is logged in (optional)
+        function checkLoginBeforeTest() {
+            // You can add Firebase auth check here later
+            return true;
+        }
+        
+        // Add click handlers for better error handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make sure all buttons have proper event handlers
+            const buttons = document.querySelectorAll('.start-btn');
+            buttons.forEach(button => {
+                // Ensure onclick works
+                button.addEventListener('click', function(e) {
+                    // Optional: Check login status
+                    if (!checkLoginBeforeTest()) {
+                        e.preventDefault();
+                        showError('টেস্ট দিতে লগইন করুন');
+                        return;
+                    }
+                });
+            });
+            
+            // Add animation to cards
+            const cards = document.querySelectorAll('.test-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.5s ease forwards';
+                card.style.opacity = '0';
+            });
+        });
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
