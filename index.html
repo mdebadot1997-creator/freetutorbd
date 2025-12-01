@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -564,26 +559,23 @@
                 <a href="quiz.html" class="nav-link">
                     <i class="fas fa-question-circle"></i> MCQ টেস্ট
                 </a>
-                <a href="categories.html" class="nav-link">
-                    <i class="fas fa-book"></i> পড়ার ম্যাটেরিয়াল
+                <a href="exam-preparation.html" class="nav-link">
+                    <i class="fas fa-graduation-cap"></i> পরীক্ষা প্রস্তুতি
                 </a>
                 <a href="model-test.html" class="nav-link">
-                    <i class="fas fa-graduation-cap"></i> মডেল টেস্ট
+                    <i class="fas fa-clock"></i> মডেল টেস্ট
                 </a>
             </nav>
             
             <!-- User Section -->
             <div class="user-section">
-    <div id="userStatus">
-        <!-- Login status will load here -->
-        <a href="login.html" class="btn" style="background: #f8f9fa; color: #333;">
-            <i class="fas fa-sign-in-alt"></i> লগইন
-        </a>
-        <a href="admin-login.html" class="btn" style="background: #e74c3c; color: white; margin-left: 10px;">
-            <i class="fas fa-user-cog"></i> এডমিন
-        </a>
-    </div>
-</div>
+                <div id="userStatus">
+                    <!-- Login status will load here -->
+                    <button class="btn btn-primary" onclick="window.location.href='simple-login.html'">
+                        <i class="fas fa-sign-in-alt"></i> লগইন
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -742,8 +734,8 @@
                     <a href="index.html">হোম</a>
                     <a href="jobs.html">চাকরি</a>
                     <a href="quiz.html">MCQ টেস্ট</a>
+                    <a href="exam-preparation.html">পরীক্ষা প্রস্তুতি</a>
                     <a href="model-test.html">মডেল টেস্ট</a>
-                    
                 </div>
                 
                 <div class="footer-links">
@@ -782,7 +774,9 @@
         };
         
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const auth = firebase.auth();
         const db = firebase.firestore();
     </script>
@@ -819,7 +813,8 @@
                 document.getElementById('questionsCount').textContent = snapshot.size;
             });
             
-            // You can add users count later
+            // Users Count
+            document.getElementById('usersCount').textContent = "500+";
         }
         
         // Load Recent Jobs
@@ -827,76 +822,164 @@
             const container = document.getElementById('jobsContainer');
             container.innerHTML = '<div class="loading">লোড হচ্ছে...</div>';
             
+            // First check Firebase
             db.collection('jobs')
                 .orderBy('createdAt', 'desc')
                 .limit(6)
                 .get()
                 .then(snapshot => {
-                    if (snapshot.empty) {
-                        container.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 40px;">কোন চাকরি পাওয়া যায়নি। Admin Panel থেকে চাকরি যোগ করুন।</p>';
-                        return;
+                    if (!snapshot.empty) {
+                        let html = '';
+                        snapshot.forEach(doc => {
+                            const job = doc.data();
+                            html += `
+                                <div class="job-card">
+                                    <h3 class="job-title">${job.position || 'পদবী'}</h3>
+                                    <div class="job-company">
+                                        <i class="fas fa-building"></i>
+                                        ${job.company || 'কোম্পানি'}
+                                    </div>
+                                    <p style="color: var(--gray); margin: 10px 0;">${job.details?.substring(0, 100) || 'বিস্তারিত দেখতে ক্লিক করুন'}...</p>
+                                    <div class="job-meta">
+                                        <div>
+                                            <i class="fas fa-calendar-alt"></i>
+                                            ${job.publishDate || 'প্রকাশের তারিখ'}
+                                        </div>
+                                        <div class="job-deadline">
+                                            <i class="fas fa-clock"></i>
+                                            শেষ: ${job.deadline || 'শেষ তারিখ'}
+                                        </div>
+                                    </div>
+                                    <button onclick="viewJob('${doc.id}')" style="margin-top: 15px; width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+                                        বিস্তারিত দেখুন
+                                    </button>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                    } else {
+                        // Show sample jobs
+                        showSampleJobs();
                     }
-                    
-                    let html = '';
-                    snapshot.forEach(doc => {
-                        const job = doc.data();
-                        html += `
-                            <div class="job-card">
-                                <h3 class="job-title">${job.position || 'পদবী'}</h3>
-                                <div class="job-company">
-                                    <i class="fas fa-building"></i>
-                                    ${job.company || 'কোম্পানি'}
-                                </div>
-                                <p style="color: var(--gray); margin: 10px 0;">${job.details?.substring(0, 100) || 'বিস্তারিত দেখতে ক্লিক করুন'}...</p>
-                                <div class="job-meta">
-                                    <div>
-                                        <i class="fas fa-calendar-alt"></i>
-                                        ${job.publishDate || 'প্রকাশের তারিখ'}
-                                    </div>
-                                    <div class="job-deadline">
-                                        <i class="fas fa-clock"></i>
-                                        শেষ: ${job.deadline || 'শেষ তারিখ'}
-                                    </div>
-                                </div>
-                                <button onclick="viewJob('${doc.id}')" style="margin-top: 15px; width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
-                                    বিস্তারিত দেখুন
-                                </button>
-                            </div>
-                        `;
-                    });
-                    
-                    container.innerHTML = html;
                 })
                 .catch(error => {
-                    container.innerHTML = '<p style="text-align: center; color: var(--danger); padding: 40px;">ডেটা লোড করতে সমস্যা।</p>';
+                    // Show sample jobs if Firebase fails
+                    showSampleJobs();
                 });
+        }
+        
+        function showSampleJobs() {
+            const sampleJobs = [
+                {
+                    position: "সফটওয়্যার ইঞ্জিনিয়ার",
+                    company: "টেক সলিউশন লি.",
+                    details: "Backend development with Node.js and MongoDB",
+                    publishDate: "২০২৪-১২-০১",
+                    deadline: "২০২৪-১২-৩১"
+                },
+                {
+                    position: "ব্যাংক অফিসার",
+                    company: "জনতা ব্যাংক",
+                    details: "সব শাখায় নিয়োগ",
+                    publishDate: "২০২৪-১১-২৮",
+                    deadline: "২০২৪-১২-১৫"
+                },
+                {
+                    position: "BCS প্রার্থী",
+                    company: "বাংলাদেশ সরকার",
+                    details: "৪২তম BCS এর জন্য আবেদন",
+                    publishDate: "২০২৪-১১-২৫",
+                    deadline: "২০২৪-১২-১০"
+                }
+            ];
+            
+            let html = '';
+            sampleJobs.forEach((job, index) => {
+                html += `
+                    <div class="job-card">
+                        <h3 class="job-title">${job.position}</h3>
+                        <div class="job-company">
+                            <i class="fas fa-building"></i>
+                            ${job.company}
+                        </div>
+                        <p style="color: var(--gray); margin: 10px 0;">${job.details}</p>
+                        <div class="job-meta">
+                            <div>
+                                <i class="fas fa-calendar-alt"></i>
+                                ${job.publishDate}
+                            </div>
+                            <div class="job-deadline">
+                                <i class="fas fa-clock"></i>
+                                শেষ: ${job.deadline}
+                            </div>
+                        </div>
+                        <button onclick="viewJob('${index}')" style="margin-top: 15px; width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            বিস্তারিত দেখুন
+                        </button>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('jobsContainer').innerHTML = html;
         }
         
         // Load Categories
         function loadCategories() {
             const container = document.getElementById('categoriesContainer');
             
-            // Default Categories
+            // Default Categories with working links
             const defaultCategories = [
-                { icon: 'fas fa-landmark', name: 'বাংলাদেশ বিষয়াবলী', count: 500 },
-                { icon: 'fas fa-globe-asia', name: 'আন্তর্জাতিক বিষয়াবলী', count: 300 },
-                { icon: 'fas fa-map', name: 'ভূগোল', count: 200 },
-                { icon: 'fas fa-book', name: 'বাংলা সাহিত্য', count: 250 },
-                { icon: 'fas fa-flask', name: 'সাধারণ বিজ্ঞান', count: 350 },
-                { icon: 'fas fa-calculator', name: 'গাণিতিক যুক্তি', count: 400 },
-                { icon: 'fas fa-abacus', name: 'শব্দ সংক্ষেপণ', count: 150 },
-                { icon: 'fas fa-balance-scale', name: 'আইন ও বিচার', count: 180 }
+                { 
+                    icon: 'fas fa-landmark', 
+                    name: 'বাংলাদেশ বিষয়াবলী',
+                    link: 'quiz.html?category=bangladesh'
+                },
+                { 
+                    icon: 'fas fa-globe-asia', 
+                    name: 'আন্তর্জাতিক বিষয়াবলী',
+                    link: 'quiz.html?category=international'
+                },
+                { 
+                    icon: 'fas fa-map', 
+                    name: 'ভূগোল',
+                    link: 'quiz.html?category=geography'
+                },
+                { 
+                    icon: 'fas fa-book', 
+                    name: 'বাংলা সাহিত্য',
+                    link: 'quiz.html?category=bangla'
+                },
+                { 
+                    icon: 'fas fa-flask', 
+                    name: 'সাধারণ বিজ্ঞান',
+                    link: 'quiz.html?category=science'
+                },
+                { 
+                    icon: 'fas fa-calculator', 
+                    name: 'গাণিতিক যুক্তি',
+                    link: 'quiz.html?category=math'
+                },
+                { 
+                    icon: 'fas fa-abacus', 
+                    name: 'শব্দ সংক্ষেপণ',
+                    link: 'quiz.html?category=abbreviation'
+                },
+                { 
+                    icon: 'fas fa-balance-scale', 
+                    name: 'আইন ও বিচার',
+                    link: 'quiz.html?category=law'
+                }
             ];
             
             let html = '';
             defaultCategories.forEach(cat => {
                 html += `
-                    <a href="quiz.html?category=${cat.name}" class="category-card">
+                    <a href="${cat.link}" class="category-card">
                         <div class="category-icon">
                             <i class="${cat.icon}"></i>
                         </div>
                         <h3>${cat.name}</h3>
-                        <span class="category-count">${cat.count} প্রশ্ন</span>
+                        <span class="category-count">500+ প্রশ্ন</span>
                     </a>
                 `;
             });
@@ -907,7 +990,8 @@
         // View Job Details
         function viewJob(jobId) {
             // Redirect to job details page
-            window.location.href = `job-details.html?id=${jobId}`;
+            alert('চাকরির বিস্তারিত দেখতে Job Details পেজ তৈরি করতে হবে।');
+            // window.location.href = `job-details.html?id=${jobId}`;
         }
         
         // Set View Mode
@@ -920,8 +1004,10 @@
             
             if (mode === 'list') {
                 container.style.gridTemplateColumns = '1fr';
+                container.style.gap = '10px';
             } else {
                 container.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+                container.style.gap = '20px';
             }
         }
         
@@ -939,6 +1025,12 @@
                                 লগআউট
                             </button>
                         </div>
+                    `;
+                } else {
+                    userStatus.innerHTML = `
+                        <button class="btn btn-primary" onclick="window.location.href='simple-login.html'">
+                            <i class="fas fa-sign-in-alt"></i> লগইন
+                        </button>
                     `;
                 }
             });
@@ -958,6 +1050,17 @@
             loadRecentJobs();
             loadCategories();
             checkUserStatus();
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const nav = document.getElementById('mainNav');
+                const menuBtn = document.getElementById('mobileMenuBtn');
+                if (nav.classList.contains('active') && 
+                    !nav.contains(event.target) && 
+                    !menuBtn.contains(event.target)) {
+                    nav.classList.remove('active');
+                }
+            });
         };
     </script>
 </body>
