@@ -6,11 +6,6 @@
     <title>MCQ Test - FreeTutorBD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    
     <style>
         * {
             margin: 0;
@@ -18,92 +13,108 @@
             box-sizing: border-box;
             font-family: 'Hind Siliguri', sans-serif;
         }
-        
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #27ae60;
-            --danger-color: #e74c3c;
-            --light-color: #f8f9fa;
-            --border-color: #ddd;
-        }
-        
+
         body {
             background: #f5f5f5;
             color: #333;
-            line-height: 1.6;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+            line-height: 1.5;
         }
-        
+
         /* Header Styles */
         .header {
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 0;
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        .header-container {
-            max-width: 1400px;
+
+        .header-top {
+            background: #2c3e50;
+            padding: 5px 0;
+        }
+
+        .ad-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-top i {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #3498db;
+        }
+
+        .header-main {
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 15px 20px;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            cursor: pointer;
+            gap: 10px;
         }
-        
-        .logo-icon {
-            font-size: 28px;
-            color: var(--secondary-color);
+
+        .logo img {
+            height: 40px;
         }
-        
+
         .logo-text h1 {
-            color: white;
+            color: #2c3e50;
             font-size: 22px;
-            margin-bottom: 2px;
+            line-height: 1.2;
         }
-        
+
         .logo-text p {
-            color: #bdc3c7;
+            color: #666;
             font-size: 12px;
         }
-        
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
-        
+
         .nav-links a {
-            color: white;
+            color: #2c3e50;
             text-decoration: none;
             font-size: 16px;
             font-weight: 500;
             transition: color 0.3s;
-            padding: 8px 0;
+            padding: 5px 0;
             position: relative;
         }
-        
+
         .nav-links a:hover {
-            color: var(--secondary-color);
+            color: #3498db;
         }
-        
+
         .nav-links a.active {
-            color: var(--secondary-color);
+            color: #3498db;
+            font-weight: 600;
         }
-        
+
         .nav-links a.active::after {
             content: '';
             position: absolute;
@@ -111,437 +122,294 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: var(--secondary-color);
-            border-radius: 1px;
+            background: #3498db;
         }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* Header Ad */
-        .header-ad {
-            background: white;
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .ad-placeholder {
-            color: #95a5a6;
-            font-size: 14px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-            border: 1px dashed #ddd;
-            border-radius: 4px;
-        }
-        
-        /* Main Layout */
+
+        /* Main Container */
         .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 250px 1fr 250px;
             gap: 20px;
-            padding: 20px;
+            padding: 0 20px;
         }
-        
-        /* Sidebar */
-        .sidebar {
-            width: 280px;
-            flex-shrink: 0;
-        }
-        
-        .sidebar-section {
+
+        /* Left Sidebar - Categories */
+        .sidebar-left {
             background: white;
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            border: 1px solid #e0e0e0;
         }
-        
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
         .sidebar-title {
-            color: var(--primary-color);
+            color: #2c3e50;
             font-size: 18px;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
         }
-        
-        .category-list, .jobs-list {
+
+        .category-list {
             list-style: none;
         }
-        
-        .category-item, .job-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+
+        .category-item {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
             cursor: pointer;
             transition: all 0.3s;
         }
-        
-        .category-item:hover, .job-item:hover {
-            color: var(--secondary-color);
-            padding-left: 5px;
+
+        .category-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
         }
-        
-        .category-item:last-child, .job-item:last-child {
-            border-bottom: none;
-        }
-        
-        .item-name {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .item-count {
-            background: var(--secondary-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* All Subjects Button */
-        .all-subjects-btn {
-            width: 100%;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .all-subjects-btn:hover {
-            background: #219653;
-        }
-        
-        .sidebar-ad {
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-            border: 1px dashed #ddd;
-            border-radius: 4px;
-            color: #95a5a6;
-        }
-        
-        /* Main Content */
-        .content {
-            flex: 1;
-        }
-        
-        /* Exam Info */
-        .exam-info {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .exam-title {
-            color: var(--primary-color);
-            font-size: 20px;
-            font-weight: 600;
-        }
-        
-        .exam-meta {
-            display: flex;
-            gap: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .timer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 16px;
-            min-width: 100px;
-            text-align: center;
-        }
-        
-        /* Questions Section */
-        .questions-section {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-        }
-        
-        /* Question Paper Style */
-        .question-paper {
-            background: white;
-            padding: 20px;
-        }
-        
-        .question-item {
-            margin-bottom: 30px;
-            page-break-inside: avoid;
-        }
-        
-        .question-text {
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 15px;
+
+        .category-name {
             color: #2c3e50;
             font-weight: 500;
         }
-        
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
+
+        .category-count {
+            float: right;
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
         }
-        
-        .option-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            border-bottom: 1px dotted #eee;
-            cursor: pointer;
+
+        /* Right Sidebar - Ads */
+        .sidebar-right {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
         }
-        
-        .option-label {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #ddd;
+
+        .ad-sidebar {
+            height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            color: #666;
-            transition: all 0.3s;
-            flex-shrink: 0;
+            color: #95a5a6;
+            font-size: 14px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        
-        .option-text {
-            flex: 1;
-            color: #444;
+
+        /* Main Content - MCQ Test */
+        .mcq-container {
+            background: white;
+            border-radius: 8px;
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
         }
-        
-        /* Selected Option Style */
-        .option-input:checked + .option-label {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
+
+        .test-header {
+            background: #2c3e50;
             color: white;
+            padding: 15px 25px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .option-input:checked + .option-label + .option-text {
-            color: var(--accent-color);
+
+        .test-title {
+            font-size: 18px;
             font-weight: 500;
         }
-        
-        /* Hidden Radio Inputs */
-        .option-input {
-            display: none;
+
+        .test-timer {
+            background: #e74c3c;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 500;
         }
-        
-        /* Question Bottom Ad */
+
+        .test-content {
+            padding: 25px;
+        }
+
+        /* Question Styles - Compact like Exam Paper */
+        .question-container {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .question-number {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+
+        .option-item:hover {
+            background: #e3f2fd;
+        }
+
+        .option-item.selected {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .option-item.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .option-item.correct {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+
+        .option-letter {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .option-text {
+            flex: 1;
+        }
+
+        /* Ad Between Questions */
         .question-ad {
-            margin: 20px 0;
-            padding: 15px;
+            height: 90px;
             background: #f8f9fa;
             border: 1px dashed #ddd;
-            border-radius: 4px;
-            text-align: center;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #95a5a6;
             font-size: 14px;
         }
-        
+
         /* Submit Section */
         .submit-section {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .result-summary {
             text-align: center;
-        }
-        
-        .submit-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 4px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
             margin-bottom: 20px;
-        }
-        
-        .submit-btn:hover {
-            background: #219653;
-        }
-        
-        /* Result Section */
-        .result-section {
             display: none;
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
         }
-        
-        .result-header {
-            text-align: center;
-            margin-bottom: 25px;
+
+        .result-summary.show {
+            display: block;
         }
-        
-        .result-title {
-            color: var(--primary-color);
-            font-size: 24px;
+
+        .score-display {
+            font-size: 32px;
+            font-weight: 600;
+            color: #27ae60;
             margin-bottom: 10px;
         }
-        
-        .score-display {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .score-item {
-            text-align: center;
-        }
-        
-        .score-value {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .total-score {
-            color: var(--secondary-color);
-        }
-        
-        .percentage {
-            color: var(--accent-color);
-        }
-        
-        .score-label {
+
+        .score-details {
             color: #666;
             font-size: 14px;
+            margin-bottom: 15px;
         }
-        
-        /* Answer Review */
-        .answer-review {
-            margin-top: 25px;
-        }
-        
-        .review-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 6px;
-            background: #f8f9fa;
-        }
-        
-        .review-item.correct {
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .review-item.wrong {
-            border-left: 4px solid var(--danger-color);
-        }
-        
-        .review-question {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .review-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .review-option {
-            padding: 5px 0;
-            border-bottom: 1px dotted #ddd;
-        }
-        
-        .correct-answer {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-        
-        .wrong-answer {
-            color: var(--danger-color);
-            text-decoration: line-through;
-        }
-        
-        /* Test Again Button */
+
         .test-again-btn {
-            background: var(--secondary-color);
+            background: #3498db;
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: background 0.3s;
-            display: inline-block;
-            margin-top: 20px;
+            display: none;
         }
-        
+
+        .test-again-btn.show {
+            display: inline-block;
+        }
+
         .test-again-btn:hover {
             background: #2980b9;
         }
-        
+
+        .submit-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #219653;
+        }
+
         /* Footer */
         .footer {
-            background: var(--primary-color);
+            background: #2c3e50;
             color: white;
-            padding: 30px 0 20px;
             margin-top: 40px;
+            padding: 30px 0 15px;
         }
-        
+
         .footer-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         .footer-links {
             display: flex;
             justify-content: center;
@@ -549,237 +417,96 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        
+
         .footer-links a {
             color: #bdc3c7;
             text-decoration: none;
             font-size: 14px;
             transition: color 0.3s;
         }
-        
+
         .footer-links a:hover {
-            color: white;
+            color: #3498db;
         }
-        
+
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
             color: #95a5a6;
             font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
-        
-        /* Mobile Sidebar */
-        .mobile-sidebar {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: -280px;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            z-index: 1001;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-        }
-        
-        .mobile-sidebar.active {
-            left: 0;
-        }
-        
-        .mobile-sidebar-header {
-            padding: 20px;
-            background: var(--primary-color);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .mobile-sidebar-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        
-        .mobile-sidebar-content {
-            padding: 20px;
-        }
-        
-        .mobile-all-subjects-btn {
-            width: 100%;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .mobile-all-subjects-btn:hover {
-            background: #219653;
-        }
-        
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            transition: opacity 0.3s;
-        }
-        
-        .overlay.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .sidebar {
+
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-left,
+            .sidebar-right {
                 display: none;
             }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .review-options {
-                grid-template-columns: 1fr;
-            }
-            
+
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                border-top: 1px solid #ddd;
+            }
+
+            .nav-links.show {
+                display: flex;
             }
         }
-        
+
         @media (max-width: 768px) {
-            .header-container {
-                padding: 0 15px;
+            .options-container {
+                grid-template-columns: 1fr;
             }
-            
-            .main-container {
-                padding: 15px;
-                flex-direction: column;
-            }
-            
-            .exam-info {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .exam-meta {
+
+            .test-header {
                 flex-direction: column;
                 gap: 10px;
+                text-align: center;
             }
-            
+
             .footer-links {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
-            
+        }
+
+        @media (max-width: 480px) {
+            .header-main {
+                padding: 10px;
+            }
+
             .logo-text h1 {
                 font-size: 18px;
             }
-            
-            .logo-text p {
-                font-size: 10px;
-            }
-            
-            .timer {
-                min-width: 80px;
-                font-size: 14px;
-                padding: 6px 12px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header-ad {
-                display: none;
-            }
-            
-            .questions-section {
+
+            .test-content {
                 padding: 15px;
             }
-            
-            .question-paper {
-                padding: 10px;
-            }
-            
-            .submit-btn {
-                width: 100%;
-                padding: 15px 20px;
-                font-size: 16px;
-            }
-            
-            .score-display {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .footer {
-                padding: 20px 0 15px;
-            }
-            
-            .option-label {
-                width: 28px;
-                height: 28px;
+
+            .question-text {
                 font-size: 14px;
             }
-            
-            .question-text {
-                font-size: 15px;
-            }
-        }
-        
-        /* Mobile Navigation */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--primary-color);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                display: none;
-                z-index: 999;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links a {
-                padding: 12px 0;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-            
-            .nav-links a:last-child {
-                border-bottom: none;
+
+            .option-text {
+                font-size: 14px;
             }
         }
     </style>
@@ -787,211 +514,141 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-container">
-            <div class="logo" onclick="window.location.href='index.html'">
-                <div class="logo-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
+        <!-- Top Ad Section -->
+        <div class="header-top">
+            <div class="ad-top" id="header-ad">
+                <i class="fas fa-ad"></i>
+                <span>বিজ্ঞাপনের জন্য এই স্থান - AdSense/Adstra</span>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="header-main">
+            <div class="logo">
+                <div class="logo-icon" id="logo-container">
+                    <!-- Logo will be loaded from Firebase -->
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 36px; color: #3498db;"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>FreeTutorBD</h1>
-                    <p>MCQ Test Platform</p>
+                    <h1>FreeTutorBD MCQ Test</h1>
+                    <p>পরীক্ষার প্রস্তুতির সেরা প্লাটফর্ম</p>
                 </div>
             </div>
-            
-            <nav class="nav-links" id="navLinks">
-                <a href="index.html" class="active"><i class="fas fa-home"></i> হোম</a>
-                <a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
-                <a href="model-test.html"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
-                <a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a>
-            </nav>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="#" class="active"><i class="fas fa-home"></i> হোম</a>
+                <a href="#"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
+                <a href="#"><i class="fas fa-briefcase"></i> চাকরি</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Header Ad -->
-    <div class="header-ad">
-        <div class="ad-placeholder" id="headerAd">
-            <i class="fas fa-ad"></i> Header Advertisement
-        </div>
-    </div>
-
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="main-container">
-        <!-- Sidebar (Desktop) -->
-        <aside class="sidebar">
-            <!-- Categories Section -->
+        <!-- Left Sidebar - Categories -->
+        <aside class="sidebar-left">
             <div class="sidebar-section">
-                <h3 class="sidebar-title">
-                    <i class="fas fa-folder"></i>
-                    প্রশ্নব্যাংক বিভাগ
-                </h3>
-                <ul class="category-list" id="categoryList">
-                    <!-- Categories will be loaded dynamically -->
-                </ul>
-                
-                <!-- All Subjects Button -->
-                <button class="all-subjects-btn" onclick="loadAllSubjectsTest()">
-                    <i class="fas fa-globe"></i> সব বিষয়ের টেস্ট
-                </button>
-            </div>
-
-            <!-- Jobs Section -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">
-                    <i class="fas fa-briefcase"></i>
-                    সাম্প্রতিক চাকরি
-                </h3>
-                <ul class="jobs-list" id="jobsList">
-                    <!-- Jobs will be loaded dynamically -->
+                <h3 class="sidebar-title">প্রশ্নব্যাংক ক্যাটাগরি</h3>
+                <ul class="category-list" id="categories-list">
+                    <!-- Categories will be loaded from Firebase -->
+                    <li class="category-item">
+                        <span class="category-name">বাংলাদেশ বিষয়াবলী</span>
+                        <span class="category-count">500</span>
+                    </li>
                 </ul>
             </div>
 
-            <!-- Sidebar Ad -->
             <div class="sidebar-section">
-                <div class="sidebar-ad" id="sidebarAd">
-                    <i class="fas fa-ad fa-2x"></i>
-                    <p>Sidebar Advertisement</p>
-                </div>
+                <h3 class="sidebar-title">চাকরি ক্যাটাগরি</h3>
+                <ul class="category-list" id="jobs-list">
+                    <!-- Jobs will be loaded from Firebase -->
+                    <li class="category-item">
+                        <span class="category-name">সরকারি চাকরি</span>
+                        <span class="category-count">25</span>
+                    </li>
+                </ul>
             </div>
         </aside>
 
-        <!-- Main Content -->
-        <main class="content">
-            <!-- Exam Info -->
-            <div class="exam-info">
-                <div>
-                    <h2 class="exam-title" id="examTitle">MCQ টেস্ট</h2>
-                    <div class="exam-meta">
-                        <span><i class="fas fa-question-circle"></i> <span id="totalQuestions">14</span> প্রশ্ন</span>
-                        <span><i class="fas fa-clock"></i> সর্বোচ্চ ৭ মিনিট</span>
-                        <span><i class="fas fa-star"></i> প্রতিটি প্রশ্নে ১ মার্ক</span>
-                    </div>
-                </div>
-                <div class="timer" id="timer">07:00</div>
+        <!-- Main MCQ Test Area -->
+        <main class="mcq-container">
+            <!-- Test Header -->
+            <div class="test-header">
+                <div class="test-title">মডেল টেস্ট - MCQ প্রশ্নপত্র</div>
+                <div class="test-timer" id="timer">07:00</div>
             </div>
 
-            <!-- Questions Section -->
-            <div class="questions-section" id="questionsSection">
-                <div class="question-paper" id="questionPaper">
+            <!-- Test Content -->
+            <div class="test-content" id="test-content">
+                <!-- Questions will be loaded here -->
+                <div id="questions-container">
                     <!-- Questions will be loaded dynamically -->
-                    <p style="text-align: center; color: #666; padding: 40px;">
-                        <i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...
-                    </p>
                 </div>
 
-                <!-- Question Bottom Ad -->
-                <div class="question-ad" id="questionAd">
-                    <i class="fas fa-ad"></i> Question Advertisement
+                <!-- Ad between questions -->
+                <div class="question-ad" id="question-ad-1">
+                    <i class="fas fa-ad"></i> প্রশ্নের মাঝে বিজ্ঞাপন
                 </div>
-            </div>
 
-            <!-- Submit Section -->
-            <div class="submit-section" id="submitSection">
-                <button class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> উত্তর জমা দিন
-                </button>
-                <p style="color: #666; font-size: 14px;">
-                    সময় শেষ হয়ে গেলে স্বয়ংক্রিয়ভাবে উত্তর জমা হবে
-                </p>
-            </div>
-
-            <!-- Result Section -->
-            <div class="result-section" id="resultSection">
-                <div class="result-header">
-                    <h3 class="result-title">আপনার রেজাল্ট</h3>
-                    <div class="score-display">
-                        <div class="score-item">
-                            <div class="score-value total-score" id="totalScore">0</div>
-                            <div class="score-label">প্রাপ্ত মার্কস</div>
-                        </div>
-                        <div class="score-item">
-                            <div class="score-value percentage" id="percentage">0%</div>
-                            <div class="score-label">শতকরা</div>
-                        </div>
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <div class="result-summary" id="result-summary">
+                        <div class="score-display" id="score-display">0/14</div>
+                        <div class="score-details" id="score-details">0% সঠিক উত্তর</div>
                     </div>
-                </div>
 
-                <div class="answer-review" id="answerReview">
-                    <!-- Answer review will be loaded here -->
-                </div>
-
-                <div style="text-align: center;">
-                    <button class="test-again-btn" id="testAgainBtn">
+                    <button class="submit-btn" id="submit-btn">উত্তর জমা দিন</button>
+                    <button class="test-again-btn" id="test-again-btn">
                         <i class="fas fa-redo"></i> আবার টেস্ট দিন
                     </button>
                 </div>
             </div>
         </main>
+
+        <!-- Right Sidebar - Ads -->
+        <aside class="sidebar-right">
+            <div class="ad-sidebar" id="sidebar-ad-1">
+                <div style="text-align: center;">
+                    <i class="fas fa-ad fa-3x"></i>
+                    <p>সাইডবার বিজ্ঞাপন</p>
+                    <small>AdSense/Adstra</small>
+                </div>
+            </div>
+
+            <div class="ad-sidebar" id="sidebar-ad-2">
+                <div style="text-align: center;">
+                    <i class="fas fa-ad fa-3x"></i>
+                    <p>সাইডবার বিজ্ঞাপন</p>
+                    <small>AdSense/Adstra</small>
+                </div>
+            </div>
+        </aside>
     </div>
-
-    <!-- Mobile Sidebar -->
-    <div class="mobile-sidebar" id="mobileSidebar">
-        <div class="mobile-sidebar-header">
-            <h3>Menu</h3>
-            <button class="mobile-sidebar-close" id="mobileSidebarClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="mobile-sidebar-content">
-            <!-- Mobile Navigation -->
-            <div style="margin-bottom: 30px;">
-                <a href="index.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
-                    <i class="fas fa-home"></i> হোম
-                </a>
-                <a href="prosnobank.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
-                    <i class="fas fa-question-circle"></i> প্রশ্নব্যাংক
-                </a>
-                <a href="model-test.html" style="display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none;">
-                    <i class="fas fa-file-alt"></i> মডেল টেস্ট
-                </a>
-                <a href="jobs.html" style="display: block; padding: 12px 0; color: #333; text-decoration: none;">
-                    <i class="fas fa-briefcase"></i> চাকরি
-                </a>
-            </div>
-
-            <!-- Mobile Categories -->
-            <div style="margin-bottom: 20px;">
-                <h4 style="color: var(--primary-color); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-folder"></i> প্রশ্নব্যাংক বিভাগ
-                </h4>
-                <ul class="category-list" id="mobileCategoryList">
-                    <!-- Categories will be loaded dynamically -->
-                </ul>
-                
-                <button class="mobile-all-subjects-btn" onclick="loadAllSubjectsTest()">
-                    <i class="fas fa-globe"></i> সব বিষয়ের টেস্ট
-                </button>
-            </div>
-
-            <!-- Mobile Jobs -->
-            <div>
-                <h4 style="color: var(--primary-color); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-briefcase"></i> সাম্প্রতিক চাকরি
-                </h4>
-                <ul class="jobs-list" id="mobileJobsList">
-                    <!-- Jobs will be loaded dynamically -->
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-links">
-                <a href="faq.html">FAQ</a>
-                <a href="privacy.html">প্রাইভেসি পলিসি</a>
-                <a href="terms.html">Terms and Condition</a>
+                <a href="#">FAQ</a>
+                <a href="#">প্রাইভেসি পলিসি</a>
+                <a href="#">Terms and Conditions</a>
             </div>
             <div class="footer-bottom">
-                <p>© ২০২৪ FreeTutorBD. সকল স্বত্ব সংরক্ষিত।</p>
+                © ২০২৪ FreeTutorBD. সকল স্বত্ব সংরক্ষিত।
             </div>
         </div>
     </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <script>
         // Firebase Configuration
@@ -1008,589 +665,429 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const storage = firebase.storage();
 
         // Global Variables
         let currentQuestions = [];
-        let userAnswers = {};
-        let timerInterval;
+        let selectedAnswers = {};
+        let testSubmitted = false;
         let timeLeft = 7 * 60; // 7 minutes in seconds
-        let testCompleted = false;
-        let currentCategory = '';
+        let timerInterval;
 
         // Predefined Categories
-        const categories = [
-            { name: "বাংলাদেশ বিষয়াবলী", count: 500 },
-            { name: "আন্তর্জাতিক বিষয়াবলী", count: 300 },
-            { name: "ভূগোল", count: 200 },
-            { name: "বাংলা সাহিত্য", count: 400 },
-            { name: "সাধারণ বিজ্ঞান", count: 350 },
-            { name: "গাণিতিক যুক্তি", count: 450 },
-            { name: "শব্দ সংক্ষেপণ", count: 150 },
-            { name: "ফুটবল", count: 100 },
-            { name: "ক্রিকেট", count: 100 },
-            { name: "বর্তমান affairs", count: 250 }
+        const predefinedCategories = [
+            "বাংলাদেশ বিষয়াবলী",
+            "আন্তর্জাতিক বিষয়াবলী", 
+            "ভূগোল",
+            "বাংলা সাহিত্য",
+            "সাধারণ বিজ্ঞান",
+            "গাণিতিক যুক্তি",
+            "শব্দ সংক্ষেপণ",
+            "ফুটবল",
+            "ক্রিকেট",
+            "বর্তমান affairs"
         ];
 
-        // Initialize Page
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            loadLogo();
             loadCategories();
             loadJobs();
-            loadQuestions();
-            startTimer();
-            setupEventListeners();
             loadAds();
+            loadQuestions();
+            setupEventListeners();
+            startTimer();
         });
+
+        // Load Logo from Firebase
+        function loadLogo() {
+            db.collection('settings').doc('logo').get()
+                .then(doc => {
+                    if (doc.exists() && doc.data().url) {
+                        const logoContainer = document.getElementById('logo-container');
+                        logoContainer.innerHTML = `<img src="${doc.data().url}" alt="FreeTutorBD Logo">`;
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading logo:", error);
+                });
+        }
 
         // Load Categories
         function loadCategories() {
-            const categoryList = document.getElementById('categoryList');
-            const mobileCategoryList = document.getElementById('mobileCategoryList');
-            
-            categoryList.innerHTML = '';
-            mobileCategoryList.innerHTML = '';
-            
-            categories.forEach(category => {
-                const categoryItem = `
-                    <li class="category-item" onclick="loadCategoryQuestions('${category.name}')">
-                        <div class="item-name">
-                            <span>${category.name}</span>
-                            <span class="item-count">${category.count}</span>
-                        </div>
-                    </li>
-                `;
-                categoryList.innerHTML += categoryItem;
-                mobileCategoryList.innerHTML += categoryItem;
-            });
-        }
+            const categoriesList = document.getElementById('categories-list');
+            categoriesList.innerHTML = '';
 
-        // Load All Subjects Test
-        function loadAllSubjectsTest() {
-            document.getElementById('examTitle').textContent = "সব বিষয়ের মিক্সড টেস্ট";
-            loadMixedQuestions();
-            resetTest();
-            closeMobileSidebar();
+            // First show predefined categories
+            predefinedCategories.forEach(category => {
+                const li = document.createElement('li');
+                li.className = 'category-item';
+                li.innerHTML = `
+                    <span class="category-name">${category}</span>
+                    <span class="category-count">0</span>
+                `;
+                li.onclick = () => navigateToQuestionBank(category);
+                categoriesList.appendChild(li);
+            });
+
+            // Load question counts from Firebase
+            db.collection('questions').get()
+                .then(snapshot => {
+                    const counts = {};
+                    snapshot.forEach(doc => {
+                        const category = doc.data().category;
+                        counts[category] = (counts[category] || 0) + 1;
+                    });
+
+                    // Update counts in UI
+                    const categoryItems = categoriesList.querySelectorAll('.category-item');
+                    categoryItems.forEach(item => {
+                        const categoryName = item.querySelector('.category-name').textContent;
+                        const countSpan = item.querySelector('.category-count');
+                        countSpan.textContent = counts[categoryName] || 0;
+                    });
+                });
         }
 
         // Load Jobs
         function loadJobs() {
-            const jobsList = document.getElementById('jobsList');
-            const mobileJobsList = document.getElementById('mobileJobsList');
-            
+            const jobsList = document.getElementById('jobs-list');
             jobsList.innerHTML = '';
-            mobileJobsList.innerHTML = '';
-            
-            // Load from Firebase
-            db.collection('jobs').orderBy('createdAt', 'desc').limit(5).get()
+
+            db.collection('jobs').get()
                 .then(snapshot => {
-                    if (!snapshot.empty) {
-                        snapshot.forEach(doc => {
-                            const job = doc.data();
-                            const jobItem = `
-                                <li class="job-item" onclick="window.location.href='jobs.html'">
-                                    <div class="item-name">
-                                        <span>${job.position}</span>
-                                    </div>
-                                </li>
+                    if (snapshot.empty) {
+                        // Show sample categories if no jobs
+                        const jobCategories = ['সরকারি চাকরি', 'ব্যাংক চাকরি', 'প্রাইভেট চাকরি', 'বিসিএস'];
+                        jobCategories.forEach(category => {
+                            const li = document.createElement('li');
+                            li.className = 'category-item';
+                            li.innerHTML = `
+                                <span class="category-name">${category}</span>
+                                <span class="category-count">0</span>
                             `;
-                            jobsList.innerHTML += jobItem;
-                            mobileJobsList.innerHTML += jobItem;
+                            li.onclick = () => navigateToJobs(category);
+                            jobsList.appendChild(li);
                         });
-                    } else {
-                        // Show sample jobs
-                        const sampleJobs = [
-                            "সহকারী প্রোগ্রামার - আইসিটি বিভাগ",
-                            "ব্যাংক অফিসার - সোনালী ব্যাংক",
-                            "বিসিএস ক্যাডার - বাংলাদেশ সরকার",
-                            "শিক্ষক - সরকারি কলেজ",
-                            "নির্বাহী কর্মকর্তা - প্রাইভেট ব্যাংক"
-                        ];
-                        
-                        sampleJobs.forEach(job => {
-                            const jobItem = `
-                                <li class="job-item" onclick="window.location.href='jobs.html'">
-                                    <div class="item-name">
-                                        <span>${job}</span>
-                                    </div>
-                                </li>
-                            `;
-                            jobsList.innerHTML += jobItem;
-                            mobileJobsList.innerHTML += jobItem;
-                        });
+                        return;
                     }
-                })
-                .catch(error => {
-                    console.error("Error loading jobs:", error);
-                });
-        }
 
-        // Load Mixed Questions from all categories
-        function loadMixedQuestions() {
-            currentCategory = 'Mixed';
-            const questionPaper = document.getElementById('questionPaper');
-            questionPaper.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
-            
-            // Get questions from all categories
-            const promises = [];
-            const mixedQuestions = [];
-            
-            // Get 2 questions from each category
-            categories.forEach(category => {
-                promises.push(
-                    db.collection('questions')
-                        .where('category', '==', category.name)
-                        .limit(2)
-                        .get()
-                        .then(snapshot => {
-                            snapshot.forEach(doc => {
-                                mixedQuestions.push({
-                                    id: doc.id,
-                                    ...doc.data()
-                                });
-                            });
-                        })
-                );
-            });
-            
-            Promise.all(promises)
-                .then(() => {
-                    // Shuffle questions
-                    const shuffled = mixedQuestions.sort(() => 0.5 - Math.random());
-                    currentQuestions = shuffled.slice(0, 14);
-                    
-                    if (currentQuestions.length < 14) {
-                        getRandomQuestions(14 - currentQuestions.length);
-                    } else {
-                        displayQuestions();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error loading mixed questions:", error);
-                    loadSampleQuestions();
-                });
-        }
-
-        // Load Questions by Category
-        function loadQuestions(category = '') {
-            currentCategory = category;
-            const questionPaper = document.getElementById('questionPaper');
-            questionPaper.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
-            
-            if (category === '') {
-                loadMixedQuestions();
-                return;
-            }
-            
-            // Get questions from Firebase
-            let query = db.collection('questions');
-            
-            if (category) {
-                query = query.where('category', '==', category);
-                document.getElementById('examTitle').textContent = `${category} - MCQ টেস্ট`;
-            }
-            
-            query.limit(14).get()
-                .then(snapshot => {
-                    if (!snapshot.empty) {
-                        currentQuestions = [];
-                        snapshot.forEach(doc => {
-                            currentQuestions.push({
-                                id: doc.id,
-                                ...doc.data()
-                            });
-                        });
-                        
-                        // If we don't have enough questions, get random ones
-                        if (currentQuestions.length < 14) {
-                            getRandomQuestions(14 - currentQuestions.length);
-                        }
-                        
-                        displayQuestions();
-                    } else {
-                        loadSampleQuestions();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error loading questions:", error);
-                    loadSampleQuestions();
-                });
-        }
-
-        function getRandomQuestions(count) {
-            db.collection('questions').get()
-                .then(snapshot => {
-                    const allQuestions = [];
+                    // Group jobs by category
+                    const jobCounts = {};
                     snapshot.forEach(doc => {
-                        allQuestions.push({
-                            id: doc.id,
-                            ...doc.data()
-                        });
+                        const category = doc.data().category;
+                        jobCounts[category] = (jobCounts[category] || 0) + 1;
                     });
-                    
-                    // Shuffle and get random questions
-                    const shuffled = allQuestions.sort(() => 0.5 - Math.random());
-                    const randomQuestions = shuffled.slice(0, count);
-                    
-                    currentQuestions = [...currentQuestions, ...randomQuestions];
-                    displayQuestions();
-                })
-                .catch(error => {
-                    console.error("Error getting random questions:", error);
-                    loadSampleQuestions();
+
+                    // Display job categories
+                    Object.keys(jobCounts).forEach(category => {
+                        const li = document.createElement('li');
+                        li.className = 'category-item';
+                        li.innerHTML = `
+                            <span class="category-name">${category}</span>
+                            <span class="category-count">${jobCounts[category]}</span>
+                        `;
+                        li.onclick = () => navigateToJobs(category);
+                        jobsList.appendChild(li);
+                    });
                 });
         }
 
-        function loadSampleQuestions() {
-            currentQuestions = [];
-            for (let i = 1; i <= 14; i++) {
-                currentQuestions.push({
-                    id: `sample_${i}`,
-                    question: `নমুনা প্রশ্ন ${i}: বাংলাদেশের স্বাধীনতা দিবস কত তারিখ?`,
-                    option1: "২৬ মার্চ",
-                    option2: "১৬ ডিসেম্বর",
-                    option3: "২১ ফেব্রুয়ারি",
-                    option4: "১ এপ্রিল",
-                    correctAnswer: Math.floor(Math.random() * 4) + 1,
-                    category: "বাংলাদেশ বিষয়াবলী"
+        // Load Ads from Firebase
+        function loadAds() {
+            // Load header ad
+            db.collection('ads').doc('header').get()
+                .then(doc => {
+                    if (doc.exists() && doc.data().code) {
+                        document.getElementById('header-ad').innerHTML = doc.data().code;
+                    }
                 });
+
+            // Load question ad
+            db.collection('ads').doc('question').get()
+                .then(doc => {
+                    if (doc.exists() && doc.data().code) {
+                        document.getElementById('question-ad-1').innerHTML = doc.data().code;
+                    }
+                });
+
+            // Load sidebar ads
+            db.collection('ads').doc('sidebar1').get()
+                .then(doc => {
+                    if (doc.exists() && doc.data().code) {
+                        document.getElementById('sidebar-ad-1').innerHTML = doc.data().code;
+                    }
+                });
+
+            db.collection('ads').doc('sidebar2').get()
+                .then(doc => {
+                    if (doc.exists() && doc.data().code) {
+                        document.getElementById('sidebar-ad-2').innerHTML = doc.data().code;
+                    }
+                });
+        }
+
+        // Load Questions from Firebase
+        async function loadQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            questionsContainer.innerHTML = '<p style="text-align: center; padding: 40px;">প্রশ্ন লোড হচ্ছে...</p>';
+
+            try {
+                // Get all questions
+                const snapshot = await db.collection('questions').limit(50).get();
+                
+                if (snapshot.empty) {
+                    questionsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #666;">কোন প্রশ্ন পাওয়া যায়নি। প্রথমে প্রশ্ন যোগ করুন।</p>';
+                    return;
+                }
+
+                // Store all questions
+                const allQuestions = [];
+                snapshot.forEach(doc => {
+                    allQuestions.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+
+                // Randomly select 14 unique questions
+                currentQuestions = getRandomQuestions(allQuestions, 14);
+
+                // Display questions
+                displayQuestions();
+            } catch (error) {
+                console.error("Error loading questions:", error);
+                questionsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: #e74c3c;">প্রশ্ন লোড করতে সমস্যা হয়েছে।</p>';
             }
-            displayQuestions();
+        }
+
+        function getRandomQuestions(questions, count) {
+            if (questions.length <= count) return [...questions];
+            
+            const shuffled = [...questions].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
         }
 
         function displayQuestions() {
-            const questionPaper = document.getElementById('questionPaper');
-            questionPaper.innerHTML = '';
-            
+            const questionsContainer = document.getElementById('questions-container');
+            questionsContainer.innerHTML = '';
+
             currentQuestions.forEach((question, index) => {
-                const questionNumber = index + 1;
-                const questionHtml = `
-                    <div class="question-item" data-id="${question.id}">
-                        <div class="question-text">
-                            ${questionNumber}. ${question.question}
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.innerHTML = `
+                    <div class="question-number">প্রশ্ন ${index + 1}:</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">
+                        <div class="option-item" data-index="${index}" data-option="1">
+                            <span class="option-letter">ক.</span>
+                            <span class="option-text">${question.option1}</span>
                         </div>
-                        <div class="options-grid">
-                            <div class="option-row" onclick="selectOption('q${questionNumber}', '1', '${question.id}')">
-                                <input type="radio" 
-                                       id="q${questionNumber}_opt1" 
-                                       name="q${questionNumber}" 
-                                       value="1"
-                                       class="option-input">
-                                <label class="option-label" for="q${questionNumber}_opt1">ক</label>
-                                <div class="option-text">${question.option1}</div>
-                            </div>
-                            <div class="option-row" onclick="selectOption('q${questionNumber}', '2', '${question.id}')">
-                                <input type="radio" 
-                                       id="q${questionNumber}_opt2" 
-                                       name="q${questionNumber}" 
-                                       value="2"
-                                       class="option-input">
-                                <label class="option-label" for="q${questionNumber}_opt2">খ</label>
-                                <div class="option-text">${question.option2}</div>
-                            </div>
-                            <div class="option-row" onclick="selectOption('q${questionNumber}', '3', '${question.id}')">
-                                <input type="radio" 
-                                       id="q${questionNumber}_opt3" 
-                                       name="q${questionNumber}" 
-                                       value="3"
-                                       class="option-input">
-                                <label class="option-label" for="q${questionNumber}_opt3">গ</label>
-                                <div class="option-text">${question.option3}</div>
-                            </div>
-                            <div class="option-row" onclick="selectOption('q${questionNumber}', '4', '${question.id}')">
-                                <input type="radio" 
-                                       id="q${questionNumber}_opt4" 
-                                       name="q${questionNumber}" 
-                                       value="4"
-                                       class="option-input">
-                                <label class="option-label" for="q${questionNumber}_opt4">ঘ</label>
-                                <div class="option-text">${question.option4}</div>
-                            </div>
+                        <div class="option-item" data-index="${index}" data-option="2">
+                            <span class="option-letter">খ.</span>
+                            <span class="option-text">${question.option2}</span>
+                        </div>
+                        <div class="option-item" data-index="${index}" data-option="3">
+                            <span class="option-letter">গ.</span>
+                            <span class="option-text">${question.option3}</span>
+                        </div>
+                        <div class="option-item" data-index="${index}" data-option="4">
+                            <span class="option-letter">ঘ.</span>
+                            <span class="option-text">${question.option4}</span>
                         </div>
                     </div>
                 `;
-                questionPaper.innerHTML += questionHtml;
+                questionsContainer.appendChild(questionDiv);
             });
-            
-            // Restore saved answers if any
-            restoreAnswers();
-        }
 
-        function selectOption(questionName, optionValue, questionId) {
-            // Uncheck all options for this question
-            const options = document.querySelectorAll(`input[name="${questionName}"]`);
-            options.forEach(option => {
-                option.checked = false;
-            });
-            
-            // Check the selected option
-            const selectedOption = document.querySelector(`input[name="${questionName}"][value="${optionValue}"]`);
-            if (selectedOption) {
-                selectedOption.checked = true;
-                saveAnswer(questionId, parseInt(optionValue));
-            }
-        }
-
-        function saveAnswer(questionId, answer) {
-            userAnswers[questionId] = answer;
-            
-            // Save to localStorage
-            localStorage.setItem('mcqAnswers', JSON.stringify(userAnswers));
-        }
-
-        function restoreAnswers() {
-            const savedAnswers = localStorage.getItem('mcqAnswers');
-            if (savedAnswers) {
-                userAnswers = JSON.parse(savedAnswers);
-                
-                // Restore radio button states
-                currentQuestions.forEach((question, index) => {
-                    const questionNumber = index + 1;
-                    if (userAnswers[question.id]) {
-                        const radioBtn = document.querySelector(`input[name="q${questionNumber}"][value="${userAnswers[question.id]}"]`);
-                        if (radioBtn) {
-                            radioBtn.checked = true;
-                        }
-                    }
+            // Add click handlers for options
+            document.querySelectorAll('.option-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (testSubmitted) return;
+                    
+                    const questionIndex = parseInt(this.getAttribute('data-index'));
+                    const optionIndex = parseInt(this.getAttribute('data-option'));
+                    
+                    selectAnswer(questionIndex, optionIndex);
                 });
-            }
+            });
         }
 
-        function loadCategoryQuestions(categoryName) {
-            loadQuestions(categoryName);
-            resetTest();
-            closeMobileSidebar();
+        function selectAnswer(questionIndex, optionIndex) {
+            // Remove selection from all options in this question
+            const questionOptions = document.querySelectorAll(`.option-item[data-index="${questionIndex}"]`);
+            questionOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            const selectedOption = document.querySelector(`.option-item[data-index="${questionIndex}"][data-option="${optionIndex}"]`);
+            selectedOption.classList.add('selected');
+            
+            // Store the answer
+            selectedAnswers[questionIndex] = optionIndex;
         }
 
         // Timer Functions
         function startTimer() {
-            clearInterval(timerInterval);
-            
+            updateTimerDisplay();
             timerInterval = setInterval(() => {
                 timeLeft--;
-                
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                
-                document.getElementById('timer').textContent = 
-                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                updateTimerDisplay();
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    submitTest();
+                    autoSubmitTest();
                 }
             }, 1000);
         }
 
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (timeLeft <= 60) {
+                document.getElementById('timer').style.background = '#e74c3c';
+            }
+        }
+
+        function autoSubmitTest() {
+            if (!testSubmitted) {
+                submitTest();
+            }
+        }
+
         // Submit Test
         function submitTest() {
-            if (testCompleted) return;
+            if (testSubmitted) return;
             
-            testCompleted = true;
             clearInterval(timerInterval);
+            testSubmitted = true;
             
             // Calculate score
-            let score = 0;
-            let totalQuestions = currentQuestions.length;
-            
-            currentQuestions.forEach(question => {
-                if (userAnswers[question.id] === question.correctAnswer) {
-                    score++;
+            let correctCount = 0;
+            currentQuestions.forEach((question, index) => {
+                const userAnswer = selectedAnswers[index];
+                const correctAnswer = question.correctAnswer;
+                
+                const questionOptions = document.querySelectorAll(`.option-item[data-index="${index}"]`);
+                
+                // Mark correct answer in blue
+                questionOptions.forEach((opt, optIndex) => {
+                    if (optIndex + 1 === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                
+                // Mark wrong answer in red if user answered
+                if (userAnswer) {
+                    if (userAnswer === correctAnswer) {
+                        correctCount++;
+                    } else {
+                        const wrongOption = document.querySelector(
+                            `.option-item[data-index="${index}"][data-option="${userAnswer}"]`
+                        );
+                        if (wrongOption) {
+                            wrongOption.classList.add('wrong');
+                        }
+                    }
                 }
             });
             
-            // Display results
-            document.getElementById('questionsSection').style.display = 'none';
-            document.getElementById('submitSection').style.display = 'none';
-            document.getElementById('resultSection').style.display = 'block';
+            // Show results
+            const score = correctCount;
+            const percentage = Math.round((correctCount / currentQuestions.length) * 100);
             
-            document.getElementById('totalScore').textContent = `${score}/${totalQuestions}`;
-            const percentage = Math.round((score / totalQuestions) * 100);
-            document.getElementById('percentage').textContent = `${percentage}%`;
+            document.getElementById('score-display').textContent = `${score}/${currentQuestions.length}`;
+            document.getElementById('score-details').textContent = `${percentage}% সঠিক উত্তর`;
             
-            // Show answer review
-            displayAnswerReview(score, totalQuestions);
+            document.getElementById('result-summary').classList.add('show');
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('test-again-btn').classList.add('show');
             
-            // Clear saved answers
-            localStorage.removeItem('mcqAnswers');
-            
-            // Track test completion in Firebase
-            saveTestResult(score, totalQuestions, percentage);
+            // Scroll to results
+            document.getElementById('result-summary').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function saveTestResult(score, total, percentage) {
-            const testResult = {
-                score: score,
-                total: total,
-                percentage: percentage,
-                category: currentCategory,
-                timestamp: new Date(),
-                userAgent: navigator.userAgent
-            };
-            
-            // Save to Firebase
-            db.collection('testResults').add(testResult)
-                .catch(error => {
-                    console.error("Error saving test result:", error);
-                });
-        }
-
-        function displayAnswerReview(score, totalQuestions) {
-            const answerReview = document.getElementById('answerReview');
-            answerReview.innerHTML = '';
-            
-            currentQuestions.forEach((question, index) => {
-                const questionNumber = index + 1;
-                const userAnswer = userAnswers[question.id];
-                const isCorrect = userAnswer === question.correctAnswer;
-                
-                const reviewItem = document.createElement('div');
-                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'wrong'}`;
-                
-                let optionsHtml = '';
-                const options = [
-                    { label: 'ক', text: question.option1, value: 1 },
-                    { label: 'খ', text: question.option2, value: 2 },
-                    { label: 'গ', text: question.option3, value: 3 },
-                    { label: 'ঘ', text: question.option4, value: 4 }
-                ];
-                
-                options.forEach(option => {
-                    let optionClass = '';
-                    if (option.value === question.correctAnswer) {
-                        optionClass = 'correct-answer';
-                    } else if (option.value === userAnswer && !isCorrect) {
-                        optionClass = 'wrong-answer';
-                    }
-                    
-                    optionsHtml += `
-                        <div class="review-option">
-                            <span class="${optionClass}">
-                                ${option.label}) ${option.text}
-                            </span>
-                        </div>
-                    `;
-                });
-                
-                reviewItem.innerHTML = `
-                    <div class="review-question">
-                        ${questionNumber}. ${question.question}
-                    </div>
-                    <div class="review-options">
-                        ${optionsHtml}
-                    </div>
-                `;
-                
-                answerReview.appendChild(reviewItem);
-            });
-        }
-
-        function resetTest() {
-            testCompleted = false;
-            userAnswers = {};
+        // Test Again
+        async function testAgain() {
+            // Reset variables
+            selectedAnswers = {};
+            testSubmitted = false;
             timeLeft = 7 * 60;
             
-            document.getElementById('questionsSection').style.display = 'block';
-            document.getElementById('submitSection').style.display = 'block';
-            document.getElementById('resultSection').style.display = 'none';
+            // Reload new questions
+            await loadQuestions();
             
-            document.getElementById('timer').textContent = '07:00';
+            // Reset UI
+            document.getElementById('result-summary').classList.remove('show');
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('test-again-btn').classList.remove('show');
             
+            // Restart timer
             startTimer();
             
-            // Clear all radio buttons
-            const radioButtons = document.querySelectorAll('.option-input');
-            radioButtons.forEach(radio => {
-                radio.checked = false;
-            });
-            
-            // Clear localStorage
-            localStorage.removeItem('mcqAnswers');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Load Ads
-        function loadAds() {
-            // Load ads from Firebase
-            db.collection('ads').doc('header').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('headerAd').innerHTML = doc.data().code;
-                    }
-                })
-                .catch(error => console.error("Error loading header ad:", error));
-            
-            db.collection('ads').doc('sidebar').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('sidebarAd').innerHTML = doc.data().code;
-                    }
-                })
-                .catch(error => console.error("Error loading sidebar ad:", error));
-            
-            db.collection('ads').doc('question').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('questionAd').innerHTML = doc.data().code;
-                    }
-                })
-                .catch(error => console.error("Error loading question ad:", error));
+        // Navigation Functions
+        function navigateToQuestionBank(category) {
+            alert(`"${category}" প্রশ্নব্যাংক পৃষ্ঠায় রিডাইরেক্ট করা হবে।`);
+            // window.location.href = `prosnobank.html?category=${encodeURIComponent(category)}`;
         }
 
-        // Mobile Navigation Functions
+        function navigateToJobs(category) {
+            alert(`"${category}" চাকরি পৃষ্ঠায় রিডাইরেক্ট করা হবে।`);
+            // window.location.href = `jobs.html?category=${encodeURIComponent(category)}`;
+        }
+
+        // Setup Event Listeners
         function setupEventListeners() {
-            // Mobile menu button
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navLinks = document.getElementById('navLinks');
-            const mobileSidebarBtn = document.getElementById('mobileSidebarBtn');
-            
-            // Toggle mobile navigation
-            mobileMenuBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                navLinks.classList.toggle('active');
-            });
-            
-            // Close mobile nav when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                }
-            });
-            
-            // Mobile sidebar
-            document.getElementById('mobileMenuBtn').addEventListener('click', openMobileSidebar);
-            document.getElementById('mobileSidebarClose').addEventListener('click', closeMobileSidebar);
-            document.getElementById('overlay').addEventListener('click', closeMobileSidebar);
-            
             // Submit button
-            document.getElementById('submitBtn').addEventListener('click', submitTest);
+            document.getElementById('submit-btn').addEventListener('click', submitTest);
             
             // Test again button
-            document.getElementById('testAgainBtn').addEventListener('click', function() {
-                if (currentCategory === 'Mixed') {
-                    loadMixedQuestions();
-                } else {
-                    loadQuestions(currentCategory);
+            document.getElementById('test-again-btn').addEventListener('click', testAgain);
+            
+            // Mobile menu button
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                document.getElementById('nav-links').classList.toggle('show');
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const navLinks = document.getElementById('nav-links');
+                const menuBtn = document.getElementById('mobile-menu-btn');
+                
+                if (!navLinks.contains(event.target) && !menuBtn.contains(event.target)) {
+                    navLinks.classList.remove('show');
                 }
             });
             
-            // Prevent right click
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
+            // Navigation links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('nav-links').classList.remove('show');
+                    
+                    // Update active link
+                    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show appropriate section based on link
+                    const linkText = this.textContent.toLowerCase();
+                    if (linkText.includes('প্রশ্নব্যাংক')) {
+                        navigateToQuestionBank('all');
+                    } else if (linkText.includes('মডেল টেস্ট')) {
+                        // Already on model test page
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (linkText.includes('চাকরি')) {
+                        navigateToJobs('all');
+                    }
+                });
             });
-            
-            // Prevent copy
-            document.addEventListener('copy', function(e) {
-                e.preventDefault();
-            });
-        }
-
-        function openMobileSidebar() {
-            document.getElementById('mobileSidebar').classList.add('active');
-            document.getElementById('overlay').classList.add('active');
-            document.getElementById('navLinks').classList.remove('active');
-        }
-
-        function closeMobileSidebar() {
-            document.getElementById('mobileSidebar').classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
         }
     </script>
 </body>
