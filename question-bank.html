@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রশ্নব্যাংক - FreeTutorBD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 36px;
+            color: #3498db;
+        }
+        
+        .logo-text h1 {
+            color: #3498db;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        .nav-links a.active {
+            color: #3498db;
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
+            gap: 30px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .sidebar-title {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar-title i {
+            color: #3498db;
+        }
+        
+        .ad-space {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-placeholder {
+            color: #95a5a6;
+        }
+        
+        .ad-placeholder i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Main Content */
+        .content {
+            flex: 1;
+        }
+        
+        .page-title {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .page-title i {
+            color: #3498db;
+            margin-right: 15px;
+        }
+        
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            background: rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .category-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .category-body {
+            padding: 20px;
+        }
+        
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .question-count {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .view-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .view-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Questions Container */
+        .questions-container {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+        
+        .questions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .questions-header h3 {
+            color: #2c3e50;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+        
+        /* Questions List */
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .question-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            background: #f8f9fa;
+            transition: border-color 0.3s;
+        }
+        
+        .question-card:hover {
+            border-color: #3498db;
+        }
+        
+        .question-number {
+            color: #3498db;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .option:hover {
+            border-color: #3498db;
+            background: #f0f7ff;
+        }
+        
+        .option-letter {
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .option-text {
+            flex: 1;
+        }
+        
+        .answer-section {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .answer-header {
+            color: #155724;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .correct-answer {
+            color: #155724;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .show-answer-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        
+        .show-answer-btn:hover {
+            background: #219653;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .search-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            color: #3498db;
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .footer-section p {
+            color: #bdc3c7;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3498db;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                font-size: 16px;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>FreeTutorBD</h1>
+                    <p>প্রশ্নব্যাংক</p>
+                </div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> হোম</a>
+                <a href="#" class="active"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                <a href="#"><i class="fas fa-file-alt"></i> MCQ টেস্ট</a>
+                <a href="#"><i class="fas fa-file-contract"></i> মডেল টেস্ট</a>
+                <a href="#"><i class="fas fa-briefcase"></i> চাকরি</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                <i class="fas fa-ad"></i>
+                <span>বিজ্ঞাপন</span>
+            </div>
+            
+            <div class="ad-space" id="sidebar-ad">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad fa-3x"></i>
+                    <p>বিজ্ঞাপনের জন্য এই স্থান</p>
+                    <small>৩০০x২৫০ পিক্সেল</small>
+                </div>
+            </div>
+            
+            <div class="sidebar-title">
+                <i class="fas fa-chart-line"></i>
+                <span>পরিসংখ্যান</span>
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: #666;">মোট প্রশ্ন:</span>
+                    <span style="color: #3498db; font-weight: bold;" id="total-questions">0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: #666;">মোট ক্যাটাগরি:</span>
+                    <span style="color: #27ae60; font-weight: bold;" id="total-categories">0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: #666;">আজকের ভিজিটর:</span>
+                    <span style="color: #e74c3c; font-weight: bold;" id="today-visitors">152</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Header Ad -->
+            <div class="ad-space" id="header-ad" style="margin-bottom: 30px; min-height: 150px;">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad fa-2x"></i>
+                    <p>হেডার বিজ্ঞাপন</p>
+                    <small>৭২০x৯০ পিক্সেল</small>
+                </div>
+            </div>
+
+            <!-- Page Title -->
+            <h1 class="page-title">
+                <i class="fas fa-book-open"></i>
+                প্রশ্নব্যাংক
+            </h1>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" id="search-input" placeholder="প্রশ্ন বা বিষয় খুঁজুন...">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i> খুঁজুন
+                    </button>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div id="categories-section">
+                <h2 style="color: #2c3e50; margin-bottom: 25px; font-size: 24px;">
+                    <i class="fas fa-folder"></i> বিষয়ভিত্তিক প্রশ্ন
+                </h2>
+                
+                <div class="categories-grid" id="categories-container">
+                    <!-- Categories will be loaded dynamically -->
+                    <div class="loading">লোড হচ্ছে...</div>
+                </div>
+            </div>
+
+            <!-- Questions Section (Initially Hidden) -->
+            <div class="questions-container" id="questions-container">
+                <div class="questions-header">
+                    <h3>
+                        <i class="fas fa-folder-open"></i>
+                        <span id="category-title">বিষয়ের নাম</span>
+                    </h3>
+                    <button class="back-btn" id="back-to-categories">
+                        <i class="fas fa-arrow-left"></i> ক্যাটাগরিতে ফিরে যান
+                    </button>
+                </div>
+                
+                <div class="questions-list" id="questions-list">
+                    <!-- Questions will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Footer Ad -->
+            <div class="ad-space" id="footer-ad" style="margin-top: 30px; min-height: 150px;">
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad fa-2x"></i>
+                    <p>ফুটার বিজ্ঞাপন</p>
+                    <small>৭২০x৯০ পিক্সেল</small>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FreeTutorBD</h4>
+                    <p>বিসিএস, ব্যাংক, বিশ্ববিদ্যালয় ভর্তি পরীক্ষার প্রস্তুতির জন্য সবচেয়ে নির্ভরযোগ্য প্লাটফর্ম।</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white; background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" style="color: white; background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" style="color: white; background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>দ্রুত লিংক</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> হোম</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> প্রশ্নব্যাংক</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> MCQ টেস্ট</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> মডেল টেস্ট</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> চাকরি</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>যোগাযোগ</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</p>
+                    <p><i class="fas fa-phone"></i> +৮৮০ ১৭XX-XXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> contact@freetutorbd.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; ২০২৪ FreeTutorBD. সকল স্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
+            authDomain: "freetutorbd-19380.firebaseapp.com",
+            projectId: "freetutorbd-19380",
+            storageBucket: "freetutorbd-19380.firebasestorage.app",
+            messagingSenderId: "741837856466",
+            appId: "1:741837856466:web:8b5a3b34183991e2f9570b",
+            measurementId: "G-VMSB3D24F1"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Predefined Categories with Icons
+        const categoryIcons = {
+            "বাংলাদেশ বিষয়াবলী": "fas fa-landmark",
+            "আন্তর্জাতিক বিষয়াবলী": "fas fa-globe-asia",
+            "ভূগোল": "fas fa-map",
+            "বাংলা সাহিত্য": "fas fa-book",
+            "সাধারণ বিজ্ঞান": "fas fa-flask",
+            "গাণিতিক যুক্তি": "fas fa-calculator",
+            "শব্দ সংক্ষেপণ": "fas fa-abacus",
+            "ফুটবল": "fas fa-football-ball",
+            "ক্রিকেট": "fas fa-baseball-ball",
+            "বর্তমান affairs": "fas fa-newspaper"
+        };
+
+        // Global Variables
+        let currentCategory = '';
+        let allQuestions = [];
+        let filteredQuestions = [];
+
+        // Load Categories from Firebase
+        async function loadCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '<div class="loading">লোড হচ্ছে...</div>';
+            
+            try {
+                // Load categories from Firebase
+                const categoriesSnapshot = await db.collection('categories').get();
+                const questionsSnapshot = await db.collection('questions').get();
+                
+                allQuestions = [];
+                questionsSnapshot.forEach(doc => {
+                    allQuestions.push({ id: doc.id, ...doc.data() });
+                });
+                
+                let categories = [];
+                
+                if (categoriesSnapshot.empty) {
+                    // Use predefined categories if no categories in Firebase
+                    categories = Object.keys(categoryIcons).map(name => ({
+                        name: name,
+                        questionCount: allQuestions.filter(q => q.category === name).length
+                    }));
+                } else {
+                    // Use categories from Firebase
+                    categoriesSnapshot.forEach(doc => {
+                        const cat = doc.data();
+                        categories.push({
+                            name: cat.nameBn,
+                            questionCount: allQuestions.filter(q => q.category === cat.nameBn).length
+                        });
+                    });
+                    
+                    // Add predefined categories that are not in Firebase
+                    Object.keys(categoryIcons).forEach(catName => {
+                        if (!categories.find(c => c.name === catName)) {
+                            categories.push({
+                                name: catName,
+                                questionCount: allQuestions.filter(q => q.category === catName).length
+                            });
+                        }
+                    });
+                }
+                
+                // Update stats
+                document.getElementById('total-questions').textContent = allQuestions.length;
+                document.getElementById('total-categories').textContent = categories.length;
+                
+                // Display categories
+                container.innerHTML = '';
+                categories.forEach(category => {
+                    const icon = categoryIcons[category.name] || 'fas fa-folder';
+                    const categoryCard = document.createElement('div');
+                    categoryCard.className = 'category-card';
+                    categoryCard.innerHTML = `
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="${icon}"></i>
+                            </div>
+                            <div class="category-info">
+                                <h3>${category.name}</h3>
+                                <p>${category.questionCount}টি প্রশ্ন</p>
+                            </div>
+                        </div>
+                        <div class="category-body">
+                            <div class="category-stats">
+                                <span class="question-count">
+                                    <i class="fas fa-question-circle"></i> ${category.questionCount}টি প্রশ্ন
+                                </span>
+                                <button class="view-btn" onclick="viewCategory('${category.name}')">
+                                    দেখুন <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(categoryCard);
+                });
+                
+            } catch (error) {
+                console.error("Error loading categories:", error);
+                container.innerHTML = '<div class="error">ডেটা লোড করতে সমস্যা হয়েছে।</div>';
+            }
+        }
+
+        // View Questions of a Category
+        function viewCategory(categoryName) {
+            currentCategory = categoryName;
+            
+            // Hide categories, show questions
+            document.getElementById('categories-section').style.display = 'none';
+            document.getElementById('questions-container').style.display = 'block';
+            
+            // Update category title
+            document.getElementById('category-title').textContent = categoryName;
+            
+            // Load questions for this category
+            loadCategoryQuestions(categoryName);
+        }
+
+        // Load Questions for a Specific Category
+        function loadCategoryQuestions(categoryName) {
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = '<div class="loading">প্রশ্ন লোড হচ্ছে...</div>';
+            
+            // Filter questions by category
+            filteredQuestions = allQuestions.filter(q => q.category === categoryName);
+            
+            if (filteredQuestions.length === 0) {
+                questionsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+                        <i class="fas fa-inbox fa-3x" style="margin-bottom: 20px;"></i>
+                        <h3>কোন প্রশ্ন পাওয়া যায়নি</h3>
+                        <p>এই ক্যাটাগরিতে এখনো কোন প্রশ্ন যোগ করা হয়নি</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display questions
+            questionsList.innerHTML = '';
+            filteredQuestions.forEach((question, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-number">
+                        <span>প্রশ্ন ${index + 1}</span>
+                    </div>
+                    <div class="question-text">${question.question}</div>
+                    
+                    <div class="options-grid">
+                        <div class="option">
+                            <div class="option-letter">ক</div>
+                            <div class="option-text">${question.option1}</div>
+                        </div>
+                        <div class="option">
+                            <div class="option-letter">খ</div>
+                            <div class="option-text">${question.option2}</div>
+                        </div>
+                        <div class="option">
+                            <div class="option-letter">গ</div>
+                            <div class="option-text">${question.option3}</div>
+                        </div>
+                        <div class="option">
+                            <div class="option-letter">ঘ</div>
+                            <div class="option-text">${question.option4}</div>
+                        </div>
+                    </div>
+                    
+                    <button class="show-answer-btn" onclick="showAnswer(${index})">
+                        <i class="fas fa-eye"></i> উত্তর দেখুন
+                    </button>
+                    
+                    <div class="answer-section" id="answer-${index}">
+                        <div class="answer-header">
+                            <i class="fas fa-check-circle"></i>
+                            <span>সঠিক উত্তর</span>
+                        </div>
+                        <div class="correct-answer">
+                            সঠিক উত্তর: <strong>${['ক', 'খ', 'গ', 'ঘ'][question.correctAnswer - 1]}</strong>
+                            <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 5px;">
+                                ${['ক', 'খ', 'গ', 'ঘ'][question.correctAnswer - 1]}) ${[question.option1, question.option2, question.option3, question.option4][question.correctAnswer - 1]}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                questionsList.appendChild(questionCard);
+            });
+        }
+
+        // Show Answer for a Question
+        function showAnswer(questionIndex) {
+            const answerDiv = document.getElementById(`answer-${questionIndex}`);
+            const button = event.target.closest('.show-answer-btn');
+            
+            if (answerDiv.style.display === 'block') {
+                answerDiv.style.display = 'none';
+                button.innerHTML = '<i class="fas fa-eye"></i> উত্তর দেখুন';
+            } else {
+                answerDiv.style.display = 'block';
+                button.innerHTML = '<i class="fas fa-eye-slash"></i> উত্তর লুকান';
+            }
+        }
+
+        // Back to Categories
+        document.getElementById('back-to-categories').addEventListener('click', function() {
+            document.getElementById('categories-section').style.display = 'block';
+            document.getElementById('questions-container').style.display = 'none';
+            currentCategory = '';
+        });
+
+        // Search Functionality
+        document.getElementById('search-btn').addEventListener('click', performSearch);
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                alert('অনুগ্রহ করে কিছু লিখুন');
+                return;
+            }
+            
+            if (currentCategory) {
+                // Search within current category
+                const results = filteredQuestions.filter(q => 
+                    q.question.toLowerCase().includes(searchTerm) ||
+                    q.option1.toLowerCase().includes(searchTerm) ||
+                    q.option2.toLowerCase().includes(searchTerm) ||
+                    q.option3.toLowerCase().includes(searchTerm) ||
+                    q.option4.toLowerCase().includes(searchTerm)
+                );
+                
+                if (results.length === 0) {
+                    alert('কোন মিল পাওয়া যায়নি');
+                } else {
+                    // Show results
+                    allQuestions = results;
+                    loadCategoryQuestions(currentCategory);
+                }
+            } else {
+                // Search in all categories
+                const results = allQuestions.filter(q => 
+                    q.question.toLowerCase().includes(searchTerm) ||
+                    q.option1.toLowerCase().includes(searchTerm) ||
+                    q.option2.toLowerCase().includes(searchTerm) ||
+                    q.option3.toLowerCase().includes(searchTerm) ||
+                    q.option4.toLowerCase().includes(searchTerm) ||
+                    q.category.toLowerCase().includes(searchTerm)
+                );
+                
+                if (results.length === 0) {
+                    alert('কোন মিল পাওয়া যায়নি');
+                } else {
+                    // Show results by category
+                    const categories = [...new Set(results.map(q => q.category))];
+                    
+                    const container = document.getElementById('categories-container');
+                    container.innerHTML = '';
+                    
+                    categories.forEach(category => {
+                        const categoryQuestions = results.filter(q => q.category === category);
+                        const icon = categoryIcons[category] || 'fas fa-folder';
+                        
+                        const categoryCard = document.createElement('div');
+                        categoryCard.className = 'category-card';
+                        categoryCard.innerHTML = `
+                            <div class="category-header">
+                                <div class="category-icon">
+                                    <i class="${icon}"></i>
+                                </div>
+                                <div class="category-info">
+                                    <h3>${category}</h3>
+                                    <p>${categoryQuestions.length}টি প্রশ্ন পাওয়া গেছে</p>
+                                </div>
+                            </div>
+                            <div class="category-body">
+                                <div style="color: #666; margin-bottom: 15px; font-size: 14px;">
+                                    <i class="fas fa-search"></i> "${searchTerm}" এর ${categoryQuestions.length}টি ফলাফল
+                                </div>
+                                <div class="category-stats">
+                                    <button class="view-btn" onclick="viewCategory('${category}')">
+                                        দেখুন <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(categoryCard);
+                    });
+                }
+            }
+        }
+
+        // Load Ads from Firebase
+        function loadAds() {
+            // You can load ads from Firebase here
+            // For now, using placeholders
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+            loadAds();
+            
+            // Set up event listeners
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Navigation
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (!this.href || this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Handle navigation
+                        const page = this.textContent.trim();
+                        if (page === 'হোম') {
+                            // Go to home page
+                        } else if (page === 'প্রশ্নব্যাংক') {
+                            // Already on question bank
+                        }
+                    }
+                });
+            });
+        }
+
+        // Utility function to format numbers
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+    </script>
+</body>
+</html>
