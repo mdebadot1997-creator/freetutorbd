@@ -111,6 +111,13 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: #3498db;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +137,12 @@
             </button>
             <div id="questionsList"></div>
         </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="back-to-home">
+                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
+            </a>
+        </div>
     </div>
     
     <script>
@@ -143,6 +156,51 @@
             { id: 'abbreviation', icon: 'fas fa-abacus', name: 'শব্দ সংক্ষেপণ' },
             { id: 'current', icon: 'fas fa-newspaper', name: 'বর্তমান affairs' }
         ];
+        
+        const questionDatabase = {
+            'bangladesh': [
+                {
+                    question: 'বাংলাদেশের সংবিধান কবে প্রথম গৃহীত হয়?',
+                    answer: '৪ নভেম্বর, ১৯৭২'
+                },
+                {
+                    question: 'বাংলাদেশের জাতীয় ফুলের নাম কি?',
+                    answer: 'শাপলা'
+                },
+                {
+                    question: 'বাংলাদেশের জাতীয় খেলা কি?',
+                    answer: 'কাবাডি'
+                },
+                {
+                    question: 'বাংলাদেশের বৃহত্তম জেলা কোনটি?',
+                    answer: 'রাঙামাটি (আয়তনে)'
+                },
+                {
+                    question: 'বাংলাদেশের প্রথম প্রধানমন্ত্রী কে ছিলেন?',
+                    answer: 'তাজউদ্দীন আহমদ'
+                }
+            ],
+            'international': [
+                {
+                    question: 'জাতিসংঘ কবে প্রতিষ্ঠিত হয়?',
+                    answer: '২৪ অক্টোবর, ১৯৪৫'
+                },
+                {
+                    question: 'বিশ্বের সবচেয়ে বেশি জনসংখ্যার দেশ কোনটি?',
+                    answer: 'চীন'
+                }
+            ],
+            'geography': [
+                {
+                    question: 'বিশ্বের দীর্ঘতম নদী কোনটি?',
+                    answer: 'নীল নদ'
+                },
+                {
+                    question: 'বিশ্বের সর্বোচ্চ পর্বতশৃঙ্গ কোনটি?',
+                    answer: 'মাউন্ট এভারেস্ট'
+                }
+            ]
+        };
         
         function loadSubjects() {
             const container = document.getElementById('subjectsContainer');
@@ -170,36 +228,20 @@
             document.getElementById('subjectsContainer').style.display = 'none';
             document.getElementById('questionsContainer').style.display = 'block';
             
-            // Load questions from Firebase or show sample
+            // Load questions
             let questionsHTML = `
                 <h2 style="margin-bottom: 20px; color: #2c3e50;">${subject.name} - প্রশ্নোত্তর</h2>
+                <p style="color: #666; margin-bottom: 20px;">মোট প্রশ্ন: ${(questionDatabase[subjectId] || []).length}টি</p>
             `;
             
-            // Sample questions
-            const sampleQuestions = [
+            const questions = questionDatabase[subjectId] || [
                 {
-                    question: 'বাংলাদেশের সংবিধান কবে প্রথম গৃহীত হয়?',
-                    answer: '৪ নভেম্বর, ১৯৭২'
-                },
-                {
-                    question: 'বাংলাদেশের জাতীয় ফুলের নাম কি?',
-                    answer: 'শাপলা'
-                },
-                {
-                    question: 'বাংলাদেশের জাতীয় খেলা কি?',
-                    answer: 'কাবাডি'
-                },
-                {
-                    question: 'বাংলাদেশের বৃহত্তম জেলা কোনটি?',
-                    answer: 'রাঙামাটি (আয়তনে)'
-                },
-                {
-                    question: 'বাংলাদেশের প্রথম প্রধানমন্ত্রী কে ছিলেন?',
-                    answer: 'তাজউদ্দীন আহমদ'
+                    question: 'উদাহরণ প্রশ্ন?',
+                    answer: 'উদাহরণ উত্তর'
                 }
             ];
             
-            sampleQuestions.forEach((q, index) => {
+            questions.forEach((q, index) => {
                 questionsHTML += `
                     <div class="question-item">
                         <h4>প্রশ্ন ${index + 1}: ${q.question}</h4>
