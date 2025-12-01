@@ -34,6 +34,19 @@
             align-items: center;
         }
         
+        .back-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
         .timer {
             background: #e74c3c;
             color: white;
@@ -141,56 +154,59 @@
             font-weight: bold;
         }
         
-        .review-section {
-            margin-top: 30px;
-            text-align: left;
+        .category-selection {
+            text-align: center;
+            padding: 40px;
         }
         
-        .back-to-home {
-            display: inline-block;
-            margin-top: 20px;
-            color: #3498db;
-            text-decoration: none;
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 id="categoryTitle">MCQ টেস্ট</h1>
-            <div class="timer" id="timer">30:00</div>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> হোম পেজ
+            </a>
+            <div class="timer" id="timer">--:--</div>
         </div>
         
-        <div id="quizContainer" class="quiz-container">
-            <div style="text-align: center; padding: 40px;">
-                <h2>টেস্ট শুরু করুন</h2>
-                <p style="margin: 20px 0; color: #666;">নিচের বিষয় নির্বাচন করে টেস্ট শুরু করুন</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin: 30px 0;">
-                    <button class="option" onclick="startTest('বাংলাদেশ বিষয়াবলী')">
-                        বাংলাদেশ বিষয়াবলী
-                    </button>
-                    <button class="option" onclick="startTest('আন্তর্জাতিক বিষয়াবলী')">
-                        আন্তর্জাতিক বিষয়াবলী
-                    </button>
-                    <button class="option" onclick="startTest('ভূগোল')">
-                        ভূগোল
-                    </button>
-                    <button class="option" onclick="startTest('বাংলা সাহিত্য')">
-                        বাংলা সাহিত্য
-                    </button>
-                    <button class="option" onclick="startTest('সাধারণ বিজ্ঞান')">
-                        সাধারণ বিজ্ঞান
-                    </button>
-                    <button class="option" onclick="startTest('গাণিতিক যুক্তি')">
-                        গাণিতিক যুক্তি
-                    </button>
-                </div>
-                
-                <a href="index.html" class="back-to-home">
-                    <i class="fas fa-home"></i> হোম পেজে ফিরে যান
-                </a>
+        <div id="categorySelection" class="category-selection">
+            <h1>MCQ টেস্ট</h1>
+            <p style="margin: 20px 0; color: #666;">টেস্ট শুরু করতে বিষয় নির্বাচন করুন</p>
+            
+            <div class="category-buttons">
+                <button class="option" onclick="startTest('বাংলাদেশ বিষয়াবলী')">
+                    <i class="fas fa-landmark"></i> বাংলাদেশ বিষয়াবলী
+                </button>
+                <button class="option" onclick="startTest('আন্তর্জাতিক বিষয়াবলী')">
+                    <i class="fas fa-globe-asia"></i> আন্তর্জাতিক বিষয়াবলী
+                </button>
+                <button class="option" onclick="startTest('ভূগোল')">
+                    <i class="fas fa-map"></i> ভূগোল
+                </button>
+                <button class="option" onclick="startTest('বাংলা সাহিত্য')">
+                    <i class="fas fa-book"></i> বাংলা সাহিত্য
+                </button>
+                <button class="option" onclick="startTest('সাধারণ বিজ্ঞান')">
+                    <i class="fas fa-flask"></i> সাধারণ বিজ্ঞান
+                </button>
+                <button class="option" onclick="startTest('গাণিতিক যুক্তি')">
+                    <i class="fas fa-calculator"></i> গাণিতিক যুক্তি
+                </button>
+                <button class="option" onclick="startTest('শব্দ সংক্ষেপণ')">
+                    <i class="fas fa-abacus"></i> শব্দ সংক্ষেপণ
+                </button>
             </div>
+        </div>
+        
+        <div id="quizContainer" class="quiz-container" style="display: none;">
+            <!-- Questions will load here -->
         </div>
         
         <div class="navigation" id="navigation" style="display: none;">
@@ -226,17 +242,13 @@
                 </div>
             </div>
             
-            <div class="review-section" id="reviewSection">
+            <div id="reviewSection" style="text-align: left; margin-top: 30px;">
                 <!-- Review will load here -->
             </div>
             
             <button class="btn btn-success" onclick="restartTest()" style="margin-top: 20px;">
                 <i class="fas fa-redo"></i> আবার টেস্ট দিন
             </button>
-            <br>
-            <a href="index.html" class="back-to-home" style="margin-top: 15px;">
-                <i class="fas fa-home"></i> হোম পেজে ফিরে যান
-            </a>
         </div>
     </div>
     
@@ -248,7 +260,6 @@
         let timerInterval;
         let currentCategory = '';
         
-        // Sample questions database
         const questionDatabase = {
             'বাংলাদেশ বিষয়াবলী': [
                 {
@@ -266,40 +277,16 @@
                     option3: 'শাপলা',
                     option4: 'গাঁদা',
                     correctAnswer: 3
-                },
-                {
-                    question: 'বাংলাদেশের জাতীয় পাখির নাম কি?',
-                    option1: 'চিল',
-                    option2: 'ময়না',
-                    option3: 'দোয়েল',
-                    option4: 'কাক',
-                    correctAnswer: 3
-                },
-                {
-                    question: 'পদ্মা সেতুর দৈর্ঘ্য কত কিলোমিটার?',
-                    option1: '৫.২ কিমি',
-                    option2: '৬.১৫ কিমি',
-                    option3: '৭.৫ কিমি',
-                    option4: '৮.২ কিমি',
-                    correctAnswer: 2
                 }
             ],
             'আন্তর্জাতিক বিষয়াবলী': [
                 {
-                    question: 'জাতিসংঘের সদর দপ্তর কোথায় অবস্থিত?',
+                    question: 'জাতিসংঘের সদর দপ্তর কোথায়?',
                     option1: 'জেনেভা',
                     option2: 'নিউইয়র্ক',
                     option3: 'প্যারিস',
                     option4: 'লন্ডন',
                     correctAnswer: 2
-                },
-                {
-                    question: 'বিশ্ব স্বাস্থ্য সংস্থার সদর দপ্তর কোথায়?',
-                    option1: 'জেনেভা',
-                    option2: 'নিউইয়র্ক',
-                    option3: 'ওয়াশিংটন',
-                    option4: 'টোকিও',
-                    correctAnswer: 1
                 }
             ],
             'ভূগোল': [
@@ -310,34 +297,27 @@
                     option3: 'ইয়াংসি',
                     option4: 'মিসিসিপি',
                     correctAnswer: 1
-                },
-                {
-                    question: 'বিশ্বের বৃহত্তম মহাদেশ কোনটি?',
-                    option1: 'আফ্রিকা',
-                    option2: 'এশিয়া',
-                    option3: 'উত্তর আমেরিকা',
-                    option4: 'ইউরোপ',
-                    correctAnswer: 2
                 }
             ]
         };
         
         function startTest(category) {
             currentCategory = category;
-            document.getElementById('categoryTitle').textContent = category + ' - MCQ টেস্ট';
+            
+            // Hide category selection
+            document.getElementById('categorySelection').style.display = 'none';
+            
+            // Show quiz container
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('navigation').style.display = 'flex';
+            
+            // Load questions
             questions = questionDatabase[category] || questionDatabase['বাংলাদেশ বিষয়াবলী'];
-            
-            // Hide start screen
-            document.getElementById('quizContainer').innerHTML = '';
-            
-            // Start the test
             userAnswers = new Array(questions.length).fill(null);
             currentQuestion = 0;
+            
             displayQuestion();
             startTimer();
-            
-            // Show navigation
-            document.getElementById('navigation').style.display = 'flex';
         }
         
         function displayQuestion() {
@@ -359,6 +339,7 @@
             }
             
             quizContainer.innerHTML = `
+                <h2>${currentCategory} - MCQ টেস্ট</h2>
                 <div class="question">
                     <span class="question-number">${currentQuestion + 1}</span>
                     <span style="font-size: 18px; font-weight: 500;">${question.question}</span>
@@ -371,7 +352,6 @@
                 </div>
             `;
             
-            // Update navigation buttons
             document.getElementById('prevBtn').style.display = currentQuestion > 0 ? 'inline-flex' : 'none';
             document.getElementById('nextBtn').innerHTML = currentQuestion === questions.length - 1 
                 ? 'টেস্ট শেষ করুন <i class="fas fa-check"></i>' 
@@ -424,7 +404,6 @@
             let wrong = 0;
             let skipped = 0;
             
-            // Calculate score
             questions.forEach((q, index) => {
                 if (userAnswers[index] === null) {
                     skipped++;
@@ -435,7 +414,7 @@
                 }
             });
             
-            // Display results
+            // Show results
             document.getElementById('score').textContent = `${correct}/${questions.length}`;
             document.getElementById('correctCount').textContent = correct;
             document.getElementById('wrongCount').textContent = wrong;
@@ -446,16 +425,12 @@
             questions.forEach((q, index) => {
                 const userAnswer = userAnswers[index];
                 const isCorrect = userAnswer === q.correctAnswer;
-                const userAnswerText = userAnswer ? 
-                    String.fromCharCode(64 + userAnswer) + '. ' + q['option' + userAnswer] : 
-                    'উত্তর দেননি';
-                const correctAnswerText = String.fromCharCode(64 + q.correctAnswer) + '. ' + q['option' + q.correctAnswer];
                 
                 reviewHTML += `
                     <div style="margin: 15px 0; padding: 15px; background: ${isCorrect ? '#d4edda' : '#f8d7da'}; border-radius: 8px;">
                         <p><strong>প্রশ্ন ${index + 1}:</strong> ${q.question}</p>
-                        <p>আপনার উত্তর: ${userAnswerText}</p>
-                        ${!isCorrect ? `<p>সঠিক উত্তর: ${correctAnswerText}</p>` : ''}
+                        <p>আপনার উত্তর: ${userAnswer ? String.fromCharCode(64 + userAnswer) + '. ' + q['option' + userAnswer] : 'উত্তর দেননি'}</p>
+                        ${!isCorrect ? `<p>সঠিক উত্তর: ${String.fromCharCode(64 + q.correctAnswer)}. ${q['option' + q.correctAnswer]}</p>` : ''}
                     </div>
                 `;
             });
@@ -469,19 +444,21 @@
         }
         
         function restartTest() {
-            // Reset everything
+            // Reset
             currentQuestion = 0;
             userAnswers = new Array(questions.length).fill(null);
             
-            // Show quiz container
-            document.getElementById('quizContainer').style.display = 'block';
-            document.getElementById('navigation').style.display = 'flex';
+            // Show category selection again
+            document.getElementById('categorySelection').style.display = 'block';
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('navigation').style.display = 'none';
             document.getElementById('resultContainer').style.display = 'none';
-            
-            // Restart
-            displayQuestion();
-            startTimer();
         }
+        
+        // Initialize timer display
+        window.onload = function() {
+            document.getElementById('timer').textContent = "30:00";
+        };
     </script>
 </body>
 </html>
