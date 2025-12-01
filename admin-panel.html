@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - MCQ Platform</title>
+    <title>Admin Panel - FreeTutorBD</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -21,7 +21,7 @@
         }
         
         .admin-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -62,11 +62,18 @@
             max-height: 100%;
         }
         
+        .site-name {
+            color: #3498db;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
         /* Navigation Tabs */
         .admin-nav {
             display: flex;
             background: #34495e;
             padding: 0;
+            flex-wrap: wrap;
         }
         
         .nav-tab {
@@ -75,6 +82,7 @@
             cursor: pointer;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
+            white-space: nowrap;
         }
         
         .nav-tab:hover {
@@ -109,7 +117,7 @@
         
         /* Form Styles */
         .form-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             background: #f8f9fa;
             padding: 25px;
             border-radius: 10px;
@@ -121,6 +129,9 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .form-group {
@@ -177,9 +188,19 @@
             color: white;
         }
         
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+        }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
         }
         
         /* Grid Layouts */
@@ -231,6 +252,140 @@
             transform: translateY(-3px);
         }
         
+        /* Exam Question Styles */
+        .exam-question-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .exam-question-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .question-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .status-published {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-draft {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-hidden {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .question-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-edit {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-hide {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-publish {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .category-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .category-item:hover {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        
+        /* Search Box */
+        .search-box {
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .admin-nav {
@@ -244,6 +399,20 @@
             .col-6 {
                 min-width: 100%;
             }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -251,17 +420,18 @@
     <div class="admin-container" id="admin-container">
         <!-- Login Screen (Initially Shown) -->
         <div id="login-screen" class="login-container">
-            <h1 style="color: white; margin-bottom: 30px;">Admin Panel Login</h1>
-            <p style="color: #ecf0f1; margin-bottom: 20px;">গুগল অ্যাকাউন্ট দিয়ে লগইন করুন</p>
+            <h1 style="color: white; margin-bottom: 30px;">FreeTutorBD Admin Panel</h1>
+            <p style="color: #ecf0f1; margin-bottom: 20px; font-size: 18px;">গুগল অ্যাকাউন্ট দিয়ে লগইন করুন</p>
             
             <button id="google-login-btn" class="google-login-btn">
                 <i class="fab fa-google" style="color: #DB4437;"></i>
                 Google দিয়ে লগইন করুন
             </button>
             
-            <div style="margin-top: 30px; color: #ecf0f1; font-size: 14px;">
-                <p>⚠️ নোট: শুধুমাত্র ভেরিফাইড অ্যাডমিন লগইন করতে পারবেন</p>
-                <p>কোন পাসওয়ার্ড লাগবে না</p>
+            <div style="margin-top: 40px; color: #ecf0f1; font-size: 14px;">
+                <p><i class="fas fa-info-circle"></i> নোট: শুধুমাত্র ভেরিফাইড অ্যাডমিন লগইন করতে পারবেন</p>
+                <p><i class="fas fa-lock"></i> কোন পাসওয়ার্ড লাগবে না</p>
+                <p><i class="fas fa-redo"></i> Page reload করলেও লগইন থাকবে</p>
             </div>
         </div>
         
@@ -271,14 +441,15 @@
             <div class="admin-header">
                 <div class="logo-section">
                     <div class="logo-preview" id="logo-preview">
-                        <span id="logo-text">Logo</span>
+                        <span id="logo-text">FT</span>
                     </div>
                     <div>
-                        <h2>Admin Panel</h2>
+                        <div class="site-name">FreeTutorBD</div>
                         <p style="color: #bdc3c7; font-size: 14px;">সবকিছু ম্যানেজ করুন এখান থেকে</p>
                     </div>
                 </div>
                 <div>
+                    <span style="color: #bdc3c7; margin-right: 15px;" id="user-email"></span>
                     <button id="logout-btn" class="btn btn-danger">
                         <i class="fas fa-sign-out-alt"></i> লগআউট
                     </button>
@@ -287,17 +458,69 @@
             
             <!-- Navigation Tabs -->
             <div class="admin-nav">
-                <div class="nav-tab active" data-tab="logo">🏠 Logo</div>
-                <div class="nav-tab" data-tab="jobs">💼 চাকরি</div>
-                <div class="nav-tab" data-tab="categories">📁 ক্যাটাগরি</div>
-                <div class="nav-tab" data-tab="questions">❓ প্রশ্ন</div>
-                <div class="nav-tab" data-tab="ads">📢 বিজ্ঞাপন</div>
+                <div class="nav-tab active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</div>
+                <div class="nav-tab" data-tab="logo"><i class="fas fa-image"></i> লোগো</div>
+                <div class="nav-tab" data-tab="jobs"><i class="fas fa-briefcase"></i> চাকরি</div>
+                <div class="nav-tab" data-tab="exams"><i class="fas fa-file-alt"></i> মডেল টেস্ট</div>
+                <div class="nav-tab" data-tab="questions"><i class="fas fa-question-circle"></i> প্রশ্ন</div>
+                <div class="nav-tab" data-tab="categories"><i class="fas fa-folder"></i> ক্যাটাগরি</div>
+                <div class="nav-tab" data-tab="results"><i class="fas fa-chart-bar"></i> রেজাল্ট</div>
+                <div class="nav-tab" data-tab="ads"><i class="fas fa-ad"></i> বিজ্ঞাপন</div>
             </div>
             
             <!-- Content Area -->
             <div class="admin-content">
+                <!-- Dashboard Tab -->
+                <div id="dashboard-tab" class="tab-content active">
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-number" id="total-jobs">0</div>
+                            <div class="stat-label">মোট চাকরি</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="total-exams">0</div>
+                            <div class="stat-label">মডেল টেস্ট</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="total-questions">0</div>
+                            <div class="stat-label">প্রশ্ন সংখ্যা</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number" id="total-results">0</div>
+                            <div class="stat-label">সাবমিশন</div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-6">
+                            <div class="form-section">
+                                <h3><i class="fas fa-bolt"></i> দ্রুত কাজ</h3>
+                                <button onclick="switchTab('jobs')" class="btn btn-primary" style="margin-bottom: 10px;">
+                                    <i class="fas fa-plus"></i> নতুন চাকরি যোগ
+                                </button>
+                                <button onclick="switchTab('exams')" class="btn btn-success" style="margin-bottom: 10px;">
+                                    <i class="fas fa-plus"></i> নতুন টেস্ট তৈরি
+                                </button>
+                                <button onclick="switchTab('questions')" class="btn btn-warning">
+                                    <i class="fas fa-plus"></i> নতুন প্রশ্ন যোগ
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-section">
+                                <h3><i class="fas fa-history"></i> সাম্প্রতিক কাজ</h3>
+                                <div id="recent-activity">
+                                    <p style="text-align: center; color: #7f8c8d;">
+                                        <i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Logo Management Tab -->
-                <div id="logo-tab" class="tab-content active">
+                <div id="logo-tab" class="tab-content">
                     <div class="form-section">
                         <h3><i class="fas fa-image"></i> লোগো পরিবর্তন করুন</h3>
                         <div class="form-group">
@@ -342,6 +565,7 @@
                                         <option value="private">প্রাইভেট</option>
                                         <option value="bank">ব্যাংক</option>
                                         <option value="ngo">এনজিও</option>
+                                        <option value="bcs">বিসিএস</option>
                                     </select>
                                 </div>
                             </div>
@@ -371,6 +595,9 @@
                     
                     <div class="form-section">
                         <h3><i class="fas fa-list"></i> সব চাকরির তালিকা</h3>
+                        <div class="search-box">
+                            <input type="text" id="job-search" placeholder="চাকরি খুঁজুন..." class="search-input" onkeyup="searchJobs()">
+                        </div>
                         <div id="jobs-list" style="max-height: 400px; overflow-y: auto;">
                             <!-- Jobs will load here -->
                             <p style="text-align: center; color: #7f8c8d; padding: 20px;">
@@ -380,77 +607,65 @@
                     </div>
                 </div>
                 
-                <!-- Categories Management Tab -->
-                <div id="categories-tab" class="tab-content">
+                <!-- Exams Management Tab -->
+                <div id="exams-tab" class="tab-content">
                     <div class="form-section">
-                        <h3><i class="fas fa-folder"></i> নতুন ক্যাটাগরি যোগ করুন</h3>
+                        <h3><i class="fas fa-file-alt"></i> নতুন মডেল টেস্ট তৈরি করুন</h3>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>ক্যাটাগরি নাম (বাংলা):</label>
-                                    <input type="text" id="cat-name-bn" placeholder="বাংলাদেশ বিষয়াবলী" class="form-control">
+                                    <label>টেস্টের নাম:</label>
+                                    <input type="text" id="exam-title" placeholder="বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>ক্যাটাগরি আইকন:</label>
-                                    <select id="cat-icon" class="form-control">
-                                        <option value="fas fa-landmark">🏛️ বাংলাদেশ</option>
-                                        <option value="fas fa-globe-asia">🌏 আন্তর্জাতিক</option>
-                                        <option value="fas fa-map">🗺️ ভূগোল</option>
-                                        <option value="fas fa-book">📚 সাহিত্য</option>
-                                        <option value="fas fa-flask">🧪 বিজ্ঞান</option>
-                                        <option value="fas fa-calculator">🧮 গণিত</option>
-                                        <option value="fas fa-abacus">🔤 শব্দ সংক্ষেপণ</option>
+                                    <label>ক্যাটাগরি:</label>
+                                    <select id="exam-category" class="form-control">
+                                        <!-- Categories will be loaded -->
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>মোট মার্কস:</label>
+                                    <input type="number" id="exam-total-marks" value="100" class="form-control">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>ক্যাটাগরি নাম (ইংরেজি):</label>
-                                    <input type="text" id="cat-name-en" placeholder="Bangladesh Affairs" class="form-control">
+                                    <label>সময় (মিনিট):</label>
+                                    <input type="number" id="exam-time" value="60" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label>প্রশ্নের সংখ্যা:</label>
-                                    <input type="number" id="cat-question-count" value="100" class="form-control">
+                                    <label>মোট প্রশ্ন:</label>
+                                    <input type="number" id="exam-total-questions" value="50" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>স্ট্যাটাস:</label>
+                                    <select id="exam-status" class="form-control">
+                                        <option value="published">Published</option>
+                                        <option value="draft">Draft</option>
+                                        <option value="hidden">Hidden</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <button onclick="addNewCategory()" class="btn btn-success">
-                            <i class="fas fa-plus"></i> ক্যাটাগরি যোগ করুন
+                        <div class="form-group">
+                            <label>টেস্টের বিবরণ:</label>
+                            <textarea id="exam-description" rows="3" placeholder="টেস্টের সংক্ষিপ্ত বিবরণ..." class="form-control"></textarea>
+                        </div>
+                        <button onclick="createNewExam()" class="btn btn-success">
+                            <i class="fas fa-plus-circle"></i> টেস্ট তৈরি করুন
                         </button>
                     </div>
                     
                     <div class="form-section">
-                        <h3><i class="fas fa-folder-open"></i> CSV থেকে প্রশ্ন আপলোড করুন</h3>
-                        <div class="form-group">
-                            <label>ক্যাটাগরি নির্বাচন করুন:</label>
-                            <select id="csv-category" class="form-control">
-                                <!-- Categories will be loaded here -->
-                                <option value="">প্রথমে ক্যাটাগরি যোগ করুন</option>
-                            </select>
+                        <h3><i class="fas fa-list-alt"></i> সব মডেল টেস্ট</h3>
+                        <div class="search-box">
+                            <input type="text" id="exam-search" placeholder="টেস্ট খুঁজুন..." class="search-input" onkeyup="searchExams()">
                         </div>
-                        <div class="form-group">
-                            <label>CSV ফাইল নির্বাচন করুন:</label>
-                            <input type="file" id="csv-upload" accept=".csv" class="form-control">
-                            <small style="color: #7f8c8d;">CSV ফরম্যাট: question,option1,option2,option3,option4,correctAnswer</small>
-                        </div>
-                        <button onclick="uploadCSV()" class="btn btn-primary">
-                            <i class="fas fa-file-upload"></i> CSV আপলোড করুন
-                        </button>
-                    </div>
-                    
-                    <div class="form-section">
-                        <h3><i class="fas fa-list-alt"></i> সব ক্যাটাগরি</h3>
-                        <div id="categories-list">
-                            <!-- Categories will load here -->
-                            <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="categories-container">
-                                <!-- Default Categories -->
-                                <div class="category-item" style="background: #e3f2fd; padding: 15px; border-radius: 8px; width: 200px;">
-                                    <i class="fas fa-landmark"></i>
-                                    <h4>বাংলাদেশ বিষয়াবলী</h4>
-                                    <p>প্রশ্ন: 500</p>
-                                </div>
-                                <!-- More categories will be added here -->
-                            </div>
+                        <div id="exams-list">
+                            <!-- Exams will load here -->
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                <i class="fas fa-spinner fa-spin"></i> টেস্ট লোড হচ্ছে...
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -504,6 +719,88 @@
                             <i class="fas fa-plus"></i> প্রশ্ন যোগ করুন
                         </button>
                     </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-file-upload"></i> CSV থেকে প্রশ্ন আপলোড করুন</h3>
+                        <div class="form-group">
+                            <label>ক্যাটাগরি নির্বাচন করুন:</label>
+                            <select id="csv-category" class="form-control">
+                                <!-- Categories will be loaded here -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>CSV ফাইল নির্বাচন করুন:</label>
+                            <input type="file" id="csv-upload" accept=".csv" class="form-control">
+                            <small style="color: #7f8c8d;">CSV ফরম্যাট: প্রশ্ন,অপশন১,অপশন২,অপশন৩,অপশন৪,সঠিকউত্তর</small>
+                        </div>
+                        <button onclick="uploadCSV()" class="btn btn-primary">
+                            <i class="fas fa-file-upload"></i> CSV আপলোড করুন
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Categories Management Tab -->
+                <div id="categories-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3><i class="fas fa-folder"></i> প্রি-ডিফাইন্ড ক্যাটাগরি</h3>
+                        <div id="predefined-categories" class="categories-grid">
+                            <!-- Predefined categories will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3><i class="fas fa-plus-circle"></i> নতুন ক্যাটাগরি যোগ করুন</h3>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>ক্যাটাগরি নাম (বাংলা):</label>
+                                    <input type="text" id="cat-name-bn" placeholder="নতুন ক্যাটাগরি" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>ক্যাটাগরি আইকন:</label>
+                                    <select id="cat-icon" class="form-control">
+                                        <option value="fas fa-landmark">🏛️ বাংলাদেশ</option>
+                                        <option value="fas fa-globe-asia">🌏 আন্তর্জাতিক</option>
+                                        <option value="fas fa-map">🗺️ ভূগোল</option>
+                                        <option value="fas fa-book">📚 সাহিত্য</option>
+                                        <option value="fas fa-flask">🧪 বিজ্ঞান</option>
+                                        <option value="fas fa-calculator">🧮 গণিত</option>
+                                        <option value="fas fa-football-ball">⚽ ফুটবল</option>
+                                        <option value="fas fa-baseball-ball">🏏 ক্রিকেট</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>ক্যাটাগরি নাম (ইংরেজি):</label>
+                                    <input type="text" id="cat-name-en" placeholder="New Category" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>প্রশ্নের সংখ্যা:</label>
+                                    <input type="number" id="cat-question-count" value="100" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="addNewCategory()" class="btn btn-success">
+                            <i class="fas fa-plus"></i> ক্যাটাগরি যোগ করুন
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Management Tab -->
+                <div id="results-tab" class="tab-content">
+                    <div class="form-section">
+                        <h3><i class="fas fa-chart-bar"></i> টেস্ট রেজাল্ট</h3>
+                        <div class="search-box">
+                            <input type="text" id="result-search" placeholder="রেজাল্ট খুঁজুন..." class="search-input" onkeyup="searchResults()">
+                        </div>
+                        <div id="results-list">
+                            <!-- Results will load here -->
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                <i class="fas fa-spinner fa-spin"></i> রেজাল্ট লোড হচ্ছে...
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Ads Management Tab -->
@@ -556,11 +853,47 @@
         const db = firebase.firestore();
         const storage = firebase.storage();
 
-        // Allowed Admin Emails (You can add more)
+        // Allowed Admin Emails (আপনার ইমেইল যোগ করুন)
         const allowedAdmins = [
             "mdebadot1997@gmail.com",
-            "mdebadot1997@gmail.com"
+            "mdebadot1997@gmail.com"  // আপনার ইমেইল এখানে যোগ করুন
         ];
+
+        // Predefined Categories (আপনার দেওয়া ক্যাটাগরি)
+        const predefinedCategories = [
+            { nameBn: "বাংলাদেশ বিষয়াবলী", nameEn: "Bangladesh Affairs", icon: "fas fa-landmark", questionCount: 500 },
+            { nameBn: "আন্তর্জাতিক বিষয়াবলী", nameEn: "International Affairs", icon: "fas fa-globe-asia", questionCount: 300 },
+            { nameBn: "ভূগোল", nameEn: "Geography", icon: "fas fa-map", questionCount: 200 },
+            { nameBn: "বাংলা সাহিত্য", nameEn: "Bengali Literature", icon: "fas fa-book", questionCount: 400 },
+            { nameBn: "সাধারণ বিজ্ঞান", nameEn: "General Science", icon: "fas fa-flask", questionCount: 350 },
+            { nameBn: "গাণিতিক যুক্তি", nameEn: "Mathematical Reasoning", icon: "fas fa-calculator", questionCount: 450 },
+            { nameBn: "শব্দ সংক্ষেপণ", nameEn: "Abbreviation", icon: "fas fa-abacus", questionCount: 150 },
+            { nameBn: "ফুটবল", nameEn: "Football", icon: "fas fa-football-ball", questionCount: 100 },
+            { nameBn: "ক্রিকেট", nameEn: "Cricket", icon: "fas fa-baseball-ball", questionCount: 100 },
+            { nameBn: "বর্তমান affairs", nameEn: "Current Affairs", icon: "fas fa-newspaper", questionCount: 250 }
+        ];
+
+        // Check if user is logged in on page load
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                // Check if user is allowed admin
+                if (allowedAdmins.includes(user.email)) {
+                    // User is logged in and is admin
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('admin-panel').style.display = 'block';
+                    document.getElementById('user-email').textContent = user.email;
+                    loadAdminData();
+                } else {
+                    // User is not admin
+                    alert('⚠️ আপনি অ্যাডমিন নন!');
+                    auth.signOut();
+                }
+            } else {
+                // User is not logged in
+                document.getElementById('login-screen').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'none';
+            }
+        });
 
         // Google Login
         document.getElementById('google-login-btn').addEventListener('click', () => {
@@ -575,6 +908,7 @@
                         // Hide login, show admin panel
                         document.getElementById('login-screen').style.display = 'none';
                         document.getElementById('admin-panel').style.display = 'block';
+                        document.getElementById('user-email').textContent = user.email;
                         loadAdminData();
                     } else {
                         alert('⚠️ আপনি অ্যাডমিন নন!');
@@ -588,11 +922,13 @@
         });
 
         // Logout
-        document.getElementById('logout-btn')?.addEventListener('click', () => {
-            auth.signOut().then(() => {
-                document.getElementById('login-screen').style.display = 'block';
-                document.getElementById('admin-panel').style.display = 'none';
-            });
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            if (confirm('আপনি কি লগআউট করতে চান?')) {
+                auth.signOut().then(() => {
+                    document.getElementById('login-screen').style.display = 'block';
+                    document.getElementById('admin-panel').style.display = 'none';
+                });
+            }
         });
 
         // Tab Navigation
@@ -606,14 +942,93 @@
                 tab.classList.add('active');
                 const tabId = tab.getAttribute('data-tab');
                 document.getElementById(`${tabId}-tab`).classList.add('active');
+                
+                // Load data for the tab if needed
+                if (tabId === 'exams') {
+                    loadExams();
+                } else if (tabId === 'results') {
+                    loadResults();
+                }
             });
         });
+
+        // Switch to specific tab
+        function switchTab(tabName) {
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
 
         // Load Admin Data
         function loadAdminData() {
             loadLogo();
+            loadPredefinedCategories();
+            loadDashboardStats();
+            loadCategoriesForSelect();
+            loadExams();
             loadJobs();
-            loadCategories();
+        }
+
+        // Load Dashboard Statistics
+        function loadDashboardStats() {
+            // Total Jobs
+            db.collection('jobs').get().then(snapshot => {
+                document.getElementById('total-jobs').textContent = snapshot.size;
+            });
+            
+            // Total Exams
+            db.collection('exams').get().then(snapshot => {
+                document.getElementById('total-exams').textContent = snapshot.size;
+            });
+            
+            // Total Questions
+            db.collection('questions').get().then(snapshot => {
+                document.getElementById('total-questions').textContent = snapshot.size;
+            });
+            
+            // Total Results
+            db.collection('results').get().then(snapshot => {
+                document.getElementById('total-results').textContent = snapshot.size;
+            });
+            
+            // Recent Activity
+            loadRecentActivity();
+        }
+
+        // Load Recent Activity
+        function loadRecentActivity() {
+            const recentDiv = document.getElementById('recent-activity');
+            recentDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</p>';
+            
+            // Get recent jobs
+            db.collection('jobs')
+                .orderBy('createdAt', 'desc')
+                .limit(5)
+                .get()
+                .then(snapshot => {
+                    let html = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+                    
+                    if (snapshot.empty) {
+                        html += '<p style="color: #7f8c8d; text-align: center;">কোন একটিভিটি নেই</p>';
+                    } else {
+                        snapshot.forEach(doc => {
+                            const job = doc.data();
+                            const timeAgo = getTimeAgo(job.createdAt);
+                            html += `
+                                <div style="border-left: 3px solid #3498db; padding-left: 10px;">
+                                    <strong>নতুন চাকরি</strong>
+                                    <p style="margin: 5px 0; font-size: 14px;">${job.position} - ${job.company}</p>
+                                    <small style="color: #7f8c8d;">${timeAgo}</small>
+                                </div>
+                            `;
+                        });
+                    }
+                    
+                    html += '</div>';
+                    recentDiv.innerHTML = html;
+                });
         }
 
         // Logo Management
@@ -674,14 +1089,21 @@
                 deadline: document.getElementById('job-deadline').value,
                 salary: document.getElementById('job-salary').value,
                 details: document.getElementById('job-details').value,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'active'
             };
+
+            if (!jobData.position || !jobData.company) {
+                alert('পদবী এবং কোম্পানির নাম দিন');
+                return;
+            }
 
             db.collection('jobs').add(jobData)
                 .then(() => {
                     alert('✅ চাকরি সফলভাবে যোগ হয়েছে!');
                     clearJobForm();
                     loadJobs();
+                    loadDashboardStats();
                 })
                 .catch(error => {
                     alert('❌ Error: ' + error.message);
@@ -703,15 +1125,24 @@
                     snapshot.forEach(doc => {
                         const job = doc.data();
                         html += `
-                            <div style="background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <strong style="color: #2c3e50;">${job.position}</strong>
-                                        <p style="margin: 5px 0; color: #555;">🏢 ${job.company} | 📅 ${job.publishDate}</p>
+                            <div class="exam-question-card">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div style="flex: 1;">
+                                        <strong style="color: #2c3e50; font-size: 18px;">${job.position}</strong>
+                                        <p style="margin: 5px 0; color: #555;">
+                                            <i class="fas fa-building"></i> ${job.company} | 
+                                            <i class="fas fa-calendar"></i> ${job.publishDate} | 
+                                            <i class="fas fa-clock"></i> শেষ: ${job.deadline}
+                                        </p>
+                                        <p style="color: #27ae60; font-weight: bold;">
+                                            <i class="fas fa-money-bill-wave"></i> ${job.salary}
+                                        </p>
                                     </div>
-                                    <button onclick="deleteJob('${doc.id}')" style="background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <div class="question-actions">
+                                        <button onclick="deleteJob('${doc.id}')" class="action-btn btn-hide">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         `;
@@ -721,12 +1152,27 @@
                 });
         }
 
+        function searchJobs() {
+            const searchTerm = document.getElementById('job-search').value.toLowerCase();
+            const jobs = document.querySelectorAll('.exam-question-card');
+            
+            jobs.forEach(job => {
+                const text = job.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    job.style.display = 'block';
+                } else {
+                    job.style.display = 'none';
+                }
+            });
+        }
+
         function deleteJob(jobId) {
             if (confirm('আপনি কি এই চাকরি ডিলিট করতে চান?')) {
                 db.collection('jobs').doc(jobId).delete()
                     .then(() => {
                         alert('✅ চাকরি ডিলিট করা হয়েছে');
                         loadJobs();
+                        loadDashboardStats();
                     });
             }
         }
@@ -736,66 +1182,316 @@
             document.getElementById('job-company').value = '';
             document.getElementById('job-details').value = '';
             document.getElementById('job-salary').value = '';
+            
+            // Set default dates
+            const today = new Date().toISOString().split('T')[0];
+            const futureDate = new Date();
+            futureDate.setDate(futureDate.getDate() + 30);
+            document.getElementById('job-publish').value = today;
+            document.getElementById('job-deadline').value = futureDate.toISOString().split('T')[0];
         }
 
-        // Category Management
+        // Predefined Categories
+        function loadPredefinedCategories() {
+            const container = document.getElementById('predefined-categories');
+            container.innerHTML = '';
+            
+            predefinedCategories.forEach(category => {
+                container.innerHTML += `
+                    <div class="category-item">
+                        <i class="${category.icon} fa-2x" style="color: #3498db;"></i>
+                        <h4 style="margin: 10px 0;">${category.nameBn}</h4>
+                        <p style="color: #666; font-size: 14px;">${category.nameEn}</p>
+                        <p style="color: #27ae60; font-weight: bold;">
+                            <i class="fas fa-question-circle"></i> প্রশ্ন: ${category.questionCount}
+                        </p>
+                        <button onclick="savePredefinedCategory('${category.nameBn}')" class="btn btn-sm btn-primary" style="margin-top: 10px;">
+                            <i class="fas fa-database"></i> ডাটাবেজে সেভ করুন
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function savePredefinedCategory(categoryNameBn) {
+            const category = predefinedCategories.find(cat => cat.nameBn === categoryNameBn);
+            
+            if (category) {
+                // Check if category already exists
+                db.collection('categories').where('nameBn', '==', category.nameBn).get()
+                    .then(snapshot => {
+                        if (snapshot.empty) {
+                            // Add to database
+                            db.collection('categories').add({
+                                ...category,
+                                isPredefined: true,
+                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                            })
+                            .then(() => {
+                                alert(`✅ "${category.nameBn}" ক্যাটাগরি ডাটাবেজে যোগ হয়েছে!`);
+                                loadCategoriesForSelect();
+                            });
+                        } else {
+                            alert('⚠️ এই ক্যাটাগরি ইতিমধ্যেই ডাটাবেজে আছে!');
+                        }
+                    });
+            }
+        }
+
+        // Load Categories for Select Dropdowns
+        function loadCategoriesForSelect() {
+            const examSelect = document.getElementById('exam-category');
+            const questionSelect = document.getElementById('question-category');
+            const csvSelect = document.getElementById('csv-category');
+            
+            examSelect.innerHTML = '<option value="">ক্যাটাগরি নির্বাচন করুন</option>';
+            questionSelect.innerHTML = '<option value="">ক্যাটাগরি নির্বাচন করুন</option>';
+            csvSelect.innerHTML = '<option value="">ক্যাটাগরি নির্বাচন করুন</option>';
+            
+            // First add predefined categories
+            predefinedCategories.forEach(cat => {
+                const option = `<option value="${cat.nameBn}">${cat.nameBn}</option>`;
+                examSelect.innerHTML += option;
+                questionSelect.innerHTML += option;
+                csvSelect.innerHTML += option;
+            });
+            
+            // Then add custom categories from database
+            db.collection('categories').get()
+                .then(snapshot => {
+                    snapshot.forEach(doc => {
+                        const cat = doc.data();
+                        if (!predefinedCategories.some(pre => pre.nameBn === cat.nameBn)) {
+                            const option = `<option value="${cat.nameBn}">${cat.nameBn}</option>`;
+                            examSelect.innerHTML += option;
+                            questionSelect.innerHTML += option;
+                            csvSelect.innerHTML += option;
+                        }
+                    });
+                });
+        }
+
+        // Custom Category Management
         function addNewCategory() {
             const categoryData = {
                 nameBn: document.getElementById('cat-name-bn').value,
                 nameEn: document.getElementById('cat-name-en').value,
                 icon: document.getElementById('cat-icon').value,
                 questionCount: parseInt(document.getElementById('cat-question-count').value),
+                isPredefined: false,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             };
 
-            db.collection('categories').add(categoryData)
+            if (!categoryData.nameBn) {
+                alert('ক্যাটাগরি নাম দিন');
+                return;
+            }
+
+            // Check if category already exists
+            db.collection('categories').where('nameBn', '==', categoryData.nameBn).get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        db.collection('categories').add(categoryData)
+                            .then(() => {
+                                alert('✅ ক্যাটাগরি যোগ হয়েছে!');
+                                loadCategoriesForSelect();
+                                clearCategoryForm();
+                            });
+                    } else {
+                        alert('⚠️ এই নামে ক্যাটাগরি ইতিমধ্যেই আছে!');
+                    }
+                });
+        }
+
+        function clearCategoryForm() {
+            document.getElementById('cat-name-bn').value = '';
+            document.getElementById('cat-name-en').value = '';
+            document.getElementById('cat-question-count').value = '100';
+        }
+
+        // Exam Management
+        function createNewExam() {
+            const examData = {
+                title: document.getElementById('exam-title').value,
+                category: document.getElementById('exam-category').value,
+                totalMarks: parseInt(document.getElementById('exam-total-marks').value),
+                timeLimit: parseInt(document.getElementById('exam-time').value),
+                totalQuestions: parseInt(document.getElementById('exam-total-questions').value),
+                status: document.getElementById('exam-status').value,
+                description: document.getElementById('exam-description').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                createdBy: auth.currentUser.email
+            };
+
+            if (!examData.title || !examData.category) {
+                alert('টেস্টের নাম এবং ক্যাটাগরি নির্বাচন করুন');
+                return;
+            }
+
+            db.collection('exams').add(examData)
                 .then(() => {
-                    alert('✅ ক্যাটাগরি যোগ হয়েছে!');
-                    loadCategories();
+                    alert('✅ মডেল টেস্ট তৈরি হয়েছে!');
+                    clearExamForm();
+                    loadExams();
+                    loadDashboardStats();
                 })
                 .catch(error => {
                     alert('❌ Error: ' + error.message);
                 });
         }
 
-        function loadCategories() {
-            const categoriesContainer = document.getElementById('categories-container');
-            const categorySelect = document.getElementById('question-category');
-            const csvCategorySelect = document.getElementById('csv-category');
+        function loadExams() {
+            const examsList = document.getElementById('exams-list');
+            examsList.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</p>';
             
-            categoriesContainer.innerHTML = '';
-            categorySelect.innerHTML = '<option value="">ক্যাটাগরি নির্বাচন করুন</option>';
-            csvCategorySelect.innerHTML = '<option value="">ক্যাটাগরি নির্বাচন করুন</option>';
-            
-            db.collection('categories').get()
+            db.collection('exams').orderBy('createdAt', 'desc').get()
                 .then(snapshot => {
+                    if (snapshot.empty) {
+                        examsList.innerHTML = '<p style="text-align: center; color: #7f8c8d;">কোন টেস্ট পাওয়া যায়নি</p>';
+                        return;
+                    }
+                    
+                    let html = '';
                     snapshot.forEach(doc => {
-                        const cat = doc.data();
+                        const exam = doc.data();
+                        const statusClass = exam.status === 'published' ? 'status-published' : 
+                                          exam.status === 'draft' ? 'status-draft' : 'status-hidden';
                         
-                        // Add to category display
-                        categoriesContainer.innerHTML += `
-                            <div class="category-item" style="background: #f0f7ff; padding: 15px; border-radius: 8px; width: 200px; border: 1px solid #cce5ff;">
-                                <i class="${cat.icon} fa-lg" style="color: #0066cc;"></i>
-                                <h4 style="margin: 10px 0;">${cat.nameBn}</h4>
-                                <p style="color: #666; font-size: 14px;">${cat.nameEn}</p>
-                                <p style="color: #27ae60; font-weight: bold;">প্রশ্ন: ${cat.questionCount}</p>
+                        html += `
+                            <div class="exam-question-card">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div style="flex: 1;">
+                                        <h4 style="margin: 0 0 10px 0; color: #2c3e50;">${exam.title}</h4>
+                                        <div style="margin-bottom: 10px;">
+                                            <span class="question-status ${statusClass}">${exam.status}</span>
+                                            <span style="color: #555;">
+                                                <i class="fas fa-folder"></i> ${exam.category} | 
+                                                <i class="fas fa-clock"></i> ${exam.timeLimit} মিনিট | 
+                                                <i class="fas fa-star"></i> ${exam.totalMarks} মার্কস
+                                            </span>
+                                        </div>
+                                        <p style="color: #666; margin-bottom: 10px;">${exam.description || 'No description'}</p>
+                                        <small style="color: #7f8c8d;">
+                                            <i class="fas fa-user"></i> ${exam.createdBy} | 
+                                            <i class="fas fa-calendar"></i> ${formatDate(exam.createdAt)}
+                                        </small>
+                                    </div>
+                                    <div class="question-actions">
+                                        <button onclick="editExam('${doc.id}')" class="action-btn btn-edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button onclick="toggleExamStatus('${doc.id}', '${exam.status}')" class="action-btn ${exam.status === 'hidden' ? 'btn-publish' : 'btn-hide'}">
+                                            ${exam.status === 'hidden' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>'}
+                                        </button>
+                                        <button onclick="deleteExam('${doc.id}')" class="action-btn btn-hide">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         `;
-                        
-                        // Add to select dropdowns
-                        const option = `<option value="${doc.id}">${cat.nameBn}</option>`;
-                        categorySelect.innerHTML += option;
-                        csvCategorySelect.innerHTML += option;
                     });
+                    examsList.innerHTML = html;
                 });
+        }
+
+        function searchExams() {
+            const searchTerm = document.getElementById('exam-search').value.toLowerCase();
+            const exams = document.querySelectorAll('.exam-question-card');
+            
+            exams.forEach(exam => {
+                const text = exam.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    exam.style.display = 'block';
+                } else {
+                    exam.style.display = 'none';
+                }
+            });
+        }
+
+        function editExam(examId) {
+            alert('Edit functionality will be implemented in next version');
+        }
+
+        function toggleExamStatus(examId, currentStatus) {
+            const newStatus = currentStatus === 'hidden' ? 'published' : 'hidden';
+            const confirmMsg = currentStatus === 'hidden' ? 
+                'আপনি কি এই টেস্ট পাবলিশ করতে চান?' : 
+                'আপনি কি এই টেস্ট হাইড করতে চান?';
+            
+            if (confirm(confirmMsg)) {
+                db.collection('exams').doc(examId).update({
+                    status: newStatus
+                })
+                .then(() => {
+                    alert(`✅ টেস্ট ${newStatus === 'published' ? 'পাবলিশ' : 'হাইড'} করা হয়েছে`);
+                    loadExams();
+                });
+            }
+        }
+
+        function deleteExam(examId) {
+            if (confirm('আপনি কি এই টেস্ট ডিলিট করতে চান?')) {
+                db.collection('exams').doc(examId).delete()
+                    .then(() => {
+                        alert('✅ টেস্ট ডিলিট করা হয়েছে');
+                        loadExams();
+                        loadDashboardStats();
+                    });
+            }
+        }
+
+        function clearExamForm() {
+            document.getElementById('exam-title').value = '';
+            document.getElementById('exam-description').value = '';
+            document.getElementById('exam-total-marks').value = '100';
+            document.getElementById('exam-time').value = '60';
+            document.getElementById('exam-total-questions').value = '50';
+        }
+
+        // Question Management
+        function addManualQuestion() {
+            const questionData = {
+                question: document.getElementById('question-text').value,
+                option1: document.getElementById('option1').value,
+                option2: document.getElementById('option2').value,
+                option3: document.getElementById('option3').value,
+                option4: document.getElementById('option4').value,
+                correctAnswer: parseInt(document.getElementById('correct-answer').value),
+                category: document.getElementById('question-category').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            if (!questionData.question || !questionData.category) {
+                alert('প্রশ্ন এবং ক্যাটাগরি নির্বাচন করুন');
+                return;
+            }
+
+            db.collection('questions').add(questionData)
+                .then(() => {
+                    alert('✅ প্রশ্ন যোগ হয়েছে!');
+                    clearQuestionForm();
+                    loadDashboardStats();
+                })
+                .catch(error => {
+                    alert('❌ Error: ' + error.message);
+                });
+        }
+
+        function clearQuestionForm() {
+            document.getElementById('question-text').value = '';
+            document.getElementById('option1').value = '';
+            document.getElementById('option2').value = '';
+            document.getElementById('option3').value = '';
+            document.getElementById('option4').value = '';
         }
 
         // CSV Upload
         function uploadCSV() {
-            const categoryId = document.getElementById('csv-category').value;
+            const category = document.getElementById('csv-category').value;
             const fileInput = document.getElementById('csv-upload');
             
-            if (!categoryId) {
+            if (!category) {
                 alert('ক্যাটাগরি নির্বাচন করুন');
                 return;
             }
@@ -814,67 +1510,103 @@
                 
                 let questionsAdded = 0;
                 let errors = 0;
+                const promises = [];
                 
                 // Process each line (skip header if exists)
-                for (let i = 1; i < lines.length; i++) {
+                for (let i = 0; i < lines.length; i++) {
                     const line = lines[i].trim();
                     if (!line) continue;
                     
                     const parts = line.split(',');
                     if (parts.length >= 6) {
                         const questionData = {
-                            question: parts[0],
-                            option1: parts[1],
-                            option2: parts[2],
-                            option3: parts[3],
-                            option4: parts[4],
-                            correctAnswer: parseInt(parts[5]),
-                            categoryId: categoryId,
+                            question: parts[0].trim(),
+                            option1: parts[1].trim(),
+                            option2: parts[2].trim(),
+                            option3: parts[3].trim(),
+                            option4: parts[4].trim(),
+                            correctAnswer: parseInt(parts[5].trim()),
+                            category: category,
                             createdAt: firebase.firestore.FieldValue.serverTimestamp()
                         };
                         
                         // Add to Firestore
-                        db.collection('questions').add(questionData)
-                            .then(() => questionsAdded++)
-                            .catch(() => errors++);
+                        promises.push(
+                            db.collection('questions').add(questionData)
+                                .then(() => questionsAdded++)
+                                .catch(() => errors++)
+                        );
                     }
                 }
                 
-                alert(`✅ CSV আপলোড সম্পন্ন!\nযোগ হয়েছে: ${questionsAdded}টি প্রশ্ন\nত্রুটি: ${errors}টি`);
+                // Wait for all promises to complete
+                Promise.all(promises).then(() => {
+                    alert(`✅ CSV আপলোড সম্পন্ন!\nযোগ হয়েছে: ${questionsAdded}টি প্রশ্ন\nত্রুটি: ${errors}টি`);
+                    loadDashboardStats();
+                    fileInput.value = '';
+                });
             };
             
             reader.readAsText(file);
         }
 
-        // Manual Question Add
-        function addManualQuestion() {
-            const questionData = {
-                question: document.getElementById('question-text').value,
-                option1: document.getElementById('option1').value,
-                option2: document.getElementById('option2').value,
-                option3: document.getElementById('option3').value,
-                option4: document.getElementById('option4').value,
-                correctAnswer: parseInt(document.getElementById('correct-answer').value),
-                categoryId: document.getElementById('question-category').value,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            db.collection('questions').add(questionData)
-                .then(() => {
-                    alert('✅ প্রশ্ন যোগ হয়েছে!');
-                    clearQuestionForm();
-                })
-                .catch(error => {
-                    alert('❌ Error: ' + error.message);
+        // Results Management
+        function loadResults() {
+            const resultsList = document.getElementById('results-list');
+            resultsList.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</p>';
+            
+            db.collection('results').orderBy('submittedAt', 'desc').limit(50).get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        resultsList.innerHTML = '<p style="text-align: center; color: #7f8c8d;">কোন রেজাল্ট পাওয়া যায়নি</p>';
+                        return;
+                    }
+                    
+                    let html = '<div style="display: grid; gap: 10px;">';
+                    snapshot.forEach(doc => {
+                        const result = doc.data();
+                        const percentage = ((result.score / result.totalMarks) * 100).toFixed(1);
+                        
+                        html += `
+                            <div class="exam-question-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <strong>${result.examTitle}</strong>
+                                        <p style="margin: 5px 0; color: #555;">
+                                            <i class="fas fa-user"></i> ${result.userEmail || 'Anonymous'} | 
+                                            <i class="fas fa-clock"></i> ${formatTime(result.timeTaken)} | 
+                                            <i class="fas fa-calendar"></i> ${formatDate(result.submittedAt)}
+                                        </p>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 24px; font-weight: bold; color: #27ae60;">
+                                            ${result.score}/${result.totalMarks}
+                                        </div>
+                                        <div style="color: #3498db; font-weight: bold;">
+                                            ${percentage}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    resultsList.innerHTML = html;
                 });
         }
 
-        function clearQuestionForm() {
-            document.getElementById('question-text').value = '';
-            document.getElementById('option1').value = '';
-            document.getElementById('option2').value = '';
-            document.getElementById('option3').value = '';
-            document.getElementById('option4').value = '';
+        function searchResults() {
+            const searchTerm = document.getElementById('result-search').value.toLowerCase();
+            const results = document.querySelectorAll('.exam-question-card');
+            
+            results.forEach(result => {
+                const text = result.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    result.style.display = 'block';
+                } else {
+                    result.style.display = 'none';
+                }
+            });
         }
 
         // Ad Management
@@ -891,6 +1623,42 @@
                 });
         }
 
+        // Utility Functions
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = timestamp.toDate();
+            return date.toLocaleDateString('bn-BD', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function formatTime(seconds) {
+            if (!seconds) return 'N/A';
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}মি ${secs}সে`;
+        }
+
+        function getTimeAgo(timestamp) {
+            if (!timestamp) return 'সময় অজানা';
+            const date = timestamp.toDate();
+            const now = new Date();
+            const diff = now - date;
+            
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            if (days > 0) return `${days} দিন আগে`;
+            if (hours > 0) return `${hours} ঘন্টা আগে`;
+            if (minutes > 0) return `${minutes} মিনিট আগে`;
+            return 'অভীকে';
+        }
+
         // Auto set today's date for jobs
         window.onload = function() {
             const today = new Date().toISOString().split('T')[0];
@@ -900,6 +1668,9 @@
             const futureDate = new Date();
             futureDate.setDate(futureDate.getDate() + 30);
             document.getElementById('job-deadline').value = futureDate.toISOString().split('T')[0];
+            
+            // Set exam creation date to today
+            document.getElementById('exam-date').value = today;
         };
     </script>
 </body>
