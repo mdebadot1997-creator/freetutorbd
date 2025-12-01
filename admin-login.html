@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - MCQ Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .admin-login-container {
+            background: white;
+            width: 100%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .admin-icon {
+            font-size: 50px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .admin-message {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .btn-admin-login {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn-admin-login:hover {
+            background: #c0392b;
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-icon">
+            <i class="fas fa-user-shield"></i>
+        </div>
+        
+        <h2>Admin Login</h2>
+        <p style="color: #666; margin: 10px 0;">শুধুমাত্র অনুমোদিত অ্যাডমিন</p>
+        
+        <div class="admin-message">
+            <p><strong>⚠️ নোট:</strong></p>
+            <p>শুধুমাত্র <strong>mdebadot1997@gmail.com</strong> অ্যাকাউন্ট দিয়ে লগইন করতে পারবেন।</p>
+        </div>
+        
+        <button class="btn-admin-login" onclick="adminLogin()">
+            <i class="fab fa-google"></i> Google দিয়ে Admin Login
+        </button>
+        
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> হোম পেজে ফিরে যান
+        </a>
+    </div>
+    
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
+            authDomain: "freetutorbd-19380.firebaseapp.com",
+            projectId: "freetutorbd-19380",
+            storageBucket: "freetutorbd-19380.firebasestorage.app",
+            messagingSenderId: "741837856466",
+            appId: "1:741837856466:web:8b5a3b34183991e2f9570b"
+        };
+        
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        
+        // Admin Login Function
+        function adminLogin() {
+            const provider = new fire
