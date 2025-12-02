@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>চাকরি বিস্তারিত - FreeTutorBD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .main-header {
+            padding: 15px 0;
+        }
+        
+        .main-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #3498db;
+        }
+        
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .site-title h2 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 3px;
+        }
+        
+        .site-title p {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+        }
+        
+        /* Navigation */
+        .nav-desktop {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: #3498db;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            display: none;
+            background: #2c3e50;
+            padding: 15px;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+        }
+        
+        /* Notice Scroll */
+        .notice-scroll {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .notice-container {
+            white-space: nowrap;
+            animation: scrollText 30s linear infinite;
+        }
+        
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .notice-text {
+            display: inline-block;
+            padding-right: 50px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 25px 0;
+        }
+        
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 25px;
+        }
+        
+        /* Job Details */
+        .job-details-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            background: #2980b9;
+            transform: translateX(-3px);
+        }
+        
+        .job-main-title {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .job-company-large {
+            color: #3498db;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .job-category-badge {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #3498db;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .job-meta-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .meta-icon {
+            color: #3498db;
+            font-size: 18px;
+        }
+        
+        .meta-label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .meta-value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .job-description-full {
+            color: #444;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .job-description-full p {
+            margin-bottom: 15px;
+        }
+        
+        .requirements-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .requirements-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #444;
+        }
+        
+        .requirements-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .secondary-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .secondary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .ad-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px dashed #ddd;
+        }
+        
+        .ad-label {
+            color: #95a5a6;
+            font-size: 12px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .ad-space {
+            height: 250px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .ad-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .related-jobs {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .related-jobs-title {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .related-job-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .related-job-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .related-job-item:last-child {
+            border-bottom: none;
+        }
+        
+        .related-job-title {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .related-job-company {
+            color: #3498db;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .related-job-deadline {
+            color: #e74c3c;
+            font-size: 13px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-desktop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-link {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .footer-mobile {
+            display: none;
+            text-align: center;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+        
+        .loading-spinner {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #3498db;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Error State */
+        .error-state {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .error-icon {
+            font-size: 60px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-desktop {
+                display: none;
+            }
+            
+            .footer-mobile {
+                display: block;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .job-meta-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .notice-text {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .job-details-card {
+                padding: 20px;
+            }
+            
+            .job-main-title {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .notice-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="main-header">
+                <div class="main-header-content">
+                    <div class="logo-section">
+                        <div class="logo" id="dynamic-logo">
+                            <i class="fas fa-chalkboard-teacher" style="font-size: 26px; color: #3498db;"></i>
+                        </div>
+                        <div class="site-title">
+                            <h2>FreeTutorBD</h2>
+                            <p>চাকরি বিস্তারিত</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="nav-desktop">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i> হোম
+                        </a>
+                        <a href="jobs.html" class="nav-link active">
+                            <i class="fas fa-briefcase"></i> চাকরি
+                        </a>
+                        <a href="mcq-test.html" class="nav-link">
+                            <i class="fas fa-file-alt"></i> MCQ টেস্ট
+                        </a>
+                        <a href="model-test.html" class="nav-link">
+                            <i class="fas fa-clipboard-check"></i> মডেল টেস্ট
+                        </a>
+                    </nav>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" id="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Navigation -->
+                <nav class="mobile-nav" id="mobile-nav">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> হোম
+                    </a>
+                    <a href="jobs.html" class="nav-link active">
+                        <i class="fas fa-briefcase"></i> চাকরি
+                    </a>
+                    <a href="mcq-test.html" class="nav-link">
+                        <i class="fas fa-file-alt"></i> MCQ টেস্ট
+                    </a>
+                    <a href="model-test.html" class="nav-link">
+                        <i class="fas fa-clipboard-check"></i> মডেল টেস্ট
+                    </a>
+                    <button class="back-button" onclick="goBack()" style="margin-top: 10px;">
+                        <i class="fas fa-arrow-left"></i> চাকরি তালিকায় ফিরে যান
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notice Scroll -->
+    <div class="notice-scroll">
+        <div class="notice-container">
+            <div class="notice-text">
+                ⚠️ চাকরি জনিত সবকিছু লেনদেন থেকে বিরত থাকুন, এটি আইনত দন্ডনীয় অপরাধ। লেনদেন থেকে বিরত থাকুন, ঘুষ-দুর্নীতি মুক্ত দেশ গড়ুন। ⚠️
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <!-- Job Details -->
+                <div class="job-details-container">
+                    <div class="job-details-card" id="job-details-card">
+                        <!-- Content will be loaded dynamically -->
+                        <div class="loading">
+                            <i class="fas fa-spinner loading-spinner"></i>
+                            <p>চাকরির তথ্য লোড হচ্ছে...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Ad Section -->
+                    <div class="ad-section">
+                        <div class="ad-label">বিজ্ঞাপন</div>
+                        <div class="ad-space" id="ad-space-1">
+                            <i class="fas fa-ad ad-icon"></i>
+                            <p>AdSense / Adstra বিজ্ঞাপন</p>
+                            <p style="font-size: 12px; margin-top: 5px;">300x250</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Related Jobs -->
+                    <div class="related-jobs">
+                        <h3 class="related-jobs-title">
+                            <i class="fas fa-briefcase"></i> সম্পর্কিত চাকরি
+                        </h3>
+                        <div id="related-jobs-list">
+                            <!-- Related jobs will be loaded dynamically -->
+                            <p style="text-align: center; color: #7f8c8d; padding: 20px;">
+                                সম্পর্কিত চাকরি লোড হচ্ছে...
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Another Ad -->
+                    <div class="ad-section">
+                        <div class="ad-label">স্পন্সরড</div>
+                        <div class="ad-space" id="ad-space-2">
+                            <i class="fas fa-bullhorn ad-icon"></i>
+                            <p>বিজ্ঞাপনের জন্য জায়গা</p>
+                            <p style="font-size: 12px; margin-top: 5px;">300x600</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Desktop Footer -->
+            <div class="footer-desktop">
+                <div class="footer-links">
+                    <a href="index.html" class="footer-link">হোম</a>
+                    <a href="about.html" class="footer-link">আমাদের সম্পর্কে</a>
+                    <a href="privacy.html" class="footer-link">প্রাইভেসি পলিসি</a>
+                    <a href="terms.html" class="footer-link">শর্তাবলী</a>
+                    <a href="contact.html" class="footer-link">যোগাযোগ</a>
+                </div>
+                <div class="copyright">
+                    © ২০২৪ FreeTutorBD - সর্বস্বত্ত সংরক্ষিত
+                </div>
+            </div>
+            
+            <!-- Mobile Footer -->
+            <div class="footer-mobile">
+                <div class="copyright">
+                    © ২০২৪ FreeTutorBD
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // ==================== FIREBASE CONFIGURATION ====================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
+            authDomain: "freetutorbd-19380.firebaseapp.com",
+            projectId: "freetutorbd-19380",
+            storageBucket: "freetutorbd-19380.firebasestorage.app",
+            messagingSenderId: "741837856466",
+            appId: "1:741837856466:web:8b5a3b34183991e2f9570b",
+            measurementId: "G-VMSB3D24F1"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // ==================== GLOBAL VARIABLES ====================
+        let currentJobId = null;
+        let currentJob = null;
+
+        // ==================== PAGE LOAD ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load logo
+            loadLogo();
+            
+            // Get job ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            currentJobId = urlParams.get('id');
+            
+            if (!currentJobId) {
+                showError('চাকরি ID পাওয়া যায়নি');
+                return;
+            }
+            
+            // Load job details
+            loadJobDetails(currentJobId);
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                document.getElementById('mobile-nav').classList.toggle('active');
+            });
+        });
+
+        // ==================== FIREBASE FUNCTIONS ====================
+        function loadLogo() {
+            db.collection('settings').doc('logo').get()
+                .then(doc => {
+                    if (doc.exists && doc.data().url) {
+                        const logoUrl = doc.data().url;
+                        document.getElementById('dynamic-logo').innerHTML = `<img src="${logoUrl}" alt="FreeTutorBD Logo">`;
+                    }
+                })
+                .catch(error => {
+                    console.log("Logo not found, using default");
+                });
+        }
+
+        function loadJobDetails(jobId) {
+            const jobDetailsCard = document.getElementById('job-details-card');
+            
+            db.collection('jobs').doc(jobId).get()
+                .then(doc => {
+                    if (!doc.exists) {
+                        showError('চাকরিটি পাওয়া যায়নি');
+                        return;
+                    }
+                    
+                    currentJob = doc.data();
+                    currentJob.id = doc.id;
+                    
+                    // Display job details
+                    displayJobDetails();
+                    
+                    // Load related jobs
+                    loadRelatedJobs(currentJob.category, jobId);
+                })
+                .catch(error => {
+                    console.error("Error loading job details:", error);
+                    showError('চাকরি লোড করতে সমস্যা হয়েছে');
+                });
+        }
+
+        function displayJobDetails() {
+            const jobDetailsCard = document.getElementById('job-details-card');
+            
+            if (!currentJob) {
+                jobDetailsCard.innerHTML = '<div class="error-state"><i class="fas fa-exclamation-circle error-icon"></i><h3>চাকরির তথ্য পাওয়া যায়নি</h3></div>';
+                return;
+            }
+            
+            // Format dates
+            const publishDate = currentJob.publishDate || 'তারিখ নেই';
+            const deadline = currentJob.deadline || 'তারিখ নেই';
+            const salary = currentJob.salary || 'আলোচনা সাপেক্ষে';
+            const categoryName = getCategoryName(currentJob.category);
+            
+            // Format description with paragraphs
+            let descriptionHTML = '';
+            if (currentJob.details) {
+                const paragraphs = currentJob.details.split('\n').filter(p => p.trim());
+                paragraphs.forEach(para => {
+                    descriptionHTML += `<p>${para}</p>`;
+                });
+            } else {
+                descriptionHTML = '<p>বিস্তারিত তথ্য নেই</p>';
+            }
+            
+            // Generate requirements list if available
+            let requirementsHTML = '';
+            if (currentJob.requirements && Array.isArray(currentJob.requirements)) {
+                currentJob.requirements.forEach(req => {
+                    requirementsHTML += `<li>${req}</li>`;
+                });
+            } else {
+                requirementsHTML = '<li>বিস্তারিত যোগ্যতা চাকরির বিজ্ঞপ্তিতে দেখুন</li>';
+            }
+            
+            // Create HTML for job details
+            const html = `
+                <button class="back-button" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> চাকরি তালিকায় ফিরে যান
+                </button>
+                
+                <h1 class="job-main-title">${currentJob.position || 'পদবী নেই'}</h1>
+                <p class="job-company-large">${currentJob.company || 'কোম্পানি নেই'}</p>
+                <span class="job-category-badge">${categoryName}</span>
+                
+                <div class="job-meta-info">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-plus meta-icon"></i>
+                        <div>
+                            <div class="meta-label">প্রকাশের তারিখ</div>
+                            <div class="meta-value">${publishDate}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-times meta-icon"></i>
+                        <div>
+                            <div class="meta-label">আবেদনের শেষ তারিখ</div>
+                            <div class="meta-value">${deadline}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <i class="fas fa-money-bill-wave meta-icon"></i>
+                        <div>
+                            <div class="meta-label">বেতন</div>
+                            <div class="meta-value">${salary}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <i class="fas fa-map-marker-alt meta-icon"></i>
+                        <div>
+                            <div class="meta-label">স্থান</div>
+                            <div class="meta-value">${currentJob.location || 'বিস্তারিত বিজ্ঞপ্তিতে'}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-file-alt"></i> চাকরির বিবরণ
+                </h3>
+                <div class="job-description-full">
+                    ${descriptionHTML}
+                </div>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-check-circle"></i> প্রয়োজনীয় যোগ্যতা
+                </h3>
+                <ul class="requirements-list">
+                    ${requirementsHTML}
+                </ul>
+                
+                <h3 class="section-title">
+                    <i class="fas fa-info-circle"></i> অতিরিক্ত তথ্য
+                </h3>
+                <div class="job-description-full">
+                    <p><strong>আবেদনের পদ্ধতি:</strong> ${currentJob.applyMethod || 'অনলাইন আবেদন'}</p>
+                    <p><strong>চাকরির ধরন:</strong> ${currentJob.jobType || 'ফুল টাইম'}</p>
+                    <p><strong>অভিজ্ঞতা:</strong> ${currentJob.experience || 'অভিজ্ঞতা প্রয়োজন নেই'}</p>
+                    <p><strong>শিক্ষাগত যোগ্যতা:</strong> ${currentJob.education || 'যেকোনো'}</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="primary-btn" onclick="applyForJob()">
+                        <i class="fas fa-paper-plane"></i> এখনই আবেদন করুন
+                    </button>
+                    <button class="secondary-btn" onclick="saveJob()">
+                        <i class="fas fa-bookmark"></i> সংরক্ষণ করুন
+                    </button>
+                </div>
+            `;
+            
+            jobDetailsCard.innerHTML = html;
+        }
+
+        function loadRelatedJobs(category, excludeJobId) {
+            const relatedJobsList = document.getElementById('related-jobs-list');
+            
+            db.collection('jobs')
+                .where('category', '==', category)
+                .orderBy('createdAt', 'desc')
+                .limit(5)
+                .get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        relatedJobsList.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 20px;">কোন সম্পর্কিত চাকরি নেই</p>';
+                        return;
+                    }
+                    
+                    let html = '';
+                    let count = 0;
+                    
+                    snapshot.forEach(doc => {
+                        if (doc.id === excludeJobId) return; // Exclude current job
+                        
+                        const job = doc.data();
+                        if (count >= 3) return; // Show max 3 related jobs
+        
+                        html += `
+                            <div class="related-job-item" onclick="viewJob('${doc.id}')">
+                                <div class="related-job-title">${job.position}</div>
+                                <div class="related-job-company">${job.company}</div>
+                                <div class="related-job-deadline">
+                                    <i class="fas fa-clock"></i> শেষ: ${job.deadline || 'তারিখ নেই'}
+                                </div>
+                            </div>
+                        `;
+                        
+                        count++;
+                    });
+                    
+                    if (html === '') {
+                        html = '<p style="text-align: center; color: #7f8c8d; padding: 20px;">কোন সম্পর্কিত চাকরি নেই</p>';
+                    }
+                    
+                    relatedJobsList.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error("Error loading related jobs:", error);
+                    relatedJobsList.innerHTML = '<p style="color: #e74c3c;">লোড করতে সমস্যা</p>';
+                });
+        }
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function getCategoryName(categoryId) {
+            const categories = {
+                'government': 'সরকারি চাকরি',
+                'private': 'প্রাইভেট চাকরি',
+                'bank': 'ব্যাংক চাকরি',
+                'ngo': 'এনজিও চাকরি',
+                'bcs': 'বিসিএস চাকরি',
+                'teacher': 'শিক্ষক নিয়োগ',
+                'others': 'অন্যান্য'
+            };
+            
+            return categories[categoryId] || categoryId;
+        }
+
+        function goBack() {
+            window.location.href = 'jobs.html';
+        }
+
+        function viewJob(jobId) {
+            window.location.href = `job-details.html?id=${jobId}`;
+        }
+
+        function applyForJob() {
+            if (currentJob && currentJob.applyLink) {
+                // Open application link in new tab
+                window.open(currentJob.applyLink, '_blank');
+            } else {
+                alert('এই চাকরির আবেদনের সরাসরি লিংক নেই। কোম্পানির অফিসিয়াল ওয়েবসাইটে আবেদন করুন।');
+            }
+        }
+
+        function saveJob() {
+            // Save job to localStorage for bookmarking
+            try {
+                let savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
+                
+                // Check if already saved
+                const alreadySaved = savedJobs.some(job => job.id === currentJob.id);
+                
+                if (alreadySaved) {
+                    alert('এই চাকরি ইতিমধ্যেই সংরক্ষিত আছে!');
+                } else {
+                    savedJobs.push({
+                        id: currentJob.id,
+                        position: currentJob.position,
+                        company: currentJob.company,
+                        deadline: currentJob.deadline,
+                        savedAt: new Date().toISOString()
+                    });
+                    
+                    localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+                    alert('চাকরি সফলভাবে সংরক্ষিত হয়েছে!');
+                }
+            } catch (error) {
+                console.error("Error saving job:", error);
+                alert('সংরক্ষণ করতে সমস্যা হয়েছে');
+            }
+        }
+
+        function showError(message) {
+            const jobDetailsCard = document.getElementById('job-details-card');
+            jobDetailsCard.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-circle error-icon"></i>
+                    <h3>${message}</h3>
+                    <button class="back-button" onclick="goBack()" style="margin-top: 20px;">
+                        <i class="fas fa-arrow-left"></i> চাকরি তালিকায় ফিরে যান
+                    </button>
+                </div>
+            `;
+        }
+
+        function setupEventListeners() {
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const mobileNav = document.getElementById('mobile-nav');
+                const mobileBtn = document.getElementById('mobile-menu-btn');
+                
+                if (mobileNav.classList.contains('active') && 
+                    !mobileNav.contains(event.target) && 
+                    !mobileBtn.contains(event.target)) {
+                    mobileNav.classList.remove('active');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    document.getElementById('mobile-nav').classList.remove('active');
+                });
+            });
+
+            // Load ads (simulated)
+            loadAds();
+        }
+
+        function loadAds() {
+            // This is where you would load actual AdSense or Adstra ads
+            // For now, we'll just show placeholder
+            
+            // Simulate ad loading delay
+            setTimeout(() => {
+                // You would replace this with actual ad code
+                // document.getElementById('ad-space-1').innerHTML = 'Actual Ad Code Here';
+                // document.getElementById('ad-space-2').innerHTML = 'Actual Ad Code Here';
+            }, 1000);
+        }
+
+    </script>
+</body>
+</html>
