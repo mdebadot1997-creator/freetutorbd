@@ -278,6 +278,34 @@
             font-size: 14px;
         }
         
+        /* File Upload */
+        .file-upload-area {
+            border: 3px dashed #3498db;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .file-upload-area:hover {
+            background: #e3f2fd;
+            border-color: #2980b9;
+        }
+        
+        .file-upload-area.dragover {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        
+        .file-icon {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
         /* Tables */
         .data-table {
             width: 100%;
@@ -306,75 +334,134 @@
             background: #f8f9fa;
         }
         
-        /* Login Screen */
-        .login-container {
-            text-align: center;
-            padding: 80px 30px;
-            background: white;
-            border-radius: 15px;
-            max-width: 500px;
-            margin: 50px auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
         }
         
-        .login-logo {
-            font-size: 48px;
-            color: #3498db;
-            margin-bottom: 20px;
-        }
-        
-        .google-login-btn {
+        .notification {
             background: white;
-            color: #555;
-            border: 2px solid #ddd;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 40px;
-            display: inline-flex;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
             align-items: center;
-            gap: 20px;
-            transition: all 0.3s;
-            font-weight: 500;
+            gap: 15px;
+            animation: slideIn 0.3s ease-out;
+            border-left: 5px solid;
         }
         
-        .google-login-btn:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateY(-3px);
-            border-color: #3498db;
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
-        /* Dropdown/Select Styles */
-        select.form-control {
-            appearance: auto !important;
-            -webkit-appearance: menulist !important;
-            -moz-appearance: menulist !important;
-            background-image: none !important;
-            padding-right: 15px !important;
-            color: #333 !important;
-            background-color: white !important;
+        .notification.success {
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #ffffff, #d4edda);
         }
         
-        select.form-control option {
-            color: #333 !important;
-            background-color: white !important;
-            padding: 10px !important;
-            font-size: 16px !important;
+        .notification.error {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #ffffff, #f8d7da);
         }
         
-        /* CSV Preview */
-        .csv-preview {
-            max-height: 300px;
-            overflow-y: auto;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            padding: 15px;
-            background: #f8f9fa;
-            margin-top: 15px;
-            font-family: 'Courier New', monospace;
+        .notification.info {
+            border-left-color: #3498db;
+            background: linear-gradient(135deg, #ffffff, #d1ecf1);
+        }
+        
+        .notification.warning {
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #ffffff, #fff3cd);
+        }
+        
+        .notification-icon {
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .notification.success .notification-icon {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .notification.error .notification-icon {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .notification.info .notification-icon {
+            background: #3498db;
+            color: white;
+        }
+        
+        .notification.warning .notification-icon {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .notification-message {
+            color: #555;
             font-size: 14px;
-            white-space: pre-wrap;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: #95a5a6;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+        }
+        
+        .notification-close:hover {
+            color: #e74c3c;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+            height: 20px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
         }
         
         /* Responsive */
@@ -416,10 +503,17 @@
                 padding: 12px 20px;
                 font-size: 14px;
             }
+            
+            .notification-container {
+                max-width: 300px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+    
     <div class="admin-container" id="admin-container">
         <!-- Login Screen -->
         <div id="login-screen" class="login-container">
@@ -566,12 +660,13 @@
                             প্রশ্নব্যাংক - প্রশ্ন যোগ করুন
                         </h3>
                         
+                        <!-- Method Selection -->
                         <div class="form-group">
                             <label class="form-label">প্রশ্ন যোগ করার পদ্ধতি:</label>
-                            <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+                            <div style="display: flex; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
                                 <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                                    <input type="radio" name="question-method" value="csv" checked>
-                                    <span style="font-size: 16px;">CSV ফাইল থেকে</span>
+                                    <input type="radio" name="question-method" value="file" checked>
+                                    <span style="font-size: 16px;">ফাইল থেকে আপলোড (CSV/Excel)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                                     <input type="radio" name="question-method" value="manual">
@@ -580,36 +675,55 @@
                             </div>
                         </div>
                         
-                        <!-- CSV Upload Section -->
-                        <div id="csv-section">
+                        <!-- File Upload Section -->
+                        <div id="file-section">
                             <div class="form-group">
                                 <label class="form-label">ক্যাটাগরি নির্বাচন করুন:</label>
-                                <select id="question-category-csv" class="form-control">
+                                <select id="question-category-file" class="form-control">
                                     <!-- Categories will be loaded -->
                                 </select>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label">CSV ফাইল নির্বাচন করুন:</label>
-                                <input type="file" id="csv-file" accept=".csv" class="form-control">
-                                <small style="color: #7f8c8d; display: block; margin-top: 5px;">
-                                    CSV ফরম্যাট: প্রশ্ন, অপশন১, অপশন২, অপশন৩, অপশন৪, সঠিকউত্তর (1-4)
-                                </small>
-                            </div>
-                            
-                            <button onclick="uploadCSVQuestions()" class="btn btn-success">
-                                <i class="fas fa-file-upload"></i> CSV থেকে প্রশ্ন আপলোড করুন
-                            </button>
-                            
-                            <!-- CSV Template Download -->
-                            <div style="margin-top: 20px;">
-                                <button onclick="downloadCSVTemplate()" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-download"></i> CSV টেমপ্লেট ডাউনলোড করুন
+                            <div class="file-upload-area" id="file-upload-area" 
+                                 ondragover="handleDragOver(event)" 
+                                 ondragleave="handleDragLeave(event)" 
+                                 ondrop="handleDrop(event)">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <h4 style="color: #2c3e50; margin-bottom: 10px;">CSV বা Excel ফাইল ড্রপ করুন</h4>
+                                <p style="color: #7f8c8d; margin-bottom: 15px;">অথবা ক্লিক করে ফাইল নির্বাচন করুন</p>
+                                <input type="file" id="question-file" accept=".csv,.xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)">
+                                <button onclick="document.getElementById('question-file').click()" class="btn btn-primary">
+                                    <i class="fas fa-folder-open"></i> ফাইল নির্বাচন করুন
                                 </button>
-                                <small style="color: #7f8c8d; margin-left: 10px;">
-                                    UTF-8 encoded, বাংলা সাপোর্টেড
-                                </small>
+                                <p id="selected-file-name" style="margin-top: 15px; color: #3498db; font-weight: 500;"></p>
                             </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">ফাইল ফরম্যাট:</label>
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                                    <p style="margin-bottom: 10px; color: #2c3e50;"><strong>CSV ফরম্যাট:</strong></p>
+                                    <p style="color: #555; font-size: 14px; margin-bottom: 10px;">
+                                        প্রশ্ন, অপশন১, অপশন২, অপশন৩, অপশন৪, সঠিকউত্তর (1-4)
+                                    </p>
+                                    <p style="color: #7f8c8d; font-size: 13px;">
+                                        উদাহরণ: "বাংলাদেশের রাজধানী কি?", "ঢাকা", "চট্টগ্রাম", "খুলনা", "সিলেট", 1
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Progress Bar -->
+                            <div id="upload-progress" style="display: none;">
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="progress-bar" style="width: 0%;">0%</div>
+                                </div>
+                                <p id="progress-text" style="text-align: center; color: #3498db; margin-top: 5px;">প্রক্রিয়াধীন...</p>
+                            </div>
+                            
+                            <button onclick="uploadQuestionsFromFile()" class="btn btn-success" id="upload-btn">
+                                <i class="fas fa-file-upload"></i> ফাইল থেকে প্রশ্ন আপলোড করুন
+                            </button>
                         </div>
                         
                         <!-- Manual Entry Section -->
@@ -667,16 +781,16 @@
                             প্রশ্নের তালিকা
                         </h3>
                         
-                        <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center;">
-                            <div style="display: flex; gap: 15px; flex: 1;">
+                        <div style="margin-bottom: 20px;">
+                            <div style="display: flex; gap: 15px;">
                                 <select id="filter-questions-category" class="form-control" style="width: 250px;">
                                     <option value="">সব ক্যাটাগরি</option>
                                 </select>
                                 <input type="text" id="search-questions" placeholder="প্রশ্ন খুঁজুন..." class="form-control" style="flex: 1;">
+                                <button onclick="loadQuestionsList()" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> খুঁজুন
+                                </button>
                             </div>
-                            <button onclick="exportQuestionsCSV()" class="btn btn-success">
-                                <i class="fas fa-file-csv"></i> CSV ডাউনলোড
-                            </button>
                         </div>
                         
                         <div id="questions-list">
@@ -805,11 +919,8 @@
                             সব চাকরির তালিকা
                         </h3>
                         
-                        <div style="margin-bottom: 20px; display: flex; gap: 15px; align-items: center;">
+                        <div style="margin-bottom: 20px;">
                             <input type="text" id="search-jobs" placeholder="চাকরি খুঁজুন..." class="form-control" style="max-width: 400px;">
-                            <button onclick="exportJobsCSV()" class="btn btn-success">
-                                <i class="fas fa-file-csv"></i> CSV ডাউনলোড
-                            </button>
                         </div>
                         
                         <table class="data-table">
@@ -945,30 +1056,12 @@
                             </div>
                         </div>
                         
-                        <div style="margin-bottom: 20px;">
-                            <button onclick="loadResults()" class="btn btn-primary" style="margin-right: 15px;">
-                                <i class="fas fa-search"></i> রেজাল্ট দেখুন
-                            </button>
-                            <button onclick="exportResultsCSV()" class="btn btn-success">
-                                <i class="fas fa-file-csv"></i> CSV ডাউনলোড করুন
-                            </button>
-                        </div>
-                        
-                        <!-- CSV Preview -->
-                        <div id="csv-preview-container" style="display: none;">
-                            <h4 style="color: #2c3e50; margin-bottom: 10px;">
-                                <i class="fas fa-eye"></i>
-                                CSV প্রিভিউ
-                            </h4>
-                            <div class="csv-preview" id="csv-preview">
-                                <!-- CSV content will be shown here -->
-                            </div>
-                            <div style="margin-top: 10px;">
-                                <button onclick="hideCSVPreview()" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-times"></i> প্রিভিউ বন্ধ করুন
-                                </button>
-                            </div>
-                        </div>
+                        <button onclick="loadResults()" class="btn btn-primary" style="margin-right: 15px;">
+                            <i class="fas fa-search"></i> রেজাল্ট দেখুন
+                        </button>
+                        <button onclick="exportResultsCSV()" class="btn btn-success">
+                            <i class="fas fa-file-csv"></i> CSV ডাউনলোড করুন
+                        </button>
                     </div>
                     
                     <div class="form-section">
@@ -1004,9 +1097,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-    <!-- Encoding Library for CSV (UTF-8 with BOM) -->
-    <script src="https://cdn.jsdelivr.net/npm/encoding-japanese@2.0.0/encoding.min.js"></script>
+    
+    <!-- SheetJS for Excel File Reading -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
     <script>
         // ==================== FIREBASE CONFIGURATION ====================
@@ -1043,8 +1136,288 @@
             { nameBn: "শব্দ সংক্ষেপণ", nameEn: "Abbreviation" },
             { nameBn: "ফুটবল", nameEn: "Football" },
             { nameBn: "ক্রিকেট", nameEn: "Cricket" },
-            { nameBn: "কারেন্ট এফেয়ার্স", nameEn: "Current Affairs" }
+            { nameBn: "বর্তমান affairs", nameEn: "Current Affairs" }
         ];
+
+        // ==================== NOTIFICATION SYSTEM ====================
+        function showNotification(type, title, message) {
+            const container = document.getElementById('notification-container');
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            let icon = '';
+            switch(type) {
+                case 'success':
+                    icon = '<i class="fas fa-check-circle"></i>';
+                    break;
+                case 'error':
+                    icon = '<i class="fas fa-times-circle"></i>';
+                    break;
+                case 'info':
+                    icon = '<i class="fas fa-info-circle"></i>';
+                    break;
+                case 'warning':
+                    icon = '<i class="fas fa-exclamation-triangle"></i>';
+                    break;
+            }
+            
+            notification.innerHTML = `
+                <div class="notification-icon">${icon}</div>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // ==================== FILE UPLOAD FUNCTIONS ====================
+        let selectedFile = null;
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('file-upload-area').classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('file-upload-area').classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('file-upload-area').classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileSelect({ target: { files: files } });
+            }
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                selectedFile = file;
+                const fileName = document.getElementById('selected-file-name');
+                fileName.textContent = `📄 ${file.name} (${formatFileSize(file.size)})`;
+                fileName.style.color = '#27ae60';
+                
+                showNotification('info', 'ফাইল নির্বাচিত', `${file.name} সফলভাবে নির্বাচিত হয়েছে`);
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        async function uploadQuestionsFromFile() {
+            if (!selectedFile) {
+                showNotification('error', 'ত্রুটি', 'প্রথমে একটি ফাইল নির্বাচন করুন');
+                return;
+            }
+
+            const category = document.getElementById('question-category-file').value;
+            if (!category) {
+                showNotification('error', 'ত্রুটি', 'ক্যাটাগরি নির্বাচন করুন');
+                return;
+            }
+
+            // Show progress bar
+            const progressDiv = document.getElementById('upload-progress');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const uploadBtn = document.getElementById('upload-btn');
+            
+            progressDiv.style.display = 'block';
+            uploadBtn.disabled = true;
+            
+            try {
+                let questions = [];
+                
+                if (selectedFile.name.endsWith('.csv')) {
+                    questions = await parseCSVFile(selectedFile);
+                } else if (selectedFile.name.endsWith('.xlsx') || selectedFile.name.endsWith('.xls')) {
+                    questions = await parseExcelFile(selectedFile);
+                } else {
+                    showNotification('error', 'ত্রুটি', 'শুধুমাত্র CSV বা Excel ফাইল সমর্থিত');
+                    return;
+                }
+                
+                if (questions.length === 0) {
+                    showNotification('error', 'ত্রুটি', 'ফাইলে কোনো প্রশ্ন পাওয়া যায়নি');
+                    return;
+                }
+                
+                // Upload questions to Firebase
+                const totalQuestions = questions.length;
+                let uploadedCount = 0;
+                let errorCount = 0;
+                
+                for (let i = 0; i < questions.length; i++) {
+                    const question = questions[i];
+                    
+                    try {
+                        await db.collection('questions').add({
+                            question: question.question,
+                            option1: question.option1,
+                            option2: question.option2,
+                            option3: question.option3,
+                            option4: question.option4,
+                            correctAnswer: parseInt(question.correctAnswer),
+                            category: category,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        
+                        uploadedCount++;
+                    } catch (error) {
+                        console.error('Error uploading question:', error);
+                        errorCount++;
+                    }
+                    
+                    // Update progress
+                    const progress = Math.round((uploadedCount / totalQuestions) * 100);
+                    progressBar.style.width = `${progress}%`;
+                    progressBar.textContent = `${progress}%`;
+                    progressText.textContent = `${uploadedCount}/${totalQuestions} প্রশ্ন আপলোড হয়েছে`;
+                }
+                
+                // Show success notification
+                if (uploadedCount > 0) {
+                    showNotification('success', 'সফল!', 
+                        `${uploadedCount}টি প্রশ্ন সফলভাবে আপলোড হয়েছে${errorCount > 0 ? `, ${errorCount}টি ব্যর্থ` : ''}`);
+                    
+                    // Reset form
+                    selectedFile = null;
+                    document.getElementById('selected-file-name').textContent = '';
+                    document.getElementById('question-file').value = '';
+                }
+                
+                // Refresh data
+                loadDashboardStats();
+                loadQuestionsList();
+                
+            } catch (error) {
+                console.error('Error processing file:', error);
+                showNotification('error', 'ত্রুটি', 'ফাইল প্রসেস করতে সমস্যা হয়েছে: ' + error.message);
+            } finally {
+                // Hide progress bar
+                setTimeout(() => {
+                    progressDiv.style.display = 'none';
+                    uploadBtn.disabled = false;
+                    progressBar.style.width = '0%';
+                    progressBar.textContent = '0%';
+                }, 2000);
+            }
+        }
+
+        async function parseCSVFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const content = e.target.result;
+                        const lines = content.split('\n');
+                        const questions = [];
+                        
+                        for (let i = 0; i < lines.length; i++) {
+                            const line = lines[i].trim();
+                            if (!line) continue;
+                            
+                            // Handle quoted CSV
+                            const parts = [];
+                            let inQuotes = false;
+                            let currentPart = '';
+                            
+                            for (let j = 0; j < line.length; j++) {
+                                const char = line[j];
+                                
+                                if (char === '"') {
+                                    inQuotes = !inQuotes;
+                                } else if (char === ',' && !inQuotes) {
+                                    parts.push(currentPart.trim());
+                                    currentPart = '';
+                                } else {
+                                    currentPart += char;
+                                }
+                            }
+                            parts.push(currentPart.trim());
+                            
+                            if (parts.length >= 6) {
+                                questions.push({
+                                    question: parts[0].replace(/^"|"$/g, ''),
+                                    option1: parts[1].replace(/^"|"$/g, ''),
+                                    option2: parts[2].replace(/^"|"$/g, ''),
+                                    option3: parts[3].replace(/^"|"$/g, ''),
+                                    option4: parts[4].replace(/^"|"$/g, ''),
+                                    correctAnswer: parseInt(parts[5].replace(/^"|"$/g, ''))
+                                });
+                            }
+                        }
+                        
+                        resolve(questions);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        async function parseExcelFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = new Uint8Array(e.target.result);
+                        const workbook = XLSX.read(data, { type: 'array' });
+                        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                        const rows = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                        
+                        const questions = [];
+                        
+                        for (let i = 0; i < rows.length; i++) {
+                            const row = rows[i];
+                            if (row.length >= 6) {
+                                questions.push({
+                                    question: String(row[0] || '').trim(),
+                                    option1: String(row[1] || '').trim(),
+                                    option2: String(row[2] || '').trim(),
+                                    option3: String(row[3] || '').trim(),
+                                    option4: String(row[4] || '').trim(),
+                                    correctAnswer: parseInt(row[5]) || 1
+                                });
+                            }
+                        }
+                        
+                        resolve(questions);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
 
         // ==================== AUTHENTICATION ====================
         firebase.auth().onAuthStateChanged((user) => {
@@ -1065,20 +1438,19 @@
                 .then((result) => {
                     const user = result.user;
                     if (!allowedAdmins.includes(user.email)) {
-                        alert('⚠️ আপনি অ্যাডমিন নন!');
+                        showNotification('error', 'অ্যাক্সেস ডিনাইড', 'আপনি অ্যাডমিন নন!');
                         auth.signOut();
                     }
                 })
                 .catch((error) => {
                     console.error("Login error:", error);
-                    alert('লগইন ব্যর্থ: ' + error.message);
+                    showNotification('error', 'লগইন ব্যর্থ', error.message);
                 });
         });
 
         document.getElementById('logout-btn').addEventListener('click', () => {
-            if (confirm('আপনি কি লগআউট করতে চান?')) {
-                auth.signOut();
-            }
+            auth.signOut();
+            showNotification('info', 'লগআউট', 'সফলভাবে লগআউট করা হয়েছে');
         });
 
         // ==================== TAB NAVIGATION ====================
@@ -1093,6 +1465,7 @@
                 
                 if (tabId === 'questions') {
                     loadQuestionsList();
+                    setupQuestionMethodToggle();
                 } else if (tabId === 'categories') {
                     loadCategories();
                 } else if (tabId === 'jobs') {
@@ -1114,6 +1487,7 @@
             
             if (tabName === 'questions') {
                 loadQuestionsList();
+                setupQuestionMethodToggle();
             } else if (tabName === 'categories') {
                 loadCategories();
             } else if (tabName === 'jobs') {
@@ -1216,7 +1590,7 @@
 
         function loadCategoriesForDropdowns() {
             const dropdowns = [
-                'question-category-csv',
+                'question-category-file',
                 'question-category-manual',
                 'exam-category',
                 'filter-questions-category'
@@ -1262,9 +1636,7 @@
                                 <h4 style="margin: 0 0 5px 0; color: #2c3e50;">${category.nameBn}</h4>
                                 <p style="margin: 0; color: #666; font-size: 14px;">${category.nameEn}</p>
                             </div>
-                            <button onclick="deleteCategory('${category.nameBn}')" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 12px;">
-                                <i class="fas fa-times"></i>
-                            </button>
+                            <span style="color: #3498db; font-size: 12px; font-weight: 600;">প্রি-ডিফাইন্ড</span>
                         </div>
                     </div>
                 `;
@@ -1299,7 +1671,7 @@
                                 <td>${cat.questionCount || 0}</td>
                                 <td>
                                     ${!isPredefined ? `
-                                        <button onclick="deleteCategory('${cat.nameBn}')" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 12px;">
+                                        <button onclick="deleteCategory('${doc.id}', '${cat.nameBn}')" style="background: #e74c3c; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 12px;">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     ` : '<span style="color: #7f8c8d;">প্রি-ডিফাইন্ড</span>'}
@@ -1312,11 +1684,26 @@
                 });
         }
 
+        function setupQuestionMethodToggle() {
+            const radios = document.querySelectorAll('input[name="question-method"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'file') {
+                        document.getElementById('file-section').style.display = 'block';
+                        document.getElementById('manual-section').style.display = 'none';
+                    } else {
+                        document.getElementById('file-section').style.display = 'none';
+                        document.getElementById('manual-section').style.display = 'block';
+                    }
+                });
+            });
+        }
+
         function addNewCategory() {
             const categoryName = document.getElementById('new-category-name').value.trim();
             
             if (!categoryName) {
-                alert('ক্যাটাগরি নাম দিন');
+                showNotification('error', 'ত্রুটি', 'ক্যাটাগরি নাম দিন');
                 return;
             }
             
@@ -1327,185 +1714,36 @@
                         // Add new category
                         db.collection('categories').add({
                             nameBn: categoryName,
-                            nameEn: categoryName, // Same as Bengali for now
+                            nameEn: categoryName,
                             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                             questionCount: 0
                         })
                         .then(() => {
-                            alert('✅ ক্যাটাগরি যোগ হয়েছে!');
+                            showNotification('success', 'সফল!', 'ক্যাটাগরি যোগ হয়েছে!');
                             document.getElementById('new-category-name').value = '';
                             loadAllCategoriesTable();
                             loadCategoriesForDropdowns();
                         });
                     } else {
-                        alert('⚠️ এই নামে ক্যাটাগরি ইতিমধ্যেই আছে!');
+                        showNotification('error', 'ত্রুটি', 'এই নামে ক্যাটাগরি ইতিমধ্যেই আছে!');
                     }
                 });
         }
 
-        function deleteCategory(categoryName) {
-            if (predefinedCategories.some(cat => cat.nameBn === categoryName)) {
-                alert('⚠️ প্রি-ডিফাইন্ড ক্যাটাগরি ডিলিট করা যাবে না!');
-                return;
-            }
-            
-            if (confirm(`আপনি কি "${categoryName}" ক্যাটাগরি ডিলিট করতে চান?`)) {
-                db.collection('categories').where('nameBn', '==', categoryName).get()
-                    .then(snapshot => {
-                        snapshot.forEach(doc => {
-                            doc.ref.delete();
-                        });
-                        alert('✅ ক্যাটাগরি ডিলিট করা হয়েছে!');
-                        loadAllCategoriesTable();
-                        loadCategoriesForDropdowns();
-                    });
-            }
+        function deleteCategory(categoryId, categoryName) {
+            // Delete without confirmation as requested
+            db.collection('categories').doc(categoryId).delete()
+                .then(() => {
+                    showNotification('success', 'সফল!', 'ক্যাটাগরি ডিলিট করা হয়েছে!');
+                    loadAllCategoriesTable();
+                    loadCategoriesForDropdowns();
+                })
+                .catch(error => {
+                    showNotification('error', 'ত্রুটি', 'ক্যাটাগরি ডিলিট করতে সমস্যা: ' + error.message);
+                });
         }
 
         // ==================== QUESTIONS FUNCTIONS ====================
-        function setupQuestionMethodToggle() {
-            const radios = document.querySelectorAll('input[name="question-method"]');
-            radios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.value === 'csv') {
-                        document.getElementById('csv-section').style.display = 'block';
-                        document.getElementById('manual-section').style.display = 'none';
-                    } else {
-                        document.getElementById('csv-section').style.display = 'none';
-                        document.getElementById('manual-section').style.display = 'block';
-                    }
-                });
-            });
-        }
-
-        function downloadCSVTemplate() {
-            const template = `প্রশ্ন,অপশন১,অপশন২,অপশন৩,অপশন৪,সঠিকউত্তর
-"বাংলাদেশের স্বাধীনতা দিবস কোনটি?","২৬ মার্চ","১৬ ডিসেম্বর","২১ ফেব্রুয়ারি","১ এপ্রিল",1
-"বাংলাদেশের জাতীয় ফুল কোনটি?","গোলাপ","কদম","শাপলা","গাঁদা",3
-"বাংলাদেশের রাজধানীর নাম কি?","চট্টগ্রাম","খুলনা","ঢাকা","রাজশাহী",3`;
-
-            // Create CSV with UTF-8 BOM for Bangla support
-            const bom = '\uFEFF';
-            const csvData = bom + template;
-            
-            // Create blob with UTF-8 encoding
-            const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'question_template_bangla.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            alert('✅ CSV টেমপ্লেট ডাউনলোড হয়েছে!');
-        }
-
-        function uploadCSVQuestions() {
-            const fileInput = document.getElementById('csv-file');
-            const category = document.getElementById('question-category-csv').value;
-            
-            if (!category) {
-                alert('ক্যাটাগরি নির্বাচন করুন');
-                return;
-            }
-            
-            if (!fileInput.files[0]) {
-                alert('CSV ফাইল নির্বাচন করুন');
-                return;
-            }
-            
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                try {
-                    // Handle UTF-8 BOM if present
-                    let csvContent = e.target.result;
-                    if (csvContent.charCodeAt(0) === 0xFEFF) {
-                        csvContent = csvContent.substring(1);
-                    }
-                    
-                    const lines = csvContent.split(/\r\n|\n/);
-                    
-                    let questionsAdded = 0;
-                    let errors = 0;
-                    const promises = [];
-                    
-                    // Process each line (skip header if exists)
-                    for (let i = 0; i < lines.length; i++) {
-                        const line = lines[i].trim();
-                        if (!line || i === 0) continue; // Skip empty lines and header
-                        
-                        // Handle CSV with quotes properly
-                        const parts = [];
-                        let currentPart = '';
-                        let inQuotes = false;
-                        
-                        for (let j = 0; j < line.length; j++) {
-                            const char = line[j];
-                            if (char === '"') {
-                                inQuotes = !inQuotes;
-                            } else if (char === ',' && !inQuotes) {
-                                parts.push(currentPart.trim());
-                                currentPart = '';
-                            } else {
-                                currentPart += char;
-                            }
-                        }
-                        parts.push(currentPart.trim());
-                        
-                        if (parts.length >= 6) {
-                            const questionData = {
-                                question: parts[0].replace(/^"|"$/g, ''),
-                                option1: parts[1].replace(/^"|"$/g, ''),
-                                option2: parts[2].replace(/^"|"$/g, ''),
-                                option3: parts[3].replace(/^"|"$/g, ''),
-                                option4: parts[4].replace(/^"|"$/g, ''),
-                                correctAnswer: parseInt(parts[5]),
-                                category: category,
-                                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                            };
-                            
-                            // Validate data
-                            if (questionData.question && 
-                                questionData.option1 && 
-                                questionData.option2 && 
-                                questionData.option3 && 
-                                questionData.option4 &&
-                                questionData.correctAnswer >= 1 && 
-                                questionData.correctAnswer <= 4) {
-                                
-                                // Add to Firestore
-                                promises.push(
-                                    db.collection('questions').add(questionData)
-                                        .then(() => questionsAdded++)
-                                        .catch(() => errors++)
-                                );
-                            } else {
-                                errors++;
-                            }
-                        }
-                    }
-                    
-                    // Wait for all promises to complete
-                    Promise.all(promises).then(() => {
-                        alert(`✅ CSV আপলোড সম্পন্ন!\nযোগ হয়েছে: ${questionsAdded}টি প্রশ্ন\nত্রুটি: ${errors}টি`);
-                        fileInput.value = '';
-                        loadDashboardStats();
-                        loadQuestionsList();
-                    });
-                    
-                } catch (error) {
-                    console.error('CSV processing error:', error);
-                    alert('❌ CSV ফাইল প্রসেস করতে সমস্যা হয়েছে। ফাইল ফরম্যাট চেক করুন।');
-                }
-            };
-            
-            reader.readAsText(file, 'UTF-8');
-        }
-
         function addManualQuestion() {
             const questionData = {
                 question: document.getElementById('manual-question').value.trim(),
@@ -1519,13 +1757,13 @@
             };
 
             if (!questionData.question || !questionData.category) {
-                alert('প্রশ্ন এবং ক্যাটাগরি নির্বাচন করুন');
+                showNotification('error', 'ত্রুটি', 'প্রশ্ন এবং ক্যাটাগরি নির্বাচন করুন');
                 return;
             }
 
             db.collection('questions').add(questionData)
                 .then(() => {
-                    alert('✅ প্রশ্ন যোগ হয়েছে!');
+                    showNotification('success', 'সফল!', 'প্রশ্ন যোগ হয়েছে!');
                     
                     // Clear form
                     document.getElementById('manual-question').value = '';
@@ -1538,7 +1776,7 @@
                     loadQuestionsList();
                 })
                 .catch(error => {
-                    alert('❌ ত্রুটি: ' + error.message);
+                    showNotification('error', 'ত্রুটি', 'প্রশ্ন যোগ করতে সমস্যা: ' + error.message);
                 });
         }
 
@@ -1546,7 +1784,12 @@
             const questionsDiv = document.getElementById('questions-list');
             questionsDiv.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 30px;"><i class="fas fa-spinner fa-spin"></i> প্রশ্ন লোড হচ্ছে...</p>';
             
-            db.collection('questions').orderBy('createdAt', 'desc').limit(50).get()
+            const categoryFilter = document.getElementById('filter-questions-category').value;
+            const searchQuery = document.getElementById('search-questions').value.toLowerCase();
+            
+            let query = db.collection('questions').orderBy('createdAt', 'desc').limit(100);
+            
+            query.get()
                 .then(snapshot => {
                     if (snapshot.empty) {
                         questionsDiv.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 30px;">কোন প্রশ্ন নেই</p>';
@@ -1554,8 +1797,17 @@
                     }
                     
                     let html = '<div style="display: grid; gap: 15px;">';
+                    let questionCount = 0;
+                    
                     snapshot.forEach(doc => {
                         const question = doc.data();
+                        
+                        // Apply filters
+                        if (categoryFilter && question.category !== categoryFilter) return;
+                        if (searchQuery && !question.question.toLowerCase().includes(searchQuery)) return;
+                        
+                        questionCount++;
+                        
                         html += `
                             <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 4px solid #9b59b6;">
                                 <div style="display: flex; justify-content: space-between; align-items: start;">
@@ -1583,52 +1835,26 @@
                             </div>
                         `;
                     });
+                    
+                    if (questionCount === 0) {
+                        html = '<p style="text-align: center; color: #7f8c8d; padding: 30px;">কোন প্রশ্ন পাওয়া যায়নি</p>';
+                    }
+                    
                     html += '</div>';
                     questionsDiv.innerHTML = html;
                 });
         }
 
         function deleteQuestion(questionId) {
-            if (confirm('আপনি কি এই প্রশ্ন ডিলিট করতে চান?')) {
-                db.collection('questions').doc(questionId).delete()
-                    .then(() => {
-                        alert('✅ প্রশ্ন ডিলিট করা হয়েছে');
-                        loadQuestionsList();
-                        loadDashboardStats();
-                    })
-                    .catch(error => {
-                        alert('❌ ত্রুটি: ' + error.message);
-                    });
-            }
-        }
-
-        function exportQuestionsCSV() {
-            db.collection('questions').get()
-                .then(snapshot => {
-                    if (snapshot.empty) {
-                        alert('কোন প্রশ্ন নেই');
-                        return;
-                    }
-                    
-                    // Create CSV header with Bangla text
-                    let csv = '"প্রশ্ন","অপশন ১","অপশন ২","অপশন ৩","অপশন ৪","সঠিক উত্তর","ক্যাটাগরি","যোগ করার তারিখ"\n';
-                    
-                    snapshot.forEach(doc => {
-                        const question = doc.data();
-                        const correctAnswer = ['A', 'B', 'C', 'D'][question.correctAnswer - 1];
-                        const date = formatDate(question.createdAt);
-                        
-                        // Escape quotes and wrap in quotes
-                        const escapeCSV = (str) => {
-                            if (!str) return '';
-                            return '"' + String(str).replace(/"/g, '""') + '"';
-                        };
-                        
-                        csv += `${escapeCSV(question.question)},${escapeCSV(question.option1)},${escapeCSV(question.option2)},${escapeCSV(question.option3)},${escapeCSV(question.option4)},${escapeCSV(correctAnswer)},${escapeCSV(question.category)},${escapeCSV(date)}\n`;
-                    });
-                    
-                    // Create CSV with UTF-8 BOM for Bangla support
-                    downloadCSVFile(csv, 'questions_bangla.csv', 'প্রশ্নের CSV');
+            // Delete without confirmation as requested
+            db.collection('questions').doc(questionId).delete()
+                .then(() => {
+                    showNotification('success', 'সফল!', 'প্রশ্ন ডিলিট করা হয়েছে');
+                    loadQuestionsList();
+                    loadDashboardStats();
+                })
+                .catch(error => {
+                    showNotification('error', 'ত্রুটি', 'প্রশ্ন ডিলিট করতে সমস্যা: ' + error.message);
                 });
         }
 
@@ -1648,13 +1874,13 @@
             };
 
             if (!jobData.position || !jobData.company) {
-                alert('পদবী এবং কোম্পানির নাম দিন');
+                showNotification('error', 'ত্রুটি', 'পদবী এবং কোম্পানির নাম দিন');
                 return;
             }
 
             db.collection('jobs').add(jobData)
                 .then(() => {
-                    alert('✅ চাকরি সফলভাবে যোগ হয়েছে!');
+                    showNotification('success', 'সফল!', 'চাকরি সফলভাবে যোগ হয়েছে!');
                     
                     // Clear form
                     document.getElementById('job-position').value = '';
@@ -1667,7 +1893,7 @@
                     loadDashboardStats();
                 })
                 .catch(error => {
-                    alert('❌ ত্রুটি: ' + error.message);
+                    showNotification('error', 'ত্রুটি', 'চাকরি যোগ করতে সমস্যা: ' + error.message);
                 });
         }
 
@@ -1705,42 +1931,15 @@
         }
 
         function deleteJob(jobId) {
-            if (confirm('আপনি কি এই চাকরি ডিলিট করতে চান?')) {
-                db.collection('jobs').doc(jobId).delete()
-                    .then(() => {
-                        alert('✅ চাকরি ডিলিট করা হয়েছে');
-                        loadJobs();
-                        loadDashboardStats();
-                    })
-                    .catch(error => {
-                        alert('❌ ত্রুটি: ' + error.message);
-                    });
-            }
-        }
-
-        function exportJobsCSV() {
-            db.collection('jobs').get()
-                .then(snapshot => {
-                    if (snapshot.empty) {
-                        alert('কোন চাকরি নেই');
-                        return;
-                    }
-                    
-                    let csv = '"পদবী","কোম্পানি","ক্যাটাগরি","প্রকাশের তারিখ","আবেদনের শেষ তারিখ","বেতন","বিস্তারিত","আবেদনের লিংক","যোগ করার তারিখ"\n';
-                    
-                    snapshot.forEach(doc => {
-                        const job = doc.data();
-                        const date = formatDate(job.createdAt);
-                        
-                        const escapeCSV = (str) => {
-                            if (!str) return '';
-                            return '"' + String(str).replace(/"/g, '""') + '"';
-                        };
-                        
-                        csv += `${escapeCSV(job.position)},${escapeCSV(job.company)},${escapeCSV(job.category)},${escapeCSV(job.publishDate)},${escapeCSV(job.deadline)},${escapeCSV(job.salary)},${escapeCSV(job.details)},${escapeCSV(job.applyLink)},${escapeCSV(date)}\n`;
-                    });
-                    
-                    downloadCSVFile(csv, 'jobs_bangla.csv', 'চাকরির CSV');
+            // Delete without confirmation as requested
+            db.collection('jobs').doc(jobId).delete()
+                .then(() => {
+                    showNotification('success', 'সফল!', 'চাকরি ডিলিট করা হয়েছে');
+                    loadJobs();
+                    loadDashboardStats();
+                })
+                .catch(error => {
+                    showNotification('error', 'ত্রুটি', 'চাকরি ডিলিট করতে সমস্যা: ' + error.message);
                 });
         }
 
@@ -1756,17 +1955,17 @@
                 description: document.getElementById('exam-description').value,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 createdBy: auth.currentUser.email,
-                questions: [] // Empty array for now
+                questions: []
             };
 
             if (!examData.title || !examData.category) {
-                alert('টেস্টের নাম এবং ক্যাটাগরি নির্বাচন করুন');
+                showNotification('error', 'ত্রুটি', 'টেস্টের নাম এবং ক্যাটাগরি নির্বাচন করুন');
                 return;
             }
 
             db.collection('exams').add(examData)
                 .then(() => {
-                    alert('✅ মডেল টেস্ট তৈরি হয়েছে!');
+                    showNotification('success', 'সফল!', 'মডেল টেস্ট তৈরি হয়েছে!');
                     
                     // Clear form
                     document.getElementById('exam-title').value = '';
@@ -1776,7 +1975,7 @@
                     loadDashboardStats();
                 })
                 .catch(error => {
-                    alert('❌ ত্রুটি: ' + error.message);
+                    showNotification('error', 'ত্রুটি', 'টেস্ট তৈরি করতে সমস্যা: ' + error.message);
                 });
         }
 
@@ -1805,7 +2004,7 @@
                                 <td>${exam.category}</td>
                                 <td>${exam.timeLimit} মিনিট</td>
                                 <td>${exam.totalQuestions}</td>
-                                <td><span style="color: ${statusColor};">${statusText}</span></td>
+                                <td><span style="color: ${statusColor}; font-weight: 500;">${statusText}</span></td>
                                 <td>
                                     <button onclick="toggleExamStatus('${doc.id}', '${exam.status}')" style="background: #3498db; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 12px; margin-right: 5px;">
                                         <i class="fas ${exam.status === 'published' ? 'fa-eye-slash' : 'fa-eye'}"></i>
@@ -1824,37 +2023,32 @@
 
         function toggleExamStatus(examId, currentStatus) {
             const newStatus = currentStatus === 'published' ? 'hidden' : 'published';
-            const confirmMsg = currentStatus === 'published' ? 
-                'আপনি কি এই টেস্ট হাইড করতে চান?' : 
-                'আপনি কি এই টেস্ট পাবলিশ করতে চান?';
+            const action = newStatus === 'published' ? 'পাবলিশ' : 'হাইড';
             
-            if (confirm(confirmMsg)) {
-                db.collection('exams').doc(examId).update({
-                    status: newStatus
-                })
+            db.collection('exams').doc(examId).update({
+                status: newStatus
+            })
+            .then(() => {
+                showNotification('success', 'সফল!', `টেস্ট ${action} করা হয়েছে`);
+                loadExams();
+                loadDashboardStats();
+            })
+            .catch(error => {
+                showNotification('error', 'ত্রুটি', 'স্ট্যাটাস পরিবর্তন করতে সমস্যা: ' + error.message);
+            });
+        }
+
+        function deleteExam(examId) {
+            // Delete without confirmation as requested
+            db.collection('exams').doc(examId).delete()
                 .then(() => {
-                    alert(`✅ টেস্ট ${newStatus === 'published' ? 'পাবলিশ' : 'হাইড'} করা হয়েছে`);
+                    showNotification('success', 'সফল!', 'টেস্ট ডিলিট করা হয়েছে');
                     loadExams();
                     loadDashboardStats();
                 })
                 .catch(error => {
-                    alert('❌ ত্রুটি: ' + error.message);
+                    showNotification('error', 'ত্রুটি', 'টেস্ট ডিলিট করতে সমস্যা: ' + error.message);
                 });
-            }
-        }
-
-        function deleteExam(examId) {
-            if (confirm('আপনি কি এই টেস্ট ডিলিট করতে চান?')) {
-                db.collection('exams').doc(examId).delete()
-                    .then(() => {
-                        alert('✅ টেস্ট ডিলিট করা হয়েছে');
-                        loadExams();
-                        loadDashboardStats();
-                    })
-                    .catch(error => {
-                        alert('❌ ত্রুটি: ' + error.message);
-                    });
-            }
         }
 
         // ==================== RESULTS FUNCTIONS ====================
@@ -1916,84 +2110,50 @@
             db.collection('results').doc(resultId).get()
                 .then(doc => {
                     const result = doc.data();
-                    let details = `নাম: ${result.userName || 'Anonymous'}\n`;
-                    details += `ফোন: ${result.phoneNumber || 'N/A'}\n`;
-                    details += `টেস্ট: ${result.examTitle}\n`;
-                    details += `মার্কস: ${result.totalScore}/${result.totalMarks}\n`;
-                    details += `সময়: ${formatTime(result.timeTaken)}\n`;
-                    details += `তারিখ: ${formatDate(result.submittedAt)}`;
                     
-                    alert(details);
+                    let details = `📊 <strong>রেজাল্ট ডিটেইলস</strong><br><br>`;
+                    details += `👤 <strong>নাম:</strong> ${result.userName || 'Anonymous'}<br>`;
+                    details += `📱 <strong>ফোন:</strong> ${result.phoneNumber || 'N/A'}<br>`;
+                    details += `📝 <strong>টেস্ট:</strong> ${result.examTitle}<br>`;
+                    details += `⭐ <strong>মার্কস:</strong> ${result.totalScore}/${result.totalMarks}<br>`;
+                    details += `📈 <strong>শতকরা:</strong> ${((result.totalScore / result.totalMarks) * 100).toFixed(1)}%<br>`;
+                    details += `⏱️ <strong>সময়:</strong> ${formatTime(result.timeTaken)}<br>`;
+                    details += `📅 <strong>তারিখ:</strong> ${formatDate(result.submittedAt)}`;
+                    
+                    showNotification('info', 'রেজাল্ট ডিটেইলস', details);
                 });
-        }
-
-        function showCSVPreview(csvContent) {
-            document.getElementById('csv-preview').textContent = csvContent;
-            document.getElementById('csv-preview-container').style.display = 'block';
-        }
-
-        function hideCSVPreview() {
-            document.getElementById('csv-preview-container').style.display = 'none';
         }
 
         function exportResultsCSV() {
             db.collection('results').get()
                 .then(snapshot => {
                     if (snapshot.empty) {
-                        alert('কোন রেজাল্ট নেই');
+                        showNotification('error', 'ত্রুটি', 'কোন রেজাল্ট নেই');
                         return;
                     }
                     
-                    let csv = '"নাম","ফোন নাম্বার","টেস্ট","প্রাপ্ত মার্কস","মোট মার্কস","শতকরা","সময় নেওয়া","তারিখ","IP Address"\n';
+                    let csv = 'নাম,ফোন,টেস্ট,প্রাপ্ত মার্কস,মোট মার্কস,শতকরা,সময়,তারিখ\n';
                     
                     snapshot.forEach(doc => {
                         const result = doc.data();
                         const percentage = ((result.totalScore / result.totalMarks) * 100).toFixed(1);
                         const timeTaken = formatTime(result.timeTaken);
-                        const date = formatDate(result.submittedAt);
                         
-                        const escapeCSV = (str) => {
-                            if (!str) return '';
-                            return '"' + String(str).replace(/"/g, '""') + '"';
-                        };
-                        
-                        csv += `${escapeCSV(result.userName || 'Anonymous')},${escapeCSV(result.phoneNumber || 'N/A')},${escapeCSV(result.examTitle)},${escapeCSV(result.totalScore)},${escapeCSV(result.totalMarks)},${escapeCSV(percentage + '%')},${escapeCSV(timeTaken)},${escapeCSV(date)},${escapeCSV(result.ipAddress || 'N/A')}\n`;
+                        csv += `"${result.userName || 'Anonymous'}","${result.phoneNumber || 'N/A'}","${result.examTitle}",${result.totalScore},${result.totalMarks},${percentage}%,${timeTaken},"${formatDate(result.submittedAt)}"\n`;
                     });
                     
-                    // Show preview before download
-                    showCSVPreview(csv);
+                    // Create download link
+                    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', `results_${new Date().toISOString().split('T')[0]}.csv`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                     
-                    // Auto-download after 3 seconds
-                    setTimeout(() => {
-                        downloadCSVFile(csv, `results_${new Date().toISOString().split('T')[0]}_bangla.csv`, 'রেজাল্ট CSV');
-                    }, 3000);
+                    showNotification('success', 'সফল!', 'CSV ফাইল ডাউনলোড হয়েছে!');
                 });
-        }
-
-        // ==================== CSV UTILITY FUNCTIONS ====================
-        function downloadCSVFile(csvContent, filename, description) {
-            try {
-                // Add UTF-8 BOM for Bangla support
-                const bom = '\uFEFF';
-                const csvData = bom + csvContent;
-                
-                // Create blob with UTF-8 encoding
-                const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-                
-                alert(`✅ ${description} ফাইল ডাউনলোড হয়েছে!\n\nফাইল: ${filename}\nএনকোডিং: UTF-8 with BOM\nবাংলা সাপোর্ট: ✓`);
-                
-            } catch (error) {
-                console.error('CSV download error:', error);
-                alert('❌ CSV ফাইল ডাউনলোড করতে সমস্যা হয়েছে।');
-            }
         }
 
         // ==================== UTILITY FUNCTIONS ====================
