@@ -20,6 +20,29 @@
             line-height: 1.6;
         }
         
+        /* Notice Bar */
+        .notice-bar {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .notice-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollNotice 30s linear infinite;
+            font-size: 15px;
+            font-weight: 500;
+            padding-right: 100%;
+        }
+        
+        @keyframes scrollNotice {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
         /* Header Styles */
         .header {
             background: linear-gradient(135deg, #1a2980, #26d0ce);
@@ -30,14 +53,14 @@
             z-index: 1000;
         }
         
+        .main-header {
+            padding: 15px 0;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-        
-        .main-header {
-            padding: 15px 0;
         }
         
         .main-header-content {
@@ -53,15 +76,15 @@
         }
         
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: white;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 3px solid #3498db;
+            border: 2px solid #3498db;
         }
         
         .logo img {
@@ -71,13 +94,13 @@
         
         .site-title h1 {
             color: white;
-            font-size: 28px;
-            margin-bottom: 5px;
+            font-size: 24px;
+            margin-bottom: 3px;
         }
         
         .site-title p {
             color: rgba(255,255,255,0.8);
-            font-size: 14px;
+            font-size: 13px;
         }
         
         /* Navigation */
@@ -96,6 +119,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 15px;
         }
         
         .nav-link:hover, .nav-link.active {
@@ -125,25 +149,26 @@
             display: flex;
         }
         
-        /* Header Ad */
+        /* Header Ads */
         .header-ad {
-            background: white;
-            padding: 10px;
+            background: #f8f9fa;
+            padding: 10px 0;
             text-align: center;
             border-bottom: 1px solid #eee;
         }
         
-        .ad-container {
-            max-width: 728px;
-            margin: 0 auto;
+        .ad-placeholder {
+            width: 728px;
             height: 90px;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            margin: 0 auto;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            border: 2px dashed #ddd;
-            border-radius: 8px;
+            color: #95a5a6;
+            font-size: 14px;
         }
         
         /* Search Section */
@@ -167,10 +192,10 @@
         
         .search-input {
             width: 100%;
-            padding: 14px 50px 14px 20px;
+            padding: 12px 45px 12px 20px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s;
         }
         
@@ -189,67 +214,107 @@
             border: none;
             color: #666;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
         }
         
         /* Main Content */
         .main-content {
-            padding: 30px 0;
+            padding: 25px 0;
         }
         
         .content-wrapper {
             display: grid;
-            grid-template-columns: 280px 1fr 280px;
-            gap: 30px;
+            grid-template-columns: 250px 1fr 250px;
+            gap: 25px;
         }
         
-        /* Left Sidebar */
+        /* Sidebars */
         .sidebar {
             background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        
+        .sidebar-right {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             height: fit-content;
         }
         
         .sidebar-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         .sidebar-title {
             color: #2c3e50;
-            font-size: 20px;
-            margin-bottom: 20px;
+            font-size: 18px;
+            margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+        
+        /* Sidebar Ads */
+        .sidebar-ad {
+            margin: 15px 0;
+        }
+        
+        .ad-small {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .ad-horizontal {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 14px;
+            margin: 10px 0;
         }
         
         /* Job Categories */
         .category-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
         
         .category-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
+            padding: 10px 12px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s;
-            border-left: 4px solid transparent;
+            border-left: 3px solid transparent;
         }
         
         .category-item:hover {
             background: #e3f2fd;
             border-left-color: #3498db;
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
         
         .category-item.active {
@@ -260,29 +325,29 @@
         .category-name {
             color: #2c3e50;
             font-weight: 500;
+            font-size: 14px;
         }
         
         .category-count {
             background: #3498db;
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 11px;
             font-weight: 600;
         }
         
         /* Question Bank Categories */
         .question-category-list {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
+            gap: 8px;
         }
         
         .q-category-item {
             background: linear-gradient(135deg, #9b59b6, #8e44ad);
             color: white;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 6px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
@@ -291,93 +356,37 @@
         }
         
         .q-category-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(155, 89, 182, 0.3);
         }
         
         .q-category-name {
             font-weight: 500;
-            margin-bottom: 5px;
+            font-size: 13px;
+            margin-bottom: 3px;
         }
         
         .q-category-count {
             background: rgba(255,255,255,0.2);
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 10px;
-            font-size: 11px;
+            font-size: 10px;
         }
         
-        /* Right Sidebar - Ads */
-        .right-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .ad-sidebar {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        
-        .ad-placeholder {
-            width: 100%;
-            height: 250px;
-            background: #f8f9fa;
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .ad-placeholder.small {
-            height: 120px;
-        }
-        
-        .ad-label {
-            color: #7f8c8d;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Job Listings - Grid View */
-        .job-listings-container {
-            min-height: 500px;
-        }
-        
-        .listings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        
-        .listings-title {
-            color: #2c3e50;
-            font-size: 28px;
-        }
-        
+        /* Job Cards (New Design) */
         .job-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
         
-        /* Job Card - Small Box Style */
         .job-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             transition: all 0.3s;
-            border-top: 4px solid #3498db;
+            border: 1px solid #e9ecef;
             cursor: pointer;
             height: 100%;
             display: flex;
@@ -386,40 +395,51 @@
         
         .job-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #3498db;
         }
         
-        .card-header {
-            margin-bottom: 15px;
-        }
-        
-        .job-title {
+        .job-position {
             color: #2c3e50;
             font-size: 18px;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
         
         .job-company {
             color: #3498db;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
-        }
-        
-        .job-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-            flex: 1;
-        }
-        
-        .meta-item {
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        
+        .job-details {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .job-detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .job-label {
             color: #666;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .job-value {
+            color: #2c3e50;
+            font-weight: 500;
         }
         
         .job-category {
@@ -429,40 +449,30 @@
             padding: 4px 10px;
             border-radius: 15px;
             font-size: 12px;
-            font-weight: 500;
+            margin-top: 12px;
         }
         
-        .job-salary {
-            color: #27ae60;
-            font-weight: 600;
-            font-size: 16px;
-        }
-        
-        .card-footer {
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        
-        .details-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+        .view-details-btn {
+            background: #3498db;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 500;
             cursor: pointer;
-            text-align: center;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             transition: all 0.3s;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 14px;
         }
         
-        .details-btn:hover {
-            background: linear-gradient(135deg, #2980b9, #1c6ea4);
+        .view-details-btn:hover {
+            background: #2980b9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
         
         /* Pagination */
@@ -470,24 +480,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-top: 40px;
+            gap: 8px;
+            margin-top: 35px;
             padding-top: 20px;
             border-top: 1px solid #eee;
         }
         
         .page-btn {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #ddd;
+            width: 36px;
+            height: 36px;
+            border: 1px solid #ddd;
             background: white;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 500;
+            font-size: 14px;
         }
         
         .page-btn:hover {
@@ -509,24 +520,23 @@
         /* Loading State */
         .loading {
             text-align: center;
-            padding: 50px;
+            padding: 40px;
             color: #7f8c8d;
-            grid-column: 1 / -1;
         }
         
         .loading-spinner {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 35px;
+            margin-bottom: 15px;
             color: #3498db;
         }
         
         .no-results {
             text-align: center;
-            padding: 50px;
+            padding: 40px;
             color: #7f8c8d;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             grid-column: 1 / -1;
         }
         
@@ -534,33 +544,34 @@
         .footer {
             background: #2c3e50;
             color: white;
-            padding: 40px 0 20px 0;
-            margin-top: 50px;
+            padding: 35px 0 20px;
+            margin-top: 40px;
         }
         
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 25px;
         }
         
         .footer-section h3 {
             color: #3498db;
-            margin-bottom: 20px;
-            font-size: 20px;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
         
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         
         .footer-link {
             color: #bdc3c7;
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 14px;
         }
         
         .footer-link:hover {
@@ -568,20 +579,20 @@
         }
         
         .footer-ad {
-            margin-top: 30px;
+            margin-top: 15px;
         }
         
-        .footer-ad-container {
-            max-width: 728px;
-            margin: 0 auto;
-            height: 90px;
-            background: rgba(255,255,255,0.1);
+        .footer-ad-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            border: 1px dashed #4a6278;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255,255,255,0.5);
-            border: 2px dashed rgba(255,255,255,0.2);
-            border-radius: 8px;
+            color: #95a5a6;
+            font-size: 13px;
         }
         
         .copyright {
@@ -590,23 +601,35 @@
             margin-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
             color: #95a5a6;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         /* Responsive Styles */
-        @media (max-width: 1200px) {
+        @media (max-width: 1100px) {
             .content-wrapper {
-                grid-template-columns: 250px 1fr;
+                grid-template-columns: 220px 1fr 220px;
             }
             
-            .right-sidebar {
-                display: none;
+            .job-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
-        @media (max-width: 992px) {
-            .job-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        @media (max-width: 900px) {
+            .content-wrapper {
+                grid-template-columns: 200px 1fr;
+            }
+            
+            .sidebar-right {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -627,44 +650,90 @@
                 flex-direction: column;
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .ad-placeholder {
+                width: 100%;
+                max-width: 728px;
+                height: 90px;
             }
             
             .job-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .mobile-sidebar-toggle {
+                display: block;
+                background: #3498db;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 6px;
+                margin-bottom: 15px;
+                width: 100%;
+                cursor: pointer;
+                font-weight: 500;
             }
         }
         
         @media (max-width: 480px) {
             .main-header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
                 text-align: center;
             }
             
-            .listings-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: stretch;
+            .logo-section {
+                justify-content: center;
             }
             
-            .ad-container {
-                height: 70px;
+            .notice-content {
+                font-size: 13px;
+            }
+        }
+        
+        /* Mobile Sidebar Toggle */
+        .mobile-sidebar-toggle {
+            display: none;
+        }
+        
+        .sidebar-mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-sidebar-toggle {
+                display: block;
             }
             
-            .footer-ad-container {
-                height: 70px;
+            .sidebar-mobile {
+                display: none;
+                background: white;
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            }
+            
+            .sidebar-mobile.active {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header Ad -->
-    <div class="header-ad">
-        <div class="ad-container" id="header-ad">
-            <div class="ad-label">Advertisement</div>
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+        <div class="notice-content">
+            ⚠️ সতর্কতা: চাকরি জনিত কোনো লেনদেন করলে FreeTutorBD.com কোন দায় বহন করবে না। লেনদেন থেকে দূরে থাকুন, দুর্নীতিমুক্ত দেশ গড়ুন। 
+            ⚠️ সতর্কতা: চাকরি জনিত কোনো লেনদেন করলে FreeTutorBD.com কোন দায় বহন করবে না। লেনদেন থেকে দূরে থাকুন, দুর্নীতিমুক্ত দেশ গড়ুন।
         </div>
     </div>
 
@@ -676,7 +745,7 @@
                 <div class="main-header-content">
                     <div class="logo-section">
                         <div class="logo" id="dynamic-logo">
-                            <i class="fas fa-chalkboard-teacher" style="font-size: 32px; color: #3498db;"></i>
+                            <i class="fas fa-chalkboard-teacher" style="font-size: 28px; color: #3498db;"></i>
                         </div>
                         <div class="site-title">
                             <h1>FreeTutorBD</h1>
@@ -731,6 +800,15 @@
         </div>
     </header>
 
+    <!-- Header Ad -->
+    <div class="header-ad">
+        <div class="container">
+            <div class="ad-placeholder">
+                <i class="fas fa-ad"></i> Header Ad (728x90) - AdSense/Google Ad
+            </div>
+        </div>
+    </div>
+
     <!-- Search Section -->
     <section class="search-section">
         <div class="container">
@@ -741,12 +819,22 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
-                <button id="search-button" class="details-btn" style="padding: 14px 25px; width: auto;">
+                <button id="search-button" class="view-details-btn" style="padding: 12px 20px; background: #27ae60;">
                     <i class="fas fa-search"></i> খুঁজুন
                 </button>
             </div>
         </div>
     </section>
+
+    <!-- Mobile Sidebar Toggle -->
+    <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle">
+        <i class="fas fa-filter"></i> ফিল্টার ও ক্যাটাগরি দেখুন
+    </button>
+
+    <!-- Mobile Sidebar (Hidden by default) -->
+    <div class="sidebar-mobile" id="sidebar-mobile">
+        <!-- Categories will be loaded here for mobile -->
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -763,8 +851,15 @@
                             <!-- Categories will be loaded dynamically -->
                             <div class="loading">
                                 <i class="fas fa-spinner fa-spin loading-spinner"></i>
-                                <p>ক্যাটাগরি লোড হচ্ছে...</p>
+                                <p style="font-size: 13px;">ক্যাটাগরি লোড হচ্ছে...</p>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Left Sidebar Ad -->
+                    <div class="sidebar-ad">
+                        <div class="ad-small">
+                            <i class="fas fa-ad"></i> Sidebar Ad (250x250)
                         </div>
                     </div>
                     
@@ -776,48 +871,32 @@
                         <div class="question-category-list" id="question-categories">
                             <!-- Question categories will be loaded dynamically -->
                             <div class="loading">
-                                <p>প্রশ্নব্যাংক লোড হচ্ছে...</p>
+                                <p style="font-size: 13px;">প্রশ্নব্যাংক লোড হচ্ছে...</p>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Stats -->
-                    <div class="sidebar-section">
-                        <h3 class="sidebar-title">
-                            <i class="fas fa-chart-line"></i> পরিসংখ্যান
-                        </h3>
-                        <div style="display: grid; gap: 15px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
-                                <span>মোট চাকরি</span>
-                                <span id="total-jobs-count" style="background: #3498db; color: white; padding: 4px 10px; border-radius: 20px; font-weight: 600;">0</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
-                                <span>একটিভ চাকরি</span>
-                                <span id="active-jobs-count" style="background: #27ae60; color: white; padding: 4px 10px; border-radius: 20px; font-weight: 600;">0</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
-                                <span>প্রশ্ন সংখ্যা</span>
-                                <span id="total-questions-count" style="background: #9b59b6; color: white; padding: 4px 10px; border-radius: 20px; font-weight: 600;">0</span>
-                            </div>
-                        </div>
+                    <!-- Horizontal Ad -->
+                    <div class="ad-horizontal">
+                        <i class="fas fa-ad"></i> Horizontal Ad (250x100)
                     </div>
                 </aside>
                 
                 <!-- Job Listings -->
                 <div class="job-listings-container">
-                    <div class="listings-header">
-                        <h2 class="listings-title">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="color: #2c3e50; font-size: 24px;">
                             <i class="fas fa-briefcase"></i> সব চাকরি
                         </h2>
-                        <div style="color: #666; font-size: 14px;">
+                        <div style="color: #666; font-size: 13px;">
                             দেখানো হচ্ছে: <span id="showing-count">0</span>টি চাকরি
                         </div>
                     </div>
                     
                     <!-- Job Grid -->
-                    <div class="job-grid" id="job-grid">
+                    <div class="job-grid" id="job-listings">
                         <!-- Jobs will be loaded dynamically -->
-                        <div class="loading">
+                        <div class="loading" style="grid-column: 1 / -1;">
                             <i class="fas fa-spinner fa-spin loading-spinner"></i>
                             <p>চাকরি লোড হচ্ছে...</p>
                         </div>
@@ -825,9 +904,9 @@
                     
                     <!-- No Results -->
                     <div id="no-results" class="no-results" style="display: none;">
-                        <i class="fas fa-search" style="font-size: 50px; color: #95a5a6; margin-bottom: 20px;"></i>
-                        <h3 style="color: #2c3e50; margin-bottom: 10px;">কোন চাকরি পাওয়া যায়নি</h3>
-                        <p style="color: #7f8c8d;">আপনার সার্চের সাথে মিলিয়ে কোন চাকরি পাওয়া যায়নি</p>
+                        <i class="fas fa-search" style="font-size: 40px; color: #95a5a6; margin-bottom: 15px;"></i>
+                        <h3 style="color: #2c3e50; margin-bottom: 8px;">কোন চাকরি পাওয়া যায়নি</h3>
+                        <p style="color: #7f8c8d; font-size: 14px;">আপনার সার্চের সাথে মিলিয়ে কোন চাকরি পাওয়া যায়নি</p>
                     </div>
                     
                     <!-- Pagination -->
@@ -836,30 +915,50 @@
                     </div>
                 </div>
                 
-                <!-- Right Sidebar - Ads -->
-                <aside class="right-sidebar">
-                    <div class="ad-sidebar">
-                        <div class="ad-placeholder">
-                            <div class="ad-label">Advertisement</div>
-                            <div style="margin-top: 10px; font-size: 14px;">300x250</div>
+                <!-- Right Sidebar -->
+                <aside class="sidebar-right">
+                    <!-- Right Sidebar Ad -->
+                    <div class="sidebar-ad">
+                        <div class="ad-small">
+                            <i class="fas fa-ad"></i> Sidebar Ad (250x250)
                         </div>
-                        <div class="ad-label">Sidebar Ad Space</div>
                     </div>
                     
-                    <div class="ad-sidebar">
-                        <div class="ad-placeholder small">
-                            <div class="ad-label">Advertisement</div>
-                            <div style="margin-top: 10px; font-size: 12px;">300x120</div>
+                    <!-- Stats -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-chart-line"></i> পরিসংখ্যান
+                        </h3>
+                        <div style="display: grid; gap: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 6px; font-size: 13px;">
+                                <span>মোট চাকরি</span>
+                                <span id="total-jobs-count" style="background: #3498db; color: white; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px;">0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 6px; font-size: 13px;">
+                                <span>একটিভ চাকরি</span>
+                                <span id="active-jobs-count" style="background: #27ae60; color: white; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px;">0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8f9fa; border-radius: 6px; font-size: 13px;">
+                                <span>প্রশ্ন সংখ্যা</span>
+                                <span id="total-questions-count" style="background: #9b59b6; color: white; padding: 3px 8px; border-radius: 12px; font-weight: 600; font-size: 12px;">0</span>
+                            </div>
                         </div>
-                        <div class="ad-label">Vertical Ad</div>
                     </div>
                     
-                    <div class="ad-sidebar">
-                        <div class="ad-placeholder">
-                            <div class="ad-label">Advertisement</div>
-                            <div style="margin-top: 10px; font-size: 14px;">300x250</div>
+                    <!-- Horizontal Ad -->
+                    <div class="ad-horizontal">
+                        <i class="fas fa-ad"></i> Horizontal Ad (250x100)
+                    </div>
+                    
+                    <!-- Recent Jobs -->
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-clock"></i> সাম্প্রতিক চাকরি
+                        </h3>
+                        <div id="recent-jobs" style="font-size: 13px;">
+                            <!-- Recent jobs will be loaded here -->
+                            <p style="color: #7f8c8d; text-align: center; padding: 10px;">লোড হচ্ছে...</p>
                         </div>
-                        <div class="ad-label">Sponsored Content</div>
                     </div>
                 </aside>
             </div>
@@ -872,13 +971,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>FreeTutorBD</h3>
-                    <p style="color: #bdc3c7; margin-bottom: 20px;">
+                    <p style="color: #bdc3c7; margin-bottom: 15px; font-size: 14px; line-height: 1.6;">
                         বাংলাদেশের সর্ববৃহৎ ফ্রি শিক্ষা প্ল্যাটফর্ম। চাকরি প্রস্তুতি, প্রশ্নব্যাংক, মডেল টেস্ট সবকিছু এক জায়গায়।
                     </p>
-                    <div style="display: flex; gap: 15px;">
-                        <a href="#" style="color: white; font-size: 20px;"><i class="fab fa-facebook"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="fab fa-youtube"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                    <div style="display: flex; gap: 12px;">
+                        <a href="#" style="color: white; font-size: 18px;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 18px;"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="color: white; font-size: 18px;"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 
@@ -895,25 +994,25 @@
                 
                 <div class="footer-section">
                     <h3>যোগাযোগ</h3>
-                    <div style="color: #bdc3c7; line-height: 1.8;">
+                    <div style="color: #bdc3c7; line-height: 1.6; font-size: 14px;">
                         <p><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</p>
-                        <p><i class="fas fa-phone"></i> ০১৭XX-XXXXXX</p>
                         <p><i class="fas fa-envelope"></i> info@freetutorbd.com</p>
                         <p><i class="fas fa-clock"></i> শনি-বৃহস্পতি: সকাল ৯টা - রাত ১০টা</p>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Footer Ad -->
-            <div class="footer-ad">
-                <div class="footer-ad-container" id="footer-ad">
-                    <div class="ad-label">Advertisement</div>
+                
+                <div class="footer-section">
+                    <div class="footer-ad">
+                        <div class="footer-ad-placeholder">
+                            <i class="fas fa-ad"></i> Footer Ad (300x250)
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="copyright">
                 <p>© ২০২৪ FreeTutorBD - সর্বস্বত্ত সংরক্ষিত</p>
-                <p style="margin-top: 5px; font-size: 13px;">ডিজাইন ও ডেভেলপমেন্ট: FreeTutorBD টিম</p>
+                <p style="margin-top: 5px; font-size: 12px;">ডিজাইন ও ডেভেলপমেন্ট: FreeTutorBD টিম</p>
             </div>
         </div>
     </footer>
@@ -953,14 +1052,12 @@
             // Load logo
             loadLogo();
             
-            // Load ads from Firebase (if any)
-            loadAds();
-            
             // Load initial data
             loadJobCategories();
             loadQuestionCategories();
             loadAllJobs();
             loadStats();
+            loadRecentJobs();
             
             // Setup event listeners
             setupEventListeners();
@@ -968,6 +1065,16 @@
             // Mobile menu toggle
             document.getElementById('mobile-menu-btn').addEventListener('click', function() {
                 document.getElementById('mobile-nav').classList.toggle('active');
+            });
+            
+            // Mobile sidebar toggle
+            document.getElementById('mobile-sidebar-toggle').addEventListener('click', function() {
+                const mobileSidebar = document.getElementById('sidebar-mobile');
+                mobileSidebar.classList.toggle('active');
+                
+                if (mobileSidebar.classList.contains('active')) {
+                    loadMobileSidebarContent();
+                }
             });
         });
 
@@ -982,24 +1089,6 @@
                 })
                 .catch(error => {
                     console.log("Logo not found, using default");
-                });
-        }
-
-        function loadAds() {
-            // Load header ad
-            db.collection('ads').doc('header').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('header-ad').innerHTML = doc.data().code;
-                    }
-                });
-            
-            // Load footer ad
-            db.collection('ads').doc('footer').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('footer-ad').innerHTML = doc.data().code;
-                    }
                 });
         }
 
@@ -1065,14 +1154,59 @@
                 })
                 .catch(error => {
                     console.error("Error loading categories:", error);
-                    categoriesContainer.innerHTML = '<p style="color: #e74c3c;">ক্যাটাগরি লোড করতে সমস্যা</p>';
+                    categoriesContainer.innerHTML = '<p style="color: #e74c3c; font-size: 13px;">ক্যাটাগরি লোড করতে সমস্যা</p>';
                 });
+        }
+
+        function loadMobileSidebarContent() {
+            const mobileSidebar = document.getElementById('sidebar-mobile');
+            
+            // Copy content from desktop sidebar
+            const categoriesHtml = document.getElementById('job-categories').innerHTML;
+            const questionsHtml = document.getElementById('question-categories').innerHTML;
+            
+            mobileSidebar.innerHTML = `
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-filter"></i> চাকরি ক্যাটাগরি
+                    </h3>
+                    <div class="category-list" id="mobile-job-categories">
+                        ${categoriesHtml}
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">
+                        <i class="fas fa-book"></i> প্রশ্নব্যাংক
+                    </h3>
+                    <div class="question-category-list">
+                        ${questionsHtml}
+                    </div>
+                </div>
+            `;
+            
+            // Re-add click events for mobile categories
+            document.querySelectorAll('#mobile-job-categories .category-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    currentCategory = this.getAttribute('data-category');
+                    currentPage = 1;
+                    
+                    // Update active state
+                    document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll(`.category-item[data-category="${currentCategory}"]`).forEach(i => i.classList.add('active'));
+                    
+                    filterAndDisplayJobs();
+                    
+                    // Close mobile sidebar
+                    mobileSidebar.classList.remove('active');
+                });
+            });
         }
 
         function loadQuestionCategories() {
             const container = document.getElementById('question-categories');
             
-            // Predefined question categories (same as admin panel)
+            // Predefined question categories
             const questionCategories = [
                 { name: "বাংলাদেশ বিষয়াবলী", count: 0 },
                 { name: "আন্তর্জাতিক বিষয়াবলী", count: 0 },
@@ -1115,17 +1249,17 @@
                         }
                     });
                     
-                    container.innerHTML = html || '<p style="color: #7f8c8d; text-align: center;">কোন প্রশ্ন নেই</p>';
+                    container.innerHTML = html || '<p style="color: #7f8c8d; text-align: center; font-size: 13px;">কোন প্রশ্ন নেই</p>';
                 })
                 .catch(error => {
                     console.error("Error loading question categories:", error);
-                    container.innerHTML = '<p style="color: #e74c3c;">প্রশ্নব্যাংক লোড করতে সমস্যা</p>';
+                    container.innerHTML = '<p style="color: #e74c3c; font-size: 13px;">প্রশ্নব্যাংক লোড করতে সমস্যা</p>';
                 });
         }
 
         function loadAllJobs() {
-            const jobsContainer = document.getElementById('job-grid');
-            jobsContainer.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin loading-spinner"></i><p>চাকরি লোড হচ্ছে...</p></div>';
+            const jobsContainer = document.getElementById('job-listings');
+            jobsContainer.innerHTML = '<div class="loading" style="grid-column: 1 / -1;"><i class="fas fa-spinner fa-spin loading-spinner"></i><p>চাকরি লোড হচ্ছে...</p></div>';
             
             db.collection('jobs')
                 .orderBy('createdAt', 'desc')
@@ -1143,6 +1277,41 @@
                 .catch(error => {
                     console.error("Error loading jobs:", error);
                     jobsContainer.innerHTML = '<div class="no-results"><p>চাকরি লোড করতে সমস্যা হয়েছে</p></div>';
+                });
+        }
+
+        function loadRecentJobs() {
+            const recentContainer = document.getElementById('recent-jobs');
+            
+            db.collection('jobs')
+                .orderBy('createdAt', 'desc')
+                .limit(5)
+                .get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        recentContainer.innerHTML = '<p style="color: #7f8c8d; text-align: center;">কোন চাকরি নেই</p>';
+                        return;
+                    }
+                    
+                    let html = '<div style="display: flex; flex-direction: column; gap: 12px;">';
+                    snapshot.forEach(doc => {
+                        const job = doc.data();
+                        const position = job.position.length > 40 ? job.position.substring(0, 40) + '...' : job.position;
+                        
+                        html += `
+                            <div style="padding: 10px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #3498db;">
+                                <div style="font-weight: 500; color: #2c3e50; margin-bottom: 5px;">${position}</div>
+                                <div style="font-size: 12px; color: #666;">${job.company || ''}</div>
+                                <div style="font-size: 11px; color: #95a5a6; margin-top: 5px;">${job.publishDate || ''}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    
+                    recentContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    recentContainer.innerHTML = '<p style="color: #e74c3c; font-size: 12px;">লোড করতে সমস্যা</p>';
                 });
         }
 
@@ -1193,7 +1362,7 @@
         }
 
         function displayJobsForPage(page) {
-            const jobsContainer = document.getElementById('job-grid');
+            const jobsContainer = document.getElementById('job-listings');
             
             // Calculate start and end index
             const startIndex = (page - 1) * jobsPerPage;
@@ -1210,42 +1379,40 @@
                 const publishDate = job.publishDate || 'তারিখ নেই';
                 const deadline = job.deadline || 'তারিখ নেই';
                 const salary = job.salary || 'আলোচনা সাপেক্ষে';
-                const shortDetails = job.details ? 
-                    (job.details.length > 100 ? job.details.substring(0, 100) + '...' : job.details) : 
-                    'বিস্তারিত দেখুন';
                 
                 html += `
                     <div class="job-card" onclick="viewJobDetails('${job.id}')">
-                        <div class="card-header">
-                            <h3 class="job-title">${job.position}</h3>
-                            <p class="job-company">${job.company}</p>
-                            <span class="job-category">${getCategoryName(job.category)}</span>
+                        <div class="job-position">${job.position}</div>
+                        <div class="job-company">
+                            <i class="fas fa-building"></i> ${job.company}
                         </div>
                         
-                        <div class="job-meta">
-                            <div class="meta-item">
-                                <i class="fas fa-calendar-plus"></i>
-                                <span>প্রকাশ: ${publishDate}</span>
+                        <div class="job-details">
+                            <div class="job-detail-row">
+                                <div class="job-label">
+                                    <i class="fas fa-calendar-plus"></i> পোস্টিং:
+                                </div>
+                                <div class="job-value">${publishDate}</div>
                             </div>
-                            <div class="meta-item">
-                                <i class="fas fa-calendar-times"></i>
-                                <span>শেষ: ${deadline}</span>
+                            <div class="job-detail-row">
+                                <div class="job-label">
+                                    <i class="fas fa-calendar-times"></i> শেষ:
+                                </div>
+                                <div class="job-value">${deadline}</div>
                             </div>
-                            <div class="meta-item">
-                                <i class="fas fa-money-bill-wave"></i>
-                                <span class="job-salary">${salary}</span>
+                            <div class="job-detail-row">
+                                <div class="job-label">
+                                    <i class="fas fa-money-bill-wave"></i> বেতন:
+                                </div>
+                                <div class="job-value">${salary}</div>
                             </div>
                         </div>
                         
-                        <div style="color: #666; font-size: 14px; margin: 10px 0; flex: 1;">
-                            ${shortDetails}
-                        </div>
+                        <span class="job-category">${getCategoryName(job.category)}</span>
                         
-                        <div class="card-footer">
-                            <a href="job-details.html?id=${job.id}" class="details-btn" onclick="event.stopPropagation();">
-                                <i class="fas fa-eye"></i> বিস্তারিত দেখুন
-                            </a>
-                        </div>
+                        <button class="view-details-btn" onclick="event.stopPropagation(); viewJobDetails('${job.id}')">
+                            <i class="fas fa-eye"></i> বিস্তারিত দেখুন
+                        </button>
                     </div>
                 `;
             });
@@ -1391,6 +1558,16 @@
                 !mobileNav.contains(event.target) && 
                 !mobileBtn.contains(event.target)) {
                 mobileNav.classList.remove('active');
+            }
+            
+            // Close mobile sidebar when clicking outside
+            const mobileSidebar = document.getElementById('sidebar-mobile');
+            const sidebarToggle = document.getElementById('mobile-sidebar-toggle');
+            
+            if (mobileSidebar && mobileSidebar.classList.contains('active') && 
+                !mobileSidebar.contains(event.target) && 
+                !sidebarToggle.contains(event.target)) {
+                mobileSidebar.classList.remove('active');
             }
         });
 
