@@ -667,6 +667,28 @@
             border-top: 1px solid #34495e;
         }
         
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         /* Responsive */
         @media (max-width: 1024px) {
             .main-container {
@@ -752,8 +774,8 @@
                 
                 <div class="nav-links">
                     <a href="index.html"><i class="fas fa-home"></i> হোম</a>
-                    <a href="#"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
-                    <a href="#"><i class="fas fa-briefcase"></i> চাকরি</a>
+                    <a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                    <a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a>
                     <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
                 </div>
                 
@@ -836,38 +858,9 @@
             </h2>
             
             <div class="tests-grid" id="tests-grid">
-                <!-- Tests will be loaded dynamically -->
-                <div class="test-card">
-                    <div class="test-header">
-                        <div class="test-title">বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১</div>
-                        <div class="test-meta">
-                            <span><i class="fas fa-clock"></i> ৬০ মিনিট</span>
-                            <span><i class="fas fa-folder"></i> বাংলাদেশ বিষয়াবলী</span>
-                        </div>
-                    </div>
-                    <div class="test-body">
-                        <p class="test-description">বিসিএস প্রিলিমিনারি পরীক্ষার জন্য প্রস্তুতিমূলক মডেল টেস্ট। বাংলাদেশ বিষয়াবলী থেকে গুরুত্বপূর্ণ প্রশ্ন সমন্বিত।</p>
-                        
-                        <div class="test-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">১০০</div>
-                                <div class="stat-label">মার্কস</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">৫০</div>
-                                <div class="stat-label">প্রশ্ন</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">১৫০</div>
-                                <div class="stat-label">পরীক্ষার্থী</div>
-                            </div>
-                        </div>
-                        
-                        <button class="start-btn" onclick="startTest('test1')">
-                            <i class="fas fa-play-circle"></i>
-                            টেস্ট শুরু করুন
-                        </button>
-                    </div>
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>মডেল টেস্ট লোড হচ্ছে...</p>
                 </div>
             </div>
         </div>
@@ -881,14 +874,10 @@
             </div>
             
             <div id="question-categories">
-                <!-- Categories will be loaded dynamically -->
-                <a href="prosnobank.html?category=bangladesh" class="sidebar-item">
-                    <div class="category-name">
-                        <i class="fas fa-landmark"></i>
-                        বাংলাদেশ বিষয়াবলী
-                    </div>
-                    <div class="category-count">৫২৩</div>
-                </a>
+                <div class="loading-spinner" style="padding: 20px;">
+                    <div class="spinner" style="width: 30px; height: 30px;"></div>
+                    <p style="font-size: 14px;">লোড হচ্ছে...</p>
+                </div>
             </div>
             
             <!-- Job Categories -->
@@ -898,14 +887,10 @@
             </div>
             
             <div id="job-categories">
-                <!-- Job categories will be loaded dynamically -->
-                <a href="jobs.html?category=government" class="sidebar-item">
-                    <div class="category-name">
-                        <i class="fas fa-landmark"></i>
-                        সরকারি চাকরি
-                    </div>
-                    <div class="category-count">২৩</div>
-                </a>
+                <div class="loading-spinner" style="padding: 20px;">
+                    <div class="spinner" style="width: 30px; height: 30px;"></div>
+                    <p style="font-size: 14px;">লোড হচ্ছে...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -955,46 +940,9 @@
                 
                 <!-- Questions Container -->
                 <div class="questions-container" id="questions-container">
-                    <!-- Questions will be loaded dynamically -->
-                    <div class="question-item">
-                        <div class="question-number">১</div>
-                        <div class="question-text">
-                            বাংলাদেশের স্বাধীনতা দিবস কত তারিখ?
-                        </div>
-                        
-                        <div class="options-grid">
-                            <label class="option-label">
-                                <input type="radio" name="q1" class="option-input" value="1">
-                                <div class="option-text">
-                                    <div class="option-letter">ক</div>
-                                    <div>২৬ মার্চ</div>
-                                </div>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q1" class="option-input" value="2">
-                                <div class="option-text">
-                                    <div class="option-letter">খ</div>
-                                    <div>১৬ ডিসেম্বর</div>
-                                </div>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q1" class="option-input" value="3">
-                                <div class="option-text">
-                                    <div class="option-letter">গ</div>
-                                    <div>২১ ফেব্রুয়ারি</div>
-                                </div>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q1" class="option-input" value="4">
-                                <div class="option-text">
-                                    <div class="option-letter">ঘ</div>
-                                    <div>১ এপ্রিল</div>
-                                </div>
-                            </label>
-                        </div>
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>প্রশ্ন লোড হচ্ছে...</p>
                     </div>
                 </div>
                 
@@ -1042,6 +990,7 @@
 
         // ==================== GLOBAL VARIABLES ====================
         let currentTestId = null;
+        let currentTestData = null;
         let testQuestions = [];
         let testTimer = null;
         let testStartTime = null;
@@ -1130,38 +1079,74 @@
         });
 
         // ==================== LOAD TESTS FROM FIREBASE ====================
-        function loadModelTests() {
-            testsGrid.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 30px;"><i class="fas fa-spinner fa-spin"></i> টেস্ট লোড হচ্ছে...</p>';
-            
-            db.collection('exams').where('status', '==', 'published').orderBy('createdAt', 'desc').get()
-                .then((snapshot) => {
-                    if (snapshot.empty) {
-                        testsGrid.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 30px;">কোন টেস্ট পাওয়া যায়নি</p>';
-                        return;
-                    }
+        async function loadModelTests() {
+            try {
+                console.log("Loading tests from Firebase...");
+                
+                // First check if exams collection exists
+                const examsRef = db.collection('exams');
+                const snapshot = await examsRef.where('status', '==', 'published').orderBy('createdAt', 'desc').get();
+                
+                console.log("Snapshot received:", snapshot.size, "exams found");
+                
+                if (snapshot.empty) {
+                    testsGrid.innerHTML = `
+                        <div style="text-align: center; padding: 40px; background: white; border-radius: 10px; grid-column: 1/-1;">
+                            <i class="fas fa-file-alt fa-3x" style="color: #ddd; margin-bottom: 20px;"></i>
+                            <h3 style="color: #7f8c8d; margin-bottom: 15px;">কোন মডেল টেস্ট পাওয়া যায়নি</h3>
+                            <p style="color: #95a5a6;">এডমিন প্যানেল থেকে নতুন টেস্ট যোগ করুন</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                let count = 0;
+                
+                // Load participant counts for each exam
+                const resultsRef = db.collection('results');
+                
+                for (const doc of snapshot.docs) {
+                    count++;
+                    const test = doc.data();
+                    const testId = doc.id;
                     
-                    let html = '';
-                    snapshot.forEach((doc) => {
-                        const test = doc.data();
-                        html += createTestCard(doc.id, test);
-                    });
+                    // Get participant count for this test
+                    const resultsSnapshot = await resultsRef.where('examId', '==', testId).get();
+                    const participantCount = resultsSnapshot.size;
                     
-                    testsGrid.innerHTML = html;
-                })
-                .catch((error) => {
-                    console.error("Error loading tests:", error);
-                    testsGrid.innerHTML = '<p style="text-align: center; color: #e74c3c; padding: 30px;">টেস্ট লোড করতে সমস্যা হয়েছে</p>';
-                });
+                    // Calculate total marks
+                    const totalMarks = test.totalMarks || (test.marksPerQuestion * test.totalQuestions) || 100;
+                    
+                    html += createTestCard(testId, test, totalMarks, participantCount);
+                }
+                
+                console.log(`Created ${count} test cards`);
+                testsGrid.innerHTML = html;
+                
+            } catch (error) {
+                console.error("Error loading tests:", error);
+                testsGrid.innerHTML = `
+                    <div style="text-align: center; padding: 40px; background: white; border-radius: 10px; grid-column: 1/-1;">
+                        <i class="fas fa-exclamation-triangle fa-3x" style="color: #e74c3c; margin-bottom: 20px;"></i>
+                        <h3 style="color: #e74c3c; margin-bottom: 15px;">টেস্ট লোড করতে সমস্যা হয়েছে</h3>
+                        <p style="color: #95a5a6;">ত্রুটি: ${error.message}</p>
+                        <button onclick="loadModelTests()" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 15px;">
+                            <i class="fas fa-redo"></i> আবার চেষ্টা করুন
+                        </button>
+                    </div>
+                `;
+            }
         }
 
-        function createTestCard(testId, test) {
+        function createTestCard(testId, test, totalMarks, participantCount) {
             return `
                 <div class="test-card">
                     <div class="test-header">
-                        <div class="test-title">${test.title}</div>
+                        <div class="test-title">${test.title || 'নামহীন টেস্ট'}</div>
                         <div class="test-meta">
-                            <span><i class="fas fa-clock"></i> ${test.timeLimit} মিনিট</span>
-                            <span><i class="fas fa-folder"></i> ${test.category}</span>
+                            <span><i class="fas fa-clock"></i> ${test.timeLimit || 60} মিনিট</span>
+                            <span><i class="fas fa-folder"></i> ${test.category || 'সাধারণ'}</span>
                         </div>
                     </div>
                     <div class="test-body">
@@ -1169,20 +1154,20 @@
                         
                         <div class="test-stats">
                             <div class="stat-item">
-                                <div class="stat-number">${test.totalMarks || test.marksPerQuestion * test.totalQuestions}</div>
+                                <div class="stat-number">${totalMarks}</div>
                                 <div class="stat-label">মার্কস</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">${test.totalQuestions}</div>
+                                <div class="stat-number">${test.totalQuestions || 50}</div>
                                 <div class="stat-label">প্রশ্ন</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-number">০</div>
+                                <div class="stat-number">${participantCount}</div>
                                 <div class="stat-label">পরীক্ষার্থী</div>
                             </div>
                         </div>
                         
-                        <button class="start-btn" onclick="startTest('${testId}', '${test.title}')">
+                        <button class="start-btn" onclick="startTest('${testId}')">
                             <i class="fas fa-play-circle"></i>
                             টেস্ট শুরু করুন
                         </button>
@@ -1192,119 +1177,216 @@
         }
 
         // ==================== LOAD CATEGORIES ====================
-        function loadCategories() {
-            // Load question categories
-            questionCategories.innerHTML = '';
-            jobCategories.innerHTML = '';
-            
-            // Predefined categories (you can also load from Firebase)
-            const predefinedCategories = [
-                { name: "বাংলাদেশ বিষয়াবলী", icon: "fas fa-landmark", count: 523 },
-                { name: "আন্তর্জাতিক বিষয়াবলী", icon: "fas fa-globe-asia", count: 312 },
-                { name: "ভূগোল", icon: "fas fa-map", count: 187 },
-                { name: "বাংলা সাহিত্য", icon: "fas fa-book", count: 456 },
-                { name: "সাধারণ বিজ্ঞান", icon: "fas fa-flask", count: 289 },
-                { name: "গাণিতিক যুক্তি", icon: "fas fa-calculator", count: 412 },
-                { name: "শব্দ সংক্ষেপণ", icon: "fas fa-abacus", count: 156 },
-                { name: "ফুটবল", icon: "fas fa-football-ball", count: 89 },
-                { name: "ক্রিকেট", icon: "fas fa-baseball-ball", count: 76 },
-                { name: "বর্তমান affairs", icon: "fas fa-newspaper", count: 234 }
-            ];
-            
-            predefinedCategories.forEach(category => {
-                questionCategories.innerHTML += `
-                    <a href="prosnobank.html?category=${encodeURIComponent(category.name)}" class="sidebar-item">
-                        <div class="category-name">
-                            <i class="${category.icon}"></i>
-                            ${category.name}
-                        </div>
-                        <div class="category-count">${category.count}</div>
-                    </a>
-                `;
-            });
-            
-            // Job categories
-            const jobCategoriesData = [
-                { name: "সরকারি চাকরি", icon: "fas fa-landmark", count: 23 },
-                { name: "প্রাইভেট চাকরি", icon: "fas fa-building", count: 45 },
-                { name: "ব্যাংক চাকরি", icon: "fas fa-university", count: 18 },
-                { name: "এনজিও চাকরি", icon: "fas fa-hands-helping", count: 12 },
-                { name: "বিসিএস", icon: "fas fa-graduation-cap", count: 8 },
-                { name: "শিক্ষক নিয়োগ", icon: "fas fa-chalkboard-teacher", count: 15 }
-            ];
-            
-            jobCategoriesData.forEach(job => {
-                jobCategories.innerHTML += `
-                    <a href="jobs.html?category=${encodeURIComponent(job.name)}" class="sidebar-item">
-                        <div class="category-name">
-                            <i class="${job.icon}"></i>
-                            ${job.name}
-                        </div>
-                        <div class="category-count">${job.count}</div>
-                    </a>
-                `;
-            });
+        async function loadCategories() {
+            try {
+                // Load question categories from Firebase
+                const categoriesSnapshot = await db.collection('categories').get();
+                const questionsSnapshot = await db.collection('questions').get();
+                
+                // Count questions per category
+                const categoryCounts = {};
+                questionsSnapshot.forEach(doc => {
+                    const question = doc.data();
+                    const category = question.category;
+                    if (category) {
+                        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+                    }
+                });
+                
+                let questionCategoriesHtml = '';
+                
+                if (categoriesSnapshot.empty) {
+                    // Use predefined categories if no categories in database
+                    const predefinedCategories = [
+                        { nameBn: "বাংলাদেশ বিষয়াবলী", icon: "fas fa-landmark" },
+                        { nameBn: "আন্তর্জাতিক বিষয়াবলী", icon: "fas fa-globe-asia" },
+                        { nameBn: "ভূগোল", icon: "fas fa-map" },
+                        { nameBn: "বাংলা সাহিত্য", icon: "fas fa-book" },
+                        { nameBn: "সাধারণ বিজ্ঞান", icon: "fas fa-flask" },
+                        { nameBn: "গাণিতিক যুক্তি", icon: "fas fa-calculator" },
+                        { nameBn: "শব্দ সংক্ষেপণ", icon: "fas fa-abacus" },
+                        { nameBn: "ফুটবল", icon: "fas fa-football-ball" },
+                        { nameBn: "ক্রিকেট", icon: "fas fa-baseball-ball" },
+                        { nameBn: "বর্তমান affairs", icon: "fas fa-newspaper" }
+                    ];
+                    
+                    predefinedCategories.forEach(category => {
+                        const count = categoryCounts[category.nameBn] || 0;
+                        questionCategoriesHtml += createCategoryItem(category.nameBn, category.icon, count, 'question');
+                    });
+                } else {
+                    categoriesSnapshot.forEach(doc => {
+                        const category = doc.data();
+                        const count = categoryCounts[category.nameBn] || 0;
+                        const icon = category.icon || "fas fa-folder";
+                        questionCategoriesHtml += createCategoryItem(category.nameBn, icon, count, 'question');
+                    });
+                }
+                
+                questionCategories.innerHTML = questionCategoriesHtml;
+                
+                // Load job categories from Firebase
+                const jobsSnapshot = await db.collection('jobs').get();
+                
+                // Count jobs per category
+                const jobCategoryCounts = {};
+                jobsSnapshot.forEach(doc => {
+                    const job = doc.data();
+                    const category = job.category;
+                    if (category) {
+                        jobCategoryCounts[category] = (jobCategoryCounts[category] || 0) + 1;
+                    }
+                });
+                
+                let jobCategoriesHtml = '';
+                const jobCategoriesData = [
+                    { name: "সরকারি চাকরি", icon: "fas fa-landmark" },
+                    { name: "প্রাইভেট চাকরি", icon: "fas fa-building" },
+                    { name: "ব্যাংক চাকরি", icon: "fas fa-university" },
+                    { name: "এনজিও চাকরি", icon: "fas fa-hands-helping" },
+                    { name: "বিসিএস", icon: "fas fa-graduation-cap" },
+                    { name: "শিক্ষক নিয়োগ", icon: "fas fa-chalkboard-teacher" }
+                ];
+                
+                jobCategoriesData.forEach(job => {
+                    const count = jobCategoryCounts[job.name] || 0;
+                    jobCategoriesHtml += createCategoryItem(job.name, job.icon, count, 'job');
+                });
+                
+                jobCategories.innerHTML = jobCategoriesHtml;
+                
+            } catch (error) {
+                console.error("Error loading categories:", error);
+                questionCategories.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 20px;">ক্যাটাগরি লোড করতে সমস্যা</p>';
+                jobCategories.innerHTML = '<p style="text-align: center; color: #7f8c8d; padding: 20px;">ক্যাটাগরি লোড করতে সমস্যা</p>';
+            }
+        }
+
+        function createCategoryItem(name, icon, count, type) {
+            const url = type === 'question' ? 'prosnobank.html' : 'jobs.html';
+            return `
+                <a href="${url}?category=${encodeURIComponent(name)}" class="sidebar-item">
+                    <div class="category-name">
+                        <i class="${icon}"></i>
+                        ${name}
+                    </div>
+                    <div class="category-count">${count}</div>
+                </a>
+            `;
         }
 
         // ==================== START TEST ====================
-        function startTest(testId, testTitle) {
-            currentTestId = testId;
-            modalTestTitle.textContent = testTitle;
-            
-            // Load test questions from Firebase
-            db.collection('exams').doc(testId).get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        const test = doc.data();
-                        
-                        // Check if test has questions
-                        if (!test.questions || test.questions.length === 0) {
-                            alert('এই টেস্টে এখনো কোন প্রশ্ন যোগ করা হয়নি।');
-                            return;
-                        }
-                        
-                        testQuestions = test.questions;
-                        displayQuestions(testQuestions);
-                        testModal.classList.add('active');
-                        
-                        // Scroll to top
-                        testModal.scrollTop = 0;
-                        
-                        // Store start time
-                        testStartTime = new Date();
-                        
-                    } else {
-                        alert('টেস্ট পাওয়া যায়নি!');
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error loading test:", error);
-                    alert('টেস্ট লোড করতে সমস্যা হয়েছে।');
+        async function startTest(testId) {
+            try {
+                currentTestId = testId;
+                
+                // Load test data from Firebase
+                const testDoc = await db.collection('exams').doc(testId).get();
+                
+                if (!testDoc.exists) {
+                    alert('টেস্ট পাওয়া যায়নি!');
+                    return;
+                }
+                
+                currentTestData = testDoc.data();
+                modalTestTitle.textContent = currentTestData.title || 'টেস্ট';
+                
+                // Show loading in questions container
+                questionsContainer.innerHTML = `
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>প্রশ্ন লোড হচ্ছে...</p>
+                    </div>
+                `;
+                
+                // Show modal
+                testModal.classList.add('active');
+                
+                // Check if test has questions
+                if (!currentTestData.questions || currentTestData.questions.length === 0) {
+                    // Try to load questions from questions collection based on category
+                    await loadQuestionsFromCategory(currentTestData.category, currentTestData.totalQuestions || 50);
+                } else {
+                    // Use questions from exam document
+                    testQuestions = currentTestData.questions;
+                    displayQuestions(testQuestions);
+                }
+                
+                // Store start time
+                testStartTime = new Date();
+                
+                // Scroll to top
+                testModal.scrollTop = 0;
+                
+            } catch (error) {
+                console.error("Error starting test:", error);
+                alert('টেস্ট লোড করতে সমস্যা হয়েছে: ' + error.message);
+            }
+        }
+
+        async function loadQuestionsFromCategory(category, limit) {
+            try {
+                const questionsSnapshot = await db.collection('questions')
+                    .where('category', '==', category)
+                    .limit(limit)
+                    .get();
+                
+                if (questionsSnapshot.empty) {
+                    questionsContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: #e74c3c;">
+                            <i class="fas fa-exclamation-triangle fa-3x"></i>
+                            <p style="margin-top: 15px;">এই ক্যাটাগরিতে কোন প্রশ্ন নেই</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                testQuestions = [];
+                questionsSnapshot.forEach(doc => {
+                    const question = doc.data();
+                    testQuestions.push({
+                        ...question,
+                        id: doc.id
+                    });
                 });
+                
+                displayQuestions(testQuestions);
+                
+            } catch (error) {
+                console.error("Error loading questions:", error);
+                questionsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #e74c3c;">
+                        <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        <p style="margin-top: 15px;">প্রশ্ন লোড করতে সমস্যা: ${error.message}</p>
+                    </div>
+                `;
+            }
         }
 
         // ==================== DISPLAY QUESTIONS ====================
         function displayQuestions(questions) {
             questionsContainer.innerHTML = '';
             
+            if (questions.length === 0) {
+                questionsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+                        <i class="fas fa-question-circle fa-3x"></i>
+                        <p style="margin-top: 15px;">এই টেস্টে কোন প্রশ্ন নেই</p>
+                    </div>
+                `;
+                return;
+            }
+            
             questions.forEach((question, index) => {
                 const questionHtml = `
                     <div class="question-item" data-question-id="${question.id || index}">
                         <div class="question-number">${index + 1}</div>
                         <div class="question-text">
-                            ${question.questionText}
+                            ${question.question || question.questionText}
                         </div>
                         
                         <div class="options-grid">
-                            ${question.options.map((option, optIndex) => `
-                                <label class="option-label">
-                                    <input type="radio" name="q${index}" class="option-input" value="${optIndex + 1}">
-                                    <div class="option-text">
-                                        <div class="option-letter">${String.fromCharCode(2437 + optIndex)}</div>
-                                        <div>${option}</div>
-                                    </div>
-                                </label>
-                            `).join('')}
+                            ${createOptionsHtml(question, index)}
                         </div>
                     </div>
                 `;
@@ -1313,98 +1395,120 @@
             });
         }
 
+        function createOptionsHtml(question, index) {
+            const options = question.options || [question.option1, question.option2, question.option3, question.option4];
+            const banglaLetters = ['ক', 'খ', 'গ', 'ঘ'];
+            
+            return options.map((option, optIndex) => `
+                <label class="option-label">
+                    <input type="radio" name="q${index}" class="option-input" value="${optIndex + 1}">
+                    <div class="option-text">
+                        <div class="option-letter">${banglaLetters[optIndex] || String.fromCharCode(2437 + optIndex)}</div>
+                        <div>${option}</div>
+                    </div>
+                </label>
+            `).join('');
+        }
+
         // ==================== SUBMIT TEST ====================
         submitTestBtn.addEventListener('click', submitTest);
 
-        function submitTest() {
-            const userName = document.getElementById('user-name').value.trim();
-            const userPhone = document.getElementById('user-phone').value.trim();
-            const userEmail = document.getElementById('user-email-input').value.trim();
-            
-            // Validate user info
-            if (!userName || !userPhone) {
-                alert('দয়া করে আপনার নাম এবং মোবাইল নাম্বার দিন।');
-                return;
-            }
-            
-            if (!/^01[3-9]\d{8}$/.test(userPhone)) {
-                alert('দয়া করে সঠিক মোবাইল নাম্বার দিন (11 ডিজিট)।');
-                return;
-            }
-            
-            // Collect answers
-            const answers = [];
-            let score = 0;
-            let totalQuestions = testQuestions.length;
-            
-            testQuestions.forEach((question, index) => {
-                const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
-                const selectedAnswer = selectedOption ? parseInt(selectedOption.value) : 0;
-                const isCorrect = selectedAnswer === question.correctAnswer;
+        async function submitTest() {
+            try {
+                const userName = document.getElementById('user-name').value.trim();
+                const userPhone = document.getElementById('user-phone').value.trim();
+                const userEmail = document.getElementById('user-email-input').value.trim();
                 
-                if (isCorrect) {
-                    score += question.marks || 1;
+                // Validate user info
+                if (!userName || !userPhone) {
+                    alert('দয়া করে আপনার নাম এবং মোবাইল নাম্বার দিন।');
+                    return;
                 }
                 
-                answers.push({
-                    questionId: question.id || index,
-                    questionText: question.questionText,
-                    selectedAnswer: selectedAnswer,
-                    correctAnswer: question.correctAnswer,
-                    isCorrect: isCorrect,
-                    marks: question.marks || 1,
-                    marksObtained: isCorrect ? (question.marks || 1) : 0
-                });
-            });
-            
-            // Calculate time taken
-            const endTime = new Date();
-            const timeTaken = Math.floor((endTime - testStartTime) / 1000); // in seconds
-            
-            // Prepare result data
-            const resultData = {
-                userName: userName,
-                phoneNumber: userPhone,
-                userEmail: userEmail || null,
-                examId: currentTestId,
-                examTitle: modalTestTitle.textContent,
-                answers: answers,
-                totalScore: score,
-                totalMarks: testQuestions.reduce((sum, q) => sum + (q.marks || 1), 0),
-                timeTaken: timeTaken,
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                ipAddress: 'N/A', // You can get this from server-side
-                browserInfo: navigator.userAgent
-            };
-            
-            // Save to Firebase
-            db.collection('results').add(resultData)
-                .then((docRef) => {
-                    // Show result to user
-                    const percentage = ((score / resultData.totalMarks) * 100).toFixed(1);
+                if (!/^01[3-9]\d{8}$/.test(userPhone)) {
+                    alert('দয়া করে সঠিক মোবাইল নাম্বার দিন (11 ডিজিট)।');
+                    return;
+                }
+                
+                // Collect answers
+                const answers = [];
+                let score = 0;
+                let totalQuestions = testQuestions.length;
+                
+                for (let i = 0; i < totalQuestions; i++) {
+                    const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                    const selectedAnswer = selectedOption ? parseInt(selectedOption.value) : 0;
                     
-                    alert(`
+                    const question = testQuestions[i];
+                    const correctAnswer = question.correctAnswer;
+                    const isCorrect = selectedAnswer === correctAnswer;
+                    
+                    if (isCorrect) {
+                        score += question.marks || 1;
+                    }
+                    
+                    answers.push({
+                        questionId: question.id || i,
+                        questionText: question.question || question.questionText,
+                        selectedAnswer: selectedAnswer,
+                        correctAnswer: correctAnswer,
+                        isCorrect: isCorrect,
+                        marks: question.marks || 1,
+                        marksObtained: isCorrect ? (question.marks || 1) : 0
+                    });
+                }
+                
+                // Calculate time taken
+                const endTime = new Date();
+                const timeTaken = Math.floor((endTime - testStartTime) / 1000); // in seconds
+                
+                // Calculate total marks
+                const totalMarks = testQuestions.reduce((sum, q) => sum + (q.marks || 1), 0);
+                
+                // Prepare result data
+                const resultData = {
+                    userName: userName,
+                    phoneNumber: userPhone,
+                    userEmail: userEmail || null,
+                    examId: currentTestId,
+                    examTitle: currentTestData.title || 'টেস্ট',
+                    answers: answers,
+                    totalScore: score,
+                    totalMarks: totalMarks,
+                    timeTaken: timeTaken,
+                    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    ipAddress: 'N/A',
+                    browserInfo: navigator.userAgent
+                };
+                
+                // Save to Firebase
+                const docRef = await db.collection('results').add(resultData);
+                
+                // Show result to user
+                const percentage = totalMarks > 0 ? ((score / totalMarks) * 100).toFixed(1) : 0;
+                
+                alert(`
 ✅ টেস্ট সফলভাবে সাবমিট হয়েছে!
 
 📊 আপনার রেজাল্ট:
-প্রাপ্ত মার্কস: ${score}/${resultData.totalMarks}
+প্রাপ্ত মার্কস: ${score}/${totalMarks}
 শতকরা: ${percentage}%
 সময় নিয়েছেন: ${formatTime(timeTaken)}
 
 আপনার রেজাল্ট এডমিন প্যানেলে সংরক্ষণ করা হয়েছে।
-                    `);
-                    
-                    // Close modal and reset
-                    testModal.classList.remove('active');
-                    resetTestForm();
-                    
-                    // Reload tests to update participant count
-                    loadModelTests();
-                })
-                .catch((error) => {
-                    console.error("Error saving result:", error);
-                    alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।');
-                });
+                `);
+                
+                // Close modal and reset
+                testModal.classList.remove('active');
+                resetTestForm();
+                
+                // Reload tests to update participant count
+                await loadModelTests();
+                
+            } catch (error) {
+                console.error("Error submitting test:", error);
+                alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন: ' + error.message);
+            }
         }
 
         // ==================== UTILITY FUNCTIONS ====================
@@ -1414,6 +1518,7 @@
             document.getElementById('user-email-input').value = '';
             questionsContainer.innerHTML = '';
             currentTestId = null;
+            currentTestData = null;
             testQuestions = [];
             testStartTime = null;
             
@@ -1430,12 +1535,17 @@
         }
 
         // ==================== INITIALIZATION ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            loadModelTests();
-            loadCategories();
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log("Page loaded, initializing...");
             
             // Set current year in footer
             document.querySelector('.copyright').innerHTML = `&copy; ${new Date().getFullYear()} FreeTutorBD. সর্বস্বত্ব সংরক্ষিত।<br><small>এই সাইটের সকল কন্টেন্ট শুধুমাত্র শিক্ষামূলক উদ্দেশ্যে তৈরি করা হয়েছে।</small>`;
+            
+            // Load data
+            await loadModelTests();
+            await loadCategories();
+            
+            console.log("Initialization complete");
         });
 
         // Prevent form submission on Enter
