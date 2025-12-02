@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model Test - FreeTutorBD</title>
+    <title>FreeTutorBD - Model Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -14,416 +14,427 @@
             font-family: 'Hind Siliguri', sans-serif;
         }
         
-        :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --light: #f8f9fa;
-            --dark: #343a40;
-        }
-        
         body {
             background: #f5f7fa;
             color: #333;
             line-height: 1.6;
         }
         
-        /* Header Styles */
+        /* Header */
         .header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         
-        .top-header {
-            background: var(--secondary);
-            color: white;
-            padding: 10px 0;
-        }
-        
-        .top-header-content {
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
         }
         
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .logo i {
-            color: var(--primary);
-            font-size: 24px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            color: white;
-        }
-        
-        .logo span {
-            color: var(--primary);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* Desktop Navigation */
-        .desktop-nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--dark);
-            text-decoration: none;
-            padding: 15px 0;
-            display: block;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .nav-links a.active {
-            color: var(--primary);
-        }
-        
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        /* Mobile Navigation */
-        .mobile-nav {
-            display: none;
-            background: white;
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100vh;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            transition: left 0.3s;
-            z-index: 2000;
-            padding-top: 60px;
-        }
-        
-        .mobile-nav.active {
-            left: 0;
-        }
-        
-        .mobile-nav-links {
-            list-style: none;
-        }
-        
-        .mobile-nav-links a {
-            display: block;
-            padding: 15px 20px;
-            color: var(--dark);
-            text-decoration: none;
-            border-bottom: 1px solid #eee;
-            font-weight: 500;
-        }
-        
-        .mobile-nav-links a:hover {
-            background: #f8f9fa;
-            color: var(--primary);
-        }
-        
-        .mobile-nav-links a i {
-            width: 30px;
-            text-align: center;
-        }
-        
-        .close-menu {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--danger);
-            cursor: pointer;
-        }
-        
-        /* Notice Bar */
-        .notice-bar {
-            background: linear-gradient(135deg, var(--warning), #e67e22);
-            color: white;
-            padding: 10px 0;
-            overflow: hidden;
-        }
-        
-        .notice-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
             gap: 15px;
         }
         
-        .notice-icon {
-            font-size: 20px;
+        .logo img {
+            height: 50px;
+            width: auto;
         }
         
-        .notice-text {
-            flex: 1;
-            white-space: nowrap;
-            animation: scrollNotice 20s linear infinite;
+        .site-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
         }
         
-        @keyframes scrollNotice {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #FFD700;
         }
         
         /* Main Container */
-        .main-container {
+        .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 30px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 250px 1fr 250px;
-            gap: 25px;
         }
         
-        /* Sidebar Styles */
-        .sidebar {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-        
-        .sidebar-section {
-            margin-bottom: 25px;
-        }
-        
-        .sidebar-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .sidebar-title {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .category-list {
-            list-style: none;
-        }
-        
-        .category-item {
-            margin-bottom: 10px;
-        }
-        
-        .category-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .category-item a {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--dark);
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-        
-        .category-item a:hover {
-            background: #f0f7ff;
-            color: var(--primary);
-        }
-        
-        .category-item .count {
-            background: #e3f2fd;
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        /* Ad Container */
-        .ad-container {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            text-align: center;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ddd;
-        }
-        
-        .ad-placeholder {
-            color: #95a5a6;
-        }
-        
-        .ad-placeholder i {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        /* Main Content */
-        .main-content {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        
-        .page-title {
-            color: var(--secondary);
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Model Tests Grid */
-        .model-tests-grid {
+        /* Test Selection Page */
+        .test-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
+            margin-top: 30px;
         }
         
-        .model-test-card {
+        .test-card {
             background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
         
-        .model-test-card:hover {
+        .test-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
-        .test-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--success);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .test-title {
-            color: var(--secondary);
-            margin-bottom: 10px;
-            font-size: 18px;
-            font-weight: 600;
+        .test-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 20px;
         }
         
         .test-meta {
             display: flex;
             gap: 15px;
             margin-bottom: 15px;
-            color: #666;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .start-btn {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .start-btn:hover {
+            background: linear-gradient(135deg, #219653, #1e8449);
+        }
+        
+        /* Test Page */
+        .test-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .test-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 25px 30px;
+        }
+        
+        .test-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .test-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 14px;
         }
         
-        .test-meta i {
-            color: var(--primary);
-            margin-right: 5px;
+        /* User Info Form */
+        .user-form-section {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-bottom: 2px solid #e0e0e0;
         }
         
-        .test-description {
-            color: #666;
+        .form-group {
             margin-bottom: 20px;
-            font-size: 14px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        /* Timer */
+        .timer-container {
+            background: #fff3cd;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffeaa7;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d35400;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid #d35400;
+        }
+        
+        .timer.warning {
+            color: #e74c3c;
+            border-color: #e74c3c;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* Questions Section */
+        .questions-section {
+            padding: 30px;
+        }
+        
+        .question-card {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .question-card:hover {
+            border-color: #3498db;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 20px;
             line-height: 1.5;
         }
         
-        .start-test-btn {
-            display: block;
-            width: 100%;
-            background: var(--primary);
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option-label:hover {
+            border-color: #3498db;
+            background: #f0f7ff;
+        }
+        
+        .option-label.selected {
+            border-color: #27ae60;
+            background: #d4edda;
+        }
+        
+        .option-radio {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .option-text {
+            font-size: 16px;
+        }
+        
+        /* Submit Section */
+        .submit-section {
+            background: #f8f9fa;
+            padding: 25px 30px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #27ae60, #219653);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: 500;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Ads */
+        .ad-container {
+            background: white;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
             text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ad-container.hidden {
+            display: none;
+        }
+        
+        .ad-placeholder {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            color: #3498db;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
             text-decoration: none;
+            transition: color 0.3s;
         }
         
-        .start-test-btn:hover {
-            background: #2980b9;
+        .footer-links a:hover {
+            color: #3498db;
         }
         
-        /* Test Modal */
-        .test-modal {
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 3000;
-            overflow-y: auto;
-            padding: 20px;
-        }
-        
-        .test-modal.active {
-            display: flex;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
         }
@@ -431,262 +442,84 @@
         .modal-content {
             background: white;
             border-radius: 15px;
-            width: 100%;
-            max-width: 800px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalFadeIn 0.3s;
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .modal-header {
-            background: var(--primary);
-            color: white;
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
         
         .modal-title {
-            font-size: 22px;
-            font-weight: 600;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
+            color: #2c3e50;
+            margin-bottom: 20px;
             font-size: 24px;
-            cursor: pointer;
         }
         
-        .modal-body {
-            padding: 30px;
-        }
-        
-        /* User Info Form */
-        .user-info-form {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
+        .modal-message {
+            color: #555;
             margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--secondary);
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
-        
-        /* Question Layout */
-        .question-container {
-            margin-bottom: 30px;
-        }
-        
-        .question-header {
-            background: #e3f2fd;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .question-number {
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 18px;
-        }
-        
-        .question-text {
-            margin-bottom: 20px;
             font-size: 16px;
             line-height: 1.6;
-            color: #333;
         }
         
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .option-item {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .option-item:hover {
-            border-color: var(--primary);
-            background: #f0f7ff;
-        }
-        
-        .option-item.selected {
-            border-color: var(--primary);
-            background: #e3f2fd;
-        }
-        
-        .option-label {
-            display: block;
-            color: var(--secondary);
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        
-        .option-text {
-            color: #333;
-            font-size: 15px;
-        }
-        
-        /* Modal Footer */
-        .modal-footer {
-            padding: 20px 30px;
-            background: #f8f9fa;
-            border-radius: 0 0 15px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .timer {
-            background: var(--warning);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-        
-        .submit-btn {
-            background: var(--success);
+        .modal-btn {
+            background: #3498db;
             color: white;
             border: none;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
-            font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s;
+            margin: 0 10px;
         }
         
-        .submit-btn:hover {
-            background: #219653;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--secondary);
-            color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-        
-        .copyright {
-            color: #bdc3c7;
-            font-size: 14px;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-        }
-        
+        /* Responsive */
         @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .model-tests-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                margin: 10px;
-                max-height: 95vh;
-            }
-            
-            .modal-body {
-                padding: 15px;
-            }
-            
-            .modal-footer {
+            .header-container {
                 flex-direction: column;
                 gap: 15px;
-                padding: 15px;
             }
             
-            .notice-text {
-                animation: scrollNotice 15s linear infinite;
+            .nav-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
             }
         }
         
         @media (max-width: 480px) {
-            .main-content {
-                padding: 15px;
+            .container {
+                padding: 0 15px;
             }
             
-            .page-title {
-                font-size: 20px;
+            .test-header {
+                padding: 20px;
             }
             
-            .model-test-card {
-                padding: 15px;
+            .questions-section {
+                padding: 20px;
             }
             
-            .test-meta {
-                flex-direction: column;
-                gap: 5px;
+            .question-card {
+                padding: 20px;
             }
         }
     </style>
@@ -694,222 +527,193 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <!-- Top Header -->
-        <div class="top-header">
-            <div class="top-header-content">
-                <div class="logo">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h1>Free<span>Tutor</span>BD</h1>
-                </div>
-                
-                <div class="desktop-nav">
-                    <ul class="nav-links">
-                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> হোম</a></li>
-                        <li><a href="quiz.html"><i class="fas fa-question-circle"></i> কুইজ টেস্ট</a></li>
-                        <li><a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a></li>
-                        <li><a href="prosnobank.html"><i class="fas fa-book"></i> প্রশ্নব্যাংক</a></li>
-                        <li><a href="#" id="login-btn"><i class="fas fa-user"></i> লগইন</a></li>
-                    </ul>
-                </div>
-                
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+        <div class="header-container">
+            <div class="logo">
+                <img id="site-logo" src="" alt="FreeTutorBD Logo">
+                <div class="site-name">FreeTutorBD</div>
             </div>
-        </div>
-        
-        <!-- Notice Bar -->
-        <div class="notice-bar">
-            <div class="notice-content">
-                <div class="notice-icon">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
-                <div class="notice-text">
-                    📢 নতুন মডেল টেস্ট যোগ করা হয়েছে! বিসিএস প্রিলিমিনারি মডেল টেস্ট - ৫ এখনই দিয়ে দেখুন। প্রতিদিন নতুন নতুন প্রশ্ন ও টেস্ট যোগ করা হচ্ছে।
-                </div>
-            </div>
+            <nav class="nav-menu">
+                <a href="#"><i class="fas fa-home"></i> হোম</a>
+                <a href="#"><i class="fas fa-file-alt"></i> মডেল টেস্ট</a>
+                <a href="#"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a>
+                <a href="#"><i class="fas fa-briefcase"></i> চাকরি</a>
+                <a href="#"><i class="fas fa-info-circle"></i> সম্পর্কে</a>
+            </nav>
         </div>
     </header>
     
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav" id="mobile-nav">
-        <button class="close-menu" id="close-menu">
-            <i class="fas fa-times"></i>
-        </button>
-        <ul class="mobile-nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> হোম</a></li>
-            <li><a href="quiz.html"><i class="fas fa-question-circle"></i> কুইজ টেস্ট</a></li>
-            <li><a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a></li>
-            <li><a href="prosnobank.html"><i class="fas fa-book"></i> প্রশ্নব্যাংক</a></li>
-            <li><a href="#" id="mobile-login-btn"><i class="fas fa-user"></i> লগইন</a></li>
-        </ul>
+    <!-- Ad Container - Header -->
+    <div class="container">
+        <div class="ad-container" id="ad-header">
+            <div class="ad-placeholder">
+                <i class="fas fa-ad fa-2x"></i>
+                <p>বিজ্ঞাপন</p>
+            </div>
+        </div>
     </div>
     
-    <!-- Main Container -->
-    <main class="main-container">
-        <!-- Left Sidebar (Desktop Only) -->
-        <aside class="sidebar">
-            <!-- Question Bank Categories -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">
-                    <i class="fas fa-folder"></i>
-                    প্রশ্নব্যাংক
-                </h3>
-                <ul class="category-list" id="question-categories">
-                    <!-- Categories will be loaded from Firebase -->
-                    <li class="category-item">
-                        <a href="#">
-                            <span>বাংলাদেশ বিষয়াবলী</span>
-                            <span class="count">500</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>আন্তর্জাতিক বিষয়াবলী</span>
-                            <span class="count">300</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Test Selection Page -->
+        <div id="test-selection-page">
+            <h1 style="color: #2c3e50; margin-bottom: 10px; text-align: center;">মডেল টেস্ট</h1>
+            <p style="color: #555; text-align: center; margin-bottom: 30px;">প্রস্তুতি নিন বিনামূল্যে, আপনার দক্ষতা যাচাই করুন</p>
             
-            <!-- Job Categories -->
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">
-                    <i class="fas fa-briefcase"></i>
-                    চাকরি ক্যাটাগরি
-                </h3>
-                <ul class="category-list" id="job-categories">
-                    <!-- Categories will be loaded from Firebase -->
-                    <li class="category-item">
-                        <a href="#">
-                            <span>সরকারি চাকরি</span>
-                            <span class="count">25</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>ব্যাংক চাকরি</span>
-                            <span class="count">15</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </aside>
-        
-        <!-- Main Content -->
-        <div class="main-content">
-            <h2 class="page-title">
-                <i class="fas fa-file-alt"></i>
-                সব মডেল টেস্ট
-            </h2>
-            
-            <!-- Model Tests Grid -->
-            <div class="model-tests-grid" id="model-tests-container">
-                <!-- Tests will be loaded from Firebase -->
-                <div class="model-test-card">
-                    <span class="test-badge">নতুন</span>
-                    <h3 class="test-title">বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১</h3>
-                    <div class="test-meta">
-                        <span><i class="fas fa-clock"></i> 60 মিনিট</span>
-                        <span><i class="fas fa-question-circle"></i> 100 প্রশ্ন</span>
-                        <span><i class="fas fa-star"></i> 100 মার্কস</span>
-                    </div>
-                    <p class="test-description">বিসিএস প্রিলিমিনারি পরীক্ষার জন্য প্রস্তুতিমূলক মডেল টেস্ট। বাংলাদেশ বিষয়াবলী, ইংরেজি, গণিত ও সাধারন জ্ঞান অন্তর্ভুক্ত।</p>
-                    <button class="start-test-btn" data-test-id="1">টেস্ট শুরু করুন</button>
-                </div>
+            <div class="test-grid" id="tests-container">
+                <!-- Tests will be loaded here -->
             </div>
         </div>
         
-        <!-- Right Sidebar (Ad Container) -->
-        <aside class="sidebar ad-container">
-            <div class="ad-placeholder" id="ad-space">
-                <i class="fas fa-ad"></i>
-                <p>বিজ্ঞাপনের জায়গা</p>
-                <small>AdSense/Adstra Code</small>
-            </div>
-        </aside>
-    </main>
-    
-    <!-- Test Modal -->
-    <div class="test-modal" id="test-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-test-title">মডেল টেস্ট</h3>
-                <button class="close-modal" id="close-modal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="modal-body">
-                <!-- User Info Form -->
-                <div class="user-info-form" id="user-info-form">
-                    <h4 style="margin-bottom: 15px; color: var(--secondary);">আপনার তথ্য দিন</h4>
-                    <div class="form-group">
-                        <label for="user-name">আপনার নাম:</label>
-                        <input type="text" id="user-name" class="form-control" placeholder="আপনার পূর্ণ নাম" required>
+        <!-- Test Page (Initially Hidden) -->
+        <div id="test-page" style="display: none;">
+            <div class="test-container">
+                <!-- Test Header -->
+                <div class="test-header">
+                    <h1 class="test-title" id="test-title">টেস্ট লোড হচ্ছে...</h1>
+                    <div class="test-info">
+                        <span class="info-item"><i class="fas fa-clock"></i> সময়: <span id="test-time">60</span> মিনিট</span>
+                        <span class="info-item"><i class="fas fa-question-circle"></i> প্রশ্ন: <span id="test-questions">0</span></span>
+                        <span class="info-item"><i class="fas fa-star"></i> মোট মার্কস: <span id="test-total-marks">0</span></span>
                     </div>
-                    <div class="form-group">
-                        <label for="user-phone">মোবাইল নাম্বার:</label>
-                        <input type="tel" id="user-phone" class="form-control" placeholder="01XXXXXXXXX" required>
-                    </div>
-                    <button class="start-test-btn" id="start-test-btn">টেস্ট শুরু করুন</button>
                 </div>
                 
-                <!-- Questions Container (Initially Hidden) -->
-                <div id="questions-container" style="display: none;">
-                    <!-- Questions will be loaded here -->
-                    <div class="question-container">
-                        <div class="question-header">
-                            <span class="question-number">প্রশ্ন ১/১০০</span>
-                            <span class="timer">সময়: <span id="timer">60:00</span></span>
+                <!-- User Info Form -->
+                <div class="user-form-section">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;"><i class="fas fa-user-circle"></i> আপনার তথ্য দিন</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="form-label">আপনার নাম *</label>
+                            <input type="text" id="user-name" class="form-input" placeholder="আপনার পুরো নাম" required>
                         </div>
-                        
-                        <p class="question-text" id="question-text">বাংলাদেশের স্বাধীনতা দিবস কোনটি?</p>
-                        
-                        <div class="options-grid" id="options-container">
-                            <div class="option-item" data-option="1">
-                                <span class="option-label">ক</span>
-                                <p class="option-text">২৬ মার্চ</p>
-                            </div>
-                            <div class="option-item" data-option="2">
-                                <span class="option-label">খ</span>
-                                <p class="option-text">১৬ ডিসেম্বর</p>
-                            </div>
-                            <div class="option-item" data-option="3">
-                                <span class="option-label">গ</span>
-                                <p class="option-text">২১ ফেব্রুয়ারি</p>
-                            </div>
-                            <div class="option-item" data-option="4">
-                                <span class="option-label">ঘ</span>
-                                <p class="option-text">১ এপ্রিল</p>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">মোবাইল নম্বর *</label>
+                            <input type="tel" id="user-phone" class="form-input" placeholder="01XXXXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ইমেইল (ঐচ্ছিক)</label>
+                        <input type="email" id="user-email" class="form-input" placeholder="you@example.com">
+                    </div>
+                    <p style="color: #7f8c8d; font-size: 14px; margin-top: 15px;">
+                        <i class="fas fa-info-circle"></i> আপনার তথ্য শুধুমাত্র রেজাল্ট দেখার জন্য ব্যবহৃত হবে
+                    </p>
+                </div>
+                
+                <!-- Timer -->
+                <div class="timer-container">
+                    <div>
+                        <strong>টেস্টার:</strong> <span id="display-name">নাম লিখুন</span>
+                    </div>
+                    <div class="timer" id="timer">
+                        60:00
+                    </div>
+                </div>
+                
+                <!-- Middle Ad -->
+                <div class="ad-container" id="ad-middle">
+                    <div class="ad-placeholder">
+                        <i class="fas fa-ad fa-2x"></i>
+                        <p>বিজ্ঞাপন</p>
+                    </div>
+                </div>
+                
+                <!-- Questions Section -->
+                <div class="questions-section" id="questions-section">
+                    <h3 style="color: #2c3e50; margin-bottom: 25px;"><i class="fas fa-question-circle"></i> প্রশ্নসমূহ</h3>
+                    
+                    <div id="questions-container">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                    
+                    <!-- Bottom Ad -->
+                    <div class="ad-container" id="ad-bottom">
+                        <div class="ad-placeholder">
+                            <i class="fas fa-ad fa-2x"></i>
+                            <p>বিজ্ঞাপন</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button id="submit-btn" class="submit-btn" onclick="submitTest()" disabled>
+                        <i class="fas fa-paper-plane"></i> টেস্ট সাবমিট করুন
+                    </button>
+                    <p style="color: #7f8c8d; margin-top: 15px; font-size: 14px;">
+                        <i class="fas fa-exclamation-triangle"></i> একবার সাবমিট করলে আর পরিবর্তন করা যাবে না
+                    </p>
+                </div>
             </div>
-            
-            <div class="modal-footer" id="modal-footer" style="display: none;">
-                <div class="timer" id="footer-timer">সময়: 59:45</div>
-                <button class="submit-btn" id="submit-test">সাবমিট করুন</button>
+        </div>
+    </div>
+    
+    <!-- Ad Container - Footer -->
+    <div class="container">
+        <div class="ad-container" id="ad-footer">
+            <div class="ad-placeholder">
+                <i class="fas fa-ad fa-2x"></i>
+                <p>বিজ্ঞাপন</p>
             </div>
         </div>
     </div>
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="copyright">
-                <p>© 2024 FreeTutorBD. সর্বস্বত্ব সংরক্ষিত।</p>
-                <p>Developed with ❤️ for Bangladeshi Students</p>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>FreeTutorBD</h3>
+                <p style="color: #bdc3c7; line-height: 1.6;">
+                    বাংলাদেশের বৃহত্তম ফ্রি লার্নিং প্ল্যাটফর্ম। প্রস্তুতি নিন বিনামূল্যে, সাফল্য পান সহজে।
+                </p>
             </div>
+            
+            <div class="footer-section">
+                <h3>দ্রুত লিংক</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> হোম</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> মডেল টেস্ট</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> প্রশ্নব্যাংক</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> চাকরি</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> যোগাযোগ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>যোগাযোগ</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> contact@freetutorbd.com</li>
+                    <li><i class="fas fa-phone"></i> +880 1XXX XXXXXX</li>
+                    <li><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2024 FreeTutorBD. সর্বস্বত্ব সংরক্ষিত।</p>
+            <p style="margin-top: 5px;">Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> for Bangladeshi Students</p>
         </div>
     </footer>
     
+    <!-- Modal -->
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <h2 class="modal-title"><i class="fas fa-trophy"></i> টেস্ট সম্পন্ন!</h2>
+            <div class="modal-message" id="modal-message">
+                আপনার টেস্ট সফলভাবে সাবমিট হয়েছে। রেজাল্ট দেখতে নিচের বাটনে ক্লিক করুন।
+            </div>
+            <button class="modal-btn" onclick="closeModal()">
+                <i class="fas fa-check"></i> ঠিক আছে
+            </button>
+        </div>
+    </div>
+    
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script>
-        // Firebase Configuration
+        // ==================== FIREBASE CONFIGURATION ====================
         const firebaseConfig = {
             apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
             authDomain: "freetutorbd-19380.firebaseapp.com",
@@ -924,324 +728,299 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // Global Variables
-        let currentTestId = null;
-        let currentTestData = null;
-        let userAnswers = {};
+        // ==================== GLOBAL VARIABLES ====================
+        let currentTest = null;
         let timerInterval = null;
         let timeLeft = 0;
-        let currentQuestionIndex = 0;
-        let testQuestions = [];
+        let userAnswers = {};
+        let testStarted = false;
+        let adsEnabled = true;
 
-        // DOM Elements
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileNav = document.getElementById('mobile-nav');
-        const closeMenuBtn = document.getElementById('close-menu');
-        const testModal = document.getElementById('test-modal');
-        const closeModalBtn = document.getElementById('close-modal');
-        const startTestBtn = document.getElementById('start-test-btn');
-        const submitTestBtn = document.getElementById('submit-test');
-        const modelTestsContainer = document.getElementById('model-tests-container');
-        const questionCategories = document.getElementById('question-categories');
-        const jobCategories = document.getElementById('job-categories');
-
-        // Event Listeners
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.add('active');
+        // ==================== PAGE LOAD ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLogo();
+            loadTests();
+            setupEventListeners();
+            toggleAds(adsEnabled);
         });
 
-        closeMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-        });
-
-        closeModalBtn.addEventListener('click', () => {
-            closeTestModal();
-        });
-
-        startTestBtn.addEventListener('click', startTest);
-
-        submitTestBtn.addEventListener('click', submitTest);
-
-        // Load Data from Firebase
-        document.addEventListener('DOMContentLoaded', () => {
-            loadModelTests();
-            loadQuestionCategories();
-            loadJobCategories();
-            setupTestCards();
-        });
-
-        // Load Model Tests
-        async function loadModelTests() {
-            try {
-                const snapshot = await db.collection('exams')
-                    .where('status', '==', 'published')
-                    .orderBy('createdAt', 'desc')
-                    .get();
-
-                modelTestsContainer.innerHTML = '';
-
-                if (snapshot.empty) {
-                    modelTestsContainer.innerHTML = `
-                        <div style="text-align: center; padding: 50px; color: #666;">
-                            <i class="fas fa-file-alt fa-3x" style="color: #ddd; margin-bottom: 20px;"></i>
-                            <p>কোন মডেল টেস্ট পাওয়া যায়নি</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                snapshot.forEach(doc => {
-                    const test = doc.data();
-                    const testCard = createTestCard(doc.id, test);
-                    modelTestsContainer.appendChild(testCard);
-                });
-
-            } catch (error) {
-                console.error('Error loading tests:', error);
-                modelTestsContainer.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: #e74c3c;">
-                        <i class="fas fa-exclamation-triangle fa-3x" style="margin-bottom: 20px;"></i>
-                        <p>ডেটা লোড করতে সমস্যা হয়েছে</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Create Test Card
-        function createTestCard(testId, test) {
-            const card = document.createElement('div');
-            card.className = 'model-test-card';
-            
-            const isNew = isTestNew(test.createdAt);
-            const timeLimit = test.timeLimit || 60;
-            const totalQuestions = test.totalQuestions || 50;
-            const totalMarks = test.totalMarks || (totalQuestions * (test.marksPerQuestion || 1));
-            
-            card.innerHTML = `
-                ${isNew ? '<span class="test-badge">নতুন</span>' : ''}
-                <h3 class="test-title">${test.title}</h3>
-                <div class="test-meta">
-                    <span><i class="fas fa-clock"></i> ${timeLimit} মিনিট</span>
-                    <span><i class="fas fa-question-circle"></i> ${totalQuestions} প্রশ্ন</span>
-                    <span><i class="fas fa-star"></i> ${totalMarks} মার্কস</span>
-                </div>
-                <p class="test-description">${test.description || 'প্রস্তুতিমূলক মডেল টেস্ট'}</p>
-                <button class="start-test-btn" data-test-id="${testId}">টেস্ট শুরু করুন</button>
-            `;
-            
-            return card;
-        }
-
-        // Check if test is new (less than 7 days old)
-        function isTestNew(createdAt) {
-            if (!createdAt) return false;
-            const createdDate = createdAt.toDate();
-            const now = new Date();
-            const diffTime = Math.abs(now - createdDate);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays <= 7;
-        }
-
-        // Load Question Categories
-        async function loadQuestionCategories() {
-            try {
-                // Load from categories collection
-                const categoriesSnapshot = await db.collection('categories').get();
-                const questionsSnapshot = await db.collection('questions').get();
-                
-                // Count questions per category
-                const categoryCounts = {};
-                questionsSnapshot.forEach(doc => {
-                    const question = doc.data();
-                    const category = question.category;
-                    if (category) {
-                        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+        // ==================== LOGO LOADING ====================
+        function loadLogo() {
+            db.collection('settings').doc('logo').get()
+                .then(doc => {
+                    if (doc.exists && doc.data().url) {
+                        document.getElementById('site-logo').src = doc.data().url;
+                    } else {
+                        document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
                     }
+                })
+                .catch(() => {
+                    document.getElementById('site-logo').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%233498db"/><text x="50" y="50" font-size="40" fill="white" text-anchor="middle" dy=".3em">FT</text></svg>';
                 });
-                
-                questionCategories.innerHTML = '';
-                
-                // Add categories with counts
-                categoriesSnapshot.forEach(doc => {
-                    const category = doc.data();
-                    const count = categoryCounts[category.nameBn] || 0;
-                    
-                    const li = document.createElement('li');
-                    li.className = 'category-item';
-                    li.innerHTML = `
-                        <a href="prosnobank.html?category=${encodeURIComponent(category.nameBn)}">
-                            <span>${category.nameBn}</span>
-                            <span class="count">${count}</span>
-                        </a>
-                    `;
-                    questionCategories.appendChild(li);
-                });
-                
-            } catch (error) {
-                console.error('Error loading categories:', error);
-            }
         }
 
-        // Load Job Categories
-        async function loadJobCategories() {
-            try {
-                const snapshot = await db.collection('jobs').get();
-                
-                // Count jobs per category
-                const categoryCounts = {};
-                snapshot.forEach(doc => {
-                    const job = doc.data();
-                    const category = job.category;
-                    if (category) {
-                        categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-                    }
-                });
-                
-                jobCategories.innerHTML = '';
-                
-                // Add categories with counts
-                const categories = {
-                    'government': 'সরকারি চাকরি',
-                    'private': 'প্রাইভেট চাকরি',
-                    'bank': 'ব্যাংক চাকরি',
-                    'ngo': 'এনজিও চাকরি',
-                    'bcs': 'বিসিএস',
-                    'teacher': 'শিক্ষক'
-                };
-                
-                for (const [key, label] of Object.entries(categories)) {
-                    const count = categoryCounts[key] || 0;
-                    
-                    const li = document.createElement('li');
-                    li.className = 'category-item';
-                    li.innerHTML = `
-                        <a href="jobs.html?category=${key}">
-                            <span>${label}</span>
-                            <span class="count">${count}</span>
-                        </a>
-                    `;
-                    jobCategories.appendChild(li);
-                }
-                
-            } catch (error) {
-                console.error('Error loading job categories:', error);
-            }
-        }
-
-        // Setup Test Cards Event Listeners
-        function setupTestCards() {
-            modelTestsContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('start-test-btn')) {
-                    const testId = e.target.getAttribute('data-test-id');
-                    openTestModal(testId);
+        // ==================== ADS MANAGEMENT ====================
+        function toggleAds(show) {
+            const ads = document.querySelectorAll('.ad-container');
+            ads.forEach(ad => {
+                if (show) {
+                    ad.classList.remove('hidden');
+                } else {
+                    ad.classList.add('hidden');
                 }
             });
         }
 
-        // Open Test Modal
-        async function openTestModal(testId) {
-            try {
-                currentTestId = testId;
-                const doc = await db.collection('exams').doc(testId).get();
-                
-                if (!doc.exists) {
-                    alert('টেস্টটি পাওয়া যায়নি');
-                    return;
-                }
-                
-                currentTestData = doc.data();
-                
-                // Set modal title
-                document.getElementById('modal-test-title').textContent = currentTestData.title;
-                
-                // Show modal
-                testModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                
-                // Load test questions
-                await loadTestQuestions();
-                
-            } catch (error) {
-                console.error('Error opening test:', error);
-                alert('টেস্ট লোড করতে সমস্যা হয়েছে');
-            }
+        // ==================== TESTS LOADING ====================
+        function loadTests() {
+            const testsContainer = document.getElementById('tests-container');
+            testsContainer.innerHTML = `
+                <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: #3498db;"></i>
+                    <p style="margin-top: 15px; color: #7f8c8d;">টেস্ট লোড হচ্ছে...</p>
+                </div>
+            `;
+            
+            db.collection('exams').where('status', '==', 'published').get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        testsContainer.innerHTML = `
+                            <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                                <i class="fas fa-exclamation-circle fa-2x" style="color: #e74c3c;"></i>
+                                <p style="margin-top: 15px; color: #7f8c8d;">কোন টেস্ট পাওয়া যায়নি</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    let html = '';
+                    snapshot.forEach(doc => {
+                        const test = doc.data();
+                        const testId = doc.id;
+                        
+                        html += `
+                            <div class="test-card">
+                                <h3>${test.title}</h3>
+                                <div class="test-meta">
+                                    <span class="meta-item"><i class="fas fa-clock"></i> ${test.timeLimit} মিনিট</span>
+                                    <span class="meta-item"><i class="fas fa-question-circle"></i> ${test.totalQuestions} প্রশ্ন</span>
+                                    <span class="meta-item"><i class="fas fa-star"></i> ${test.totalQuestions * test.marksPerQuestion} মার্কস</span>
+                                </div>
+                                <p style="color: #666; margin-bottom: 20px;">${test.description || 'কোন বিবরণ নেই'}</p>
+                                <button class="start-btn" onclick="startTest('${testId}')">
+                                    <i class="fas fa-play-circle"></i> শুরু করুন
+                                </button>
+                            </div>
+                        `;
+                    });
+                    
+                    testsContainer.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading tests:', error);
+                    testsContainer.innerHTML = `
+                        <div style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle fa-2x" style="color: #e74c3c;"></i>
+                            <p style="margin-top: 15px; color: #7f8c8d;">টেস্ট লোড করতে সমস্যা হয়েছে</p>
+                        </div>
+                    `;
+                });
         }
 
-        // Load Test Questions
-        async function loadTestQuestions() {
-            try {
-                // First check if test has embedded questions
-                if (currentTestData.questions && currentTestData.questions.length > 0) {
-                    testQuestions = currentTestData.questions;
-                } else {
-                    // Load questions from question bank based on category
-                    const snapshot = await db.collection('questions')
-                        .where('category', '==', currentTestData.category)
-                        .limit(currentTestData.totalQuestions || 50)
-                        .get();
-                    
-                    testQuestions = [];
-                    snapshot.forEach(doc => {
-                        testQuestions.push({
-                            id: doc.id,
+        // ==================== TEST START ====================
+        function startTest(testId) {
+            document.getElementById('test-selection-page').style.display = 'none';
+            document.getElementById('test-page').style.display = 'block';
+            
+            db.collection('exams').doc(testId).get()
+                .then(doc => {
+                    if (doc.exists) {
+                        currentTest = {
+                            id: testId,
                             ...doc.data()
+                        };
+                        
+                        document.getElementById('test-title').textContent = currentTest.title;
+                        document.getElementById('test-time').textContent = currentTest.timeLimit;
+                        document.getElementById('test-questions').textContent = currentTest.totalQuestions;
+                        document.getElementById('test-total-marks').textContent = currentTest.totalQuestions * currentTest.marksPerQuestion;
+                        
+                        timeLeft = currentTest.timeLimit * 60;
+                        updateTimerDisplay();
+                        
+                        loadQuestions();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading test:', error);
+                    alert('টেস্ট লোড করতে সমস্যা হয়েছে');
+                });
+        }
+
+        // ==================== QUESTIONS LOADING ====================
+        function loadQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            questionsContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-2x" style="color: #3498db;"></i>
+                    <p style="margin-top: 15px; color: #7f8c8d;">প্রশ্ন লোড হচ্ছে...</p>
+                </div>
+            `;
+            
+            // Load questions from Firebase
+            db.collection('questions').limit(20).get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        showSampleQuestions();
+                        return;
+                    }
+                    
+                    let html = '';
+                    let questionCount = 0;
+                    
+                    snapshot.forEach(doc => {
+                        const question = doc.data();
+                        questionCount++;
+                        
+                        html += `
+                            <div class="question-card">
+                                <div class="question-number">${questionCount}</div>
+                                <div class="question-text">${question.question}</div>
+                                <div class="options-container">
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 1)">
+                                        <input type="radio" name="q${questionCount}" value="1" class="option-radio">
+                                        <span class="option-text">${question.option1}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 2)">
+                                        <input type="radio" name="q${questionCount}" value="2" class="option-radio">
+                                        <span class="option-text">${question.option2}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 3)">
+                                        <input type="radio" name="q${questionCount}" value="3" class="option-radio">
+                                        <span class="option-text">${question.option3}</span>
+                                    </label>
+                                    <label class="option-label" onclick="selectAnswer(${questionCount}, 4)">
+                                        <input type="radio" name="q${questionCount}" value="4" class="option-radio">
+                                        <span class="option-text">${question.option4}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    questionsContainer.innerHTML = html;
+                    
+                    // Store questions data
+                    currentTest.questions = [];
+                    snapshot.forEach(doc => {
+                        const q = doc.data();
+                        currentTest.questions.push({
+                            id: currentTest.questions.length + 1,
+                            question: q.question,
+                            options: [q.option1, q.option2, q.option3, q.option4],
+                            correctAnswer: q.correctAnswer
                         });
                     });
                     
-                    // Shuffle questions
-                    testQuestions = shuffleArray(testQuestions);
+                    checkIfAllAnswered();
+                })
+                .catch(error => {
+                    console.error('Error loading questions:', error);
+                    showSampleQuestions();
+                });
+        }
+
+        function showSampleQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            let html = '';
+            
+            const sampleQuestions = [
+                {
+                    id: 1,
+                    question: "বাংলাদেশের স্বাধীনতা দিবস কোন তারিখে?",
+                    options: ["২৬ মার্চ", "১৬ ডিসেম্বর", "২১ ফেব্রুয়ারি", "১ এপ্রিল"],
+                    correctAnswer: 1
+                },
+                {
+                    id: 2,
+                    question: "বাংলাদেশের জাতীয় পাখি কোনটি?",
+                    options: ["ময়না", "দোয়েল", "কাক", "শালিক"],
+                    correctAnswer: 2
+                },
+                {
+                    id: 3,
+                    question: "বাংলাদেশের জাতীয় ফুল কোনটি?",
+                    options: ["গোলাপ", "কদম", "শাপলা", "গাঁদা"],
+                    correctAnswer: 3
                 }
+            ];
+            
+            sampleQuestions.forEach((q, index) => {
+                html += `
+                    <div class="question-card">
+                        <div class="question-number">${index + 1}</div>
+                        <div class="question-text">${q.question}</div>
+                        <div class="options-container">
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 1)">
+                                <input type="radio" name="q${q.id}" value="1" class="option-radio">
+                                <span class="option-text">${q.options[0]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 2)">
+                                <input type="radio" name="q${q.id}" value="2" class="option-radio">
+                                <span class="option-text">${q.options[1]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 3)">
+                                <input type="radio" name="q${q.id}" value="3" class="option-radio">
+                                <span class="option-text">${q.options[2]}</span>
+                            </label>
+                            <label class="option-label" onclick="selectAnswer(${q.id}, 4)">
+                                <input type="radio" name="q${q.id}" value="4" class="option-radio">
+                                <span class="option-text">${q.options[3]}</span>
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            questionsContainer.innerHTML = html;
+            currentTest.questions = sampleQuestions;
+            checkIfAllAnswered();
+        }
+
+        // ==================== ANSWER SELECTION ====================
+        function selectAnswer(questionId, answerIndex) {
+            userAnswers[questionId] = answerIndex;
+            
+            const labels = document.querySelectorAll(`input[name="q${questionId}"]`);
+            labels.forEach((label, index) => {
+                const parent = label.parentElement;
+                if (index + 1 === answerIndex) {
+                    parent.classList.add('selected');
+                } else {
+                    parent.classList.remove('selected');
+                }
+            });
+            
+            checkIfAllAnswered();
+        }
+
+        function checkIfAllAnswered() {
+            if (currentTest && currentTest.questions) {
+                const totalQuestions = currentTest.questions.length;
+                const answeredQuestions = Object.keys(userAnswers).length;
+                const submitBtn = document.getElementById('submit-btn');
                 
-            } catch (error) {
-                console.error('Error loading questions:', error);
-                testQuestions = [];
+                if (answeredQuestions === totalQuestions) {
+                    submitBtn.disabled = false;
+                }
             }
         }
 
-        // Shuffle array (Fisher-Yates algorithm)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        // Start Test
-        function startTest() {
-            const userName = document.getElementById('user-name').value.trim();
-            const userPhone = document.getElementById('user-phone').value.trim();
-            
-            if (!userName || !userPhone) {
-                alert('নাম এবং মোবাইল নাম্বার দিন');
-                return;
-            }
-            
-            if (!/^01[3-9]\d{8}$/.test(userPhone)) {
-                alert('সঠিক মোবাইল নাম্বার দিন (01XXXXXXXXX)');
-                return;
-            }
-            
-            // Hide user form and show questions
-            document.getElementById('user-info-form').style.display = 'none';
-            document.getElementById('questions-container').style.display = 'block';
-            document.getElementById('modal-footer').style.display = 'flex';
-            
-            // Initialize test
-            userAnswers = {};
-            currentQuestionIndex = 0;
-            timeLeft = (currentTestData.timeLimit || 60) * 60; // Convert to seconds
-            
-            // Start timer
-            startTimer();
-            
-            // Load first question
-            loadQuestion(currentQuestionIndex);
-        }
-
-        // Start Timer
+        // ==================== TIMER FUNCTIONS ====================
         function startTimer() {
-            updateTimerDisplay();
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
             
             timerInterval = setInterval(() => {
                 timeLeft--;
@@ -1249,203 +1028,172 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    autoSubmitTest();
+                    timeUp();
+                }
+                
+                if (timeLeft === 300) {
+                    showTimeWarning();
                 }
             }, 1000);
         }
 
-        // Update Timer Display
         function updateTimerDisplay() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
+            const timerElement = document.getElementById('timer');
             
-            const timerStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            document.getElementById('timer').textContent = timerStr;
-            document.getElementById('footer-timer').textContent = `সময়: ${timerStr}`;
-        }
-
-        // Load Question
-        function loadQuestion(index) {
-            if (index >= testQuestions.length) {
-                // End of questions
-                submitTest();
-                return;
-            }
-            
-            const question = testQuestions[index];
-            
-            // Update question number
-            document.querySelector('.question-number').textContent = `প্রশ্ন ${index + 1}/${testQuestions.length}`;
-            
-            // Set question text
-            document.getElementById('question-text').textContent = question.question;
-            
-            // Set options
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            const optionLabels = ['ক', 'খ', 'গ', 'ঘ'];
-            const options = [
-                question.option1,
-                question.option2,
-                question.option3,
-                question.option4
-            ];
-            
-            options.forEach((optionText, i) => {
-                const optionIndex = i + 1;
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-item';
-                optionDiv.setAttribute('data-option', optionIndex);
-                optionDiv.innerHTML = `
-                    <span class="option-label">${optionLabels[i]}</span>
-                    <p class="option-text">${optionText}</p>
-                `;
-                
-                // Set selected if already answered
-                if (userAnswers[question.id] === optionIndex) {
-                    optionDiv.classList.add('selected');
-                }
-                
-                // Add click event
-                optionDiv.addEventListener('click', () => {
-                    selectOption(question.id, optionIndex);
-                });
-                
-                optionsContainer.appendChild(optionDiv);
-            });
-            
-            // Update navigation buttons
-            updateNavigationButtons();
-        }
-
-        // Select Option
-        function selectOption(questionId, optionIndex) {
-            // Remove selected class from all options
-            document.querySelectorAll('.option-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked option
-            event.target.closest('.option-item').classList.add('selected');
-            
-            // Save answer
-            userAnswers[questionId] = optionIndex;
-        }
-
-        // Update Navigation Buttons
-        function updateNavigationButtons() {
-            // For now, we'll handle navigation with a simple next button
-            // You can add previous/next buttons if needed
-        }
-
-        // Submit Test
-        async function submitTest() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            
-            const userName = document.getElementById('user-name').value.trim();
-            const userPhone = document.getElementById('user-phone').value.trim();
-            
-            // Calculate score
-            let score = 0;
-            let totalMarks = 0;
-            
-            testQuestions.forEach(question => {
-                totalMarks++;
-                if (userAnswers[question.id] === question.correctAnswer) {
-                    score++;
-                }
-            });
-            
-            // Save result to Firebase
-            try {
-                await db.collection('results').add({
-                    userName: userName,
-                    phoneNumber: userPhone,
-                    examId: currentTestId,
-                    examTitle: currentTestData.title,
-                    totalScore: score,
-                    totalMarks: totalMarks,
-                    timeTaken: (currentTestData.timeLimit || 60) * 60 - timeLeft,
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    answers: userAnswers
-                });
-                
-                // Show result
-                alert(`টেস্ট সম্পন্ন!\n\nনাম: ${userName}\nফোন: ${userPhone}\nপ্রাপ্ত মার্কস: ${score}/${totalMarks}\nসঠিক উত্তর: ${Math.round((score / totalMarks) * 100)}%`);
-                
-                // Close modal
-                closeTestModal();
-                
-            } catch (error) {
-                console.error('Error saving result:', error);
-                alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে');
+            if (timeLeft < 300) {
+                timerElement.classList.add('warning');
+            } else {
+                timerElement.classList.remove('warning');
             }
         }
 
-        // Auto Submit Test when time's up
-        function autoSubmitTest() {
-            alert('সময় শেষ! আপনার টেস্টটি স্বয়ংক্রিয়ভাবে সাবমিট করা হয়েছে।');
+        function showTimeWarning() {
+            alert('⚠️ সতর্কতা: আপনার মাত্র ৫ মিনিট বাকি আছে! দ্রুত সাবমিট করুন।');
+        }
+
+        function timeUp() {
+            alert('⏰ সময় শেষ! টেস্ট স্বয়ংক্রিয়ভাবে সাবমিট হচ্ছে...');
             submitTest();
         }
 
-        // Close Test Modal
-        function closeTestModal() {
+        // ==================== FORM VALIDATION ====================
+        function setupEventListeners() {
+            const userNameInput = document.getElementById('user-name');
+            const userPhoneInput = document.getElementById('user-phone');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            function validateForm() {
+                const nameValid = userNameInput.value.trim().length > 0;
+                const phoneValid = /^(?:\+88|01)?(?:\d{11}|\d{13})$/.test(userPhoneInput.value.trim());
+                
+                if (nameValid) {
+                    document.getElementById('display-name').textContent = userNameInput.value.trim();
+                }
+                
+                submitBtn.disabled = !(nameValid && phoneValid);
+                
+                if (nameValid && phoneValid && !testStarted) {
+                    testStarted = true;
+                    startTimer();
+                }
+            }
+            
+            userNameInput.addEventListener('input', validateForm);
+            userPhoneInput.addEventListener('input', validateForm);
+        }
+
+        // ==================== TEST SUBMISSION ====================
+        function submitTest() {
+            const userName = document.getElementById('user-name').value.trim();
+            const userPhone = document.getElementById('user-phone').value.trim();
+            const userEmail = document.getElementById('user-email').value.trim();
+            
+            if (!userName || !userPhone) {
+                alert('নাম এবং মোবাইল নম্বর দিন');
+                return;
+            }
+            
+            let score = 0;
+            let totalQuestions = currentTest.questions.length;
+            
+            currentTest.questions.forEach(q => {
+                if (userAnswers[q.id] === q.correctAnswer) {
+                    score += currentTest.marksPerQuestion || 1;
+                }
+            });
+            
+            const timeTaken = (currentTest.timeLimit * 60) - timeLeft;
+            
+            const resultData = {
+                userName: userName,
+                phoneNumber: userPhone,
+                userEmail: userEmail,
+                examId: currentTest.id,
+                examTitle: currentTest.title,
+                totalScore: score,
+                totalMarks: totalQuestions * (currentTest.marksPerQuestion || 1),
+                timeTaken: timeTaken,
+                answers: userAnswers,
+                submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                ipAddress: getIPAddress() || 'Unknown',
+                browserInfo: navigator.userAgent
+            };
+            
+            db.collection('results').add(resultData)
+                .then(docRef => {
+                    showResultModal(score, totalQuestions * (currentTest.marksPerQuestion || 1), timeTaken);
+                    resetTest();
+                })
+                .catch(error => {
+                    console.error('Error saving result:', error);
+                    alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে');
+                });
+        }
+
+        function showResultModal(score, totalMarks, timeTaken) {
+            const percentage = ((score / totalMarks) * 100).toFixed(1);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            
+            const message = `
+                <div style="text-align: left; margin-bottom: 20px;">
+                    <p><strong>প্রাপ্ত মার্কস:</strong> ${score}/${totalMarks}</p>
+                    <p><strong>শতকরা হার:</strong> ${percentage}%</p>
+                    <p><strong>সময় নিয়েছেন:</strong> ${minutes} মিনিট ${seconds} সেকেন্ড</p>
+                    <p style="margin-top: 15px; color: #27ae60;">
+                        <i class="fas fa-check-circle"></i> আপনার রেজাল্ট সেভ করা হয়েছে
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('result-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').style.display = 'none';
+            document.getElementById('test-selection-page').style.display = 'block';
+            document.getElementById('test-page').style.display = 'none';
+        }
+
+        function resetTest() {
+            currentTest = null;
+            userAnswers = {};
+            testStarted = false;
+            
             if (timerInterval) {
                 clearInterval(timerInterval);
+                timerInterval = null;
             }
             
-            testModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-            
-            // Reset form
-            document.getElementById('user-info-form').style.display = 'block';
-            document.getElementById('questions-container').style.display = 'none';
-            document.getElementById('modal-footer').style.display = 'none';
             document.getElementById('user-name').value = '';
             document.getElementById('user-phone').value = '';
-            
-            currentTestId = null;
-            currentTestData = null;
-            userAnswers = {};
+            document.getElementById('user-email').value = '';
+            document.getElementById('submit-btn').disabled = true;
         }
 
-        // Login Button Handler
-        document.getElementById('login-btn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('লগইন সিস্টেম শীঘ্রই আসছে!');
-        });
+        // ==================== UTILITY FUNCTIONS ====================
+        function getIPAddress() {
+            return localStorage.getItem('user_ip') || 'Unknown';
+        }
 
-        document.getElementById('mobile-login-btn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            mobileNav.classList.remove('active');
-            alert('লগইন সিস্টেম শীঘ্রই আসছে!');
-        });
-
-        // Ad Space Management
-        function loadAd() {
-            // You can add AdSense or Adstra code here
-            const adSpace = document.getElementById('ad-space');
-            
-            // Example: Load ad from localStorage or server
-            const adCode = localStorage.getItem('ad_code');
-            if (adCode) {
-                adSpace.innerHTML = adCode;
+        function initializeAds() {
+            if (adsEnabled) {
+                // Add your AdSense or Adstra code here
+                // Example:
+                // const adScript = document.createElement('script');
+                // adScript.async = true;
+                // adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+                // adScript.setAttribute('data-ad-client', 'YOUR_AD_CLIENT_ID');
+                // document.head.appendChild(adScript);
             }
-            
-            // For now, show placeholder
-            adSpace.innerHTML = `
-                <i class="fas fa-ad"></i>
-                <p>বিজ্ঞাপনের জায়গা</p>
-                <small>AdSense/Adstra Code</small>
-            `;
         }
 
-        // Initialize ad on load
-        loadAd();
+        window.addEventListener('load', initializeAds);
 
     </script>
 </body>
