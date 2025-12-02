@@ -503,7 +503,7 @@
             outline: none;
         }
         
-        /* Question Layout */
+        /* Question Layout - UPDATED for 2 columns */
         .question-container {
             margin-bottom: 30px;
         }
@@ -529,21 +529,33 @@
             font-size: 16px;
             line-height: 1.6;
             color: #333;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
         }
         
+        /* Options in 2x2 grid */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 10px;
+        }
+        
+        .option-row {
+            display: contents;
         }
         
         .option-item {
             background: white;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            padding: 15px;
+            padding: 12px 15px;
             transition: all 0.3s;
             cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
         
         .option-item:hover {
@@ -557,16 +569,28 @@
         }
         
         .option-label {
-            display: block;
-            color: var(--secondary);
-            font-weight: 500;
-            margin-bottom: 8px;
+            background: #3498db;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 14px;
+            font-weight: 500;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .option-item.selected .option-label {
+            background: #27ae60;
         }
         
         .option-text {
             color: #333;
             font-size: 15px;
+            line-height: 1.4;
         }
         
         /* Modal Footer */
@@ -601,6 +625,104 @@
         
         .submit-btn:hover {
             background: #219653;
+        }
+        
+        /* Result Modal */
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            padding: 20px;
+        }
+        
+        .result-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .result-content {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        .result-icon {
+            font-size: 60px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .result-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .result-label {
+            color: #666;
+        }
+        
+        .result-value {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .result-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .restart-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            background: #2980b9;
         }
         
         /* Footer */
@@ -649,6 +771,7 @@
             
             .options-grid {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
             
             .modal-content {
@@ -669,6 +792,10 @@
             .notice-text {
                 animation: scrollNotice 15s linear infinite;
             }
+            
+            .option-item {
+                padding: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -687,6 +814,11 @@
             .test-meta {
                 flex-direction: column;
                 gap: 5px;
+            }
+            
+            .question-text {
+                padding: 12px;
+                font-size: 15px;
             }
         }
     </style>
@@ -758,15 +890,9 @@
                 <ul class="category-list" id="question-categories">
                     <!-- Categories will be loaded from Firebase -->
                     <li class="category-item">
-                        <a href="#">
+                        <a href="prosnobank.html?category=বাংলাদেশ বিষয়াবলী">
                             <span>বাংলাদেশ বিষয়াবলী</span>
-                            <span class="count">500</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>আন্তর্জাতিক বিষয়াবলী</span>
-                            <span class="count">300</span>
+                            <span class="count">0</span>
                         </a>
                     </li>
                 </ul>
@@ -781,15 +907,9 @@
                 <ul class="category-list" id="job-categories">
                     <!-- Categories will be loaded from Firebase -->
                     <li class="category-item">
-                        <a href="#">
+                        <a href="jobs.html?category=government">
                             <span>সরকারি চাকরি</span>
-                            <span class="count">25</span>
-                        </a>
-                    </li>
-                    <li class="category-item">
-                        <a href="#">
-                            <span>ব্যাংক চাকরি</span>
-                            <span class="count">15</span>
+                            <span class="count">0</span>
                         </a>
                     </li>
                 </ul>
@@ -806,16 +926,11 @@
             <!-- Model Tests Grid -->
             <div class="model-tests-grid" id="model-tests-container">
                 <!-- Tests will be loaded from Firebase -->
-                <div class="model-test-card">
-                    <span class="test-badge">নতুন</span>
-                    <h3 class="test-title">বিসিএস প্রিলিমিনারি মডেল টেস্ট - ১</h3>
-                    <div class="test-meta">
-                        <span><i class="fas fa-clock"></i> 60 মিনিট</span>
-                        <span><i class="fas fa-question-circle"></i> 100 প্রশ্ন</span>
-                        <span><i class="fas fa-star"></i> 100 মার্কস</span>
+                <div class="loading-container" id="loading-tests">
+                    <div style="text-align: center; padding: 50px;">
+                        <i class="fas fa-spinner fa-spin fa-3x" style="color: #3498db;"></i>
+                        <p style="margin-top: 20px; color: #666;">মডেল টেস্ট লোড হচ্ছে...</p>
                     </div>
-                    <p class="test-description">বিসিএস প্রিলিমিনারি পরীক্ষার জন্য প্রস্তুতিমূলক মডেল টেস্ট। বাংলাদেশ বিষয়াবলী, ইংরেজি, গণিত ও সাধারন জ্ঞান অন্তর্ভুক্ত।</p>
-                    <button class="start-test-btn" data-test-id="1">টেস্ট শুরু করুন</button>
                 </div>
             </div>
         </div>
@@ -858,40 +973,39 @@
                 <!-- Questions Container (Initially Hidden) -->
                 <div id="questions-container" style="display: none;">
                     <!-- Questions will be loaded here -->
-                    <div class="question-container">
-                        <div class="question-header">
-                            <span class="question-number">প্রশ্ন ১/১০০</span>
-                            <span class="timer">সময়: <span id="timer">60:00</span></span>
-                        </div>
-                        
-                        <p class="question-text" id="question-text">বাংলাদেশের স্বাধীনতা দিবস কোনটি?</p>
-                        
-                        <div class="options-grid" id="options-container">
-                            <div class="option-item" data-option="1">
-                                <span class="option-label">ক</span>
-                                <p class="option-text">২৬ মার্চ</p>
-                            </div>
-                            <div class="option-item" data-option="2">
-                                <span class="option-label">খ</span>
-                                <p class="option-text">১৬ ডিসেম্বর</p>
-                            </div>
-                            <div class="option-item" data-option="3">
-                                <span class="option-label">গ</span>
-                                <p class="option-text">২১ ফেব্রুয়ারি</p>
-                            </div>
-                            <div class="option-item" data-option="4">
-                                <span class="option-label">ঘ</span>
-                                <p class="option-text">১ এপ্রিল</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             
             <div class="modal-footer" id="modal-footer" style="display: none;">
-                <div class="timer" id="footer-timer">সময়: 59:45</div>
+                <div class="timer" id="footer-timer">সময়: 20:00</div>
                 <button class="submit-btn" id="submit-test">সাবমিট করুন</button>
             </div>
+        </div>
+    </div>
+    
+    <!-- Result Modal -->
+    <div class="result-modal" id="result-modal">
+        <div class="result-content">
+            <div class="result-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="result-title">টেস্ট সম্পন্ন!</h2>
+            
+            <div class="result-details" id="result-details">
+                <!-- Result details will be shown here -->
+            </div>
+            
+            <div class="result-score" id="result-score">
+                0/20
+            </div>
+            
+            <p style="color: #666; margin-bottom: 20px;" id="result-message">
+                আপনার ফলাফল সফলভাবে সংরক্ষণ করা হয়েছে।
+            </p>
+            
+            <button class="restart-btn" id="restart-test">
+                <i class="fas fa-redo"></i> আবার টেস্ট দিন
+            </button>
         </div>
     </div>
     
@@ -929,9 +1043,10 @@
         let currentTestData = null;
         let userAnswers = {};
         let timerInterval = null;
-        let timeLeft = 0;
-        let currentQuestionIndex = 0;
+        let timeLeft = 20 * 60; // 20 minutes in seconds
         let testQuestions = [];
+        let userName = '';
+        let userPhone = '';
 
         // DOM Elements
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -941,7 +1056,10 @@
         const closeModalBtn = document.getElementById('close-modal');
         const startTestBtn = document.getElementById('start-test-btn');
         const submitTestBtn = document.getElementById('submit-test');
+        const restartTestBtn = document.getElementById('restart-test');
+        const resultModal = document.getElementById('result-modal');
         const modelTestsContainer = document.getElementById('model-tests-container');
+        const loadingTests = document.getElementById('loading-tests');
         const questionCategories = document.getElementById('question-categories');
         const jobCategories = document.getElementById('job-categories');
 
@@ -962,6 +1080,11 @@
 
         submitTestBtn.addEventListener('click', submitTest);
 
+        restartTestBtn.addEventListener('click', () => {
+            resultModal.classList.remove('active');
+            openTestModal(currentTestId);
+        });
+
         // Load Data from Firebase
         document.addEventListener('DOMContentLoaded', () => {
             loadModelTests();
@@ -976,15 +1099,19 @@
                 const snapshot = await db.collection('exams')
                     .where('status', '==', 'published')
                     .orderBy('createdAt', 'desc')
+                    .limit(10)
                     .get();
 
-                modelTestsContainer.innerHTML = '';
+                loadingTests.style.display = 'none';
 
                 if (snapshot.empty) {
                     modelTestsContainer.innerHTML = `
-                        <div style="text-align: center; padding: 50px; color: #666;">
+                        <div style="text-align: center; padding: 50px; color: #666; grid-column: 1 / -1;">
                             <i class="fas fa-file-alt fa-3x" style="color: #ddd; margin-bottom: 20px;"></i>
                             <p>কোন মডেল টেস্ট পাওয়া যায়নি</p>
+                            <p style="color: #95a5a6; font-size: 14px; margin-top: 10px;">
+                                Admin Panel থেকে প্রথমে টেস্ট তৈরি করুন
+                            </p>
                         </div>
                     `;
                     return;
@@ -998,10 +1125,14 @@
 
             } catch (error) {
                 console.error('Error loading tests:', error);
+                loadingTests.style.display = 'none';
                 modelTestsContainer.innerHTML = `
-                    <div style="text-align: center; padding: 50px; color: #e74c3c;">
+                    <div style="text-align: center; padding: 50px; color: #e74c3c; grid-column: 1 / -1;">
                         <i class="fas fa-exclamation-triangle fa-3x" style="margin-bottom: 20px;"></i>
                         <p>ডেটা লোড করতে সমস্যা হয়েছে</p>
+                        <p style="color: #95a5a6; font-size: 14px; margin-top: 10px;">
+                            Firebase কনফিগারেশন চেক করুন
+                        </p>
                     </div>
                 `;
             }
@@ -1013,9 +1144,9 @@
             card.className = 'model-test-card';
             
             const isNew = isTestNew(test.createdAt);
-            const timeLimit = test.timeLimit || 60;
-            const totalQuestions = test.totalQuestions || 50;
-            const totalMarks = test.totalMarks || (totalQuestions * (test.marksPerQuestion || 1));
+            const timeLimit = test.timeLimit || 20;
+            const totalQuestions = 20; // Always 20 questions
+            const totalMarks = totalQuestions;
             
             card.innerHTML = `
                 ${isNew ? '<span class="test-badge">নতুন</span>' : ''}
@@ -1025,7 +1156,7 @@
                     <span><i class="fas fa-question-circle"></i> ${totalQuestions} প্রশ্ন</span>
                     <span><i class="fas fa-star"></i> ${totalMarks} মার্কস</span>
                 </div>
-                <p class="test-description">${test.description || 'প্রস্তুতিমূলক মডেল টেস্ট'}</p>
+                <p class="test-description">${test.description || 'বিভিন্ন ক্যাটাগরি থেকে ২০টি প্রশ্ন'}</p>
                 <button class="start-test-btn" data-test-id="${testId}">টেস্ট শুরু করুন</button>
             `;
             
@@ -1042,10 +1173,10 @@
             return diffDays <= 7;
         }
 
-        // Load Question Categories
+        // Load Question Categories with Counts
         async function loadQuestionCategories() {
             try {
-                // Load from categories collection
+                // Load all categories
                 const categoriesSnapshot = await db.collection('categories').get();
                 const questionsSnapshot = await db.collection('questions').get();
                 
@@ -1078,14 +1209,16 @@
                 });
                 
             } catch (error) {
-                console.error('Error loading categories:', error);
+                console.error('Error loading question categories:', error);
             }
         }
 
-        // Load Job Categories
+        // Load Job Categories with Counts
         async function loadJobCategories() {
             try {
-                const snapshot = await db.collection('jobs').get();
+                const snapshot = await db.collection('jobs')
+                    .where('status', '==', 'active')
+                    .get();
                 
                 // Count jobs per category
                 const categoryCounts = {};
@@ -1158,8 +1291,14 @@
                 testModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
                 
-                // Load test questions
-                await loadTestQuestions();
+                // Reset form
+                document.getElementById('user-info-form').style.display = 'block';
+                document.getElementById('questions-container').style.display = 'none';
+                document.getElementById('modal-footer').style.display = 'none';
+                document.getElementById('user-name').value = '';
+                document.getElementById('user-phone').value = '';
+                
+                userAnswers = {};
                 
             } catch (error) {
                 console.error('Error opening test:', error);
@@ -1167,30 +1306,74 @@
             }
         }
 
-        // Load Test Questions
-        async function loadTestQuestions() {
+        // Start Test
+        async function startTest() {
+            const nameInput = document.getElementById('user-name').value.trim();
+            const phoneInput = document.getElementById('user-phone').value.trim();
+            
+            if (!nameInput || !phoneInput) {
+                alert('নাম এবং মোবাইল নাম্বার দিন');
+                return;
+            }
+            
+            if (!/^01[3-9]\d{8}$/.test(phoneInput)) {
+                alert('সঠিক মোবাইল নাম্বার দিন (01XXXXXXXXX)');
+                return;
+            }
+            
+            userName = nameInput;
+            userPhone = phoneInput;
+            
+            // Hide user form and show loading
+            document.getElementById('user-info-form').style.display = 'none';
+            document.getElementById('questions-container').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin fa-3x" style="color: #3498db;"></i>
+                    <p style="margin-top: 20px; color: #666;">প্রশ্ন লোড হচ্ছে...</p>
+                </div>
+            `;
+            document.getElementById('questions-container').style.display = 'block';
+            
+            // Load questions from all categories
+            await loadRandomQuestions();
+            
+            if (testQuestions.length === 0) {
+                alert('কোন প্রশ্ন পাওয়া যায়নি! Admin Panel থেকে প্রশ্ন যোগ করুন।');
+                document.getElementById('user-info-form').style.display = 'block';
+                document.getElementById('questions-container').style.display = 'none';
+                return;
+            }
+            
+            // Initialize test
+            timeLeft = 20 * 60; // Reset to 20 minutes
+            userAnswers = {};
+            
+            // Start timer
+            startTimer();
+            
+            // Load first question
+            loadQuestion(0);
+            
+            // Show footer
+            document.getElementById('modal-footer').style.display = 'flex';
+        }
+
+        // Load 20 Random Questions from All Categories
+        async function loadRandomQuestions() {
             try {
-                // First check if test has embedded questions
-                if (currentTestData.questions && currentTestData.questions.length > 0) {
-                    testQuestions = currentTestData.questions;
-                } else {
-                    // Load questions from question bank based on category
-                    const snapshot = await db.collection('questions')
-                        .where('category', '==', currentTestData.category)
-                        .limit(currentTestData.totalQuestions || 50)
-                        .get();
-                    
-                    testQuestions = [];
-                    snapshot.forEach(doc => {
-                        testQuestions.push({
-                            id: doc.id,
-                            ...doc.data()
-                        });
+                // Get all questions
+                const snapshot = await db.collection('questions').get();
+                
+                testQuestions = [];
+                snapshot.forEach(doc => {
+                    testQuestions.push({
+                        id: doc.id,
+                        ...doc.data()
                     });
-                    
-                    // Shuffle questions
-                    testQuestions = shuffleArray(testQuestions);
-                }
+                });
+                
+                // Shuffle and take first 20
+                testQuestions = shuffleArray(testQuestions).slice(0, 20);
                 
             } catch (error) {
                 console.error('Error loading questions:', error);
@@ -1205,38 +1388,6 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
-        }
-
-        // Start Test
-        function startTest() {
-            const userName = document.getElementById('user-name').value.trim();
-            const userPhone = document.getElementById('user-phone').value.trim();
-            
-            if (!userName || !userPhone) {
-                alert('নাম এবং মোবাইল নাম্বার দিন');
-                return;
-            }
-            
-            if (!/^01[3-9]\d{8}$/.test(userPhone)) {
-                alert('সঠিক মোবাইল নাম্বার দিন (01XXXXXXXXX)');
-                return;
-            }
-            
-            // Hide user form and show questions
-            document.getElementById('user-info-form').style.display = 'none';
-            document.getElementById('questions-container').style.display = 'block';
-            document.getElementById('modal-footer').style.display = 'flex';
-            
-            // Initialize test
-            userAnswers = {};
-            currentQuestionIndex = 0;
-            timeLeft = (currentTestData.timeLimit || 60) * 60; // Convert to seconds
-            
-            // Start timer
-            startTimer();
-            
-            // Load first question
-            loadQuestion(currentQuestionIndex);
         }
 
         // Start Timer
@@ -1261,7 +1412,6 @@
             
             const timerStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            document.getElementById('timer').textContent = timerStr;
             document.getElementById('footer-timer').textContent = `সময়: ${timerStr}`;
         }
 
@@ -1275,55 +1425,61 @@
             
             const question = testQuestions[index];
             
-            // Update question number
-            document.querySelector('.question-number').textContent = `প্রশ্ন ${index + 1}/${testQuestions.length}`;
+            const questionsContainer = document.getElementById('questions-container');
             
-            // Set question text
-            document.getElementById('question-text').textContent = question.question;
+            // Create question HTML with 2x2 options grid
+            const questionHTML = `
+                <div class="question-container" data-question-index="${index}">
+                    <div class="question-header">
+                        <span class="question-number">প্রশ্ন ${index + 1}/${testQuestions.length}</span>
+                    </div>
+                    
+                    <p class="question-text">${question.question}</p>
+                    
+                    <div class="options-grid">
+                        <div class="option-row">
+                            <div class="option-item ${userAnswers[question.id] === 1 ? 'selected' : ''}" data-option="1">
+                                <span class="option-label">ক</span>
+                                <p class="option-text">${question.option1}</p>
+                            </div>
+                            <div class="option-item ${userAnswers[question.id] === 2 ? 'selected' : ''}" data-option="2">
+                                <span class="option-label">খ</span>
+                                <p class="option-text">${question.option2}</p>
+                            </div>
+                        </div>
+                        <div class="option-row">
+                            <div class="option-item ${userAnswers[question.id] === 3 ? 'selected' : ''}" data-option="3">
+                                <span class="option-label">গ</span>
+                                <p class="option-text">${question.option3}</p>
+                            </div>
+                            <div class="option-item ${userAnswers[question.id] === 4 ? 'selected' : ''}" data-option="4">
+                                <span class="option-label">ঘ</span>
+                                <p class="option-text">${question.option4}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
             
-            // Set options
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
+            questionsContainer.innerHTML = questionHTML;
             
-            const optionLabels = ['ক', 'খ', 'গ', 'ঘ'];
-            const options = [
-                question.option1,
-                question.option2,
-                question.option3,
-                question.option4
-            ];
-            
-            options.forEach((optionText, i) => {
-                const optionIndex = i + 1;
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-item';
-                optionDiv.setAttribute('data-option', optionIndex);
-                optionDiv.innerHTML = `
-                    <span class="option-label">${optionLabels[i]}</span>
-                    <p class="option-text">${optionText}</p>
-                `;
-                
-                // Set selected if already answered
-                if (userAnswers[question.id] === optionIndex) {
-                    optionDiv.classList.add('selected');
-                }
-                
-                // Add click event
-                optionDiv.addEventListener('click', () => {
+            // Add event listeners to options
+            document.querySelectorAll('.option-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const optionIndex = parseInt(item.getAttribute('data-option'));
                     selectOption(question.id, optionIndex);
                 });
-                
-                optionsContainer.appendChild(optionDiv);
             });
             
-            // Update navigation buttons
-            updateNavigationButtons();
+            // Add navigation buttons
+            addNavigationButtons(index);
         }
 
         // Select Option
         function selectOption(questionId, optionIndex) {
-            // Remove selected class from all options
-            document.querySelectorAll('.option-item').forEach(item => {
+            // Remove selected class from all options in this question
+            const questionContainer = document.querySelector(`[data-question-index="${currentQuestionIndex}"]`);
+            questionContainer.querySelectorAll('.option-item').forEach(item => {
                 item.classList.remove('selected');
             });
             
@@ -1334,10 +1490,38 @@
             userAnswers[questionId] = optionIndex;
         }
 
-        // Update Navigation Buttons
-        function updateNavigationButtons() {
-            // For now, we'll handle navigation with a simple next button
-            // You can add previous/next buttons if needed
+        // Add Navigation Buttons
+        function addNavigationButtons(currentIndex) {
+            const questionsContainer = document.getElementById('questions-container');
+            const navHTML = `
+                <div style="display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <button class="btn btn-warning" id="prev-btn" ${currentIndex === 0 ? 'disabled style="opacity: 0.5;"' : ''}>
+                        <i class="fas fa-arrow-left"></i> পূর্ববর্তী
+                    </button>
+                    <button class="btn btn-primary" id="next-btn">
+                        ${currentIndex === testQuestions.length - 1 ? 'শেষ করুন' : 'পরবর্তী <i class="fas fa-arrow-right"></i>'}
+                    </button>
+                </div>
+            `;
+            
+            questionsContainer.insertAdjacentHTML('beforeend', navHTML);
+            
+            // Add event listeners
+            document.getElementById('prev-btn')?.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentQuestionIndex = currentIndex - 1;
+                    loadQuestion(currentQuestionIndex);
+                }
+            });
+            
+            document.getElementById('next-btn')?.addEventListener('click', () => {
+                if (currentIndex < testQuestions.length - 1) {
+                    currentQuestionIndex = currentIndex + 1;
+                    loadQuestion(currentQuestionIndex);
+                } else {
+                    submitTest();
+                }
+            });
         }
 
         // Submit Test
@@ -1346,19 +1530,18 @@
                 clearInterval(timerInterval);
             }
             
-            const userName = document.getElementById('user-name').value.trim();
-            const userPhone = document.getElementById('user-phone').value.trim();
-            
             // Calculate score
             let score = 0;
-            let totalMarks = 0;
+            const totalQuestions = testQuestions.length;
             
             testQuestions.forEach(question => {
-                totalMarks++;
                 if (userAnswers[question.id] === question.correctAnswer) {
                     score++;
                 }
             });
+            
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const timeTaken = (20 * 60) - timeLeft;
             
             // Save result to Firebase
             try {
@@ -1366,24 +1549,87 @@
                     userName: userName,
                     phoneNumber: userPhone,
                     examId: currentTestId,
-                    examTitle: currentTestData.title,
+                    examTitle: currentTestData?.title || 'সাধারণ মডেল টেস্ট',
                     totalScore: score,
-                    totalMarks: totalMarks,
-                    timeTaken: (currentTestData.timeLimit || 60) * 60 - timeLeft,
+                    totalMarks: totalQuestions,
+                    percentage: percentage,
+                    timeTaken: timeTaken,
                     submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    answers: userAnswers
+                    answers: userAnswers,
+                    testQuestions: testQuestions.map(q => ({
+                        id: q.id,
+                        question: q.question,
+                        correctAnswer: q.correctAnswer,
+                        userAnswer: userAnswers[q.id] || 0
+                    }))
                 });
                 
-                // Show result
-                alert(`টেস্ট সম্পন্ন!\n\nনাম: ${userName}\nফোন: ${userPhone}\nপ্রাপ্ত মার্কস: ${score}/${totalMarks}\nসঠিক উত্তর: ${Math.round((score / totalMarks) * 100)}%`);
+                // Show result modal
+                showResultModal(score, totalQuestions, percentage, timeTaken);
                 
-                // Close modal
+                // Close test modal
                 closeTestModal();
                 
             } catch (error) {
                 console.error('Error saving result:', error);
                 alert('রেজাল্ট সেভ করতে সমস্যা হয়েছে');
             }
+        }
+
+        // Show Result Modal
+        function showResultModal(score, total, percentage, timeTaken) {
+            // Format time
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            const timeStr = `${minutes} মিনিট ${seconds} সেকেন্ড`;
+            
+            // Set result details
+            document.getElementById('result-details').innerHTML = `
+                <div class="result-item">
+                    <span class="result-label">নাম:</span>
+                    <span class="result-value">${userName}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">ফোন:</span>
+                    <span class="result-value">${userPhone}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">মোট প্রশ্ন:</span>
+                    <span class="result-value">${total}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">সঠিক উত্তর:</span>
+                    <span class="result-value">${score}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">ভুল উত্তর:</span>
+                    <span class="result-value">${total - score}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">সময় লেগেছে:</span>
+                    <span class="result-value">${timeStr}</span>
+                </div>
+            `;
+            
+            // Set score
+            document.getElementById('result-score').textContent = `${score}/${total}`;
+            
+            // Set message based on performance
+            let message = '';
+            if (percentage >= 80) {
+                message = 'অভিনন্দন! আপনি অসাধারণ ফলাফল করেছেন।';
+            } else if (percentage >= 60) {
+                message = 'ভালো ফলাফল! আরও উন্নতি করুন।';
+            } else if (percentage >= 40) {
+                message = 'সন্তোষজনক ফলাফল। আরও চর্চা করুন।';
+            } else {
+                message = 'আরও চর্চা প্রয়োজন। আবার চেষ্টা করুন।';
+            }
+            document.getElementById('result-message').textContent = message;
+            
+            // Show modal
+            resultModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         // Auto Submit Test when time's up
@@ -1401,16 +1647,11 @@
             testModal.classList.remove('active');
             document.body.style.overflow = 'auto';
             
-            // Reset form
-            document.getElementById('user-info-form').style.display = 'block';
-            document.getElementById('questions-container').style.display = 'none';
-            document.getElementById('modal-footer').style.display = 'none';
-            document.getElementById('user-name').value = '';
-            document.getElementById('user-phone').value = '';
-            
             currentTestId = null;
             currentTestData = null;
             userAnswers = {};
+            testQuestions = [];
+            currentQuestionIndex = 0;
         }
 
         // Login Button Handler
@@ -1446,6 +1687,42 @@
 
         // Initialize ad on load
         loadAd();
+
+        // Helper function for button styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                transition: all 0.3s;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .btn-primary {
+                background: #3498db;
+                color: white;
+            }
+            .btn-primary:hover {
+                background: #2980b9;
+            }
+            .btn-warning {
+                background: #f39c12;
+                color: white;
+            }
+            .btn-warning:hover {
+                background: #e67e22;
+            }
+            .btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        `;
+        document.head.appendChild(style);
 
     </script>
 </body>
