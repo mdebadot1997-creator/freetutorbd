@@ -177,6 +177,161 @@
             font-weight: 500;
         }
         
+        /* Filter Box */
+        .filter-box-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .filter-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            border: 2px solid #3498db;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .filter-box:hover {
+            background: #f0f7ff;
+        }
+        
+        .filter-box-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .filter-box-arrow {
+            color: #3498db;
+            transition: transform 0.3s;
+        }
+        
+        .filter-box.active .filter-box-arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Filter Popup */
+        .filter-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 3000;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .filter-popup.active {
+            display: block;
+        }
+        
+        .filter-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2999;
+        }
+        
+        .filter-popup-overlay.active {
+            display: block;
+        }
+        
+        .filter-popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .filter-popup-title {
+            color: #2c3e50;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .close-popup {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .filter-popup-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-popup-category {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-popup-category:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+        }
+        
+        .filter-popup-category.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .filter-popup-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .filter-popup-category.active .filter-popup-count {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .filter-popup-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
         /* Main Container */
         .main-container {
             max-width: 1200px;
@@ -244,52 +399,6 @@
             border-radius: 12px;
             font-size: 12px;
             font-weight: 500;
-        }
-        
-        /* Category Filter */
-        .category-filter {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        
-        .filter-title {
-            color: #2c3e50;
-            font-size: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 10px;
-        }
-        
-        .filter-category {
-            padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-            text-align: center;
-        }
-        
-        .filter-category:hover {
-            background: #e3f2fd;
-            border-color: #3498db;
-        }
-        
-        .filter-category.active {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
         }
         
         /* Main Content */
@@ -490,6 +599,10 @@
                 grid-template-columns: 200px 1fr 200px;
                 gap: 20px;
             }
+            
+            .filter-popup-categories {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -514,10 +627,6 @@
                 padding: 0 15px;
             }
             
-            .filter-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            }
-            
             .sidebar, .right-sidebar {
                 order: 3;
             }
@@ -536,10 +645,6 @@
         @media (max-width: 480px) {
             .logo-text h1 {
                 font-size: 20px;
-            }
-            
-            .filter-grid {
-                grid-template-columns: 1fr;
             }
             
             .ad-banner {
@@ -623,14 +728,45 @@
         </div>
     </div>
     
-    <!-- Category Filter -->
-    <div class="category-filter" id="categoryFilter">
-        <h3 class="filter-title">
-            <i class="fas fa-filter"></i>
-            ক্যাটাগরি ফিল্টার
-        </h3>
-        <div class="filter-grid" id="filterCategories">
+    <!-- Filter Box -->
+    <div class="filter-box-container">
+        <div class="filter-box" id="filterBox">
+            <div class="filter-box-text">
+                <i class="fas fa-filter"></i>
+                ক্যাটাগরি ফিল্টার করুন
+            </div>
+            <div class="filter-box-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filter Popup Overlay -->
+    <div class="filter-popup-overlay" id="filterOverlay"></div>
+    
+    <!-- Filter Popup -->
+    <div class="filter-popup" id="filterPopup">
+        <div class="filter-popup-header">
+            <h3 class="filter-popup-title">
+                <i class="fas fa-filter"></i>
+                ক্যাটাগরি নির্বাচন করুন
+            </h3>
+            <button class="close-popup" id="closePopup">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="filter-popup-categories" id="popupCategories">
             <!-- Categories will be loaded here -->
+        </div>
+        
+        <div class="filter-popup-actions">
+            <button class="btn" id="clearFilter" style="background: #95a5a6; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+                সব মুছুন
+            </button>
+            <button class="btn" id="applyFilter" style="background: #3498db; color: white; border: none; padding: 10px 30px; border-radius: 6px; cursor: pointer;">
+                প্রয়োগ করুন
+            </button>
         </div>
     </div>
     
@@ -748,6 +884,7 @@
         let totalQuestions = 0;
         let allCategories = [];
         let allJobs = [];
+        let selectedCategoryInPopup = 'all';
 
         // ==================== PAGE INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
@@ -762,8 +899,8 @@
             // Setup mobile menu
             setupMobileMenu();
             
-            // Setup category filters
-            setupCategoryFilters();
+            // Setup filter popup
+            setupFilterPopup();
         });
 
         // ==================== MOBILE MENU ====================
@@ -788,6 +925,98 @@
             });
         }
 
+        // ==================== FILTER POPUP ====================
+        function setupFilterPopup() {
+            const filterBox = document.getElementById('filterBox');
+            const filterPopup = document.getElementById('filterPopup');
+            const filterOverlay = document.getElementById('filterOverlay');
+            const closePopup = document.getElementById('closePopup');
+            const clearFilter = document.getElementById('clearFilter');
+            const applyFilter = document.getElementById('applyFilter');
+            
+            // Open popup
+            filterBox.addEventListener('click', () => {
+                filterPopup.classList.add('active');
+                filterOverlay.classList.add('active');
+                filterBox.classList.add('active');
+                
+                // Update selected category in popup
+                updatePopupSelection();
+            });
+            
+            // Close popup
+            function closeFilterPopup() {
+                filterPopup.classList.remove('active');
+                filterOverlay.classList.remove('active');
+                filterBox.classList.remove('active');
+            }
+            
+            closePopup.addEventListener('click', closeFilterPopup);
+            filterOverlay.addEventListener('click', closeFilterPopup);
+            
+            // Clear filter
+            clearFilter.addEventListener('click', () => {
+                selectedCategoryInPopup = 'all';
+                updatePopupSelection();
+            });
+            
+            // Apply filter
+            applyFilter.addEventListener('click', () => {
+                currentCategory = selectedCategoryInPopup;
+                currentPage = 1;
+                closeFilterPopup();
+                loadQuestions();
+                updatePageTitle();
+            });
+            
+            // Category selection in popup
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.filter-popup-category')) {
+                    const categoryDiv = e.target.closest('.filter-popup-category');
+                    selectedCategoryInPopup = categoryDiv.getAttribute('data-category');
+                    updatePopupSelection();
+                }
+            });
+        }
+
+        function updatePopupSelection() {
+            document.querySelectorAll('.filter-popup-category').forEach(cat => {
+                cat.classList.remove('active');
+                if (cat.getAttribute('data-category') === selectedCategoryInPopup) {
+                    cat.classList.add('active');
+                }
+            });
+        }
+
+        function renderPopupCategories() {
+            const container = document.getElementById('popupCategories');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            // Add "All Questions" option
+            const allQuestionsCount = allCategories.reduce((total, cat) => total + cat.questionCount, 0);
+            container.innerHTML += `
+                <div class="filter-popup-category ${selectedCategoryInPopup === 'all' ? 'active' : ''}" data-category="all">
+                    <span>সব প্রশ্ন</span>
+                    <span class="filter-popup-count">${allQuestionsCount}</span>
+                </div>
+            `;
+            
+            // Add each category
+            allCategories.forEach(category => {
+                if (category.questionCount > 0) {
+                    container.innerHTML += `
+                        <div class="filter-popup-category ${selectedCategoryInPopup === category.nameBn ? 'active' : ''}" 
+                             data-category="${category.nameBn}">
+                            <span>${category.nameBn}</span>
+                            <span class="filter-popup-count">${category.questionCount}</span>
+                        </div>
+                    `;
+                }
+            });
+        }
+
         // ==================== LOGO LOADING ====================
         function loadLogo() {
             db.collection('settings').doc('logo').get()
@@ -802,11 +1031,7 @@
         // ==================== CATEGORIES LOADING ====================
         async function loadCategories() {
             try {
-                // Load categories from database
-                const snapshot = await db.collection('categories').get();
-                allCategories = [];
-                
-                // Add predefined categories first
+                // First load predefined categories
                 const predefinedCategories = [
                     "বাংলাদেশ বিষয়াবলী",
                     "আন্তর্জাতিক বিষয়াবলী",
@@ -820,6 +1045,9 @@
                     "বর্তমান affairs"
                 ];
                 
+                allCategories = [];
+                
+                // Initialize with predefined categories
                 predefinedCategories.forEach(name => {
                     allCategories.push({
                         nameBn: name,
@@ -828,46 +1056,50 @@
                     });
                 });
                 
-                // Add categories from database
-                snapshot.forEach(doc => {
+                // Load categories from database
+                const categoriesSnapshot = await db.collection('categories').get();
+                categoriesSnapshot.forEach(doc => {
                     const cat = doc.data();
-                    if (!predefinedCategories.includes(cat.nameBn)) {
+                    // Check if already exists in predefined
+                    const exists = predefinedCategories.includes(cat.nameBn);
+                    if (!exists) {
                         allCategories.push(cat);
                     }
                 });
                 
-                // Update question counts
-                await updateCategoryCounts();
+                // Get question counts for each category
+                for (let category of allCategories) {
+                    try {
+                        const questionsSnapshot = await db.collection('questions')
+                            .where('category', '==', category.nameBn)
+                            .get();
+                        category.questionCount = questionsSnapshot.size;
+                    } catch (error) {
+                        console.log(`Error counting questions for ${category.nameBn}:`, error);
+                        category.questionCount = 0;
+                    }
+                }
                 
                 // Render categories
                 renderQuestionCategories();
-                renderFilterCategories();
+                renderPopupCategories();
                 
             } catch (error) {
                 console.error('Error loading categories:', error);
             }
         }
 
-        async function updateCategoryCounts() {
-            // Get question counts for each category
-            for (let category of allCategories) {
-                const snapshot = await db.collection('questions')
-                    .where('category', '==', category.nameBn)
-                    .get();
-                
-                category.questionCount = snapshot.size;
-            }
-        }
-
         function renderQuestionCategories() {
             const container = document.getElementById('questionCategories');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             // Add "All Questions" option
             const allQuestionsCount = allCategories.reduce((total, cat) => total + cat.questionCount, 0);
             container.innerHTML += `
                 <li class="category-item">
-                    <a href="#" class="category-link" data-category="all">
+                    <a href="#" class="category-link ${currentCategory === 'all' ? 'active' : ''}" data-category="all">
                         <span>সব প্রশ্ন</span>
                         <span class="category-count">${allQuestionsCount}</span>
                     </a>
@@ -879,7 +1111,7 @@
                 if (category.questionCount > 0) {
                     container.innerHTML += `
                         <li class="category-item">
-                            <a href="#" class="category-link" data-category="${category.nameBn}">
+                            <a href="#" class="category-link ${currentCategory === category.nameBn ? 'active' : ''}" data-category="${category.nameBn}">
                                 <span>${category.nameBn}</span>
                                 <span class="category-count">${category.questionCount}</span>
                             </a>
@@ -893,75 +1125,21 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const category = this.getAttribute('data-category');
-                    selectCategory(category);
+                    currentCategory = category;
+                    currentPage = 1;
                     
                     // Update active state
                     document.querySelectorAll('.category-link').forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    // Update selected in popup
+                    selectedCategoryInPopup = category;
+                    
+                    // Load questions
+                    loadQuestions();
+                    updatePageTitle();
                 });
             });
-        }
-
-        function renderFilterCategories() {
-            const container = document.getElementById('filterCategories');
-            container.innerHTML = '';
-            
-            // Add "All" filter
-            container.innerHTML += `
-                <div class="filter-category ${currentCategory === 'all' ? 'active' : ''}" data-category="all">
-                    সব প্রশ্ন
-                </div>
-            `;
-            
-            // Add each category
-            allCategories.forEach(category => {
-                if (category.questionCount > 0) {
-                    container.innerHTML += `
-                        <div class="filter-category ${currentCategory === category.nameBn ? 'active' : ''}" 
-                             data-category="${category.nameBn}">
-                            ${category.nameBn}
-                            <span style="font-size: 12px; color: #666;">(${category.questionCount})</span>
-                        </div>
-                    `;
-                }
-            });
-            
-            // Add click event listeners
-            document.querySelectorAll('.filter-category').forEach(filter => {
-                filter.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    selectCategory(category);
-                    
-                    // Update active state
-                    document.querySelectorAll('.filter-category').forEach(f => f.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Also update sidebar active state
-                    document.querySelectorAll('.category-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('data-category') === category) {
-                            link.classList.add('active');
-                        }
-                    });
-                });
-            });
-        }
-
-        function selectCategory(category) {
-            currentCategory = category;
-            currentPage = 1;
-            
-            // Update page title
-            const pageTitle = document.getElementById('pageTitle');
-            if (category === 'all') {
-                pageTitle.textContent = 'সব প্রশ্ন';
-            } else {
-                const selectedCat = allCategories.find(c => c.nameBn === category);
-                pageTitle.textContent = selectedCat ? selectedCat.nameBn : category;
-            }
-            
-            // Reload questions
-            loadQuestions();
         }
 
         // ==================== JOBS LOADING ====================
@@ -993,6 +1171,8 @@
 
         function renderJobCategories(jobCounts) {
             const container = document.getElementById('jobCategories');
+            if (!container) return;
+            
             container.innerHTML = '';
             
             // Add all jobs option
@@ -1007,11 +1187,11 @@
             `;
             
             // Add job categories
-            const categories = [
+            const jobCategories = [
                 'সরকারি', 'প্রাইভেট', 'ব্যাংক', 'এনজিও', 'বিসিএস', 'শিক্ষক'
             ];
             
-            categories.forEach(category => {
+            jobCategories.forEach(category => {
                 const count = jobCounts[category] || 0;
                 if (count > 0) {
                     container.innerHTML += `
@@ -1039,7 +1219,7 @@
                     </div>
                 `;
                 
-                // Build query
+                // Get all questions first
                 let query = db.collection('questions');
                 
                 if (currentCategory !== 'all') {
@@ -1047,8 +1227,8 @@
                 }
                 
                 // Get total count
-                const countSnapshot = await query.get();
-                totalQuestions = countSnapshot.size;
+                const allQuestionsSnapshot = await query.get();
+                totalQuestions = allQuestionsSnapshot.size;
                 
                 // Update total questions display
                 document.getElementById('questionsCount').textContent = totalQuestions;
@@ -1057,15 +1237,32 @@
                 const totalPages = Math.ceil(totalQuestions / questionsPerPage);
                 const startIndex = (currentPage - 1) * questionsPerPage;
                 
-                // Get questions for current page
-                const snapshot = await query
+                if (totalQuestions === 0) {
+                    renderQuestions([]);
+                    renderPagination(totalPages);
+                    return;
+                }
+                
+                // Get documents for current page
+                const pageSnapshot = await query
                     .orderBy('createdAt', 'desc')
-                    .startAt(startIndex)
-                    .limit(questionsPerPage)
                     .get();
                 
+                // Convert to array and paginate manually
+                const allQuestions = [];
+                pageSnapshot.forEach(doc => {
+                    allQuestions.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                const start = (currentPage - 1) * questionsPerPage;
+                const end = start + questionsPerPage;
+                const pageQuestions = allQuestions.slice(start, end);
+                
                 // Render questions
-                renderQuestions(snapshot);
+                renderQuestions(pageQuestions);
                 
                 // Render pagination
                 renderPagination(totalPages);
@@ -1076,16 +1273,17 @@
                     <div class="no-data">
                         <i class="fas fa-exclamation-triangle" style="font-size: 36px; color: #e74c3c; margin-bottom: 15px;"></i>
                         <p>প্রশ্ন লোড করতে সমস্যা হয়েছে</p>
-                        <p style="font-size: 14px;">${error.message}</p>
+                        <p style="font-size: 14px; color: #e74c3c;">${error.message}</p>
+                        <p style="font-size: 14px; margin-top: 10px;">দয়া করে পৃষ্ঠাটি রিফ্রেশ করুন</p>
                     </div>
                 `;
             }
         }
 
-        function renderQuestions(snapshot) {
+        function renderQuestions(questions) {
             const questionsList = document.getElementById('questionsList');
             
-            if (snapshot.empty) {
+            if (!questions || questions.length === 0) {
                 questionsList.innerHTML = `
                     <div class="no-data">
                         <i class="fas fa-question-circle" style="font-size: 36px; color: #7f8c8d; margin-bottom: 15px;"></i>
@@ -1099,8 +1297,7 @@
             let html = '';
             let questionNumber = (currentPage - 1) * questionsPerPage + 1;
             
-            snapshot.forEach(doc => {
-                const question = doc.data();
+            questions.forEach(question => {
                 const answerText = getAnswerText(question);
                 
                 html += `
@@ -1118,14 +1315,16 @@
         }
 
         function getAnswerText(question) {
+            if (!question.correctAnswer) return 'উত্তর পাওয়া যায়নি';
+            
             const answers = ['A', 'B', 'C', 'D'];
             const correctAnswer = answers[question.correctAnswer - 1];
             
             switch(correctAnswer) {
-                case 'A': return question.option1;
-                case 'B': return question.option2;
-                case 'C': return question.option3;
-                case 'D': return question.option4;
+                case 'A': return question.option1 || 'উত্তর পাওয়া যায়নি';
+                case 'B': return question.option2 || 'উত্তর পাওয়া যায়নি';
+                case 'C': return question.option3 || 'উত্তর পাওয়া যায়নি';
+                case 'D': return question.option4 || 'উত্তর পাওয়া যায়নি';
                 default: return 'উত্তর পাওয়া যায়নি';
             }
         }
@@ -1194,26 +1393,26 @@
             });
         }
 
-        // ==================== SETUP CATEGORY FILTERS ====================
-        function setupCategoryFilters() {
-            // Initial active state
+        // ==================== UPDATE PAGE TITLE ====================
+        function updatePageTitle() {
+            const pageTitle = document.getElementById('pageTitle');
             if (currentCategory === 'all') {
-                const allLink = document.querySelector('.category-link[data-category="all"]');
-                if (allLink) allLink.classList.add('active');
+                pageTitle.textContent = 'সব প্রশ্ন';
+            } else {
+                const selectedCat = allCategories.find(c => c.nameBn === currentCategory);
+                pageTitle.textContent = selectedCat ? selectedCat.nameBn : currentCategory;
             }
         }
 
         // ==================== REAL-TIME UPDATES ====================
         // Listen for new questions
         db.collection('questions')
-            .orderBy('createdAt', 'desc')
-            .limit(1)
             .onSnapshot((snapshot) => {
                 // Reload categories to update counts
                 loadCategories();
                 
-                // If we're on "all" category, reload questions too
-                if (currentCategory === 'all') {
+                // Reload questions if needed
+                if (!snapshot.empty) {
                     loadQuestions();
                 }
             });
@@ -1227,6 +1426,9 @@
         db.collection('jobs').onSnapshot(() => {
             loadJobs();
         });
+
+        // Initial update
+        updatePageTitle();
 
     </script>
 </body>
