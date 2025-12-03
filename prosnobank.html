@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* পূর্বের CSS একই থাকবে, শুধু important part দেখাচ্ছি */
         * {
             margin: 0;
             padding: 0;
@@ -18,6 +17,7 @@
         body {
             background-color: #f5f7fa;
             color: #333;
+            line-height: 1.6;
         }
         
         /* Fixed Header */
@@ -112,7 +112,7 @@
             color: white;
         }
         
-        /* Mobile Menu Button in Header */
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -141,11 +141,31 @@
             display: block;
         }
         
+        .mobile-nav-link {
+            display: block;
+            color: white;
+            padding: 12px 15px;
+            text-decoration: none;
+            border-bottom: 1px solid #34495e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         /* Header Ad */
         .header-ad {
             max-width: 1400px;
             margin: 85px auto 10px;
             padding: 0 20px;
+        }
+        
+        .ad-banner {
+            background: #f8f9fa;
+            border: 1px dashed #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            color: #666;
         }
         
         /* Main Container */
@@ -170,7 +190,121 @@
             overflow-y: auto;
         }
         
-        /* Main Content */
+        .sidebar-section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+        
+        .sidebar-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-item {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .category-item:hover {
+            background: #e3f2fd;
+        }
+        
+        .category-item.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .category-count {
+            background: #ecf0f1;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .category-item.active .category-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        /* Right Sidebar */
+        .sidebar-right {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .test-maker {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .test-maker h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .test-btn {
+            background: white;
+            color: #27ae60;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .test-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-ad {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .ad-box {
+            background: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px 15px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Main Content - SIMPLIFIED DESIGN */
         .main-content {
             background: white;
             border-radius: 10px;
@@ -190,18 +324,19 @@
             gap: 10px;
         }
         
-        /* Questions Container */
+        /* Questions Container - SIMPLE DESIGN */
         .questions-container {
             margin-bottom: 30px;
         }
         
-        .question-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-            transition: all 0.3s;
+        .question-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question-item:last-child {
+            border-bottom: none;
         }
         
         .question-number {
@@ -220,31 +355,72 @@
         .question-text {
             font-size: 18px;
             color: #2c3e50;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .answer-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .answer-title {
-            color: #27ae60;
             margin-bottom: 10px;
-            font-weight: 600;
+            line-height: 1.6;
+            display: inline;
+        }
+        
+        /* Answer - Plain Text Below Question */
+        .answer-text {
+            color: #27ae60;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-top: 10px;
+            padding-left: 40px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .answer-text {
-            color: #2c3e50;
-            font-size: 16px;
-            line-height: 1.5;
-            padding-left: 30px;
+        .answer-text i {
+            color: #27ae60;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .page-btn {
+            background: white;
+            border: 2px solid #ddd;
+            color: #555;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .page-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+        
+        .page-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
+            color: #666;
+            margin: 0 15px;
         }
         
         /* Loading Spinner */
@@ -265,7 +441,40 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Responsive */
+        /* No Questions */
+        .no-questions {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+        
+        .no-questions i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+        
+        /* Footer */
+        .main-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .copyright {
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* Mobile Styles */
         @media (max-width: 1024px) {
             .main-container {
                 grid-template-columns: 1fr;
@@ -286,6 +495,81 @@
             
             .mobile-menu-btn {
                 display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                min-width: auto;
+            }
+            
+            .logo-text h1 {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .header-ad {
+                margin-top: 75px;
+                padding: 0 15px;
+            }
+            
+            .main-container {
+                padding: 0 15px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+            
+            .answer-text {
+                font-size: 15px;
+                padding-left: 30px;
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text h1 {
+                font-size: 18px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .logo-text p {
+                font-size: 10px;
+            }
+            
+            .question-number {
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+                font-size: 14px;
+            }
+            
+            .answer-text {
+                padding-left: 25px;
             }
         }
     </style>
@@ -330,7 +614,7 @@
                 </nav>
             </div>
             
-            <!-- Mobile Menu Button in Header -->
+            <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -372,7 +656,7 @@
     
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Left Sidebar (Desktop) -->
+        <!-- Left Sidebar -->
         <aside class="sidebar-left">
             <!-- Question Categories -->
             <div class="sidebar-section">
@@ -386,6 +670,17 @@
                         <span class="category-count" id="all-count">0</span>
                     </li>
                     <!-- Categories will be loaded here -->
+                </ul>
+            </div>
+            
+            <!-- Job Categories -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-briefcase"></i>
+                    চাকরি ক্যাটাগরি
+                </h3>
+                <ul class="category-list" id="jobCategories">
+                    <!-- Job categories will be loaded here -->
                 </ul>
             </div>
         </aside>
@@ -424,6 +719,18 @@
                     টেস্ট তৈরি করুন
                 </button>
             </div>
+            
+            <!-- Ad Section -->
+            <div class="sidebar-ad">
+                <div class="ad-box">
+                    <i class="fas fa-ad fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>এখানে আপনার AdSense বিজ্ঞাপন</p>
+                </div>
+                <div class="ad-box">
+                    <i class="fas fa-ad fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>এখানে আপনার Adstra বিজ্ঞাপন</p>
+                </div>
+            </div>
         </aside>
     </div>
     
@@ -442,7 +749,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     
     <script>
-        // Firebase Configuration - আপনার Configuration
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
             authDomain: "freetutorbd-19380.firebaseapp.com",
@@ -455,15 +762,11 @@
 
         // Initialize Firebase
         try {
-            // Check if Firebase is already initialized
             if (!firebase.apps.length) {
                 firebase.initializeApp(firebaseConfig);
-                console.log("✅ Firebase initialized successfully");
-            } else {
-                console.log("ℹ️ Firebase already initialized");
             }
         } catch (error) {
-            console.error("❌ Firebase initialization error:", error);
+            console.error("Firebase error:", error);
         }
         
         const db = firebase.firestore();
@@ -477,86 +780,40 @@
 
         // Initialize Page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("📱 Page loaded, initializing...");
-            
-            // Mobile Menu Toggle
+            // Mobile Menu
             document.getElementById('mobileMenuBtn').addEventListener('click', function() {
                 document.getElementById('mobileNav').classList.toggle('active');
             });
             
-            // Load initial data
+            // Load data
             loadQuestionCategories();
         });
 
-        // ==================== DEBUG FUNCTION ====================
-        async function debugFirebase() {
-            console.log("🔍 Starting Firebase debug...");
-            
-            try {
-                // Test 1: Check if Firestore is accessible
-                console.log("🔍 Testing Firestore connection...");
-                const testDoc = await db.collection('questions').limit(1).get();
-                console.log(`✅ Firestore accessible. Found ${testDoc.size} documents`);
-                
-                // Test 2: Check all questions
-                const allQuestions = await db.collection('questions').get();
-                console.log(`📊 Total questions in database: ${allQuestions.size}`);
-                
-                // Test 3: Show first few questions data
-                allQuestions.forEach((doc, index) => {
-                    if (index < 3) {
-                        console.log(`📝 Question ${index + 1}:`, doc.data());
-                    }
-                });
-                
-                return true;
-            } catch (error) {
-                console.error("❌ Firebase debug error:", error);
-                return false;
-            }
-        }
-
-        // ==================== LOAD QUESTION CATEGORIES ====================
+        // Load Question Categories
         async function loadQuestionCategories() {
-            console.log("📂 Loading question categories...");
-            
             try {
-                // First debug Firebase
-                const isFirebaseWorking = await debugFirebase();
-                if (!isFirebaseWorking) {
-                    showError("Firebase connection failed. Please check your configuration.");
-                    return;
-                }
-                
                 const categoriesList = document.getElementById('questionCategories');
                 
-                // Clear existing options (keep "all")
+                // Clear existing (keep "all")
                 while (categoriesList.children.length > 1) {
                     categoriesList.removeChild(categoriesList.lastChild);
                 }
                 
                 // Get all questions
                 const questionsSnapshot = await db.collection('questions').get();
-                console.log(`📊 Total questions found: ${questionsSnapshot.size}`);
                 
                 if (questionsSnapshot.size === 0) {
-                    console.log("⚠️ No questions found in database!");
                     showNoQuestions();
                     return;
                 }
                 
                 const categoryCounts = {};
-                const allQuestions = [];
                 
                 questionsSnapshot.forEach(doc => {
                     const question = doc.data();
-                    allQuestions.push(question);
-                    
                     const category = question.category || 'অন্যান্য';
                     categoryCounts[category] = (categoryCounts[category] || 0) + 1;
                 });
-                
-                console.log("📊 Category distribution:", categoryCounts);
                 
                 // Store categories data
                 categoriesData = Object.keys(categoryCounts).map(category => ({
@@ -564,10 +821,10 @@
                     count: categoryCounts[category]
                 }));
                 
-                // Sort by count (descending)
+                // Sort by count
                 categoriesData.sort((a, b) => b.count - a.count);
                 
-                // Add categories to sidebar (max 10 with questions)
+                // Add categories to sidebar (max 10)
                 let addedCount = 0;
                 categoriesData.forEach(category => {
                     if (addedCount < 10 && category.count > 0) {
@@ -595,24 +852,54 @@
                 document.getElementById('all-count').textContent = allCount;
                 totalQuestions = allCount;
                 
-                console.log("✅ Categories loaded successfully");
-                
-                // Store all questions in localStorage for offline access
-                localStorage.setItem('allQuestions', JSON.stringify(allQuestions));
-                
-                // Load questions after categories are loaded
+                // Load questions
                 loadQuestions();
                 
+                // Load job categories
+                loadJobCategories();
+                
             } catch (error) {
-                console.error('❌ Error loading categories:', error);
-                showError('ক্যাটাগরি লোড করতে সমস্যা হয়েছে');
+                console.error('Error:', error);
+                showError('ডেটা লোড করতে সমস্যা হয়েছে');
             }
         }
 
-        // ==================== LOAD QUESTIONS ====================
+        // Load Job Categories
+        async function loadJobCategories() {
+            try {
+                const jobCategoriesList = document.getElementById('jobCategories');
+                
+                const jobsSnapshot = await db.collection('jobs').get();
+                const jobCategoryCounts = {};
+                
+                jobsSnapshot.forEach(doc => {
+                    const job = doc.data();
+                    const category = job.category || 'অন্যান্য';
+                    jobCategoryCounts[category] = (jobCategoryCounts[category] || 0) + 1;
+                });
+                
+                Object.keys(jobCategoryCounts).forEach(category => {
+                    if (jobCategoryCounts[category] > 0) {
+                        const categoryItem = document.createElement('li');
+                        categoryItem.className = 'category-item';
+                        categoryItem.innerHTML = `
+                            <span>${category}</span>
+                            <span class="category-count">${jobCategoryCounts[category]}</span>
+                        `;
+                        categoryItem.addEventListener('click', () => {
+                            window.location.href = 'jobs.html';
+                        });
+                        jobCategoriesList.appendChild(categoryItem);
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Job categories error:', error);
+            }
+        }
+
+        // Load Questions
         async function loadQuestions() {
-            console.log(`📖 Loading questions... Category: ${currentCategory}, Page: ${currentPage}`);
-            
             const container = document.getElementById('questionsContainer');
             container.innerHTML = `
                 <div class="loading-spinner">
@@ -625,13 +912,11 @@
                 let questions = [];
                 
                 if (currentCategory === 'all') {
-                    // Get all questions
                     const snapshot = await db.collection('questions').get();
                     snapshot.forEach(doc => {
                         questions.push(doc.data());
                     });
                 } else {
-                    // Get questions by category
                     const snapshot = await db.collection('questions')
                         .where('category', '==', currentCategory)
                         .get();
@@ -642,7 +927,6 @@
                 }
                 
                 totalQuestions = questions.length;
-                console.log(`📊 Questions found: ${totalQuestions}`);
                 
                 if (totalQuestions === 0) {
                     showNoQuestions();
@@ -662,50 +946,12 @@
                 generatePagination(totalPages);
                 
             } catch (error) {
-                console.error('❌ Error loading questions:', error);
-                // Try to load from localStorage as fallback
-                try {
-                    const savedQuestions = JSON.parse(localStorage.getItem('allQuestions') || '[]');
-                    if (savedQuestions.length > 0) {
-                        console.log("⚠️ Using cached questions from localStorage");
-                        filterAndDisplayQuestions(savedQuestions);
-                    } else {
-                        showError('প্রশ্ন লোড করতে সমস্যা হয়েছে');
-                    }
-                } catch (cacheError) {
-                    showError('প্রশ্ন লোড করতে সমস্যা হয়েছে');
-                }
+                console.error('Error:', error);
+                showError('প্রশ্ন লোড করতে সমস্যা হয়েছে');
             }
         }
 
-        // ==================== FILTER AND DISPLAY QUESTIONS (Fallback) ====================
-        function filterAndDisplayQuestions(allQuestions) {
-            let filteredQuestions = [];
-            
-            if (currentCategory === 'all') {
-                filteredQuestions = allQuestions;
-            } else {
-                filteredQuestions = allQuestions.filter(q => q.category === currentCategory);
-            }
-            
-            totalQuestions = filteredQuestions.length;
-            
-            if (totalQuestions === 0) {
-                showNoQuestions();
-                return;
-            }
-            
-            const startIndex = (currentPage - 1) * questionsPerPage;
-            const endIndex = startIndex + questionsPerPage;
-            const paginatedQuestions = filteredQuestions.slice(startIndex, endIndex);
-            
-            displayQuestions(paginatedQuestions, startIndex);
-            
-            const totalPages = Math.ceil(totalQuestions / questionsPerPage);
-            generatePagination(totalPages);
-        }
-
-        // ==================== DISPLAY QUESTIONS ====================
+        // Display Questions - SIMPLE DESIGN
         function displayQuestions(questions, startIndex) {
             const container = document.getElementById('questionsContainer');
             
@@ -714,9 +960,6 @@
                     <div class="no-questions">
                         <i class="fas fa-inbox"></i>
                         <p>কোন প্রশ্ন পাওয়া যায়নি</p>
-                        <button onclick="loadQuestions()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            <i class="fas fa-redo"></i> রিফ্রেশ করুন
-                        </button>
                     </div>
                 `;
                 return;
@@ -728,7 +971,7 @@
                 const questionNumber = startIndex + index + 1;
                 const correctAnswer = question.correctAnswer || 1;
                 
-                // Get the correct option text
+                // Get correct option text
                 let correctOptionText = '';
                 switch(correctAnswer) {
                     case 1: correctOptionText = question.option1; break;
@@ -742,62 +985,48 @@
                 const answerLetter = ['A', 'B', 'C', 'D'][correctAnswer - 1] || 'A';
                 
                 html += `
-                    <div class="question-card">
+                    <div class="question-item">
                         <div>
                             <span class="question-number">${questionNumber}</span>
                             <span class="question-text">${question.question || 'প্রশ্নের বিষয়বস্তু পাওয়া যায়নি'}</span>
                         </div>
-                        <div class="answer-section">
-                            <div class="answer-title">
-                                <i class="fas fa-check-circle"></i>
-                                সঠিক উত্তর
-                            </div>
-                            <div class="answer-text">
-                                ${answerLetter}. ${correctOptionText}
-                            </div>
+                        <div class="answer-text">
+                            <i class="fas fa-check-circle"></i>
+                            উত্তর: ${answerLetter}. ${correctOptionText}
                         </div>
                     </div>
                 `;
             });
             
             container.innerHTML = html;
-            console.log(`✅ Displayed ${questions.length} questions`);
         }
 
-        // ==================== SHOW NO QUESTIONS ====================
+        // Show No Questions
         function showNoQuestions() {
             const container = document.getElementById('questionsContainer');
             container.innerHTML = `
                 <div class="no-questions">
                     <i class="fas fa-inbox"></i>
                     <p>কোন প্রশ্ন পাওয়া যায়নি</p>
-                    <div style="margin-top: 20px; color: #666; font-size: 14px;">
-                        <p>Admin Panel থেকে প্রশ্ন যোগ করুন:</p>
-                        <p>1. প্রশ্নব্যাংক ট্যাবে যান</p>
-                        <p>2. CSV আপলোড করুন অথবা ম্যানুয়ালি প্রশ্ন যোগ করুন</p>
-                    </div>
                 </div>
             `;
         }
 
-        // ==================== SHOW ERROR ====================
+        // Show Error
         function showError(message) {
             const container = document.getElementById('questionsContainer');
             container.innerHTML = `
                 <div class="no-questions" style="color: #e74c3c;">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>${message}</p>
-                    <button onclick="debugFirebase()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
-                        <i class="fas fa-bug"></i> ডিবাগ করুন
-                    </button>
-                    <button onclick="loadQuestions()" style="margin-top: 15px; padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        <i class="fas fa-redo"></i> আবার চেষ্টা করুন
+                    <button onclick="loadQuestions()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        আবার চেষ্টা করুন
                     </button>
                 </div>
             `;
         }
 
-        // ==================== GENERATE PAGINATION ====================
+        // Generate Pagination
         function generatePagination(totalPages) {
             const paginationDiv = document.getElementById('pagination');
             
@@ -847,14 +1076,14 @@
             // Page info
             html += `
                 <div class="page-info">
-                    পৃষ্ঠা ${currentPage} / ${totalPages} (মোট ${totalQuestions} প্রশ্ন)
+                    পৃষ্ঠা ${currentPage} / ${totalPages}
                 </div>
             `;
             
             paginationDiv.innerHTML = html;
         }
 
-        // ==================== CHANGE PAGE ====================
+        // Change Page
         function changePage(page) {
             if (page < 1 || page > Math.ceil(totalQuestions / questionsPerPage)) return;
             
@@ -868,19 +1097,19 @@
             });
         }
 
-        // ==================== UPDATE PAGE TITLE ====================
+        // Update Page Title
         function updatePageTitle() {
             const titleElement = document.getElementById('page-title-text');
             
             if (currentCategory === 'all') {
-                titleElement.textContent = `সকল প্রশ্ন (${totalQuestions}টি প্রশ্ন)`;
+                titleElement.textContent = `সকল প্রশ্ন (${totalQuestions}টি)`;
             } else {
                 const category = categoriesData.find(cat => cat.name === currentCategory);
-                titleElement.textContent = `${currentCategory} (${category ? category.count : 0}টি প্রশ্ন)`;
+                titleElement.textContent = `${currentCategory} (${category ? category.count : 0}টি)`;
             }
         }
 
-        // ==================== UPDATE ACTIVE CATEGORY ====================
+        // Update Active Category
         function updateActiveCategory() {
             // Update desktop category items
             document.querySelectorAll('#questionCategories .category-item').forEach(item => {
@@ -891,30 +1120,25 @@
             });
         }
 
-        // ==================== HANDLE "সকল প্রশ্ন" CLICK ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle click on "সকল প্রশ্ন"
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('[data-category="all"]')) {
-                    currentCategory = 'all';
-                    currentPage = 1;
-                    updatePageTitle();
-                    loadQuestions();
-                    updateActiveCategory();
-                }
-            });
+        // Handle "সকল প্রশ্ন" click
+        document.querySelector('[data-category="all"]').addEventListener('click', function() {
+            currentCategory = 'all';
+            currentPage = 1;
+            updatePageTitle();
+            loadQuestions();
+            updateActiveCategory();
+        });
+
+        // Close mobile menu on click outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             
-            // Close mobile menu on click outside
-            document.addEventListener('click', function(event) {
-                const mobileNav = document.getElementById('mobileNav');
-                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                
-                if (mobileNav.classList.contains('active') && 
-                    !mobileNav.contains(event.target) && 
-                    !mobileMenuBtn.contains(event.target)) {
-                    mobileNav.classList.remove('active');
-                }
-            });
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
         });
     </script>
 </body>
