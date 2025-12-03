@@ -42,6 +42,13 @@
             align-items: center;
         }
         
+        .logo-nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex: 1;
+        }
+        
         .logo {
             display: flex;
             align-items: center;
@@ -58,23 +65,28 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #3498db;
+            flex-shrink: 0;
         }
         
         .logo-text h1 {
             color: #3498db;
             font-size: 24px;
             margin-bottom: 5px;
+            white-space: nowrap;
         }
         
         .logo-text p {
             color: #bdc3c7;
             font-size: 12px;
+            white-space: nowrap;
         }
         
         /* Navigation */
         .main-nav {
             display: flex;
             gap: 25px;
+            flex: 1;
+            justify-content: center;
         }
         
         .nav-link {
@@ -87,6 +99,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
         
         .nav-link:hover {
@@ -99,7 +112,7 @@
             color: white;
         }
         
-        /* Mobile Menu Button */
+        /* Mobile Menu Button in Header */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -107,66 +120,115 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
+            padding: 5px;
+            margin-left: 15px;
         }
         
-        /* Category Filter Section - FIXED POSITION */
-        .category-filter-section {
-            background: white;
-            padding: 20px;
-            margin: 10px auto 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            position: sticky;
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            background: #2c3e50;
+            padding: 15px;
+            position: fixed;
             top: 80px;
-            z-index: 900;
-            max-width: 1400px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .category-filter-section h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            color: white;
+            padding: 12px 15px;
+            text-decoration: none;
+            border-bottom: 1px solid #34495e;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
+        /* Header Ad */
+        .header-ad {
+            max-width: 1400px;
+            margin: 20px auto 10px;
+            padding: 0 20px;
+        }
+        
+        .ad-banner {
+            background: #f8f9fa;
+            border: 1px dashed #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            color: #666;
+        }
+        
+        /* Category Filter Bar */
+        .category-filter-bar {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+        }
+        
         .filter-container {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        
-        .category-select {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
             background: white;
-            min-width: 200px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
-        .clear-filter {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
+        .filter-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
         
-        .clear-filter:hover {
-            background: #c0392b;
+        .filter-header h3 {
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .filter-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .filter-btn.active {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
         }
         
         /* Main Container */
         .main-container {
             max-width: 1400px;
-            margin: 20px auto;
+            margin: 0 auto 40px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: 250px 1fr 300px;
@@ -180,8 +242,8 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             overflow: hidden;
             position: sticky;
-            top: 180px;
-            max-height: calc(100vh - 200px);
+            top: 100px;
+            max-height: calc(100vh - 120px);
             overflow-y: auto;
         }
         
@@ -208,14 +270,14 @@
         }
         
         .category-item {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: 5px;
         }
         
         .category-item:hover {
@@ -229,10 +291,9 @@
         
         .category-count {
             background: #ecf0f1;
-            padding: 3px 8px;
-            border-radius: 20px;
+            padding: 2px 8px;
+            border-radius: 10px;
             font-size: 12px;
-            font-weight: 500;
         }
         
         .category-item.active .category-count {
@@ -247,8 +308,8 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             overflow: hidden;
             position: sticky;
-            top: 180px;
-            max-height: calc(100vh - 200px);
+            top: 100px;
+            max-height: calc(100vh - 120px);
             overflow-y: auto;
         }
         
@@ -258,6 +319,11 @@
             padding: 25px;
             text-align: center;
             border-radius: 10px 10px 0 0;
+        }
+        
+        .test-maker h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
         }
         
         .test-btn {
@@ -280,6 +346,20 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
+        .sidebar-ad {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .ad-box {
+            background: #f8f9fa;
+            border: 1px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px 15px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
         /* Main Content */
         .main-content {
             background: white;
@@ -293,14 +373,14 @@
             color: #2c3e50;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 1px solid #eee;
             font-size: 24px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        /* Questions Container - SIMPLE DESIGN */
+        /* Questions Container - SIMPLIFIED */
         .questions-container {
             margin-bottom: 30px;
         }
@@ -313,19 +393,18 @@
         
         .question-item:last-child {
             border-bottom: none;
-            margin-bottom: 0;
         }
         
         .question-number {
             display: inline-block;
             background: #3498db;
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             text-align: center;
-            line-height: 32px;
-            margin-right: 12px;
+            line-height: 30px;
+            margin-right: 10px;
             font-weight: bold;
             font-size: 14px;
         }
@@ -333,55 +412,27 @@
         .question-text {
             font-size: 18px;
             color: #2c3e50;
-            margin-bottom: 15px;
             line-height: 1.6;
+            margin-bottom: 10px;
             display: inline;
+        }
+        
+        .answer-section {
+            margin-top: 15px;
+            margin-left: 40px;
         }
         
         .answer-text {
             color: #27ae60;
             font-size: 16px;
             line-height: 1.5;
-            margin-top: 15px;
-            padding-left: 44px;
-            font-weight: 500;
+            padding: 5px 0;
         }
         
-        .answer-text:before {
-            content: "উত্তর: ";
-            color: #2c3e50;
-            font-weight: normal;
-        }
-        
-        /* Loading Spinner */
-        .loading-spinner {
-            text-align: center;
-            padding: 50px;
-            color: #3498db;
-        }
-        
-        .loading-spinner i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* No Questions */
-        .no-questions {
-            text-align: center;
-            padding: 50px;
-            color: #7f8c8d;
-        }
-        
-        .no-questions i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #bdc3c7;
+        .answer-label {
+            color: #27ae60;
+            font-weight: 600;
+            margin-right: 10px;
         }
         
         /* Pagination */
@@ -397,7 +448,7 @@
         
         .page-btn {
             background: white;
-            border: 2px solid #ddd;
+            border: 1px solid #ddd;
             color: #555;
             width: 40px;
             height: 40px;
@@ -429,6 +480,38 @@
         .page-info {
             color: #666;
             margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        /* No Questions Message */
+        .no-questions {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+        }
+        
+        .no-questions i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+            color: #3498db;
+        }
+        
+        .loading-spinner i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Footer */
@@ -462,9 +545,8 @@
                 display: none;
             }
             
-            .category-filter-section {
-                top: 80px;
-                margin: 10px 20px 20px;
+            .logo-nav-wrapper {
+                justify-content: space-between;
             }
             
             .main-nav {
@@ -473,6 +555,10 @@
             
             .mobile-menu-btn {
                 display: block;
+            }
+            
+            .filter-options {
+                justify-content: center;
             }
         }
         
@@ -485,6 +571,10 @@
                 padding: 0 15px;
             }
             
+            .logo {
+                min-width: auto;
+            }
+            
             .logo-text h1 {
                 font-size: 20px;
             }
@@ -494,25 +584,8 @@
                 height: 40px;
             }
             
-            .category-filter-section {
-                padding: 15px;
-                margin: 10px 15px 15px;
-            }
-            
-            .filter-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .category-select {
-                min-width: 100%;
-            }
-            
-            .clear-filter {
-                width: 100%;
-                justify-content: center;
-            }
-            
+            .header-ad,
+            .category-filter-bar,
             .main-container {
                 padding: 0 15px;
             }
@@ -531,11 +604,15 @@
             
             .answer-text {
                 font-size: 15px;
-                padding-left: 40px;
             }
             
             .pagination {
                 flex-wrap: wrap;
+            }
+            
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 13px;
             }
         }
         
@@ -553,11 +630,12 @@
                 font-size: 10px;
             }
             
-            .question-number {
-                width: 28px;
-                height: 28px;
-                line-height: 28px;
-                font-size: 12px;
+            .question-text {
+                font-size: 15px;
+            }
+            
+            .answer-text {
+                font-size: 14px;
             }
         }
     </style>
@@ -566,63 +644,129 @@
     <!-- Fixed Header -->
     <header class="main-header">
         <div class="header-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-chalkboard-teacher" style="font-size: 24px; color: #3498db;"></i>
+            <div class="logo-nav-wrapper">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-chalkboard-teacher" style="font-size: 24px; color: #3498db;"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>FreeTutorBD</h1>
+                        <p>বাংলাদেশের বৃহত্তম প্রশ্নব্যাংক</p>
+                    </div>
                 </div>
-                <div class="logo-text">
-                    <h1>FreeTutorBD</h1>
-                    <p>বাংলাদেশের বৃহত্তম প্রশ্নব্যাংক</p>
-                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="main-nav">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        হোম
+                    </a>
+                    <a href="questions.html" class="nav-link active">
+                        <i class="fas fa-question-circle"></i>
+                        প্রশ্নব্যাংক
+                    </a>
+                    <a href="quiz.html" class="nav-link">
+                        <i class="fas fa-puzzle-piece"></i>
+                        কুইজ টেস্ট
+                    </a>
+                    <a href="exams.html" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        মডেল টেস্ট
+                    </a>
+                    <a href="jobs.html" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        চাকরি
+                    </a>
+                </nav>
             </div>
             
-            <!-- Desktop Navigation -->
-            <nav class="main-nav">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    হোম
-                </a>
-                <a href="questions.html" class="nav-link active">
-                    <i class="fas fa-question-circle"></i>
-                    প্রশ্নব্যাংক
-                </a>
-                <a href="quiz.html" class="nav-link">
-                    <i class="fas fa-puzzle-piece"></i>
-                    কুইজ টেস্ট
-                </a>
-                <a href="exams.html" class="nav-link">
-                    <i class="fas fa-file-alt"></i>
-                    মডেল টেস্ট
-                </a>
-                <a href="jobs.html" class="nav-link">
-                    <i class="fas fa-briefcase"></i>
-                    চাকরি
-                </a>
-            </nav>
-            
-            <!-- Mobile Menu Button -->
+            <!-- Mobile Menu Button in Header -->
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                হোম
+            </a>
+            <a href="questions.html" class="mobile-nav-link active">
+                <i class="fas fa-question-circle"></i>
+                প্রশ্নব্যাংক
+            </a>
+            <a href="quiz.html" class="mobile-nav-link">
+                <i class="fas fa-puzzle-piece"></i>
+                কুইজ টেস্ট
+            </a>
+            <a href="exams.html" class="mobile-nav-link">
+                <i class="fas fa-file-alt"></i>
+                মডেল টেস্ট
+            </a>
+            <a href="jobs.html" class="mobile-nav-link">
+                <i class="fas fa-briefcase"></i>
+                চাকরি
+            </a>
+        </div>
     </header>
     
-    <!-- Category Filter Section (Fixed Position) -->
-    <div class="category-filter-section">
-        <h3><i class="fas fa-filter"></i> ক্যাটাগরি ফিল্টার</h3>
+    <!-- Header Ad -->
+    <div class="header-ad">
+        <div class="ad-banner">
+            <i class="fas fa-ad" style="margin-right: 10px;"></i>
+            এখানে আপনার AdSense/Adstra বিজ্ঞাপন
+            <i class="fas fa-ad" style="margin-left: 10px;"></i>
+        </div>
+    </div>
+    
+    <!-- Category Filter Bar (Above Content) -->
+    <div class="category-filter-bar">
         <div class="filter-container">
-            <select class="category-select" id="categoryFilter">
-                <option value="all">সকল প্রশ্ন দেখুন</option>
+            <div class="filter-header">
+                <i class="fas fa-filter"></i>
+                <h3>ক্যাটাগরি ফিল্টার</h3>
+            </div>
+            <div class="filter-options" id="filterOptions">
+                <button class="filter-btn active" data-category="all">
+                    সকল প্রশ্ন
+                </button>
                 <!-- Categories will be loaded here -->
-            </select>
-            <button class="clear-filter" id="clearFilterBtn">
-                <i class="fas fa-times"></i> ফিল্টার ক্লিয়ার করুন
-            </button>
+            </div>
         </div>
     </div>
     
     <!-- Main Container -->
     <div class="main-container">
+        <!-- Left Sidebar (Desktop) -->
+        <aside class="sidebar-left">
+            <!-- Question Categories -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-folder"></i>
+                    প্রশ্ন ক্যাটাগরি
+                </h3>
+                <ul class="category-list" id="questionCategories">
+                    <li class="category-item active" data-category="all">
+                        <span>সকল প্রশ্ন</span>
+                        <span class="category-count" id="all-count">0</span>
+                    </li>
+                    <!-- Categories will be loaded here -->
+                </ul>
+            </div>
+            
+            <!-- Job Categories -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-briefcase"></i>
+                    চাকরি ক্যাটাগরি
+                </h3>
+                <ul class="category-list" id="jobCategories">
+                    <!-- Job categories will be loaded here -->
+                </ul>
+            </div>
+        </aside>
+        
         <!-- Main Content -->
         <main class="main-content">
             <!-- Page Title -->
@@ -633,6 +777,7 @@
             
             <!-- Questions Container -->
             <div class="questions-container" id="questionsContainer">
+                <!-- Questions will be loaded here -->
                 <div class="loading-spinner">
                     <i class="fas fa-spinner"></i>
                     <p>প্রশ্ন লোড হচ্ছে...</p>
@@ -644,6 +789,31 @@
                 <!-- Pagination will be generated here -->
             </div>
         </main>
+        
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <!-- Test Maker -->
+            <div class="test-maker">
+                <h3>নিজের টেস্ট তৈরি করুন</h3>
+                <p>কাস্টমাইজড MCQ টেস্ট তৈরি করুন</p>
+                <button class="test-btn" onclick="window.location.href='mcqtest.html'">
+                    <i class="fas fa-plus-circle"></i>
+                    টেস্ট তৈরি করুন
+                </button>
+            </div>
+            
+            <!-- Ad Section -->
+            <div class="sidebar-ad">
+                <div class="ad-box">
+                    <i class="fas fa-ad fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>এখানে আপনার AdSense বিজ্ঞাপন</p>
+                </div>
+                <div class="ad-box">
+                    <i class="fas fa-ad fa-2x" style="margin-bottom: 10px;"></i>
+                    <p>এখানে আপনার Adstra বিজ্ঞাপন</p>
+                </div>
+            </div>
+        </aside>
     </div>
     
     <!-- Footer -->
@@ -661,7 +831,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     
     <script>
-        // Firebase Configuration
+        // Firebase Configuration - আপনার Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCbfCCosPtMmkxbjp0yjBmJKo_vzzUYEiQ",
             authDomain: "freetutorbd-19380.firebaseapp.com",
@@ -674,12 +844,13 @@
 
         // Initialize Firebase
         try {
+            // Check if Firebase is already initialized
             if (!firebase.apps.length) {
                 firebase.initializeApp(firebaseConfig);
-                console.log("✅ Firebase initialized successfully");
             }
+            console.log("Firebase initialized successfully");
         } catch (error) {
-            console.error("❌ Firebase initialization error:", error);
+            console.error("Firebase initialization error:", error);
         }
         
         const db = firebase.firestore();
@@ -690,71 +861,49 @@
         const questionsPerPage = 20;
         let totalQuestions = 0;
         let categoriesData = [];
-        let allQuestions = [];
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        });
 
         // Initialize Page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log("📱 Page loaded, initializing...");
-            
-            // Load initial data
+            console.log("Page loaded, initializing...");
             loadQuestionCategories();
-            
-            // Setup event listeners
-            setupEventListeners();
+            loadJobCategories();
         });
-
-        // Setup Event Listeners
-        function setupEventListeners() {
-            // Category filter change
-            document.getElementById('categoryFilter').addEventListener('change', function() {
-                currentCategory = this.value;
-                currentPage = 1;
-                updatePageTitle();
-                loadQuestions();
-            });
-            
-            // Clear filter button
-            document.getElementById('clearFilterBtn').addEventListener('click', function() {
-                document.getElementById('categoryFilter').value = 'all';
-                currentCategory = 'all';
-                currentPage = 1;
-                updatePageTitle();
-                loadQuestions();
-            });
-        }
 
         // Load Question Categories
         async function loadQuestionCategories() {
-            console.log("📂 Loading question categories...");
+            console.log("Loading question categories...");
+            const categoriesList = document.getElementById('questionCategories');
+            const filterOptions = document.getElementById('filterOptions');
+            
+            // Clear existing options (keep "all")
+            while (categoriesList.children.length > 1) {
+                categoriesList.removeChild(categoriesList.lastChild);
+            }
+            
+            // Clear filter options (keep "all")
+            while (filterOptions.children.length > 1) {
+                filterOptions.removeChild(filterOptions.lastChild);
+            }
             
             try {
-                const categorySelect = document.getElementById('categoryFilter');
-                
-                // Clear existing options (keep "all")
-                categorySelect.innerHTML = '<option value="all">সকল প্রশ্ন দেখুন</option>';
-                
-                // Get all questions
+                // Get all questions to count by category
                 const questionsSnapshot = await db.collection('questions').get();
-                console.log(`📊 Total questions found: ${questionsSnapshot.size}`);
+                console.log("Total questions found:", questionsSnapshot.size);
                 
-                if (questionsSnapshot.size === 0) {
-                    showNoQuestions();
-                    return;
-                }
-                
-                // Store all questions
-                allQuestions = [];
                 const categoryCounts = {};
                 
                 questionsSnapshot.forEach(doc => {
                     const question = doc.data();
-                    allQuestions.push(question);
-                    
                     const category = question.category || 'অন্যান্য';
                     categoryCounts[category] = (categoryCounts[category] || 0) + 1;
                 });
                 
-                console.log("📊 Category distribution:", categoryCounts);
+                console.log("Category counts:", categoryCounts);
                 
                 // Store categories data
                 categoriesData = Object.keys(categoryCounts).map(category => ({
@@ -765,36 +914,114 @@
                 // Sort by count (descending)
                 categoriesData.sort((a, b) => b.count - a.count);
                 
-                // Add categories to select (max 15 with questions)
+                // Add categories to sidebar and filter (max 10 with questions)
                 let addedCount = 0;
                 categoriesData.forEach(category => {
-                    if (addedCount < 15 && category.count > 0) {
-                        const option = document.createElement('option');
-                        option.value = category.name;
-                        option.textContent = `${category.name} (${category.count}টি প্রশ্ন)`;
-                        categorySelect.appendChild(option);
+                    if (addedCount < 10 && category.count > 0) {
+                        // Add to desktop sidebar
+                        const categoryItem = document.createElement('li');
+                        categoryItem.className = 'category-item';
+                        categoryItem.setAttribute('data-category', category.name);
+                        categoryItem.innerHTML = `
+                            <span>${category.name}</span>
+                            <span class="category-count">${category.count}</span>
+                        `;
+                        categoryItem.addEventListener('click', () => {
+                            selectCategory(category.name);
+                        });
+                        categoriesList.appendChild(categoryItem);
+                        
+                        // Add to filter options
+                        const filterBtn = document.createElement('button');
+                        filterBtn.className = 'filter-btn';
+                        filterBtn.setAttribute('data-category', category.name);
+                        filterBtn.textContent = `${category.name} (${category.count})`;
+                        filterBtn.addEventListener('click', () => {
+                            selectCategory(category.name);
+                        });
+                        filterOptions.appendChild(filterBtn);
+                        
                         addedCount++;
                     }
                 });
                 
-                // Update total count
-                totalQuestions = questionsSnapshot.size;
+                // Update "All" count
+                const allCount = questionsSnapshot.size;
+                document.getElementById('all-count').textContent = allCount;
+                totalQuestions = allCount;
                 
-                console.log("✅ Categories loaded successfully");
+                console.log("Categories loaded successfully");
                 
                 // Load questions after categories are loaded
                 loadQuestions();
                 
             } catch (error) {
-                console.error('❌ Error loading categories:', error);
+                console.error('Error loading categories:', error);
                 showError('ক্যাটাগরি লোড করতে সমস্যা হয়েছে');
+            }
+        }
+
+        // Select Category
+        function selectCategory(category) {
+            currentCategory = category;
+            currentPage = 1;
+            updatePageTitle();
+            updateActiveCategory();
+            loadQuestions();
+            
+            // Scroll to top on mobile
+            if (window.innerWidth <= 1024) {
+                window.scrollTo({
+                    top: document.querySelector('.category-filter-bar').offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Load Job Categories
+        async function loadJobCategories() {
+            console.log("Loading job categories...");
+            const jobCategoriesList = document.getElementById('jobCategories');
+            
+            try {
+                // Get all jobs to count by category
+                const jobsSnapshot = await db.collection('jobs').get();
+                console.log("Total jobs found:", jobsSnapshot.size);
+                
+                const jobCategoryCounts = {};
+                
+                jobsSnapshot.forEach(doc => {
+                    const job = doc.data();
+                    const category = job.category || 'অন্যান্য';
+                    jobCategoryCounts[category] = (jobCategoryCounts[category] || 0) + 1;
+                });
+                
+                // Add job categories to sidebar (only those with jobs)
+                Object.keys(jobCategoryCounts).forEach(category => {
+                    if (jobCategoryCounts[category] > 0) {
+                        const categoryItem = document.createElement('li');
+                        categoryItem.className = 'category-item';
+                        categoryItem.innerHTML = `
+                            <span>${category}</span>
+                            <span class="category-count">${jobCategoryCounts[category]}</span>
+                        `;
+                        categoryItem.addEventListener('click', () => {
+                            window.location.href = 'jobs.html';
+                        });
+                        jobCategoriesList.appendChild(categoryItem);
+                    }
+                });
+                
+                console.log("Job categories loaded successfully");
+                
+            } catch (error) {
+                console.error('Error loading job categories:', error);
             }
         }
 
         // Load Questions
         async function loadQuestions() {
-            console.log(`📖 Loading questions... Category: ${currentCategory}, Page: ${currentPage}`);
-            
+            console.log("Loading questions... Category:", currentCategory);
             const container = document.getElementById('questionsContainer');
             container.innerHTML = `
                 <div class="loading-spinner">
@@ -804,45 +1031,46 @@
             `;
             
             try {
-                let filteredQuestions = [];
+                let query = db.collection('questions');
                 
-                if (currentCategory === 'all') {
-                    filteredQuestions = allQuestions;
-                } else {
-                    filteredQuestions = allQuestions.filter(q => q.category === currentCategory);
+                // Apply category filter if not "all"
+                if (currentCategory !== 'all') {
+                    query = query.where('category', '==', currentCategory);
                 }
                 
-                totalQuestions = filteredQuestions.length;
-                console.log(`📊 Questions found: ${totalQuestions}`);
+                // Get total count for pagination
+                const countSnapshot = await query.get();
+                totalQuestions = countSnapshot.size;
+                console.log("Total questions for this category:", totalQuestions);
                 
-                if (totalQuestions === 0) {
-                    showNoQuestions();
-                    return;
-                }
+                // Calculate pagination
+                const totalPages = Math.ceil(totalQuestions / questionsPerPage);
+                const startAt = (currentPage - 1) * questionsPerPage;
                 
-                // Apply pagination
-                const startIndex = (currentPage - 1) * questionsPerPage;
-                const endIndex = startIndex + questionsPerPage;
-                const paginatedQuestions = filteredQuestions.slice(startIndex, endIndex);
+                // Get paginated data
+                const snapshot = await query
+                    .orderBy('createdAt', 'desc')
+                    .limit(questionsPerPage)
+                    .offset(startAt)
+                    .get();
                 
                 // Display questions
-                displayQuestions(paginatedQuestions, startIndex);
+                displayQuestions(snapshot, startAt);
                 
                 // Generate pagination
-                const totalPages = Math.ceil(totalQuestions / questionsPerPage);
                 generatePagination(totalPages);
                 
             } catch (error) {
-                console.error('❌ Error loading questions:', error);
-                showError('প্রশ্ন লোড করতে সমস্যা হয়েছে');
+                console.error('Error loading questions:', error);
+                showError('প্রশ্ন লোড করতে সমস্যা হয়েছে: ' + error.message);
             }
         }
 
-        // Display Questions (Simple Design - No Box)
-        function displayQuestions(questions, startIndex) {
+        // Display Questions - SIMPLIFIED VERSION
+        function displayQuestions(snapshot, startIndex) {
             const container = document.getElementById('questionsContainer');
             
-            if (questions.length === 0) {
+            if (snapshot.empty) {
                 container.innerHTML = `
                     <div class="no-questions">
                         <i class="fas fa-inbox"></i>
@@ -853,56 +1081,39 @@
             }
             
             let html = '';
+            let questionIndex = startIndex + 1;
             
-            questions.forEach((question, index) => {
-                const questionNumber = startIndex + index + 1;
-                const correctAnswer = question.correctAnswer || 1;
+            snapshot.forEach(doc => {
+                const question = doc.data();
+                console.log("Question data:", question);
                 
-                // Get the correct option text
-                let correctOptionText = '';
-                switch(correctAnswer) {
-                    case 1: correctOptionText = question.option1; break;
-                    case 2: correctOptionText = question.option2; break;
-                    case 3: correctOptionText = question.option3; break;
-                    case 4: correctOptionText = question.option4; break;
-                    default: correctOptionText = 'উত্তর পাওয়া যায়নি';
-                }
+                // Get correct option
+                const correctOptionIndex = question.correctAnswer || 1;
+                const answerOptions = ['A', 'B', 'C', 'D'];
+                const correctAnswer = answerOptions[correctOptionIndex - 1];
                 
-                // Get answer letter
-                const answerLetter = ['A', 'B', 'C', 'D'][correctAnswer - 1] || 'A';
+                // Get correct option text
+                const correctOptionText = question[`option${correctOptionIndex}`] || 'উত্তর পাওয়া যায়নি';
                 
+                // SIMPLE LAYOUT - No boxes, just plain text
                 html += `
                     <div class="question-item">
                         <div>
-                            <span class="question-number">${questionNumber}</span>
-                            <span class="question-text">${question.question || 'প্রশ্নের বিষয়বস্তু পাওয়া যায়নি'}</span>
+                            <span class="question-number">${questionIndex}</span>
+                            <span class="question-text">${question.question || 'প্রশ্ন নেই'}</span>
                         </div>
-                        <div class="answer-text">
-                            ${answerLetter}. ${correctOptionText}
+                        <div class="answer-section">
+                            <div class="answer-text">
+                                <span class="answer-label">উত্তর:</span>
+                                ${correctAnswer}. ${correctOptionText}
+                            </div>
                         </div>
                     </div>
                 `;
+                questionIndex++;
             });
             
             container.innerHTML = html;
-            console.log(`✅ Displayed ${questions.length} questions`);
-        }
-
-        // Show No Questions
-        function showNoQuestions() {
-            const container = document.getElementById('questionsContainer');
-            container.innerHTML = `
-                <div class="no-questions">
-                    <i class="fas fa-inbox"></i>
-                    <p>কোন প্রশ্ন পাওয়া যায়নি</p>
-                    <p style="margin-top: 10px; font-size: 14px; color: #666;">
-                        Admin Panel থেকে প্রশ্ন যোগ করুন
-                    </p>
-                </div>
-            `;
-            
-            // Hide pagination
-            document.getElementById('pagination').innerHTML = '';
         }
 
         // Show Error
@@ -912,7 +1123,7 @@
                 <div class="no-questions" style="color: #e74c3c;">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>${message}</p>
-                    <button onclick="loadQuestions()" style="margin-top: 15px; padding: 10px 20px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    <button onclick="loadQuestions()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
                         <i class="fas fa-redo"></i> আবার চেষ্টা করুন
                     </button>
                 </div>
@@ -931,13 +1142,13 @@
             let html = '';
             
             // Previous button
-            if (currentPage > 1) {
-                html += `
-                    <button class="page-btn" onclick="changePage(${currentPage - 1})">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                `;
-            }
+            html += `
+                <button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" 
+                        onclick="changePage(${currentPage - 1})" 
+                        ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
             
             // Page numbers
             const maxVisiblePages = 5;
@@ -958,18 +1169,18 @@
             }
             
             // Next button
-            if (currentPage < totalPages) {
-                html += `
-                    <button class="page-btn" onclick="changePage(${currentPage + 1})">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                `;
-            }
+            html += `
+                <button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" 
+                        onclick="changePage(${currentPage + 1})" 
+                        ${currentPage === totalPages ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
             
             // Page info
             html += `
                 <div class="page-info">
-                    পৃষ্ঠা ${currentPage} / ${totalPages} (মোট ${totalQuestions} প্রশ্ন)
+                    পৃষ্ঠা ${currentPage} / ${totalPages}
                 </div>
             `;
             
@@ -983,9 +1194,9 @@
             currentPage = page;
             loadQuestions();
             
-            // Scroll to top of questions
+            // Scroll to top
             window.scrollTo({
-                top: document.querySelector('.category-filter-section').offsetTop,
+                top: document.querySelector('.main-content').offsetTop - 100,
                 behavior: 'smooth'
             });
         }
@@ -995,13 +1206,43 @@
             const titleElement = document.getElementById('page-title-text');
             
             if (currentCategory === 'all') {
-                titleElement.textContent = `সকল প্রশ্ন (${totalQuestions}টি প্রশ্ন)`;
+                titleElement.textContent = 'সকল প্রশ্ন';
             } else {
                 const category = categoriesData.find(cat => cat.name === currentCategory);
-                const count = category ? category.count : 0;
-                titleElement.textContent = `${currentCategory} (${count}টি প্রশ্ন)`;
+                titleElement.textContent = `${currentCategory} (${category ? category.count : 0}টি প্রশ্ন)`;
             }
         }
+
+        // Update Active Category
+        function updateActiveCategory() {
+            // Update desktop category items
+            document.querySelectorAll('#questionCategories .category-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-category') === currentCategory) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-category') === currentCategory) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Close mobile menu on click outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
