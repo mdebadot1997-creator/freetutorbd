@@ -230,7 +230,7 @@
             padding: 25px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             z-index: 3000;
-            max-width: 500px;
+            max-width: 400px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -280,47 +280,43 @@
             cursor: pointer;
         }
         
+        /* Plain List Style for Categories */
         .filter-popup-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
             margin-bottom: 20px;
         }
         
         .filter-popup-category {
             padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            color: #2c3e50;
+        }
+        
+        .filter-popup-category:last-child {
+            border-bottom: none;
         }
         
         .filter-popup-category:hover {
-            background: #e3f2fd;
-            border-color: #3498db;
+            background: #f8f9fa;
+            color: #3498db;
         }
         
         .filter-popup-category.active {
             background: #3498db;
             color: white;
-            border-color: #3498db;
         }
         
         .filter-popup-count {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 14px;
+            color: #666;
         }
         
         .filter-popup-category.active .filter-popup-count {
-            background: rgba(255,255,255,0.3);
+            color: white;
         }
         
         .filter-popup-actions {
@@ -371,34 +367,42 @@
         }
         
         .category-item {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .category-link {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
+            padding: 8px 12px;
             text-decoration: none;
             color: #2c3e50;
             transition: all 0.3s;
+            border-radius: 6px;
         }
         
         .category-link:hover {
-            background: #e3f2fd;
+            background: #f0f7ff;
             color: #3498db;
-            transform: translateX(5px);
+        }
+        
+        .category-link.active {
+            background: #3498db;
+            color: white;
         }
         
         .category-count {
-            background: #3498db;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
             font-size: 12px;
             font-weight: 500;
+            background: #e3f2fd;
+            color: #3498db;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .category-link.active .category-count {
+            background: rgba(255,255,255,0.3);
+            color: white;
         }
         
         /* Main Content */
@@ -428,37 +432,37 @@
             font-size: 14px;
         }
         
-        /* Questions List */
+        /* Questions List - Plain Style */
         .questions-list {
             margin-bottom: 30px;
         }
         
         .question-item {
-            padding: 20px 0;
+            padding: 15px 0;
             border-bottom: 1px solid #eee;
         }
         
         .question-number {
             color: #3498db;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-size: 16px;
+            display: inline-block;
+            margin-right: 10px;
         }
         
         .question-text {
             color: #2c3e50;
             font-size: 17px;
-            margin-bottom: 10px;
-            line-height: 1.5;
+            display: inline;
+            line-height: 1.6;
         }
         
         .answer-text {
             color: #27ae60;
             font-size: 16px;
-            background: #f0f9f0;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border-left: 3px solid #27ae60;
+            margin-top: 5px;
+            display: block;
         }
         
         /* Pagination */
@@ -599,10 +603,6 @@
                 grid-template-columns: 200px 1fr 200px;
                 gap: 20px;
             }
-            
-            .filter-popup-categories {
-                grid-template-columns: 1fr;
-            }
         }
         
         @media (max-width: 768px) {
@@ -661,7 +661,6 @@
             
             .answer-text {
                 font-size: 15px;
-                padding: 8px 12px;
             }
         }
     </style>
@@ -967,15 +966,7 @@
                 closeFilterPopup();
                 loadQuestions();
                 updatePageTitle();
-            });
-            
-            // Category selection in popup
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.filter-popup-category')) {
-                    const categoryDiv = e.target.closest('.filter-popup-category');
-                    selectedCategoryInPopup = categoryDiv.getAttribute('data-category');
-                    updatePopupSelection();
-                }
+                updateSidebarSelection();
             });
         }
 
@@ -1068,21 +1059,33 @@
                 });
                 
                 // Get question counts for each category
-                for (let category of allCategories) {
-                    try {
-                        const questionsSnapshot = await db.collection('questions')
-                            .where('category', '==', category.nameBn)
-                            .get();
-                        category.questionCount = questionsSnapshot.size;
-                    } catch (error) {
-                        console.log(`Error counting questions for ${category.nameBn}:`, error);
-                        category.questionCount = 0;
+                const allQuestions = await db.collection('questions').get();
+                
+                // Reset counts
+                allCategories.forEach(cat => cat.questionCount = 0);
+                
+                // Count questions for each category
+                allQuestions.forEach(doc => {
+                    const question = doc.data();
+                    if (question.category) {
+                        const category = allCategories.find(cat => cat.nameBn === question.category);
+                        if (category) {
+                            category.questionCount++;
+                        } else {
+                            // If category not found, add it
+                            allCategories.push({
+                                nameBn: question.category,
+                                nameEn: question.category,
+                                questionCount: 1
+                            });
+                        }
                     }
-                }
+                });
                 
                 // Render categories
                 renderQuestionCategories();
                 renderPopupCategories();
+                updateSidebarSelection();
                 
             } catch (error) {
                 console.error('Error loading categories:', error);
@@ -1099,7 +1102,7 @@
             const allQuestionsCount = allCategories.reduce((total, cat) => total + cat.questionCount, 0);
             container.innerHTML += `
                 <li class="category-item">
-                    <a href="#" class="category-link ${currentCategory === 'all' ? 'active' : ''}" data-category="all">
+                    <a href="#" class="category-link ${currentCategory === 'all' ? 'active' : ''}" data-category="all" onclick="handleCategoryClick(event, 'all')">
                         <span>সব প্রশ্ন</span>
                         <span class="category-count">${allQuestionsCount}</span>
                     </a>
@@ -1111,7 +1114,9 @@
                 if (category.questionCount > 0) {
                     container.innerHTML += `
                         <li class="category-item">
-                            <a href="#" class="category-link ${currentCategory === category.nameBn ? 'active' : ''}" data-category="${category.nameBn}">
+                            <a href="#" class="category-link ${currentCategory === category.nameBn ? 'active' : ''}" 
+                               data-category="${category.nameBn}" 
+                               onclick="handleCategoryClick(event, '${category.nameBn}')">
                                 <span>${category.nameBn}</span>
                                 <span class="category-count">${category.questionCount}</span>
                             </a>
@@ -1119,26 +1124,28 @@
                     `;
                 }
             });
+        }
+
+        function handleCategoryClick(event, category) {
+            event.preventDefault();
+            currentCategory = category;
+            currentPage = 1;
+            selectedCategoryInPopup = category;
             
-            // Add click event listeners
+            // Update active state
+            updateSidebarSelection();
+            
+            // Load questions
+            loadQuestions();
+            updatePageTitle();
+        }
+
+        function updateSidebarSelection() {
             document.querySelectorAll('.category-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const category = this.getAttribute('data-category');
-                    currentCategory = category;
-                    currentPage = 1;
-                    
-                    // Update active state
-                    document.querySelectorAll('.category-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Update selected in popup
-                    selectedCategoryInPopup = category;
-                    
-                    // Load questions
-                    loadQuestions();
-                    updatePageTitle();
-                });
+                link.classList.remove('active');
+                if (link.getAttribute('data-category') === currentCategory) {
+                    link.classList.add('active');
+                }
             });
         }
 
@@ -1219,44 +1226,46 @@
                     </div>
                 `;
                 
-                // Get all questions first
-                let query = db.collection('questions');
+                let allQuestions = [];
                 
-                if (currentCategory !== 'all') {
-                    query = query.where('category', '==', currentCategory);
+                // Get all questions
+                if (currentCategory === 'all') {
+                    const snapshot = await db.collection('questions').get();
+                    snapshot.forEach(doc => {
+                        allQuestions.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                } else {
+                    // Get questions for specific category
+                    const snapshot = await db.collection('questions')
+                        .where('category', '==', currentCategory)
+                        .get();
+                    
+                    snapshot.forEach(doc => {
+                        allQuestions.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
                 }
                 
-                // Get total count
-                const allQuestionsSnapshot = await query.get();
-                totalQuestions = allQuestionsSnapshot.size;
+                totalQuestions = allQuestions.length;
                 
                 // Update total questions display
                 document.getElementById('questionsCount').textContent = totalQuestions;
                 
-                // Calculate pagination
-                const totalPages = Math.ceil(totalQuestions / questionsPerPage);
-                const startIndex = (currentPage - 1) * questionsPerPage;
-                
                 if (totalQuestions === 0) {
                     renderQuestions([]);
-                    renderPagination(totalPages);
+                    renderPagination(0);
                     return;
                 }
                 
-                // Get documents for current page
-                const pageSnapshot = await query
-                    .orderBy('createdAt', 'desc')
-                    .get();
+                // Calculate pagination
+                const totalPages = Math.ceil(totalQuestions / questionsPerPage);
                 
-                // Convert to array and paginate manually
-                const allQuestions = [];
-                pageSnapshot.forEach(doc => {
-                    allQuestions.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                
+                // Get questions for current page
                 const start = (currentPage - 1) * questionsPerPage;
                 const end = start + questionsPerPage;
                 const pageQuestions = allQuestions.slice(start, end);
@@ -1302,9 +1311,8 @@
                 
                 html += `
                     <div class="question-item">
-                        <div class="question-number">প্রশ্ন ${questionNumber}</div>
-                        <div class="question-text">${question.question}</div>
-                        <div class="answer-text">উত্তর: ${answerText}</div>
+                        <div class="question-number">${questionNumber}.</div>
+                        <div class="question-text">${question.question} <span class="answer-text">উত্তর: ${answerText}</span></div>
                     </div>
                 `;
                 
@@ -1317,16 +1325,14 @@
         function getAnswerText(question) {
             if (!question.correctAnswer) return 'উত্তর পাওয়া যায়নি';
             
-            const answers = ['A', 'B', 'C', 'D'];
-            const correctAnswer = answers[question.correctAnswer - 1];
+            const answerIndex = question.correctAnswer - 1;
+            const answers = [question.option1, question.option2, question.option3, question.option4];
             
-            switch(correctAnswer) {
-                case 'A': return question.option1 || 'উত্তর পাওয়া যায়নি';
-                case 'B': return question.option2 || 'উত্তর পাওয়া যায়নি';
-                case 'C': return question.option3 || 'উত্তর পাওয়া যায়নি';
-                case 'D': return question.option4 || 'উত্তর পাওয়া যায়নি';
-                default: return 'উত্তর পাওয়া যায়নি';
+            if (answerIndex >= 0 && answerIndex < answers.length) {
+                return answers[answerIndex] || 'উত্তর পাওয়া যায়নি';
             }
+            
+            return 'উত্তর পাওয়া যায়নি';
         }
 
         // ==================== PAGINATION ====================
@@ -1403,6 +1409,16 @@
                 pageTitle.textContent = selectedCat ? selectedCat.nameBn : currentCategory;
             }
         }
+
+        // ==================== EVENT LISTENERS FOR POPUP ====================
+        document.addEventListener('click', function(e) {
+            // Handle category selection in popup
+            if (e.target.closest('.filter-popup-category')) {
+                const categoryDiv = e.target.closest('.filter-popup-category');
+                selectedCategoryInPopup = categoryDiv.getAttribute('data-category');
+                updatePopupSelection();
+            }
+        });
 
         // ==================== REAL-TIME UPDATES ====================
         // Listen for new questions
