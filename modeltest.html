@@ -77,11 +77,51 @@
             color: #bdc3c7;
         }
         
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.9);
+            font-size: 16px;
+            color: #333;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+            background: white;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
         /* Navigation */
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
         }
         
         .nav-menu li a {
@@ -89,7 +129,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
-            padding: 8px 15px;
+            padding: 8px 12px;
             border-radius: 5px;
             transition: all 0.3s;
             display: flex;
@@ -214,12 +254,21 @@
             padding-bottom: 15px;
             border-bottom: 2px solid #eee;
             font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        /* Model Test Cards */
+        .results-count {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        /* Model Test Cards - 3 per row */
         .model-tests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         
@@ -229,7 +278,8 @@
             padding: 20px;
             border: 2px solid #e9ecef;
             transition: all 0.3s;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
         
         .test-card:hover {
@@ -249,6 +299,7 @@
             color: #2c3e50;
             font-size: 18px;
             font-weight: 600;
+            line-height: 1.4;
         }
         
         .test-category {
@@ -258,11 +309,14 @@
             border-radius: 15px;
             font-size: 12px;
             font-weight: 500;
+            white-space: nowrap;
+            margin-left: 10px;
         }
         
         .test-details {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 15px;
             font-size: 14px;
             color: #555;
@@ -271,41 +325,115 @@
         .test-detail {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+        }
+        
+        .test-detail i {
+            color: #3498db;
+            width: 16px;
         }
         
         .test-description {
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 14px;
             line-height: 1.5;
+            flex-grow: 1;
         }
         
         .test-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: auto;
         }
         
-        .test-questions {
-            font-size: 13px;
-            color: #7f8c8d;
+        .test-actions {
+            display: flex;
+            gap: 10px;
         }
         
-        .start-test-btn {
-            background: linear-gradient(135deg, #27ae60, #219653);
-            color: white;
-            border: none;
-            padding: 8px 20px;
+        .action-btn {
+            padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
             font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-test {
+            background: linear-gradient(135deg, #27ae60, #219653);
+            color: white;
+        }
+        
+        .btn-test:hover {
+            background: linear-gradient(135deg, #219653, #1e8449);
+            transform: translateY(-2px);
+        }
+        
+        .btn-download {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-download:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .page-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .start-test-btn:hover {
-            background: linear-gradient(135deg, #219653, #1e8449);
-            transform: translateY(-2px);
+        .page-btn:hover {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .page-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .page-info {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1/-1;
+        }
+        
+        .no-results i {
+            font-size: 48px;
+            color: #bdc3c7;
+            margin-bottom: 20px;
         }
         
         /* ==================== RIGHT SIDEBAR ==================== */
@@ -320,271 +448,6 @@
         /* ==================== MIDDLE ADS ==================== */
         .middle-ads {
             margin: 30px 0;
-            text-align: center;
-        }
-        
-        /* ==================== TEST MODAL ==================== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            position: relative;
-            animation: modalFadeIn 0.3s;
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #7f8c8d;
-            cursor: pointer;
-        }
-        
-        .modal-title {
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 22px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        .input-group input:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
-            flex: 1;
-            text-align: center;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        /* ==================== TEST INTERFACE ==================== */
-        .test-interface {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: white;
-            z-index: 3000;
-            overflow-y: auto;
-        }
-        
-        .test-header-bar {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        
-        .test-info {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-        }
-        
-        .timer {
-            background: #e74c3c;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        
-        .test-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .test-body {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        
-        .test-instructions {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #3498db;
-        }
-        
-        /* Plain Question Paper Style */
-        .question-paper {
-            font-size: 16px;
-            line-height: 1.8;
-        }
-        
-        .question-item {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .question-text {
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .option-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .option-label:hover {
-            background: #e3f2fd;
-        }
-        
-        .option-input {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        
-        .option-text {
-            flex: 1;
-        }
-        
-        .submit-section {
-            text-align: center;
-            margin: 40px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .btn-large {
-            padding: 15px 40px;
-            font-size: 18px;
-        }
-        
-        /* ==================== RESULT PAGE ==================== */
-        .result-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .result-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .result-score {
-            font-size: 48px;
-            font-weight: bold;
-            color: #27ae60;
-            margin: 20px 0;
-        }
-        
-        .result-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .result-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
             text-align: center;
         }
         
@@ -611,6 +474,10 @@
             .main-content {
                 grid-template-columns: 250px 1fr 250px;
             }
+            
+            .model-tests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 992px) {
@@ -620,6 +487,10 @@
             
             .sidebar, .right-sidebar {
                 display: none;
+            }
+            
+            .model-tests-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .mobile-sidebar-toggle {
@@ -645,6 +516,13 @@
                 flex-wrap: wrap;
             }
             
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+                max-width: 100%;
+            }
+            
             .nav-menu {
                 display: none;
                 width: 100%;
@@ -665,17 +543,13 @@
                 grid-template-columns: 1fr;
             }
             
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .result-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .test-info {
+            .test-header {
                 flex-direction: column;
                 gap: 10px;
+            }
+            
+            .test-category {
+                align-self: flex-start;
             }
         }
         
@@ -684,13 +558,18 @@
                 font-size: 20px;
             }
             
-            .modal-content {
-                padding: 20px;
+            .test-details {
+                grid-template-columns: 1fr;
             }
             
-            .btn {
-                padding: 10px 15px;
-                font-size: 14px;
+            .test-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -707,6 +586,16 @@
                     <div class="logo-text">
                         <h1>FreeTutorBD</h1>
                         <p>Online MCQ Learning Platform</p>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" class="search-input" id="search-input" placeholder="টেস্ট খুঁজুন...">
+                        <button class="search-btn" id="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -770,9 +659,10 @@
 
             <!-- Main Content Area -->
             <main class="content-area">
-                <h2 class="page-title" id="page-title">
+                <h2 class="page-title">
                     <i class="fas fa-file-alt"></i>
                     মডেল টেস্ট
+                    <span class="results-count" id="results-count"></span>
                 </h2>
 
                 <!-- Middle Ads -->
@@ -790,6 +680,28 @@
                         <i class="fas fa-spinner fa-spin fa-2x"></i>
                         <p style="margin-top: 15px;">মডেল টেস্ট লোড হচ্ছে...</p>
                     </div>
+                </div>
+
+                <!-- No Results Message (Initially Hidden) -->
+                <div class="no-results" id="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3 style="color: #7f8c8d; margin-bottom: 10px;">কোন টেস্ট পাওয়া যায়নি</h3>
+                    <p style="color: #95a5a6;">আপনার সার্চের সাথে মিলছে না এমন টেস্ট</p>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="page-btn" id="prev-page">
+                        <i class="fas fa-chevron-left"></i> পূর্ববর্তী
+                    </button>
+                    
+                    <div class="page-info">
+                        পৃষ্ঠা <span id="current-page">1</span> / <span id="total-pages">1</span>
+                    </div>
+                    
+                    <button class="page-btn" id="next-page">
+                        পরবর্তী <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </main>
 
@@ -831,86 +743,6 @@
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- ==================== TEST START MODAL ==================== -->
-    <div class="modal-overlay" id="test-start-modal">
-        <div class="modal-content">
-            <button class="close-modal" id="close-test-modal">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <h3 class="modal-title" id="test-modal-title">টেস্ট শুরু করুন</h3>
-            
-            <div class="input-group">
-                <label for="user-name"><i class="fas fa-user"></i> আপনার নাম:</label>
-                <input type="text" id="user-name" placeholder="আপনার নাম লিখুন" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="user-phone"><i class="fas fa-phone"></i> ফোন নাম্বার:</label>
-                <input type="tel" id="user-phone" placeholder="01XXXXXXXXX" required pattern="[0-9]{11}">
-                <small style="color: #7f8c8d; display: block; margin-top: 5px;">11 ডিজিটের ফোন নাম্বার দিন</small>
-            </div>
-            
-            <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" id="cancel-test">
-                    বাতিল করুন
-                </button>
-                <button type="button" class="btn btn-primary" id="start-test-btn">
-                    টেস্ট শুরু করুন
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== TEST INTERFACE ==================== -->
-    <div class="test-interface" id="test-interface">
-        <!-- Test Header -->
-        <div class="test-header-bar">
-            <div class="test-info">
-                <span id="test-name-header"></span>
-                <span id="test-time-header"></span>
-                <span id="test-marks-header"></span>
-            </div>
-            
-            <div class="test-actions">
-                <button class="timer" id="test-timer">00:00:00</button>
-                <button class="btn btn-primary btn-sm" id="download-pdf-btn">
-                    <i class="fas fa-download"></i> PDF
-                </button>
-            </div>
-        </div>
-
-        <!-- Test Body -->
-        <div class="test-body">
-            <!-- Test Instructions -->
-            <div class="test-instructions" id="test-instructions">
-                <h3>টেস্ট নির্দেশনা:</h3>
-                <p id="test-description"></p>
-                <div style="display: flex; gap: 20px; margin-top: 15px;">
-                    <div><strong>মোট সময়:</strong> <span id="total-time-display"></span></div>
-                    <div><strong>মোট প্রশ্ন:</strong> <span id="total-questions-display"></span></div>
-                    <div><strong>মোট মার্কস:</strong> <span id="total-marks-display"></span></div>
-                </div>
-            </div>
-
-            <!-- Question Paper -->
-            <div class="question-paper" id="question-paper">
-                <!-- Questions will be loaded here -->
-                <div style="text-align: center; padding: 40px; color: #7f8c8d;">
-                    <i class="fas fa-spinner fa-spin fa-2x"></i>
-                    <p style="margin-top: 15px;">প্রশ্ন লোড হচ্ছে...</p>
-                </div>
-            </div>
-
-            <!-- Submit Section -->
-            <div class="submit-section">
-                <button class="btn btn-primary btn-large" id="submit-test-btn">
-                    <i class="fas fa-paper-plane"></i> টেস্ট সাবমিট করুন
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- ==================== FIREBASE SDK ==================== -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
@@ -936,11 +768,10 @@
         const db = firebase.firestore();
 
         // ==================== GLOBAL VARIABLES ====================
-        let currentTest = null;
-        let timerInterval = null;
-        let timeLeft = 0;
-        let userAnswers = {};
-        let currentExamId = null;
+        let allExams = [];
+        let filteredExams = [];
+        let currentPage = 1;
+        const examsPerPage = 15;
 
         // ==================== DOM ELEMENTS ====================
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -948,16 +779,15 @@
         const questionCategories = document.getElementById('question-categories');
         const jobCategories = document.getElementById('job-categories');
         const modelTestsGrid = document.getElementById('model-tests-grid');
-        const testStartModal = document.getElementById('test-start-modal');
-        const closeTestModal = document.getElementById('close-test-modal');
-        const cancelTest = document.getElementById('cancel-test');
-        const startTestBtn = document.getElementById('start-test-btn');
-        const testInterface = document.getElementById('test-interface');
-        const testTimer = document.getElementById('test-timer');
-        const downloadPdfBtn = document.getElementById('download-pdf-btn');
-        const submitTestBtn = document.getElementById('submit-test-btn');
-        const userNameInput = document.getElementById('user-name');
-        const userPhoneInput = document.getElementById('user-phone');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const resultsCount = document.getElementById('results-count');
+        const noResults = document.getElementById('no-results');
+        const pagination = document.getElementById('pagination');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const currentPageSpan = document.getElementById('current-page');
+        const totalPagesSpan = document.getElementById('total-pages');
 
         // ==================== MOBILE MENU TOGGLE ====================
         mobileMenuToggle.addEventListener('click', () => {
@@ -966,8 +796,19 @@
 
         // ==================== SIDEBAR TOGGLE FOR MOBILE ====================
         document.getElementById('mobile-sidebar-toggle').addEventListener('click', () => {
-            document.querySelector('.sidebar').style.display = 
-                document.querySelector('.sidebar').style.display === 'block' ? 'none' : 'block';
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim().toLowerCase();
+            filterExams(searchTerm);
+        });
+
+        searchBtn.addEventListener('click', () => {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            filterExams(searchTerm);
         });
 
         // ==================== LOAD DATA FROM FIREBASE ====================
@@ -978,10 +819,11 @@
             loadAds();
         }
 
-        // Load Question Categories
+        // Load Question Categories (Only those with data)
         function loadQuestionCategories() {
             questionCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</li>';
             
+            // First get all categories with questions count
             db.collection('categories').get()
                 .then(snapshot => {
                     if (snapshot.empty) {
@@ -989,25 +831,48 @@
                         return;
                     }
                     
-                    let html = '';
+                    const categoryPromises = [];
+                    const categoriesWithCount = [];
+                    
                     snapshot.forEach(doc => {
                         const cat = doc.data();
-                        // Count questions in this category
-                        db.collection('questions').where('category', '==', cat.nameBn).get()
+                        const promise = db.collection('questions')
+                            .where('category', '==', cat.nameBn)
+                            .get()
                             .then(qSnapshot => {
                                 const count = qSnapshot.size;
-                                
-                                html += `
-                                    <li class="category-item">
-                                        <a href="prosnobank.html?category=${encodeURIComponent(cat.nameBn)}" class="category-link">
-                                            <span class="category-name">${cat.nameBn}</span>
-                                            <span class="category-count">${count}</span>
-                                        </a>
-                                    </li>
-                                `;
-                                
-                                questionCategories.innerHTML = html;
+                                if (count > 0) {
+                                    categoriesWithCount.push({
+                                        name: cat.nameBn,
+                                        count: count
+                                    });
+                                }
                             });
+                        categoryPromises.push(promise);
+                    });
+                    
+                    Promise.all(categoryPromises).then(() => {
+                        if (categoriesWithCount.length === 0) {
+                            questionCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;">কোন ক্যাটাগরি নেই</li>';
+                            return;
+                        }
+                        
+                        // Sort by count descending
+                        categoriesWithCount.sort((a, b) => b.count - a.count);
+                        
+                        let html = '';
+                        categoriesWithCount.forEach(cat => {
+                            html += `
+                                <li class="category-item">
+                                    <a href="prosnobank.html?category=${encodeURIComponent(cat.name)}" class="category-link">
+                                        <span class="category-name">${cat.name}</span>
+                                        <span class="category-count">${cat.count}</span>
+                                    </a>
+                                </li>
+                            `;
+                        });
+                        
+                        questionCategories.innerHTML = html;
                     });
                 })
                 .catch(error => {
@@ -1016,7 +881,7 @@
                 });
         }
 
-        // Load Job Categories
+        // Load Job Categories (Only those with data)
         function loadJobCategories() {
             jobCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</li>';
             
@@ -1039,13 +904,24 @@
                         }
                     });
                     
+                    if (Object.keys(categories).length === 0) {
+                        jobCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;">কোন চাকরি নেই</li>';
+                        return;
+                    }
+                    
+                    // Convert to array and sort by count
+                    const categoriesArray = Object.keys(categories).map(name => ({
+                        name: name,
+                        count: categories[name]
+                    })).sort((a, b) => b.count - a.count);
+                    
                     let html = '';
-                    Object.keys(categories).forEach(catName => {
+                    categoriesArray.forEach(cat => {
                         html += `
                             <li class="category-item">
-                                <a href="jobs.html?category=${encodeURIComponent(catName)}" class="category-link">
-                                    <span class="category-name">${catName}</span>
-                                    <span class="category-count">${categories[catName]}</span>
+                                <a href="jobs.html?category=${encodeURIComponent(cat.name)}" class="category-link">
+                                    <span class="category-name">${cat.name}</span>
+                                    <span class="category-count">${cat.count}</span>
                                 </a>
                             </li>
                         `;
@@ -1069,53 +945,21 @@
                 .get()
                 .then(snapshot => {
                     if (snapshot.empty) {
-                        modelTestsGrid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #7f8c8d;">কোন মডেল টেস্ট নেই</div>';
+                        showNoResults();
                         return;
                     }
                     
-                    let html = '';
+                    allExams = [];
                     snapshot.forEach(doc => {
-                        const exam = doc.data();
-                        const totalMarks = exam.totalQuestions * exam.marksPerQuestion;
-                        
-                        html += `
-                            <div class="test-card" data-exam-id="${doc.id}">
-                                <div class="test-header">
-                                    <h3 class="test-title">${exam.title}</h3>
-                                    <span class="test-category">${exam.category}</span>
-                                </div>
-                                
-                                <div class="test-details">
-                                    <div class="test-detail">
-                                        <i class="fas fa-clock"></i>
-                                        <span>${exam.timeLimit} মিনিট</span>
-                                    </div>
-                                    <div class="test-detail">
-                                        <i class="fas fa-star"></i>
-                                        <span>${totalMarks} মার্কস</span>
-                                    </div>
-                                    <div class="test-detail">
-                                        <i class="fas fa-question-circle"></i>
-                                        <span>${exam.totalQuestions} প্রশ্ন</span>
-                                    </div>
-                                </div>
-                                
-                                <p class="test-description">${exam.description || 'কোন বিবরণ নেই'}</p>
-                                
-                                <div class="test-footer">
-                                    <div class="test-questions">
-                                        <i class="fas fa-calendar"></i>
-                                        ${formatDate(exam.createdAt)}
-                                    </div>
-                                    <button class="start-test-btn" onclick="openTestModal('${doc.id}')">
-                                        শুরু করুন
-                                    </button>
-                                </div>
-                            </div>
-                        `;
+                        allExams.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
                     });
                     
-                    modelTestsGrid.innerHTML = html;
+                    filteredExams = [...allExams];
+                    displayExamsPage(1);
+                    updatePagination();
                 })
                 .catch(error => {
                     console.error("Error loading exams:", error);
@@ -1123,409 +967,277 @@
                 });
         }
 
-        // Load Ads (Placeholder for now)
-        function loadAds() {
-            // In future, you can load actual ads from Firebase
-            console.log("Ads loading functionality can be added here");
-        }
-
-        // ==================== TEST FUNCTIONS ====================
-        function openTestModal(examId) {
-            currentExamId = examId;
-            
-            db.collection('exams').doc(examId).get()
-                .then(doc => {
-                    if (!doc.exists) {
-                        alert('টেস্ট পাওয়া যায়নি!');
-                        return;
-                    }
-                    
-                    currentTest = doc.data();
-                    document.getElementById('test-modal-title').textContent = currentTest.title;
-                    
-                    // Clear previous inputs
-                    userNameInput.value = '';
-                    userPhoneInput.value = '';
-                    
-                    // Show modal
-                    testStartModal.style.display = 'flex';
-                });
-        }
-
-        // Close Test Modal
-        closeTestModal.addEventListener('click', () => {
-            testStartModal.style.display = 'none';
-        });
-
-        cancelTest.addEventListener('click', () => {
-            testStartModal.style.display = 'none';
-        });
-
-        // Start Test
-        startTestBtn.addEventListener('click', () => {
-            const userName = userNameInput.value.trim();
-            const userPhone = userPhoneInput.value.trim();
-            
-            if (!userName) {
-                alert('আপনার নাম দিন');
-                return;
-            }
-            
-            if (!userPhone || !/^[0-9]{11}$/.test(userPhone)) {
-                alert('সঠিক ১১ ডিজিটের ফোন নাম্বার দিন');
-                return;
-            }
-            
-            // Save user info
-            localStorage.setItem('testUserName', userName);
-            localStorage.setItem('testUserPhone', userPhone);
-            localStorage.setItem('testStartTime', Date.now());
-            
-            // Hide modal and show test interface
-            testStartModal.style.display = 'none';
-            startTest();
-        });
-
-        function startTest() {
-            if (!currentTest) return;
-            
-            // Set test info in header
-            document.getElementById('test-name-header').textContent = currentTest.title;
-            document.getElementById('test-time-header').textContent = `সময়: ${currentTest.timeLimit} মিনিট`;
-            document.getElementById('test-marks-header').textContent = `মার্কস: ${currentTest.totalQuestions * currentTest.marksPerQuestion}`;
-            
-            // Set test instructions
-            document.getElementById('test-description').textContent = currentTest.description || 'কোন বিবরণ নেই';
-            document.getElementById('total-time-display').textContent = `${currentTest.timeLimit} মিনিট`;
-            document.getElementById('total-questions-display').textContent = currentTest.totalQuestions;
-            document.getElementById('total-marks-display').textContent = currentTest.totalQuestions * currentTest.marksPerQuestion;
-            
-            // Start timer
-            timeLeft = currentTest.timeLimit * 60; // Convert to seconds
-            startTimer();
-            
-            // Load questions
-            loadTestQuestions();
-            
-            // Show test interface
-            testInterface.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            
-            function updateTimer() {
-                const hours = Math.floor(timeLeft / 3600);
-                const minutes = Math.floor((timeLeft % 3600) / 60);
-                const seconds = timeLeft % 60;
-                
-                testTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    submitTest();
-                }
-                
-                timeLeft--;
-            }
-            
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-        }
-
-        function loadTestQuestions() {
-            const questionPaper = document.getElementById('question-paper');
-            questionPaper.innerHTML = '<div style="text-align: center; padding: 40px; color: #7f8c8d;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top: 15px;">প্রশ্ন লোড হচ্ছে...</p></div>';
-            
-            // Load questions from the exam (if stored in exam document)
-            if (currentTest.questions && currentTest.questions.length > 0) {
-                displayQuestions(currentTest.questions);
+        // Filter Exams based on search term
+        function filterExams(searchTerm) {
+            if (!searchTerm) {
+                filteredExams = [...allExams];
             } else {
-                // If no questions in exam, load from question bank based on category
-                db.collection('questions')
-                    .where('category', '==', currentTest.category)
-                    .limit(currentTest.totalQuestions)
-                    .get()
-                    .then(snapshot => {
-                        if (snapshot.empty) {
-                            questionPaper.innerHTML = '<div style="text-align: center; padding: 40px; color: #e74c3c;">কোন প্রশ্ন পাওয়া যায়নি</div>';
-                            return;
-                        }
-                        
-                        const questions = [];
-                        snapshot.forEach(doc => {
-                            questions.push(doc.data());
-                        });
-                        
-                        displayQuestions(questions);
-                    });
+                filteredExams = allExams.filter(exam => {
+                    return exam.title.toLowerCase().includes(searchTerm) ||
+                           exam.category.toLowerCase().includes(searchTerm) ||
+                           (exam.description && exam.description.toLowerCase().includes(searchTerm));
+                });
             }
+            
+            currentPage = 1;
+            displayExamsPage(currentPage);
+            updatePagination();
         }
 
-        function displayQuestions(questions) {
-            const questionPaper = document.getElementById('question-paper');
-            let html = '';
+        // Display exams for a specific page
+        function displayExamsPage(page) {
+            if (filteredExams.length === 0) {
+                showNoResults();
+                return;
+            }
             
-            questions.forEach((question, index) => {
+            const startIndex = (page - 1) * examsPerPage;
+            const endIndex = startIndex + examsPerPage;
+            const pageExams = filteredExams.slice(startIndex, endIndex);
+            
+            let html = '';
+            pageExams.forEach(exam => {
+                const totalMarks = exam.totalQuestions * (exam.marksPerQuestion || 1);
+                
                 html += `
-                    <div class="question-item" data-question-index="${index}">
-                        <div class="question-text">
-                            <strong>${index + 1}.</strong> ${question.question}
+                    <div class="test-card">
+                        <div class="test-header">
+                            <h3 class="test-title">${exam.title}</h3>
+                            <span class="test-category">${exam.category}</span>
                         </div>
                         
-                        <div class="options-grid">
-                            <label class="option-label">
-                                <input type="radio" name="q${index}" value="1" class="option-input" onchange="saveAnswer(${index}, 1)">
-                                <span class="option-text">ক) ${question.option1}</span>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q${index}" value="2" class="option-input" onchange="saveAnswer(${index}, 2)">
-                                <span class="option-text">খ) ${question.option2}</span>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q${index}" value="3" class="option-input" onchange="saveAnswer(${index}, 3)">
-                                <span class="option-text">গ) ${question.option3}</span>
-                            </label>
-                            
-                            <label class="option-label">
-                                <input type="radio" name="q${index}" value="4" class="option-input" onchange="saveAnswer(${index}, 4)">
-                                <span class="option-text">ঘ) ${question.option4}</span>
-                            </label>
+                        <div class="test-details">
+                            <div class="test-detail">
+                                <i class="fas fa-star"></i>
+                                <span>মার্কস: ${totalMarks}</span>
+                            </div>
+                            <div class="test-detail">
+                                <i class="fas fa-question-circle"></i>
+                                <span>প্রশ্ন: ${exam.totalQuestions}</span>
+                            </div>
+                            <div class="test-detail">
+                                <i class="fas fa-clock"></i>
+                                <span>সময়: ${exam.timeLimit} মিনিট</span>
+                            </div>
+                            <div class="test-detail">
+                                <i class="fas fa-calendar"></i>
+                                <span>${formatDate(exam.createdAt)}</span>
+                            </div>
+                        </div>
+                        
+                        <p class="test-description">${exam.description || 'কোন বিবরণ নেই'}</p>
+                        
+                        <div class="test-footer">
+                            <div class="test-actions">
+                                <button class="action-btn btn-test" onclick="takeTest('${exam.id}')">
+                                    <i class="fas fa-play-circle"></i> টেস্ট দিন
+                                </button>
+                                <button class="action-btn btn-download" onclick="downloadTestPDF('${exam.id}', '${exam.title}')">
+                                    <i class="fas fa-download"></i> ডাউনলোড
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
             });
             
-            questionPaper.innerHTML = html;
+            modelTestsGrid.innerHTML = html;
+            modelTestsGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            // Update results count
+            resultsCount.textContent = `(${filteredExams.length}টি টেস্ট পাওয়া গেছে)`;
         }
 
-        function saveAnswer(questionIndex, answer) {
-            userAnswers[questionIndex] = answer;
+        function showNoResults() {
+            modelTestsGrid.style.display = 'none';
+            noResults.style.display = 'block';
+            pagination.style.display = 'none';
+            resultsCount.textContent = '(কোন টেস্ট নেই)';
         }
 
-        // Download PDF
-        downloadPdfBtn.addEventListener('click', generatePDF);
+        // Update Pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredExams.length / examsPerPage);
+            
+            if (totalPages <= 1) {
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            pagination.style.display = 'flex';
+            currentPageSpan.textContent = currentPage;
+            totalPagesSpan.textContent = totalPages;
+            
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+            
+            prevPageBtn.style.opacity = prevPageBtn.disabled ? '0.5' : '1';
+            nextPageBtn.style.opacity = nextPageBtn.disabled ? '0.5' : '1';
+        }
 
-        function generatePDF() {
+        // Pagination Event Listeners
+        prevPageBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayExamsPage(currentPage);
+                updatePagination();
+            }
+        });
+
+        nextPageBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredExams.length / examsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayExamsPage(currentPage);
+                updatePagination();
+            }
+        });
+
+        // ==================== TEST FUNCTIONS ====================
+        function takeTest(examId) {
+            // Redirect to examtest.html with exam ID
+            window.location.href = `examtest.html?id=${examId}`;
+        }
+
+        async function downloadTestPDF(examId, examTitle) {
+            try {
+                // Get exam details
+                const examDoc = await db.collection('exams').doc(examId).get();
+                if (!examDoc.exists) {
+                    alert('টেস্ট পাওয়া যায়নি!');
+                    return;
+                }
+                
+                const exam = examDoc.data();
+                
+                // Get questions for this exam
+                let questions = [];
+                
+                if (exam.questions && exam.questions.length > 0) {
+                    questions = exam.questions;
+                } else {
+                    // Load questions from question bank based on category
+                    const querySnapshot = await db.collection('questions')
+                        .where('category', '==', exam.category)
+                        .limit(exam.totalQuestions)
+                        .get();
+                    
+                    querySnapshot.forEach(doc => {
+                        questions.push(doc.data());
+                    });
+                }
+                
+                if (questions.length === 0) {
+                    alert('এই টেস্টের কোনো প্রশ্ন নেই!');
+                    return;
+                }
+                
+                // Generate PDF
+                generatePDF(exam, questions);
+                
+            } catch (error) {
+                console.error("Error downloading PDF:", error);
+                alert('PDF ডাউনলোড করতে সমস্যা হয়েছে!');
+            }
+        }
+
+        function generatePDF(exam, questions) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
+            
+            // PDF settings
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+            let yPosition = margin;
             
             // Add header
             doc.setFontSize(20);
             doc.setTextColor(52, 152, 219);
-            doc.text(currentTest.title, 105, 20, null, null, 'center');
+            doc.text(exam.title, pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 15;
             
+            // Exam details
             doc.setFontSize(12);
             doc.setTextColor(100, 100, 100);
-            doc.text(`ক্যাটাগরি: ${currentTest.category} | সময়: ${currentTest.timeLimit} মিনিট | প্রশ্ন: ${currentTest.totalQuestions} | মার্কস: ${currentTest.totalQuestions * currentTest.marksPerQuestion}`, 105, 30, null, null, 'center');
+            const totalMarks = exam.totalQuestions * (exam.marksPerQuestion || 1);
+            const details = `ক্যাটাগরি: ${exam.category} | সময়: ${exam.timeLimit} মিনিট | প্রশ্ন: ${exam.totalQuestions} | মার্কস: ${totalMarks}`;
+            doc.text(details, pageWidth / 2, yPosition, { align: 'center' });
+            yPosition += 15;
             
+            // Separator line
             doc.setDrawColor(200, 200, 200);
-            doc.line(20, 35, 190, 35);
+            doc.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 15;
             
-            // Add student info
-            const userName = localStorage.getItem('testUserName') || 'Anonymous';
-            const userPhone = localStorage.getItem('testUserPhone') || 'N/A';
-            
+            // Instructions
             doc.setFontSize(11);
             doc.setTextColor(0, 0, 0);
-            doc.text(`পরীক্ষার্থী: ${userName}`, 20, 45);
-            doc.text(`ফোন: ${userPhone}`, 20, 52);
-            doc.text(`তারিখ: ${new Date().toLocaleDateString('bn-BD')}`, 20, 59);
+            doc.setFont(undefined, 'bold');
+            doc.text("নির্দেশনা:", margin, yPosition);
+            yPosition += 8;
             
-            // Add questions
-            let yPosition = 75;
+            doc.setFont(undefined, 'normal');
+            const instruction = exam.description || '১. প্রতিটি প্রশ্নের জন্য সঠিক উত্তর নির্বাচন করুন। ২. সময় শেষ হওয়ার পর উত্তর জমা দেওয়া যাবে না।';
+            const splitInstructions = doc.splitTextToSize(instruction, pageWidth - 2 * margin);
+            doc.text(splitInstructions, margin, yPosition);
+            yPosition += splitInstructions.length * 7 + 15;
             
-            const questions = document.querySelectorAll('.question-item');
-            questions.forEach((questionEl, index) => {
+            // Questions
+            doc.setFont(undefined, 'bold');
+            doc.text("প্রশ্নসমূহ:", margin, yPosition);
+            yPosition += 10;
+            
+            questions.forEach((question, index) => {
+                // Check if we need a new page
                 if (yPosition > 250) {
                     doc.addPage();
-                    yPosition = 20;
+                    yPosition = margin;
                 }
                 
-                const questionText = questionEl.querySelector('.question-text').textContent;
-                const options = questionEl.querySelectorAll('.option-text');
+                // Question number and text
+                doc.setFont(undefined, 'bold');
+                doc.text(`${index + 1}. ${question.question}`, margin, yPosition);
+                yPosition += 8;
                 
-                doc.setFontSize(12);
-                doc.setTextColor(0, 0, 0);
-                doc.text(questionText, 20, yPosition);
-                yPosition += 10;
-                
-                options.forEach((option, optIndex) => {
-                    doc.setFontSize(11);
-                    doc.text(option.textContent, 25, yPosition);
-                    yPosition += 7;
-                });
-                
-                yPosition += 10;
+                // Options
+                doc.setFont(undefined, 'normal');
+                doc.text(`ক) ${question.option1}`, margin + 5, yPosition);
+                yPosition += 6;
+                doc.text(`খ) ${question.option2}`, margin + 5, yPosition);
+                yPosition += 6;
+                doc.text(`গ) ${question.option3}`, margin + 5, yPosition);
+                yPosition += 6;
+                doc.text(`ঘ) ${question.option4}`, margin + 5, yPosition);
+                yPosition += 12;
             });
             
             // Save PDF
-            doc.save(`${currentTest.title}_${userName}.pdf`);
+            const fileName = `${exam.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_question_paper.pdf`;
+            doc.save(fileName);
         }
 
-        // Submit Test
-        submitTestBtn.addEventListener('click', submitTest);
-
-        function submitTest() {
-            clearInterval(timerInterval);
-            
-            const userName = localStorage.getItem('testUserName') || 'Anonymous';
-            const userPhone = localStorage.getItem('testUserPhone') || 'N/A';
-            const startTime = parseInt(localStorage.getItem('testStartTime')) || Date.now();
-            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-            
-            // Calculate score
-            let score = 0;
-            const totalQuestions = currentTest.totalQuestions;
-            
-            // For demo, we'll simulate correct answers
-            // In real implementation, you would compare with correct answers from database
-            Object.keys(userAnswers).forEach(() => {
-                score += currentTest.marksPerQuestion; // All answers considered correct for demo
-            });
-            
-            const totalMarks = totalQuestions * currentTest.marksPerQuestion;
-            
-            // Save result to Firebase
-            db.collection('results').add({
-                examId: currentExamId,
-                examTitle: currentTest.title,
-                userName: userName,
-                phoneNumber: userPhone,
-                totalScore: score,
-                totalMarks: totalMarks,
-                timeTaken: timeTaken,
-                submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                answers: userAnswers
-            })
-            .then(() => {
-                // Show result
-                showResult(score, totalMarks, timeTaken);
-            })
-            .catch(error => {
-                console.error("Error saving result:", error);
-                showResult(score, totalMarks, timeTaken);
-            });
-        }
-
-        function showResult(score, totalMarks, timeTaken) {
-            const percentage = ((score / totalMarks) * 100).toFixed(1);
-            
-            // Create result page
-            const resultHTML = `
-                <div class="result-container">
-                    <div class="result-header">
-                        <h2>${currentTest.title}</h2>
-                        <p>আপনার রেজাল্ট</p>
-                    </div>
-                    
-                    <div class="result-score">${score}/${totalMarks}</div>
-                    
-                    <div style="text-align: center; color: #3498db; font-size: 24px; margin-bottom: 30px;">
-                        ${percentage}%
-                    </div>
-                    
-                    <div class="result-details">
-                        <div class="result-card">
-                            <h4>নাম</h4>
-                            <p>${localStorage.getItem('testUserName') || 'Anonymous'}</p>
-                        </div>
-                        <div class="result-card">
-                            <h4>ফোন</h4>
-                            <p>${localStorage.getItem('testUserPhone') || 'N/A'}</p>
-                        </div>
-                        <div class="result-card">
-                            <h4>সময় লেগেছে</h4>
-                            <p>${formatTime(timeTaken)}</p>
-                        </div>
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 40px;">
-                        <button onclick="closeTestInterface()" class="btn btn-primary" style="padding: 12px 30px;">
-                            <i class="fas fa-home"></i> হোমে ফিরে যান
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            testInterface.innerHTML = resultHTML;
-        }
-
-        function closeTestInterface() {
-            testInterface.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Clear test data
-            currentTest = null;
-            currentExamId = null;
-            userAnswers = {};
-            localStorage.removeItem('testUserName');
-            localStorage.removeItem('testUserPhone');
-            localStorage.removeItem('testStartTime');
-            
-            // Reload test interface for next use
-            testInterface.innerHTML = `
-                <div class="test-header-bar">
-                    <div class="test-info">
-                        <span id="test-name-header"></span>
-                        <span id="test-time-header"></span>
-                        <span id="test-marks-header"></span>
-                    </div>
-                    
-                    <div class="test-actions">
-                        <button class="timer" id="test-timer">00:00:00</button>
-                        <button class="btn btn-primary btn-sm" id="download-pdf-btn">
-                            <i class="fas fa-download"></i> PDF
-                        </button>
-                    </div>
-                </div>
-
-                <div class="test-body">
-                    <div class="test-instructions" id="test-instructions">
-                        <h3>টেস্ট নির্দেশনা:</h3>
-                        <p id="test-description"></p>
-                        <div style="display: flex; gap: 20px; margin-top: 15px;">
-                            <div><strong>মোট সময়:</strong> <span id="total-time-display"></span></div>
-                            <div><strong>মোট প্রশ্ন:</strong> <span id="total-questions-display"></span></div>
-                            <div><strong>মোট মার্কস:</strong> <span id="total-marks-display"></span></div>
-                        </div>
-                    </div>
-
-                    <div class="question-paper" id="question-paper">
-                        <div style="text-align: center; padding: 40px; color: #7f8c8d;">
-                            <i class="fas fa-spinner fa-spin fa-2x"></i>
-                            <p style="margin-top: 15px;">প্রশ্ন লোড হচ্ছে...</p>
-                        </div>
-                    </div>
-
-                    <div class="submit-section">
-                        <button class="btn btn-primary btn-large" id="submit-test-btn">
-                            <i class="fas fa-paper-plane"></i> টেস্ট সাবমিট করুন
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            // Reattach event listeners
-            document.getElementById('download-pdf-btn').addEventListener('click', generatePDF);
-            document.getElementById('submit-test-btn').addEventListener('click', submitTest);
+        // Load Ads (Placeholder for now)
+        function loadAds() {
+            console.log("Ads loading functionality can be added here");
         }
 
         // ==================== UTILITY FUNCTIONS ====================
         function formatDate(timestamp) {
             if (!timestamp) return 'N/A';
             const date = timestamp.toDate();
-            return date.toLocaleDateString('bn-BD');
-        }
-
-        function formatTime(seconds) {
-            if (!seconds) return 'N/A';
-            const minutes = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${minutes} মিনিট ${secs} সেকেন্ড`;
+            const today = new Date();
+            const diffTime = Math.abs(today - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'গতকাল';
+            if (diffDays <= 7) return `${diffDays} দিন আগে`;
+            
+            return date.toLocaleDateString('bn-BD', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
         }
 
         // ==================== INITIALIZATION ====================
@@ -1537,14 +1249,8 @@
             const urlParams = new URLSearchParams(window.location.search);
             const category = urlParams.get('category');
             if (category) {
-                document.getElementById('page-title').innerHTML = `<i class="fas fa-folder"></i> ${category}`;
-            }
-        });
-
-        // ==================== WINDOW EVENT LISTENERS ====================
-        window.addEventListener('click', (event) => {
-            if (event.target === testStartModal) {
-                testStartModal.style.display = 'none';
+                document.querySelector('.page-title i').parentNode.innerHTML = 
+                    `<i class="fas fa-folder"></i> ${category}`;
             }
         });
 
