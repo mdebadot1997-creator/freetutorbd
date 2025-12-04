@@ -27,7 +27,7 @@
             padding: 0 15px;
         }
         
-        /* ==================== HEADER STYLES ==================== */
+        /* ==================== HEADER ==================== */
         .header {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
@@ -91,18 +91,16 @@
         .search-input {
             width: 100%;
             padding: 12px 45px 12px 15px;
-            border: none;
+            border: 2px solid #ddd;
             border-radius: 25px;
-            background: rgba(255,255,255,0.9);
             font-size: 16px;
-            color: #333;
             transition: all 0.3s;
         }
         
         .search-input:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
-            background: white;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
         }
         
         .search-btn {
@@ -112,7 +110,7 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #3498db;
+            color: #7f8c8d;
             cursor: pointer;
             font-size: 18px;
         }
@@ -121,7 +119,7 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 25px;
         }
         
         .nav-menu li a {
@@ -129,7 +127,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
-            padding: 8px 12px;
+            padding: 8px 15px;
             border-radius: 5px;
             transition: all 0.3s;
             display: flex;
@@ -142,7 +140,6 @@
             color: #3498db;
         }
         
-        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -152,7 +149,7 @@
             cursor: pointer;
         }
         
-        /* ==================== TOP ADS SECTION ==================== */
+        /* ==================== TOP ADS ==================== */
         .top-ads {
             background: white;
             padding: 15px;
@@ -205,14 +202,14 @@
         }
         
         .category-item {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .category-link {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
+            padding: 10px;
             background: #f8f9fa;
             border-radius: 6px;
             text-decoration: none;
@@ -224,20 +221,22 @@
         .category-link:hover {
             background: #e3f2fd;
             border-left-color: #3498db;
-            transform: translateX(5px);
         }
         
         .category-name {
+            font-size: 14px;
             font-weight: 500;
         }
         
         .category-count {
             background: #3498db;
             color: white;
-            padding: 3px 8px;
+            padding: 2px 8px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
+            min-width: 25px;
+            text-align: center;
         }
         
         /* ==================== MAIN CONTENT AREA ==================== */
@@ -259,21 +258,15 @@
             align-items: center;
         }
         
-        .results-count {
-            font-size: 16px;
-            color: #7f8c8d;
-            font-weight: normal;
-        }
-        
-        /* Model Test Cards - 3 per row */
+        /* Model Tests Grid - 3-4 per row */
         .model-tests-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
         
         .test-card {
-            background: #f8f9fa;
+            background: white;
             border-radius: 10px;
             padding: 20px;
             border: 2px solid #e9ecef;
@@ -285,85 +278,87 @@
         .test-card:hover {
             border-color: #3498db;
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .test-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
             margin-bottom: 15px;
         }
         
         .test-title {
             color: #2c3e50;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            line-height: 1.4;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
         
         .test-category {
             background: #e3f2fd;
             color: #3498db;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 500;
-            white-space: nowrap;
-            margin-left: 10px;
+            display: inline-block;
         }
         
         .test-details {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
             margin-bottom: 15px;
-            font-size: 14px;
-            color: #555;
+            flex-grow: 1;
         }
         
         .test-detail {
             display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .test-detail i {
-            color: #3498db;
-            width: 16px;
-        }
-        
-        .test-description {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-        
-        .test-footer {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .detail-label {
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+        
+        .detail-value {
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 13px;
         }
         
         .test-actions {
             display: flex;
             gap: 10px;
+            margin-top: auto;
         }
         
         .action-btn {
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
+            flex: 1;
+            padding: 10px;
             border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-download {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .btn-download:hover {
+            background: #d5dbdb;
         }
         
         .btn-test {
@@ -373,18 +368,6 @@
         
         .btn-test:hover {
             background: linear-gradient(135deg, #219653, #1e8449);
-            transform: translateY(-2px);
-        }
-        
-        .btn-download {
-            background: #f8f9fa;
-            color: #2c3e50;
-            border: 1px solid #ddd;
-        }
-        
-        .btn-download:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
         }
         
         /* Pagination */
@@ -399,7 +382,7 @@
         }
         
         .page-btn {
-            padding: 8px 16px;
+            padding: 8px 15px;
             border: 1px solid #ddd;
             background: white;
             border-radius: 5px;
@@ -408,8 +391,8 @@
         }
         
         .page-btn:hover {
+            background: #f8f9fa;
             border-color: #3498db;
-            color: #3498db;
         }
         
         .page-btn.active {
@@ -421,19 +404,6 @@
         .page-info {
             color: #7f8c8d;
             font-size: 14px;
-        }
-        
-        /* No Results Message */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            grid-column: 1/-1;
-        }
-        
-        .no-results i {
-            font-size: 48px;
-            color: #bdc3c7;
-            margin-bottom: 20px;
         }
         
         /* ==================== RIGHT SIDEBAR ==================== */
@@ -469,6 +439,37 @@
             margin-top: 15px;
         }
         
+        /* ==================== MOBILE SIDEBAR TOGGLE ==================== */
+        .mobile-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* ==================== LOADING SKELETON ==================== */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
         /* ==================== RESPONSIVE STYLES ==================== */
         @media (max-width: 1200px) {
             .main-content {
@@ -476,7 +477,7 @@
             }
             
             .model-tests-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
@@ -489,25 +490,12 @@
                 display: none;
             }
             
-            .model-tests-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .mobile-sidebar-toggle {
                 display: block;
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #3498db;
-                color: white;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: none;
-                font-size: 20px;
-                cursor: pointer;
-                z-index: 100;
-                box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            }
+            
+            .model-tests-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -518,7 +506,6 @@
             
             .search-container {
                 order: 3;
-                width: 100%;
                 margin: 15px 0 0 0;
                 max-width: 100%;
             }
@@ -542,15 +529,6 @@
             .model-tests-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .test-header {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .test-category {
-                align-self: flex-start;
-            }
         }
         
         @media (max-width: 480px) {
@@ -558,18 +536,12 @@
                 font-size: 20px;
             }
             
-            .test-details {
-                grid-template-columns: 1fr;
-            }
-            
             .test-actions {
                 flex-direction: column;
-                width: 100%;
             }
             
             .action-btn {
                 width: 100%;
-                justify-content: center;
             }
         }
     </style>
@@ -589,25 +561,26 @@
                     </div>
                 </div>
                 
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <!-- Search Bar -->
                 <div class="search-container">
                     <div class="search-box">
-                        <input type="text" class="search-input" id="search-input" placeholder="টেস্ট খুঁজুন...">
+                        <input type="text" class="search-input" id="search-input" 
+                               placeholder="টেস্ট খুঁজুন...">
                         <button class="search-btn" id="search-btn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="index.html"><i class="fas fa-home"></i> হোম</a></li>
-                    <li><a href="#" id="quiz-test-link"><i class="fas fa-file-alt"></i> কুইজ টেস্ট</a></li>
                     <li><a href="prosnobank.html"><i class="fas fa-question-circle"></i> প্রশ্নব্যাংক</a></li>
                     <li><a href="jobs.html"><i class="fas fa-briefcase"></i> চাকরি</a></li>
+                    <li><a href="admin-panel.html" target="_blank"><i class="fas fa-cog"></i> এডমিন</a></li>
                 </ul>
             </div>
         </div>
@@ -635,10 +608,9 @@
                         প্রশ্নব্যাংক ক্যাটাগরি
                     </h3>
                     <ul class="category-list" id="question-categories">
-                        <!-- Categories will be loaded from Firebase -->
-                        <li style="text-align: center; color: #7f8c8d; padding: 20px;">
-                            <i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...
-                        </li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
                     </ul>
                 </div>
 
@@ -649,10 +621,9 @@
                         চাকরি ক্যাটাগরি
                     </h3>
                     <ul class="category-list" id="job-categories">
-                        <!-- Categories will be loaded from Firebase -->
-                        <li style="text-align: center; color: #7f8c8d; padding: 20px;">
-                            <i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...
-                        </li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
+                        <li class="category-item skeleton" style="height: 40px;"></li>
                     </ul>
                 </div>
             </aside>
@@ -662,7 +633,7 @@
                 <h2 class="page-title">
                     <i class="fas fa-file-alt"></i>
                     মডেল টেস্ট
-                    <span class="results-count" id="results-count"></span>
+                    <span class="page-info" id="total-tests-info">মোট ০ টেস্ট</span>
                 </h2>
 
                 <!-- Middle Ads -->
@@ -675,33 +646,16 @@
 
                 <!-- Model Tests Grid -->
                 <div class="model-tests-grid" id="model-tests-grid">
-                    <!-- Model tests will be loaded from Firebase -->
-                    <div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #7f8c8d;">
-                        <i class="fas fa-spinner fa-spin fa-2x"></i>
-                        <p style="margin-top: 15px;">মডেল টেস্ট লোড হচ্ছে...</p>
-                    </div>
-                </div>
-
-                <!-- No Results Message (Initially Hidden) -->
-                <div class="no-results" id="no-results" style="display: none;">
-                    <i class="fas fa-search"></i>
-                    <h3 style="color: #7f8c8d; margin-bottom: 10px;">কোন টেস্ট পাওয়া যায়নি</h3>
-                    <p style="color: #95a5a6;">আপনার সার্চের সাথে মিলছে না এমন টেস্ট</p>
+                    <!-- Skeleton Loading -->
+                    <div class="test-card skeleton" style="height: 250px;"></div>
+                    <div class="test-card skeleton" style="height: 250px;"></div>
+                    <div class="test-card skeleton" style="height: 250px;"></div>
+                    <div class="test-card skeleton" style="height: 250px;"></div>
                 </div>
 
                 <!-- Pagination -->
-                <div class="pagination" id="pagination" style="display: none;">
-                    <button class="page-btn" id="prev-page">
-                        <i class="fas fa-chevron-left"></i> পূর্ববর্তী
-                    </button>
-                    
-                    <div class="page-info">
-                        পৃষ্ঠা <span id="current-page">1</span> / <span id="total-pages">1</span>
-                    </div>
-                    
-                    <button class="page-btn" id="next-page">
-                        পরবর্তী <i class="fas fa-chevron-right"></i>
-                    </button>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be loaded here -->
                 </div>
             </main>
 
@@ -768,26 +722,24 @@
         const db = firebase.firestore();
 
         // ==================== GLOBAL VARIABLES ====================
-        let allExams = [];
-        let filteredExams = [];
+        let allTests = [];
         let currentPage = 1;
-        const examsPerPage = 15;
+        const testsPerPage = 15;
+        let totalTests = 0;
+        let totalPages = 1;
+        let searchQuery = '';
+        let searchTimeout = null;
 
         // ==================== DOM ELEMENTS ====================
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
         const navMenu = document.getElementById('nav-menu');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
         const questionCategories = document.getElementById('question-categories');
         const jobCategories = document.getElementById('job-categories');
         const modelTestsGrid = document.getElementById('model-tests-grid');
-        const searchInput = document.getElementById('search-input');
-        const searchBtn = document.getElementById('search-btn');
-        const resultsCount = document.getElementById('results-count');
-        const noResults = document.getElementById('no-results');
         const pagination = document.getElementById('pagination');
-        const prevPageBtn = document.getElementById('prev-page');
-        const nextPageBtn = document.getElementById('next-page');
-        const currentPageSpan = document.getElementById('current-page');
-        const totalPagesSpan = document.getElementById('total-pages');
+        const totalTestsInfo = document.getElementById('total-tests-info');
 
         // ==================== MOBILE MENU TOGGLE ====================
         mobileMenuToggle.addEventListener('click', () => {
@@ -802,13 +754,19 @@
 
         // ==================== SEARCH FUNCTIONALITY ====================
         searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.trim().toLowerCase();
-            filterExams(searchTerm);
+            clearTimeout(searchTimeout);
+            searchQuery = this.value.trim().toLowerCase();
+            
+            searchTimeout = setTimeout(() => {
+                currentPage = 1;
+                loadModelTests();
+            }, 500); // Debounce 500ms
         });
 
         searchBtn.addEventListener('click', () => {
-            const searchTerm = searchInput.value.trim().toLowerCase();
-            filterExams(searchTerm);
+            searchQuery = searchInput.value.trim().toLowerCase();
+            currentPage = 1;
+            loadModelTests();
         });
 
         // ==================== LOAD DATA FROM FIREBASE ====================
@@ -816,14 +774,10 @@
             loadQuestionCategories();
             loadJobCategories();
             loadModelTests();
-            loadAds();
         }
 
-        // Load Question Categories (Only those with data)
+        // Load Question Categories (Only categories with data)
         function loadQuestionCategories() {
-            questionCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</li>';
-            
-            // First get all categories with questions count
             db.collection('categories').get()
                 .then(snapshot => {
                     if (snapshot.empty) {
@@ -831,20 +785,23 @@
                         return;
                     }
                     
+                    let html = '';
+                    const categoriesWithData = [];
+                    
+                    // Check each category for questions
                     const categoryPromises = [];
-                    const categoriesWithCount = [];
                     
                     snapshot.forEach(doc => {
                         const cat = doc.data();
                         const promise = db.collection('questions')
                             .where('category', '==', cat.nameBn)
+                            .limit(1)
                             .get()
                             .then(qSnapshot => {
-                                const count = qSnapshot.size;
-                                if (count > 0) {
-                                    categoriesWithCount.push({
+                                if (!qSnapshot.empty) {
+                                    categoriesWithData.push({
                                         name: cat.nameBn,
-                                        count: count
+                                        count: 0 // Will update later
                                     });
                                 }
                             });
@@ -852,27 +809,39 @@
                     });
                     
                     Promise.all(categoryPromises).then(() => {
-                        if (categoriesWithCount.length === 0) {
-                            questionCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;">কোন ক্যাটাগরি নেই</li>';
-                            return;
-                        }
-                        
-                        // Sort by count descending
-                        categoriesWithCount.sort((a, b) => b.count - a.count);
-                        
-                        let html = '';
-                        categoriesWithCount.forEach(cat => {
-                            html += `
-                                <li class="category-item">
-                                    <a href="prosnobank.html?category=${encodeURIComponent(cat.name)}" class="category-link">
-                                        <span class="category-name">${cat.name}</span>
-                                        <span class="category-count">${cat.count}</span>
-                                    </a>
-                                </li>
-                            `;
+                        // Now get actual counts for categories with data
+                        const countPromises = categoriesWithData.map(cat => {
+                            return db.collection('questions')
+                                .where('category', '==', cat.name)
+                                .get()
+                                .then(qSnapshot => {
+                                    cat.count = qSnapshot.size;
+                                });
                         });
                         
-                        questionCategories.innerHTML = html;
+                        Promise.all(countPromises).then(() => {
+                            if (categoriesWithData.length === 0) {
+                                questionCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;">কোন ক্যাটাগরি নেই</li>';
+                                return;
+                            }
+                            
+                            // Sort by count descending
+                            categoriesWithData.sort((a, b) => b.count - a.count);
+                            
+                            // Display categories
+                            categoriesWithData.forEach(cat => {
+                                html += `
+                                    <li class="category-item">
+                                        <a href="prosnobank.html?category=${encodeURIComponent(cat.name)}" class="category-link">
+                                            <span class="category-name">${cat.name}</span>
+                                            <span class="category-count">${cat.count}</span>
+                                        </a>
+                                    </li>
+                                `;
+                            });
+                            
+                            questionCategories.innerHTML = html;
+                        });
                     });
                 })
                 .catch(error => {
@@ -881,11 +850,8 @@
                 });
         }
 
-        // Load Job Categories (Only those with data)
+        // Load Job Categories (Only categories with data)
         function loadJobCategories() {
-            jobCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</li>';
-            
-            // Get all jobs and group by category
             db.collection('jobs').get()
                 .then(snapshot => {
                     if (snapshot.empty) {
@@ -904,24 +870,13 @@
                         }
                     });
                     
-                    if (Object.keys(categories).length === 0) {
-                        jobCategories.innerHTML = '<li style="text-align: center; color: #7f8c8d; padding: 20px;">কোন চাকরি নেই</li>';
-                        return;
-                    }
-                    
-                    // Convert to array and sort by count
-                    const categoriesArray = Object.keys(categories).map(name => ({
-                        name: name,
-                        count: categories[name]
-                    })).sort((a, b) => b.count - a.count);
-                    
                     let html = '';
-                    categoriesArray.forEach(cat => {
+                    Object.keys(categories).forEach(catName => {
                         html += `
                             <li class="category-item">
-                                <a href="jobs.html?category=${encodeURIComponent(cat.name)}" class="category-link">
-                                    <span class="category-name">${cat.name}</span>
-                                    <span class="category-count">${cat.count}</span>
+                                <a href="jobs.html?category=${encodeURIComponent(catName)}" class="category-link">
+                                    <span class="category-name">${catName}</span>
+                                    <span class="category-count">${categories[catName]}</span>
                                 </a>
                             </li>
                         `;
@@ -935,30 +890,57 @@
                 });
         }
 
-        // Load Model Tests
+        // Load Model Tests with Pagination
         function loadModelTests() {
-            modelTestsGrid.innerHTML = '<div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #7f8c8d;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top: 15px;">মডেল টেস্ট লোড হচ্ছে...</p></div>';
+            // Show skeleton loading
+            modelTestsGrid.innerHTML = '';
+            for (let i = 0; i < 12; i++) {
+                modelTestsGrid.innerHTML += '<div class="test-card skeleton" style="height: 250px;"></div>';
+            }
             
-            db.collection('exams')
-                .where('status', '==', 'published')
-                .orderBy('createdAt', 'desc')
-                .get()
+            let query = db.collection('exams')
+                .where('status', '==', 'published');
+            
+            query.get()
                 .then(snapshot => {
-                    if (snapshot.empty) {
-                        showNoResults();
-                        return;
-                    }
-                    
-                    allExams = [];
+                    allTests = [];
                     snapshot.forEach(doc => {
-                        allExams.push({
+                        allTests.push({
                             id: doc.id,
                             ...doc.data()
                         });
                     });
                     
-                    filteredExams = [...allExams];
-                    displayExamsPage(1);
+                    // Apply search filter
+                    if (searchQuery) {
+                        allTests = allTests.filter(test => 
+                            test.title.toLowerCase().includes(searchQuery) ||
+                            test.category.toLowerCase().includes(searchQuery) ||
+                            test.description.toLowerCase().includes(searchQuery)
+                        );
+                    }
+                    
+                    // Sort by creation date (newest first)
+                    allTests.sort((a, b) => {
+                        if (a.createdAt && b.createdAt) {
+                            return b.createdAt.toDate() - a.createdAt.toDate();
+                        }
+                        return 0;
+                    });
+                    
+                    totalTests = allTests.length;
+                    totalPages = Math.ceil(totalTests / testsPerPage);
+                    
+                    // Update total tests info
+                    totalTestsInfo.textContent = `মোট ${totalTests} টেস্ট`;
+                    if (searchQuery) {
+                        totalTestsInfo.textContent += ` (${searchQuery} এর জন্য)`;
+                    }
+                    
+                    // Display current page
+                    displayCurrentPage();
+                    
+                    // Update pagination
                     updatePagination();
                 })
                 .catch(error => {
@@ -967,174 +949,179 @@
                 });
         }
 
-        // Filter Exams based on search term
-        function filterExams(searchTerm) {
-            if (!searchTerm) {
-                filteredExams = [...allExams];
-            } else {
-                filteredExams = allExams.filter(exam => {
-                    return exam.title.toLowerCase().includes(searchTerm) ||
-                           exam.category.toLowerCase().includes(searchTerm) ||
-                           (exam.description && exam.description.toLowerCase().includes(searchTerm));
-                });
-            }
+        function displayCurrentPage() {
+            const startIndex = (currentPage - 1) * testsPerPage;
+            const endIndex = startIndex + testsPerPage;
+            const currentTests = allTests.slice(startIndex, endIndex);
             
-            currentPage = 1;
-            displayExamsPage(currentPage);
-            updatePagination();
-        }
-
-        // Display exams for a specific page
-        function displayExamsPage(page) {
-            if (filteredExams.length === 0) {
-                showNoResults();
+            if (currentTests.length === 0) {
+                modelTestsGrid.innerHTML = `
+                    <div style="text-align: center; grid-column: 1/-1; padding: 40px; color: #7f8c8d;">
+                        <i class="fas fa-search fa-3x" style="margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 10px;">কোন টেস্ট পাওয়া যায়নি</h3>
+                        <p>অনুগ্রহ করে ভিন্ন কিছু খুঁজুন</p>
+                    </div>
+                `;
                 return;
             }
             
-            const startIndex = (page - 1) * examsPerPage;
-            const endIndex = startIndex + examsPerPage;
-            const pageExams = filteredExams.slice(startIndex, endIndex);
-            
             let html = '';
-            pageExams.forEach(exam => {
-                const totalMarks = exam.totalQuestions * (exam.marksPerQuestion || 1);
+            
+            currentTests.forEach(test => {
+                const totalMarks = test.totalQuestions * (test.marksPerQuestion || 1);
+                const description = test.description || 'কোন বিবরণ নেই';
+                const shortDescription = description.length > 80 ? description.substring(0, 80) + '...' : description;
                 
                 html += `
                     <div class="test-card">
                         <div class="test-header">
-                            <h3 class="test-title">${exam.title}</h3>
-                            <span class="test-category">${exam.category}</span>
+                            <h3 class="test-title" title="${test.title}">${test.title}</h3>
+                            <span class="test-category">${test.category}</span>
                         </div>
                         
                         <div class="test-details">
                             <div class="test-detail">
-                                <i class="fas fa-star"></i>
-                                <span>মার্কস: ${totalMarks}</span>
+                                <span class="detail-label">মোট মার্কস:</span>
+                                <span class="detail-value">${totalMarks}</span>
                             </div>
                             <div class="test-detail">
-                                <i class="fas fa-question-circle"></i>
-                                <span>প্রশ্ন: ${exam.totalQuestions}</span>
+                                <span class="detail-label">প্রশ্ন সংখ্যা:</span>
+                                <span class="detail-value">${test.totalQuestions}</span>
                             </div>
                             <div class="test-detail">
-                                <i class="fas fa-clock"></i>
-                                <span>সময়: ${exam.timeLimit} মিনিট</span>
+                                <span class="detail-label">সময়:</span>
+                                <span class="detail-value">${test.timeLimit} মিনিট</span>
                             </div>
                             <div class="test-detail">
-                                <i class="fas fa-calendar"></i>
-                                <span>${formatDate(exam.createdAt)}</span>
+                                <span class="detail-label">ধরণ:</span>
+                                <span class="detail-value">MCQ</span>
                             </div>
                         </div>
                         
-                        <p class="test-description">${exam.description || 'কোন বিবরণ নেই'}</p>
-                        
-                        <div class="test-footer">
-                            <div class="test-actions">
-                                <button class="action-btn btn-test" onclick="takeTest('${exam.id}')">
-                                    <i class="fas fa-play-circle"></i> টেস্ট দিন
-                                </button>
-                                <button class="action-btn btn-download" onclick="downloadTestPDF('${exam.id}', '${exam.title}')">
-                                    <i class="fas fa-download"></i> ডাউনলোড
-                                </button>
-                            </div>
+                        <div class="test-actions">
+                            <button class="action-btn btn-download" onclick="downloadTestPDF('${test.id}')">
+                                <i class="fas fa-download"></i> ডাউনলোড
+                            </button>
+                            <button class="action-btn btn-test" onclick="startTest('${test.id}')">
+                                <i class="fas fa-play"></i> টেস্ট দিন
+                            </button>
                         </div>
                     </div>
                 `;
             });
             
             modelTestsGrid.innerHTML = html;
-            modelTestsGrid.style.display = 'grid';
-            noResults.style.display = 'none';
-            
-            // Update results count
-            resultsCount.textContent = `(${filteredExams.length}টি টেস্ট পাওয়া গেছে)`;
         }
 
-        function showNoResults() {
-            modelTestsGrid.style.display = 'none';
-            noResults.style.display = 'block';
-            pagination.style.display = 'none';
-            resultsCount.textContent = '(কোন টেস্ট নেই)';
-        }
-
-        // Update Pagination
         function updatePagination() {
-            const totalPages = Math.ceil(filteredExams.length / examsPerPage);
-            
             if (totalPages <= 1) {
-                pagination.style.display = 'none';
+                pagination.innerHTML = '';
                 return;
             }
             
-            pagination.style.display = 'flex';
-            currentPageSpan.textContent = currentPage;
-            totalPagesSpan.textContent = totalPages;
+            let html = '';
             
-            prevPageBtn.disabled = currentPage === 1;
-            nextPageBtn.disabled = currentPage === totalPages;
+            // Previous button
+            html += `
+                <button class="page-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
             
-            prevPageBtn.style.opacity = prevPageBtn.disabled ? '0.5' : '1';
-            nextPageBtn.style.opacity = nextPageBtn.disabled ? '0.5' : '1';
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            // Adjust start page if we're near the end
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            // First page
+            if (startPage > 1) {
+                html += `<button class="page-btn" onclick="goToPage(1)">1</button>`;
+                if (startPage > 2) {
+                    html += `<span class="page-info">...</span>`;
+                }
+            }
+            
+            // Page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                html += `
+                    <button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            // Last page
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    html += `<span class="page-info">...</span>`;
+                }
+                html += `<button class="page-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // Next button
+            html += `
+                <button class="page-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+            
+            // Page info
+            html += `
+                <span class="page-info">
+                    পৃষ্ঠা ${currentPage} / ${totalPages}
+                </span>
+            `;
+            
+            pagination.innerHTML = html;
         }
 
-        // Pagination Event Listeners
-        prevPageBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                displayExamsPage(currentPage);
-                updatePagination();
-            }
-        });
-
-        nextPageBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredExams.length / examsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                displayExamsPage(currentPage);
-                updatePagination();
-            }
-        });
+        function goToPage(page) {
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            displayCurrentPage();
+            updatePagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // ==================== TEST FUNCTIONS ====================
-        function takeTest(examId) {
+        function startTest(examId) {
             // Redirect to examtest.html with exam ID
             window.location.href = `examtest.html?id=${examId}`;
         }
 
-        async function downloadTestPDF(examId, examTitle) {
+        async function downloadTestPDF(examId) {
             try {
-                // Get exam details
-                const examDoc = await db.collection('exams').doc(examId).get();
-                if (!examDoc.exists) {
+                const doc = await db.collection('exams').doc(examId).get();
+                if (!doc.exists) {
                     alert('টেস্ট পাওয়া যায়নি!');
                     return;
                 }
                 
-                const exam = examDoc.data();
+                const exam = doc.data();
                 
                 // Get questions for this exam
                 let questions = [];
-                
                 if (exam.questions && exam.questions.length > 0) {
                     questions = exam.questions;
                 } else {
-                    // Load questions from question bank based on category
-                    const querySnapshot = await db.collection('questions')
+                    // Fetch questions from question bank
+                    const qSnapshot = await db.collection('questions')
                         .where('category', '==', exam.category)
                         .limit(exam.totalQuestions)
                         .get();
                     
-                    querySnapshot.forEach(doc => {
-                        questions.push(doc.data());
+                    qSnapshot.forEach(qDoc => {
+                        questions.push(qDoc.data());
                     });
                 }
                 
-                if (questions.length === 0) {
-                    alert('এই টেস্টের কোনো প্রশ্ন নেই!');
-                    return;
-                }
-                
                 // Generate PDF
-                generatePDF(exam, questions);
+                generateExamPDF(exam, questions);
                 
             } catch (error) {
                 console.error("Error downloading PDF:", error);
@@ -1142,102 +1129,87 @@
             }
         }
 
-        function generatePDF(exam, questions) {
+        function generateExamPDF(exam, questions) {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // PDF settings
-            const pageWidth = doc.internal.pageSize.getWidth();
-            const margin = 20;
-            let yPosition = margin;
             
             // Add header
             doc.setFontSize(20);
             doc.setTextColor(52, 152, 219);
-            doc.text(exam.title, pageWidth / 2, yPosition, { align: 'center' });
-            yPosition += 15;
+            doc.text(exam.title, 105, 20, null, null, 'center');
             
-            // Exam details
             doc.setFontSize(12);
             doc.setTextColor(100, 100, 100);
-            const totalMarks = exam.totalQuestions * (exam.marksPerQuestion || 1);
-            const details = `ক্যাটাগরি: ${exam.category} | সময়: ${exam.timeLimit} মিনিট | প্রশ্ন: ${exam.totalQuestions} | মার্কস: ${totalMarks}`;
-            doc.text(details, pageWidth / 2, yPosition, { align: 'center' });
-            yPosition += 15;
+            doc.text(`ক্যাটাগরি: ${exam.category} | সময়: ${exam.timeLimit} মিনিট | প্রশ্ন: ${exam.totalQuestions} | মার্কস: ${exam.totalQuestions * (exam.marksPerQuestion || 1)}`, 105, 30, null, null, 'center');
             
-            // Separator line
             doc.setDrawColor(200, 200, 200);
-            doc.line(margin, yPosition, pageWidth - margin, yPosition);
-            yPosition += 15;
+            doc.line(20, 35, 190, 35);
             
-            // Instructions
+            // Add instructions
             doc.setFontSize(11);
             doc.setTextColor(0, 0, 0);
-            doc.setFont(undefined, 'bold');
-            doc.text("নির্দেশনা:", margin, yPosition);
+            let yPosition = 45;
+            
+            doc.text('নির্দেশনা:', 20, yPosition);
             yPosition += 8;
             
-            doc.setFont(undefined, 'normal');
-            const instruction = exam.description || '১. প্রতিটি প্রশ্নের জন্য সঠিক উত্তর নির্বাচন করুন। ২. সময় শেষ হওয়ার পর উত্তর জমা দেওয়া যাবে না।';
-            const splitInstructions = doc.splitTextToSize(instruction, pageWidth - 2 * margin);
-            doc.text(splitInstructions, margin, yPosition);
-            yPosition += splitInstructions.length * 7 + 15;
+            const instructions = [
+                '১. সমস্ত প্রশ্নের উত্তর দিন',
+                '২. প্রতিটি প্রশ্নের জন্য চারটি অপশন দেওয়া আছে',
+                '৩. শুধুমাত্র একটি সঠিক উত্তর আছে',
+                '৪. সময় সীমার মধ্যে উত্তর দিন'
+            ];
             
-            // Questions
-            doc.setFont(undefined, 'bold');
-            doc.text("প্রশ্নসমূহ:", margin, yPosition);
+            instructions.forEach(instruction => {
+                doc.text(instruction, 25, yPosition);
+                yPosition += 7;
+            });
+            
             yPosition += 10;
             
+            // Add questions
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            
             questions.forEach((question, index) => {
-                // Check if we need a new page
                 if (yPosition > 250) {
                     doc.addPage();
-                    yPosition = margin;
+                    yPosition = 20;
                 }
                 
-                // Question number and text
-                doc.setFont(undefined, 'bold');
-                doc.text(`${index + 1}. ${question.question}`, margin, yPosition);
-                yPosition += 8;
+                // Question text
+                const questionText = `${index + 1}. ${question.question}`;
+                const lines = doc.splitTextToSize(questionText, 170);
+                lines.forEach(line => {
+                    doc.text(line, 20, yPosition);
+                    yPosition += 7;
+                });
                 
                 // Options
-                doc.setFont(undefined, 'normal');
-                doc.text(`ক) ${question.option1}`, margin + 5, yPosition);
-                yPosition += 6;
-                doc.text(`খ) ${question.option2}`, margin + 5, yPosition);
-                yPosition += 6;
-                doc.text(`গ) ${question.option3}`, margin + 5, yPosition);
-                yPosition += 6;
-                doc.text(`ঘ) ${question.option4}`, margin + 5, yPosition);
-                yPosition += 12;
+                const options = [
+                    `ক) ${question.option1}`,
+                    `খ) ${question.option2}`,
+                    `গ) ${question.option3}`,
+                    `ঘ) ${question.option4}`
+                ];
+                
+                options.forEach(option => {
+                    doc.setFontSize(11);
+                    doc.text(option, 25, yPosition);
+                    yPosition += 7;
+                });
+                
+                yPosition += 10;
+                
+                // Add page break if needed
+                if (yPosition > 250 && index < questions.length - 1) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
             });
             
             // Save PDF
-            const fileName = `${exam.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_question_paper.pdf`;
-            doc.save(fileName);
-        }
-
-        // Load Ads (Placeholder for now)
-        function loadAds() {
-            console.log("Ads loading functionality can be added here");
-        }
-
-        // ==================== UTILITY FUNCTIONS ====================
-        function formatDate(timestamp) {
-            if (!timestamp) return 'N/A';
-            const date = timestamp.toDate();
-            const today = new Date();
-            const diffTime = Math.abs(today - date);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 1) return 'গতকাল';
-            if (diffDays <= 7) return `${diffDays} দিন আগে`;
-            
-            return date.toLocaleDateString('bn-BD', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            });
+            doc.save(`${exam.title}_Question_Paper.pdf`);
         }
 
         // ==================== INITIALIZATION ====================
@@ -1249,17 +1221,16 @@
             const urlParams = new URLSearchParams(window.location.search);
             const category = urlParams.get('category');
             if (category) {
-                document.querySelector('.page-title i').parentNode.innerHTML = 
-                    `<i class="fas fa-folder"></i> ${category}`;
+                document.getElementById('page-title').innerHTML = `<i class="fas fa-folder"></i> ${category}`;
             }
         });
 
-        // ==================== QUIZ TEST LINK ====================
-        document.getElementById('quiz-test-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            // Scroll to model tests section
-            document.querySelector('.model-tests-grid').scrollIntoView({ behavior: 'smooth' });
-        });
+        // ==================== UTILITY FUNCTIONS ====================
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = timestamp.toDate();
+            return date.toLocaleDateString('bn-BD');
+        }
     </script>
 </body>
 </html>
