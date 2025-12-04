@@ -143,7 +143,7 @@
             gap: 20px;
         }
 
-        /* Left Sidebar - Categories */
+        /* Left Sidebar - Categories (Desktop) */
         .left-sidebar {
             flex: 0 0 250px;
             background-color: white;
@@ -243,31 +243,81 @@
         .search-container {
             display: flex;
             gap: 10px;
+            position: relative;
         }
 
         .search-input {
-            padding: 10px 15px;
+            padding: 10px 15px 10px 40px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            width: 250px;
+            width: 300px;
             font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
 
-        .search-btn {
-            padding: 10px 20px;
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        /* Mobile Categories (Hidden on Desktop) */
+        .mobile-categories {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .mobile-categories-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+
+        .mobile-categories-header h3 {
+            color: var(--primary);
+        }
+
+        .mobile-categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .mobile-category-item {
+            padding: 8px 15px;
+            background-color: var(--light-bg);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .mobile-category-item:hover {
+            background-color: #e1e8f0;
+        }
+
+        .mobile-category-item.active {
             background-color: var(--primary);
             color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
         }
 
-        .search-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
+        /* Model Tests Grid */
         .model-tests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -499,8 +549,11 @@
             }
             
             .left-sidebar {
-                width: 100%;
-                margin-bottom: 20px;
+                display: none; /* Hide desktop categories on mobile */
+            }
+            
+            .mobile-categories {
+                display: block; /* Show mobile categories */
             }
             
             .model-tests-grid {
@@ -514,6 +567,7 @@
             
             .search-input {
                 width: 100%;
+                padding-left: 40px;
             }
             
             .page-title {
@@ -594,6 +648,13 @@
         .categories-list::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
+
+        /* Type-as-you-search results */
+        .search-results-info {
+            margin-top: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -630,7 +691,7 @@
 
     <!-- Main Content -->
     <div class="main-container">
-        <!-- Left Sidebar - Categories -->
+        <!-- Left Sidebar - Categories (Desktop only) -->
         <aside class="left-sidebar">
             <div class="categories-header">
                 <h3>Model Test Categories</h3>
@@ -650,10 +711,8 @@
             <div class="page-title">
                 <h2>Test Papers</h2>
                 <div class="search-container">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search model tests...">
-                    <button class="search-btn" id="searchBtn">
-                        <i class="fas fa-search"></i> Search
-                    </button>
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Type to search model tests...">
                 </div>
             </div>
 
@@ -661,11 +720,25 @@
                 <strong>Firebase Error:</strong> <span id="errorMessage"></span>
             </div>
 
+            <div id="searchResultsInfo" class="search-results-info" style="display: none;">
+                Showing <span id="resultsCount">0</span> results for "<span id="searchTerm"></span>"
+            </div>
+
             <div class="model-tests-grid" id="modelTestsGrid">
                 <!-- Model tests will be loaded from Firebase -->
                 <div class="loading">
                     <div class="spinner"></div>
                     Loading model tests from Firebase...
+                </div>
+            </div>
+
+            <!-- Mobile Categories (Only on mobile) -->
+            <div class="mobile-categories">
+                <div class="mobile-categories-header">
+                    <h3>Browse by Category</h3>
+                </div>
+                <div class="mobile-categories-list" id="mobileCategoriesList">
+                    <!-- Mobile categories will be loaded here -->
                 </div>
             </div>
 
@@ -737,12 +810,13 @@
         // Current filter state
         let currentCategory = "all";
         let currentSearch = "";
+        let searchTimeout = null;
 
         // DOM Elements
         const categoriesList = document.getElementById('categoriesList');
+        const mobileCategoriesList = document.getElementById('mobileCategoriesList');
         const modelTestsGrid = document.getElementById('modelTestsGrid');
         const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
         const categoryCount = document.getElementById('categoryCount');
         const pagination = document.getElementById('pagination');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -751,6 +825,9 @@
         const errorMessage = document.getElementById('errorMessage');
         const recentTests = document.getElementById('recentTests');
         const popularCategories = document.getElementById('popularCategories');
+        const searchResultsInfo = document.getElementById('searchResultsInfo');
+        const resultsCount = document.getElementById('resultsCount');
+        const searchTermElement = document.getElementById('searchTerm');
 
         // Initialize Firebase and load data
         document.addEventListener('DOMContentLoaded', function() {
@@ -790,13 +867,14 @@
             try {
                 console.log("Loading categories from Firebase...");
                 
-                // এই collection টি আপনার Firebase-এ থাকতে হবে
-                const categoriesRef = db.collection("categories");
-                const snapshot = await categoriesRef.where("hasTests", "==", true).get();
+                // Firebase থেকে ক্যাটেগরি লোড করুন
+                const categoriesRef = db.collection("modelTestCategories");
+                const snapshot = await categoriesRef.get();
                 
                 if (snapshot.empty) {
                     console.log("No categories found in Firebase");
-                    loadDemoCategories();
+                    // যদি ক্যাটেগরি না থাকে, তাহলে মডেল টেস্ট থেকে ক্যাটেগরি তৈরি করুন
+                    extractCategoriesFromTests();
                     return;
                 }
                 
@@ -806,6 +884,7 @@
                     categories.push({
                         id: doc.id,
                         name: data.name || "Unnamed Category",
+                        name_bn: data.name_bn || data.name || "Unnamed Category",
                         count: data.count || 0,
                         hasTests: data.hasTests || false
                     });
@@ -816,9 +895,44 @@
                 
             } catch (error) {
                 console.error("Error loading categories from Firebase:", error);
-                showFirebaseError("Failed to load categories from Firebase.");
-                loadDemoCategories();
+                // Firebase থেকে ক্যাটেগরি লোড করতে ব্যর্থ হলে মডেল টেস্ট থেকে এক্সট্রাক্ট করুন
+                extractCategoriesFromTests();
             }
+        }
+
+        // মডেল টেস্ট থেকে ক্যাটেগরি এক্সট্রাক্ট করুন
+        function extractCategoriesFromTests() {
+            if (modelTests.length === 0) {
+                loadDemoCategories();
+                return;
+            }
+            
+            // মডেল টেস্ট থেকে ইউনিক ক্যাটেগরি বের করুন
+            const uniqueCategories = {};
+            modelTests.forEach(test => {
+                if (test.category && !uniqueCategories[test.category]) {
+                    uniqueCategories[test.category] = {
+                        count: 0,
+                        name: test.category,
+                        name_bn: test.category // আপনি বাংলা নাম Firebase-এ সেভ করতে পারেন
+                    };
+                }
+                if (test.category) {
+                    uniqueCategories[test.category].count++;
+                }
+            });
+            
+            // অ্যারে কনভার্ট করুন
+            categories = Object.values(uniqueCategories).map((cat, index) => ({
+                id: `cat-${index}`,
+                name: cat.name,
+                name_bn: cat.name_bn,
+                count: cat.count,
+                hasTests: true
+            }));
+            
+            console.log(`Extracted ${categories.length} categories from model tests`);
+            renderCategories();
         }
 
         // Load model tests from Firebase
@@ -826,7 +940,7 @@
             try {
                 console.log("Loading model tests from Firebase...");
                 
-                // এই collection টি আপনার Firebase-এ থাকতে হবে
+                // Firebase থেকে মডেল টেস্ট লোড করুন
                 const testsRef = db.collection("modelTests");
                 const snapshot = await testsRef.orderBy("createdAt", "desc").get();
                 
@@ -842,6 +956,7 @@
                     modelTests.push({
                         id: doc.id,
                         title: data.title || "Untitled Test",
+                        title_bn: data.title_bn || data.title || "Untitled Test",
                         category: data.category || "Uncategorized",
                         fullMarks: data.fullMarks || 0,
                         totalQuestions: data.totalQuestions || 0,
@@ -849,7 +964,9 @@
                         downloadCount: data.downloadCount || 0,
                         createdAt: data.createdAt || new Date(),
                         pdfUrl: data.pdfUrl || "#",
-                        testUrl: data.testUrl || "#"
+                        pdfUrl_bn: data.pdfUrl_bn || data.pdfUrl || "#", // বাংলা PDF লিঙ্ক
+                        testUrl: data.testUrl || "#",
+                        language: data.language || "both" // "english", "bangla", or "both"
                     });
                 });
                 
@@ -858,6 +975,11 @@
                 renderModelTests();
                 updateRecentTests();
                 updatePopularCategories();
+                
+                // যদি ক্যাটেগরি আগে না লোড হয়ে থাকে, তাহলে এখন এক্সট্রাক্ট করুন
+                if (categories.length === 0) {
+                    extractCategoriesFromTests();
+                }
                 
             } catch (error) {
                 console.error("Error loading model tests from Firebase:", error);
@@ -873,74 +995,91 @@
         }
 
         function loadDemoCategories() {
+            // বাংলা এবং ইংরেজি ক্যাটেগরি সহ ডেমো ডেটা
             categories = [
-                { id: "1", name: "BCS & Government Jobs", count: 24, hasTests: true },
-                { id: "2", name: "Bank Recruitment", count: 18, hasTests: true },
-                { id: "3", name: "Teaching Jobs", count: 12, hasTests: true },
-                { id: "4", name: "University Admission", count: 15, hasTests: true },
-                { id: "5", name: "SSC & HSC", count: 8, hasTests: true },
-                { id: "6", name: "IELTS & TOEFL", count: 10, hasTests: true },
-                { id: "7", name: "GRE & GMAT", count: 6, hasTests: true }
+                { id: "1", name: "BCS & Government Jobs", name_bn: "বিসিএস ও সরকারি চাকরি", count: 24, hasTests: true },
+                { id: "2", name: "Bank Recruitment", name_bn: "ব্যাংক নিয়োগ", count: 18, hasTests: true },
+                { id: "3", name: "Teaching Jobs", name_bn: "শিক্ষক নিয়োগ", count: 12, hasTests: true },
+                { id: "4", name: "University Admission", name_bn: "বিশ্ববিদ্যালয় ভর্তি", count: 15, hasTests: true },
+                { id: "5", name: "SSC & HSC", name_bn: "এসএসসি ও এইচএসসি", count: 8, hasTests: true },
+                { id: "6", name: "IELTS & TOEFL", name_bn: "আইইএলটিএস ও টোফেল", count: 10, hasTests: true },
+                { id: "7", name: "GRE & GMAT", name_bn: "জিআরই ও জিম্যাট", count: 6, hasTests: true }
             ];
             renderCategories();
         }
 
         function loadDemoTests() {
+            // বাংলা এবং ইংরেজি টেস্ট সহ ডেমো ডেটা
             modelTests = [
                 {
                     id: "1",
                     title: "BCS Preliminary Model Test 2023",
+                    title_bn: "বিসিএস প্রিলিমিনারি মডেল টেস্ট ২০২৩",
                     category: "BCS & Government Jobs",
                     fullMarks: 200,
                     totalQuestions: 100,
                     time: "120 minutes",
                     downloadCount: 245,
                     pdfUrl: "#",
-                    testUrl: "testexam.html"
+                    pdfUrl_bn: "#",
+                    testUrl: "testexam.html",
+                    language: "both"
                 },
                 {
                     id: "2",
                     title: "Bank Recruitment Model Test",
+                    title_bn: "ব্যাংক নিয়োগ মডেল টেস্ট",
                     category: "Bank Recruitment",
                     fullMarks: 200,
                     totalQuestions: 100,
                     time: "90 minutes",
                     downloadCount: 189,
                     pdfUrl: "#",
-                    testUrl: "testexam.html"
+                    pdfUrl_bn: "#",
+                    testUrl: "testexam.html",
+                    language: "both"
                 },
                 {
                     id: "3",
                     title: "IELTS Practice Test - Full Length",
+                    title_bn: "আইইএলটিএস প্র্যাকটিস টেস্ট - ফুল লেংথ",
                     category: "IELTS & TOEFL",
                     fullMarks: 9,
                     totalQuestions: 40,
                     time: "60 minutes",
                     downloadCount: 312,
                     pdfUrl: "#",
-                    testUrl: "testexam.html"
+                    pdfUrl_bn: "#",
+                    testUrl: "testexam.html",
+                    language: "english"
                 },
                 {
                     id: "4",
                     title: "Medical Admission Test Model",
+                    title_bn: "মেডিকেল ভর্তি টেস্ট মডেল",
                     category: "University Admission",
                     fullMarks: 300,
                     totalQuestions: 120,
                     time: "180 minutes",
                     downloadCount: 156,
                     pdfUrl: "#",
-                    testUrl: "testexam.html"
+                    pdfUrl_bn: "#",
+                    testUrl: "testexam.html",
+                    language: "both"
                 },
                 {
                     id: "5",
                     title: "Primary Teacher Recruitment Test",
+                    title_bn: "প্রাথমিক শিক্ষক নিয়োগ টেস্ট",
                     category: "Teaching Jobs",
                     fullMarks: 100,
                     totalQuestions: 50,
                     time: "60 minutes",
                     downloadCount: 278,
                     pdfUrl: "#",
-                    testUrl: "testexam.html"
+                    pdfUrl_bn: "#",
+                    testUrl: "testexam.html",
+                    language: "bangla"
                 }
             ];
             filteredTests = [...modelTests];
@@ -949,7 +1088,7 @@
             updatePopularCategories();
         }
 
-        // Render categories
+        // Render categories for desktop and mobile
         function renderCategories() {
             // Filter categories with tests (count > 0)
             const categoriesWithTests = categories.filter(cat => cat.count > 0);
@@ -960,6 +1099,7 @@
             
             categoryCount.textContent = categoriesToShow.length;
             
+            // Desktop categories
             let categoriesHTML = '<div class="category-item active" data-category="all">';
             categoriesHTML += '<span class="category-name">All Categories</span>';
             categoriesHTML += '<span class="category-badge">' + modelTests.length + '</span>';
@@ -998,7 +1138,19 @@
             
             categoriesList.innerHTML = categoriesHTML;
             
-            // Add click event to categories
+            // Mobile categories
+            let mobileCategoriesHTML = '<div class="mobile-category-item active" data-category="all">All</div>';
+            categoriesWithTests.forEach(category => {
+                mobileCategoriesHTML += `
+                    <div class="mobile-category-item" data-category="${category.name}">
+                        ${category.name}
+                    </div>
+                `;
+            });
+            
+            mobileCategoriesList.innerHTML = mobileCategoriesHTML;
+            
+            // Add click event to desktop categories
             document.querySelectorAll('.category-item:not(.show-more-btn)').forEach(item => {
                 item.addEventListener('click', function() {
                     // Remove active class from all categories
@@ -1008,6 +1160,42 @@
                     
                     // Add active class to clicked category
                     this.classList.add('active');
+                    
+                    // Also update mobile categories
+                    document.querySelectorAll('.mobile-category-item').forEach(mobileCat => {
+                        if (mobileCat.getAttribute('data-category') === this.getAttribute('data-category')) {
+                            mobileCat.classList.add('active');
+                        } else {
+                            mobileCat.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update current category and re-render tests
+                    currentCategory = this.getAttribute('data-category');
+                    currentPage = 1;
+                    filterTests();
+                });
+            });
+            
+            // Add click event to mobile categories
+            document.querySelectorAll('.mobile-category-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all mobile categories
+                    document.querySelectorAll('.mobile-category-item').forEach(cat => {
+                        cat.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked category
+                    this.classList.add('active');
+                    
+                    // Also update desktop categories
+                    document.querySelectorAll('.category-item').forEach(desktopCat => {
+                        if (desktopCat.getAttribute('data-category') === this.getAttribute('data-category')) {
+                            desktopCat.classList.add('active');
+                        } else {
+                            desktopCat.classList.remove('active');
+                        }
+                    });
                     
                     // Update current category and re-render tests
                     currentCategory = this.getAttribute('data-category');
@@ -1044,10 +1232,27 @@
             // Filter by search
             if (currentSearch) {
                 const searchTerm = currentSearch.toLowerCase();
-                filteredTests = filteredTests.filter(test => 
-                    test.title.toLowerCase().includes(searchTerm) || 
-                    test.category.toLowerCase().includes(searchTerm)
-                );
+                filteredTests = filteredTests.filter(test => {
+                    // Search in English title
+                    const englishMatch = test.title.toLowerCase().includes(searchTerm);
+                    // Search in Bangla title (if available)
+                    const banglaMatch = test.title_bn && test.title_bn.toLowerCase().includes(searchTerm);
+                    // Search in category
+                    const categoryMatch = test.category.toLowerCase().includes(searchTerm);
+                    
+                    return englishMatch || banglaMatch || categoryMatch;
+                });
+                
+                // Show search results info
+                if (filteredTests.length > 0) {
+                    searchResultsInfo.style.display = 'block';
+                    resultsCount.textContent = filteredTests.length;
+                    searchTermElement.textContent = currentSearch;
+                } else {
+                    searchResultsInfo.style.display = 'none';
+                }
+            } else {
+                searchResultsInfo.style.display = 'none';
             }
             
             // Update pagination and render
@@ -1084,9 +1289,20 @@
             testsToShow.forEach(test => {
                 const testCard = document.createElement('div');
                 testCard.className = 'test-card';
+                
+                // Language badge
+                let languageBadge = '';
+                if (test.language === 'english') {
+                    languageBadge = '<span style="background-color: #007bff; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; margin-left: 5px;">EN</span>';
+                } else if (test.language === 'bangla') {
+                    languageBadge = '<span style="background-color: #28a745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; margin-left: 5px;">বাং</span>';
+                } else {
+                    languageBadge = '<span style="background-color: #6f42c1; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; margin-left: 5px;">EN+বাং</span>';
+                }
+                
                 testCard.innerHTML = `
                     <div class="test-header">
-                        <h3 class="test-title">${test.title}</h3>
+                        <h3 class="test-title">${test.title} ${languageBadge}</h3>
                         <div class="test-meta">
                             <span>Full Marks: <strong>${test.fullMarks}</strong></span>
                             <span>Questions: <strong>${test.totalQuestions}</strong></span>
@@ -1098,7 +1314,7 @@
                         <div class="test-category">${test.category}</div>
                     </div>
                     <div class="test-actions">
-                        <button class="btn btn-download" onclick="downloadTest('${test.id}', '${test.title}')">
+                        <button class="btn btn-download" onclick="downloadTest('${test.id}')">
                             <i class="fas fa-download"></i> Download
                         </button>
                         <button class="btn btn-test" onclick="startTest('${test.id}')">
@@ -1155,6 +1371,8 @@
                     if (page && page !== currentPage) {
                         currentPage = page;
                         filterTests();
+                        // Scroll to top of tests
+                        modelTestsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             });
@@ -1207,12 +1425,19 @@
                 navMenu.classList.toggle('active');
             });
             
-            // Search functionality
-            searchBtn.addEventListener('click', performSearch);
-            searchInput.addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    performSearch();
+            // Real-time search as you type
+            searchInput.addEventListener('input', function() {
+                // Clear previous timeout
+                if (searchTimeout) {
+                    clearTimeout(searchTimeout);
                 }
+                
+                // Set new timeout to avoid too frequent searches
+                searchTimeout = setTimeout(() => {
+                    currentSearch = this.value.trim();
+                    currentPage = 1;
+                    filterTests();
+                }, 300); // 300ms delay
             });
             
             // Close mobile menu when clicking outside
@@ -1223,31 +1448,68 @@
             });
         }
 
-        // Perform search
-        function performSearch() {
-            currentSearch = searchInput.value.trim();
-            currentPage = 1;
-            filterTests();
-        }
-
         // Download test as PDF
-        function downloadTest(testId, testTitle) {
+        function downloadTest(testId) {
             const test = modelTests.find(t => t.id === testId);
-            if (!test) return;
+            if (!test) {
+                alert("Test not found!");
+                return;
+            }
             
-            // In a real implementation, you would generate PDF
-            alert(`Downloading "${testTitle}" as PDF...\n\nPDF will include:\n- Test Name: ${test.title}\n- Full Marks: ${test.fullMarks}\n- Total Questions: ${test.totalQuestions}\n- Time: ${test.time}\n- Category: ${test.category}\n\nFooter: Freetutor.com | Develop by Md Ebadot Hossen`);
+            // Detect user's language preference
+            const userLanguage = navigator.language || navigator.userLanguage;
+            const isBanglaPreferred = userLanguage.includes('bn') || userLanguage.includes('BD');
             
-            // Redirect to PDF download URL if available
-            if (test.pdfUrl && test.pdfUrl !== "#") {
-                window.open(test.pdfUrl, '_blank');
+            // Choose PDF URL based on language preference and availability
+            let pdfUrl = test.pdfUrl;
+            let languageUsed = "English";
+            
+            if (isBanglaPreferred && test.pdfUrl_bn && test.pdfUrl_bn !== "#") {
+                pdfUrl = test.pdfUrl_bn;
+                languageUsed = "Bangla";
+            } else if (test.language === "bangla" && test.pdfUrl_bn && test.pdfUrl_bn !== "#") {
+                pdfUrl = test.pdfUrl_bn;
+                languageUsed = "Bangla";
+            } else if (test.language === "both") {
+                // Ask user which language they want
+                const choice = confirm(`Download "${test.title}"\n\nThis test is available in both English and Bangla.\n\nClick OK for English version\nClick Cancel for Bangla version`);
+                if (choice && test.pdfUrl && test.pdfUrl !== "#") {
+                    pdfUrl = test.pdfUrl;
+                    languageUsed = "English";
+                } else if (test.pdfUrl_bn && test.pdfUrl_bn !== "#") {
+                    pdfUrl = test.pdfUrl_bn;
+                    languageUsed = "Bangla";
+                }
+            }
+            
+            // Start download
+            if (pdfUrl && pdfUrl !== "#") {
+                // Create a temporary link for download
+                const link = document.createElement('a');
+                link.href = pdfUrl;
+                link.download = `${test.title.replace(/\s+/g, '_')}_${languageUsed}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message
+                alert(`${languageUsed} PDF is downloading: "${test.title}"`);
+                
+                // Update download count (in real implementation, you would update this in Firebase)
+                test.downloadCount++;
+                
+            } else {
+                alert(`PDF download is not available for "${test.title}"\n\nIn a real implementation, the PDF would be generated with:\n\n- Header: ${test.title}\n- Full Marks: ${test.fullMarks}\n- Total Questions: ${test.totalQuestions}\n- Time: ${test.time}\n- Category: ${test.category}\n\nFooter: Freetutor.com | Develop by Md Ebadot Hossen`);
             }
         }
 
         // Start test
         function startTest(testId) {
             const test = modelTests.find(t => t.id === testId);
-            if (!test) return;
+            if (!test) {
+                alert("Test not found!");
+                return;
+            }
             
             alert(`Starting test: "${test.title}"\n\nRedirecting to testexam.html with test ID: ${testId}`);
             
