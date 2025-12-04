@@ -53,6 +53,10 @@
         .logo-img {
             height: 50px;
             width: auto;
+            border-radius: 8px;
+            border: 2px solid #4299e1;
+            padding: 3px;
+            background: white;
         }
 
         .logo-text h1 {
@@ -202,7 +206,7 @@
         /* ========== MIDDLE CONTENT - TESTS ========== */
         .middle-content {
             flex: 1;
-            min-width: 0; /* For flexbox overflow */
+            min-width: 0;
         }
 
         .tests-header {
@@ -357,6 +361,13 @@
             background: #f7fafc;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .test-item:hover {
+            background: #ebf8ff;
+            border-color: #4299e1;
         }
 
         .test-item-icon {
@@ -393,6 +404,8 @@
             background: #f7fafc;
             border-radius: 6px;
             border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .popular-category:hover {
@@ -650,6 +663,17 @@
         .suggestion-item:last-child {
             border-bottom: none;
         }
+
+        /* Debug Info */
+        .debug-info {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #856404;
+        }
     </style>
 </head>
 <body>
@@ -660,7 +684,10 @@
             <div class="header-top">
                 <!-- Logo Section -->
                 <div class="logo-section">
-                    <img src="" alt="FreeTutorBD" class="logo-img" id="site-logo">
+                    <div class="logo-img" id="logo-container">
+                        <!-- Logo will be loaded here -->
+                        <i class="fas fa-chalkboard-teacher" style="font-size: 32px; color: #4299e1; line-height: 50px; text-align: center; width: 100%;"></i>
+                    </div>
                     <div class="logo-text">
                         <h1>FreeTutorBD</h1>
                         <p>Model Test Platform</p>
@@ -710,6 +737,11 @@
 
     <!-- MAIN CONTENT -->
     <div class="container">
+        <!-- Debug Info (Remove in production) -->
+        <div class="debug-info" id="debug-info" style="display: none;">
+            Loading data from Firebase...
+        </div>
+
         <div class="main-content">
             <!-- LEFT SIDEBAR - Categories (Desktop only) -->
             <aside class="left-sidebar">
@@ -721,7 +753,7 @@
                     <div class="category-list" id="desktop-category-list">
                         <div class="loading-spinner">
                             <div class="spinner"></div>
-                            <p>লোড হচ্ছে...</p>
+                            <p>ক্যাটাগরি লোড হচ্ছে...</p>
                         </div>
                     </div>
                 </div>
@@ -772,6 +804,7 @@
                     <div id="new-tests-list">
                         <div class="loading-spinner" style="padding: 10px;">
                             <div class="spinner" style="width: 20px; height: 20px;"></div>
+                            <p style="font-size: 12px;">লোড হচ্ছে...</p>
                         </div>
                     </div>
                 </div>
@@ -785,6 +818,7 @@
                     <div id="popular-categories">
                         <div class="loading-spinner" style="padding: 10px;">
                             <div class="spinner" style="width: 20px; height: 20px;"></div>
+                            <p style="font-size: 12px;">লোড হচ্ছে...</p>
                         </div>
                     </div>
                 </div>
@@ -819,7 +853,7 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
         // ==================== GLOBAL VARIABLES ====================
@@ -830,10 +864,11 @@
         let currentPage = 1;
         const testsPerPage = 12;
         let searchTimeout;
-        let testSuggestions = [];
 
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            
             // Mobile menu toggle
             document.getElementById('mobile-menu-btn').addEventListener('click', function() {
                 document.getElementById('main-nav').classList.toggle('active');
@@ -842,19 +877,346 @@
             // Setup search functionality
             setupSearch();
 
-            // Load data
-            loadLogo();
-            loadCategories();
-            loadTests();
-            loadAds();
-            loadNewTests();
-            loadPopularCategories();
+            // Load all data
+            loadAllData();
 
             // Real-time updates
             setupRealtimeUpdates();
         });
 
-        // ==================== SEARCH FUNCTIONALITY ====================
+        // ==================== LOAD ALL DATA ====================
+        async function loadAllData() {
+            try {
+                console.log('Loading all data from Firebase...');
+                document.getElementById('debug-info').style.display = 'block';
+                
+                // Load logo first
+                await loadLogo();
+                
+                // Load tests and categories in parallel
+                await Promise.all([
+                    loadTests(),
+                    loadCategories()
+                ]);
+                
+                // Load sidebar data after tests are loaded
+                loadNewTests();
+                loadPopularCategories();
+                loadAds();
+                
+                document.getElementById('debug-info').style.display = 'none';
+                console.log('All data loaded successfully!');
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('debug-info').innerHTML = 
+                    `Error loading data: ${error.message}. Check Firebase connection.`;
+                document.getElementById('debug-info').style.display = 'block';
+            }
+        }
+
+        // ==================== LOGO LOADING ====================
+        async function loadLogo() {
+            try {
+                const logoDoc = await db.collection('settings').doc('logo').get();
+                
+                if (logoDoc.exists) {
+                    const logoData = logoDoc.data();
+                    const logoContainer = document.getElementById('logo-container');
+                    
+                    if (logoData.url && logoData.url.trim() !== '') {
+                        // Create image element for logo
+                        const logoImg = document.createElement('img');
+                        logoImg.src = logoData.url;
+                        logoImg.alt = 'FreeTutorBD Logo';
+                        logoImg.className = 'logo-img';
+                        logoImg.style.height = '50px';
+                        logoImg.style.width = 'auto';
+                        logoImg.style.borderRadius = '8px';
+                        logoImg.style.border = '2px solid #4299e1';
+                        logoImg.style.padding = '3px';
+                        logoImg.style.background = 'white';
+                        
+                        // Clear container and add image
+                        logoContainer.innerHTML = '';
+                        logoContainer.appendChild(logoImg);
+                    } else {
+                        // Keep the default icon if no logo URL
+                        console.log('No logo URL found, using default icon');
+                    }
+                } else {
+                    console.log('No logo document found in settings');
+                }
+            } catch (error) {
+                console.error('Error loading logo:', error);
+            }
+        }
+
+        // ==================== TESTS LOADING ====================
+        async function loadTests() {
+            try {
+                console.log('Loading tests from Firebase...');
+                const snapshot = await db.collection('exams')
+                    .where('status', '==', 'published')
+                    .orderBy('createdAt', 'desc')
+                    .get();
+                
+                console.log(`Found ${snapshot.size} published tests`);
+                
+                allTests = [];
+                snapshot.forEach(doc => {
+                    const test = doc.data();
+                    test.id = doc.id;
+                    test.createdAt = test.createdAt ? test.createdAt.toDate() : new Date();
+                    allTests.push(test);
+                });
+
+                // Update debug info
+                document.getElementById('debug-info').innerHTML = 
+                    `Loaded ${allTests.length} tests from Firebase`;
+
+                filteredTests = [...allTests];
+                displayTests();
+                setupPagination();
+
+            } catch (error) {
+                console.error('Error loading tests:', error);
+                showError('tests', error.message);
+            }
+        }
+
+        // ==================== CATEGORIES LOADING ====================
+        async function loadCategories() {
+            try {
+                console.log('Loading categories from Firebase...');
+                
+                // First get all tests to count categories
+                const testsSnapshot = await db.collection('exams')
+                    .where('status', '==', 'published')
+                    .get();
+                
+                // Create a map to count tests per category
+                const categoryCountMap = new Map();
+                
+                testsSnapshot.forEach(doc => {
+                    const test = doc.data();
+                    if (test.category) {
+                        const count = categoryCountMap.get(test.category) || 0;
+                        categoryCountMap.set(test.category, count + 1);
+                    }
+                });
+                
+                console.log('Category counts:', Array.from(categoryCountMap.entries()));
+                
+                // Now get categories from categories collection
+                const categoriesSnapshot = await db.collection('categories').get();
+                console.log(`Found ${categoriesSnapshot.size} categories in database`);
+                
+                allCategories = [];
+                categoriesSnapshot.forEach(doc => {
+                    const category = doc.data();
+                    category.id = doc.id;
+                    category.testCount = categoryCountMap.get(category.nameBn) || 0;
+                    
+                    // Only add categories that have tests or are predefined
+                    if (category.testCount > 0) {
+                        allCategories.push(category);
+                    }
+                });
+                
+                console.log(`Filtered to ${allCategories.length} categories with tests`);
+                
+                // Update debug info
+                document.getElementById('debug-info').innerHTML += 
+                    ` | ${allCategories.length} categories with tests`;
+                
+                // Display categories
+                displayCategories(allCategories, 'desktop-category-list');
+                displayCategories(allCategories, 'mobile-category-list');
+
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                showError('categories', error.message);
+            }
+        }
+
+        // ==================== DISPLAY FUNCTIONS ====================
+        function displayCategories(categories, elementId) {
+            const container = document.getElementById(elementId);
+            
+            if (!categories || categories.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results" style="padding: 20px;">
+                        <p>কোন ক্যাটাগরি নেই</p>
+                        <p style="font-size: 12px; margin-top: 10px;">প্রথমে Admin Panel থেকে টেস্ট যোগ করুন</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by test count (descending)
+            const sortedCategories = [...categories].sort((a, b) => b.testCount - a.testCount);
+
+            let html = '';
+            sortedCategories.forEach(category => {
+                html += `
+                    <div class="category-item ${currentCategory === category.nameBn ? 'active' : ''}" 
+                         onclick="filterByCategory('${category.nameBn}')">
+                        <span class="category-name">${category.nameBn}</span>
+                        <span class="category-count">${category.testCount}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function displayTests() {
+            const testsGrid = document.getElementById('tests-grid');
+            
+            if (!allTests || allTests.length === 0) {
+                testsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>কোন টেস্ট পাওয়া যায়নি</h3>
+                        <p>প্রথমে Admin Panel থেকে টেস্ট যোগ করুন</p>
+                        <a href="admin-panel.html" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #4299e1; color: white; text-decoration: none; border-radius: 5px;">
+                            <i class="fas fa-plus"></i> নতুন টেস্ট যোগ করুন
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * testsPerPage;
+            const endIndex = startIndex + testsPerPage;
+            const testsToShow = filteredTests.slice(startIndex, endIndex);
+
+            if (testsToShow.length === 0) {
+                testsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>কোন টেস্ট পাওয়া যায়নি</h3>
+                        <p>অনুগ্রহ করে অন্য কিছু খুঁজুন</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            testsToShow.forEach(test => {
+                const totalMarks = test.totalMarks || 
+                    (test.marksPerQuestion && test.totalQuestions ? 
+                     test.marksPerQuestion * test.totalQuestions : 'N/A');
+                
+                html += `
+                    <div class="test-card">
+                        <div class="test-header">
+                            <h3 class="test-title">${test.title || 'Unnamed Test'}</h3>
+                        </div>
+                        <div class="test-body">
+                            <div class="test-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-star detail-icon"></i>
+                                    <span class="detail-label">মার্কস:</span>
+                                    <span class="detail-value">${totalMarks}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-question-circle detail-icon"></i>
+                                    <span class="detail-label">প্রশ্ন:</span>
+                                    <span class="detail-value">${test.totalQuestions || 'N/A'}</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-clock detail-icon"></i>
+                                    <span class="detail-label">সময়:</span>
+                                    <span class="detail-value">${test.timeLimit || 'N/A'} মিনিট</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-folder detail-icon"></i>
+                                    <span class="detail-label">ক্যাটাগরি:</span>
+                                    <span class="detail-value">${test.category || 'Uncategorized'}</span>
+                                </div>
+                            </div>
+                            <button class="test-now-btn" onclick="startTest('${test.id}')">
+                                <i class="fas fa-play-circle"></i> টেস্ট দিন
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            testsGrid.innerHTML = html;
+        }
+
+        // ==================== SIDEBAR DATA ====================
+        function loadNewTests() {
+            const newTestsList = document.getElementById('new-tests-list');
+            
+            if (!allTests || allTests.length === 0) {
+                newTestsList.innerHTML = `
+                    <div class="no-results" style="padding: 10px; font-size: 12px;">
+                        <p>কোন নতুন টেস্ট নেই</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Get latest 3 tests
+            const latestTests = [...allTests]
+                .sort((a, b) => b.createdAt - a.createdAt)
+                .slice(0, 3);
+
+            let html = '';
+            latestTests.forEach((test, index) => {
+                const icons = ['fa-file-alt', 'fa-chart-line', 'fa-rocket'];
+                html += `
+                    <div class="test-item" onclick="startTest('${test.id}')">
+                        <div class="test-item-icon">
+                            <i class="fas ${icons[index] || 'fa-file'}"></i>
+                        </div>
+                        <div class="test-item-info">
+                            <h4>${test.title || 'Unnamed Test'}</h4>
+                            <span>${test.category || 'Uncategorized'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            newTestsList.innerHTML = html;
+        }
+
+        function loadPopularCategories() {
+            const popularContainer = document.getElementById('popular-categories');
+            
+            if (!allCategories || allCategories.length === 0) {
+                popularContainer.innerHTML = `
+                    <div class="no-results" style="padding: 10px; font-size: 12px;">
+                        <p>কোন ডাটা নেই</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort categories by test count (descending) and take top 5
+            const popularCategories = [...allCategories]
+                .sort((a, b) => b.testCount - a.testCount)
+                .slice(0, 5);
+
+            let html = '';
+            popularCategories.forEach(category => {
+                html += `
+                    <div class="popular-category" onclick="filterByCategory('${category.nameBn}')">
+                        <span>${category.nameBn}</span>
+                        <span class="category-count">${category.testCount}</span>
+                    </div>
+                `;
+            });
+
+            popularContainer.innerHTML = html;
+        }
+
+        // ==================== SEARCH & FILTER ====================
         function setupSearch() {
             const searchInput = document.getElementById('search-input');
             const suggestionsBox = document.getElementById('suggestions-box');
@@ -869,12 +1231,11 @@
                     return;
                 }
 
-                // Show loading in suggestions
-                suggestionsBox.innerHTML = '<div class="suggestion-item">লোড হচ্ছে...</div>';
-                suggestionsBox.style.display = 'block';
-
+                // Generate suggestions
+                generateSuggestions(searchTerm);
+                
+                // Search after delay
                 searchTimeout = setTimeout(() => {
-                    generateSuggestions(searchTerm);
                     searchTests(searchTerm);
                 }, 300);
             });
@@ -891,31 +1252,20 @@
             const suggestionsBox = document.getElementById('suggestions-box');
             const term = searchTerm.toLowerCase();
 
-            // Get unique test titles for suggestions
-            const uniqueTitles = [...new Set(allTests.map(test => test.title))];
-            
-            // Filter suggestions based on search term
-            let suggestions = uniqueTitles.filter(title => 
-                title.toLowerCase().includes(term)
-            ).slice(0, 10); // Show top 10 suggestions
-
-            // If no exact matches, show reasonable suggestions
-            if (suggestions.length === 0) {
-                suggestions = uniqueTitles
-                    .filter(title => {
-                        const words = term.split(' ');
-                        return words.some(word => title.toLowerCase().includes(word));
-                    })
-                    .slice(0, 10);
+            if (!allTests || allTests.length === 0) {
+                suggestionsBox.innerHTML = '<div class="suggestion-item">কোন টেস্ট নেই</div>';
+                suggestionsBox.style.display = 'block';
+                return;
             }
 
-            // If still no matches, show some random popular tests
-            if (suggestions.length === 0 && uniqueTitles.length > 0) {
-                suggestions = uniqueTitles.slice(0, 5);
-            }
+            // Get unique test titles
+            const suggestions = [...new Set(allTests.map(test => test.title))]
+                .filter(title => title && title.toLowerCase().includes(term))
+                .slice(0, 5);
 
             if (suggestions.length === 0) {
                 suggestionsBox.innerHTML = '<div class="suggestion-item">কোন সাজেশন নেই</div>';
+                suggestionsBox.style.display = 'block';
                 return;
             }
 
@@ -930,6 +1280,7 @@
             });
 
             suggestionsBox.innerHTML = html;
+            suggestionsBox.style.display = 'block';
         }
 
         function selectSuggestion(suggestion) {
@@ -947,11 +1298,12 @@
             } else {
                 filteredTests = allTests.filter(test => {
                     const matchesSearch = !term || 
-                        test.title.toLowerCase().includes(term) ||
-                        test.category.toLowerCase().includes(term) ||
+                        (test.title && test.title.toLowerCase().includes(term)) ||
+                        (test.category && test.category.toLowerCase().includes(term)) ||
                         (test.description && test.description.toLowerCase().includes(term));
                     
-                    const matchesCategory = currentCategory === 'all' || test.category === currentCategory;
+                    const matchesCategory = currentCategory === 'all' || 
+                        (test.category && test.category === currentCategory);
                     
                     return matchesSearch && matchesCategory;
                 });
@@ -961,178 +1313,26 @@
             setupPagination();
         }
 
-        // ==================== CATEGORIES ====================
-        async function loadCategories() {
-            try {
-                // Load categories from Firebase
-                const categoriesSnapshot = await db.collection('categories').get();
-                allCategories = [];
-                
-                categoriesSnapshot.forEach(doc => {
-                    const category = doc.data();
-                    category.id = doc.id;
-                    allCategories.push(category);
-                });
-
-                // Get test counts for each category
-                const testsSnapshot = await db.collection('exams').where('status', '==', 'published').get();
-                const categoryCounts = {};
-                
-                testsSnapshot.forEach(doc => {
-                    const test = doc.data();
-                    if (test.category) {
-                        categoryCounts[test.category] = (categoryCounts[test.category] || 0) + 1;
-                    }
-                });
-
-                // Update categories with counts
-                allCategories.forEach(cat => {
-                    cat.testCount = categoryCounts[cat.nameBn] || 0;
-                });
-
-                // Filter categories that have tests
-                const categoriesWithTests = allCategories.filter(cat => cat.testCount > 0);
-
-                // Display in desktop sidebar
-                displayCategories(categoriesWithTests, 'desktop-category-list');
-                
-                // Display in mobile section
-                displayCategories(categoriesWithTests, 'mobile-category-list');
-
-            } catch (error) {
-                console.error('Error loading categories:', error);
-                showError('categories');
-            }
-        }
-
-        function displayCategories(categories, elementId) {
-            const container = document.getElementById(elementId);
-            
-            if (categories.length === 0) {
-                container.innerHTML = '<div class="no-results">কোন ক্যাটাগরি নেই</div>';
-                return;
-            }
-
-            let html = '';
-            categories.forEach(category => {
-                html += `
-                    <div class="category-item ${currentCategory === category.nameBn ? 'active' : ''}" 
-                         onclick="filterByCategory('${category.nameBn}')">
-                        <span class="category-name">${category.nameBn}</span>
-                        <span class="category-count">${category.testCount}</span>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
         function filterByCategory(categoryName) {
             currentCategory = categoryName;
             currentPage = 1;
             
-            // Update active category in both lists
+            // Update active category
             document.querySelectorAll('.category-item').forEach(item => {
                 item.classList.remove('active');
             });
-            document.querySelectorAll(`.category-item:contains('${categoryName}')`).forEach(item => {
-                item.classList.add('active');
+            
+            // Find and activate the clicked category
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item.querySelector('.category-name').textContent === categoryName) {
+                    item.classList.add('active');
+                }
             });
             
             searchTests(document.getElementById('search-input').value);
         }
 
-        // ==================== TESTS ====================
-        async function loadTests() {
-            try {
-                const snapshot = await db.collection('exams')
-                    .where('status', '==', 'published')
-                    .orderBy('createdAt', 'desc')
-                    .get();
-                
-                allTests = [];
-                snapshot.forEach(doc => {
-                    const test = doc.data();
-                    test.id = doc.id;
-                    test.createdAt = test.createdAt ? test.createdAt.toDate() : new Date();
-                    allTests.push(test);
-                });
-
-                // Store test suggestions
-                testSuggestions = allTests.map(test => test.title);
-
-                filteredTests = [...allTests];
-                displayTests();
-                setupPagination();
-
-            } catch (error) {
-                console.error('Error loading tests:', error);
-                showError('tests');
-            }
-        }
-
-        function displayTests() {
-            const testsGrid = document.getElementById('tests-grid');
-            
-            if (filteredTests.length === 0) {
-                testsGrid.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <h3>কোন টেস্ট পাওয়া যায়নি</h3>
-                        <p>অনুগ্রহ করে অন্য কিছু খুঁজুন</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Calculate pagination
-            const startIndex = (currentPage - 1) * testsPerPage;
-            const endIndex = startIndex + testsPerPage;
-            const testsToShow = filteredTests.slice(startIndex, endIndex);
-
-            let html = '';
-            testsToShow.forEach(test => {
-                const totalMarks = test.totalMarks || (test.marksPerQuestion * test.totalQuestions) || 'N/A';
-                
-                html += `
-                    <div class="test-card">
-                        <div class="test-header">
-                            <h3 class="test-title">${test.title}</h3>
-                        </div>
-                        <div class="test-body">
-                            <div class="test-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-star detail-icon"></i>
-                                    <span class="detail-label">মার্কস:</span>
-                                    <span class="detail-value">${totalMarks}</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-question-circle detail-icon"></i>
-                                    <span class="detail-label">প্রশ্ন:</span>
-                                    <span class="detail-value">${test.totalQuestions}</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-clock detail-icon"></i>
-                                    <span class="detail-label">সময়:</span>
-                                    <span class="detail-value">${test.timeLimit} মিনিট</span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-folder detail-icon"></i>
-                                    <span class="detail-label">ক্যাটাগরি:</span>
-                                    <span class="detail-value">${test.category}</span>
-                                </div>
-                            </div>
-                            <button class="test-now-btn" onclick="startTest('${test.id}')">
-                                <i class="fas fa-play-circle"></i> টেস্ট দিন
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            testsGrid.innerHTML = html;
-        }
-
+        // ==================== PAGINATION ====================
         function setupPagination() {
             const paginationDiv = document.getElementById('pagination');
             const totalPages = Math.ceil(filteredTests.length / testsPerPage);
@@ -1191,103 +1391,29 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // ==================== TEST ACTIONS ====================
         function startTest(testId) {
             localStorage.setItem('currentTestId', testId);
             window.location.href = `examtest.html?id=${testId}`;
         }
 
-        // ==================== NEW TESTS ====================
-        function loadNewTests() {
-            const newTestsList = document.getElementById('new-tests-list');
-            
-            if (allTests.length === 0) {
-                newTestsList.innerHTML = '<div class="no-results">কোন নতুন টেস্ট নেই</div>';
-                return;
+        // ==================== ADS LOADING ====================
+        async function loadAds() {
+            try {
+                // Load header ad
+                const headerAd = await db.collection('ads').doc('header').get();
+                if (headerAd.exists && headerAd.data().code) {
+                    document.getElementById('header-ad').innerHTML = headerAd.data().code;
+                }
+
+                // Load middle ad
+                const middleAd = await db.collection('ads').doc('middle').get();
+                if (middleAd.exists && middleAd.data().code) {
+                    document.getElementById('middle-ad').innerHTML = middleAd.data().code;
+                }
+            } catch (error) {
+                console.error('Error loading ads:', error);
             }
-
-            // Get latest 3 tests
-            const latestTests = [...allTests]
-                .sort((a, b) => b.createdAt - a.createdAt)
-                .slice(0, 3);
-
-            let html = '';
-            latestTests.forEach((test, index) => {
-                const icons = ['fa-file-alt', 'fa-chart-line', 'fa-rocket'];
-                html += `
-                    <div class="test-item" onclick="startTest('${test.id}')">
-                        <div class="test-item-icon">
-                            <i class="fas ${icons[index] || 'fa-file'}"></i>
-                        </div>
-                        <div class="test-item-info">
-                            <h4>${test.title}</h4>
-                            <span>${test.category}</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            newTestsList.innerHTML = html;
-        }
-
-        // ==================== POPULAR CATEGORIES ====================
-        function loadPopularCategories() {
-            const popularContainer = document.getElementById('popular-categories');
-            
-            if (allCategories.length === 0) {
-                popularContainer.innerHTML = '<div class="no-results">কোন ডাটা নেই</div>';
-                return;
-            }
-
-            // Sort categories by test count (descending)
-            const popularCategories = [...allCategories]
-                .filter(cat => cat.testCount > 0)
-                .sort((a, b) => b.testCount - a.testCount)
-                .slice(0, 5);
-
-            if (popularCategories.length === 0) {
-                popularContainer.innerHTML = '<div class="no-results">কোন ডাটা নেই</div>';
-                return;
-            }
-
-            let html = '';
-            popularCategories.forEach(category => {
-                html += `
-                    <div class="popular-category" onclick="filterByCategory('${category.nameBn}')">
-                        <span>${category.nameBn}</span>
-                        <span class="category-count">${category.testCount}</span>
-                    </div>
-                `;
-            });
-
-            popularContainer.innerHTML = html;
-        }
-
-        // ==================== LOGO & ADS ====================
-        function loadLogo() {
-            db.collection('settings').doc('logo').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().url) {
-                        document.getElementById('site-logo').src = doc.data().url;
-                    }
-                });
-        }
-
-        function loadAds() {
-            // Load header ad
-            db.collection('ads').doc('header').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('header-ad').innerHTML = doc.data().code;
-                    }
-                });
-
-            // Load middle ad
-            db.collection('ads').doc('middle').get()
-                .then(doc => {
-                    if (doc.exists && doc.data().code) {
-                        document.getElementById('middle-ad').innerHTML = doc.data().code;
-                    }
-                });
         }
 
         // ==================== REAL-TIME UPDATES ====================
@@ -1295,56 +1421,57 @@
             // Listen for test updates
             db.collection('exams')
                 .where('status', '==', 'published')
-                .onSnapshot(() => {
+                .onSnapshot((snapshot) => {
+                    console.log('Tests updated, reloading...');
                     loadTests();
+                    loadNewTests();
+                }, (error) => {
+                    console.error('Error listening to tests:', error);
                 });
 
             // Listen for category updates
-            db.collection('categories').onSnapshot(() => {
+            db.collection('categories').onSnapshot((snapshot) => {
+                console.log('Categories updated, reloading...');
                 loadCategories();
                 loadPopularCategories();
+            }, (error) => {
+                console.error('Error listening to categories:', error);
+            });
+
+            // Listen for logo updates
+            db.collection('settings').doc('logo').onSnapshot((doc) => {
+                console.log('Logo updated, reloading...');
+                loadLogo();
+            }, (error) => {
+                console.error('Error listening to logo:', error);
             });
 
             // Listen for ad updates
-            db.collection('ads').doc('header').onSnapshot(() => {
+            db.collection('ads').doc('header').onSnapshot((doc) => {
+                console.log('Ads updated, reloading...');
                 loadAds();
+            }, (error) => {
+                console.error('Error listening to ads:', error);
             });
         }
 
-        // ==================== UTILITY FUNCTIONS ====================
-        function showError(type) {
+        // ==================== ERROR HANDLING ====================
+        function showError(type, message) {
             const messages = {
                 'tests': 'টেস্ট লোড করতে সমস্যা হয়েছে',
                 'categories': 'ক্যাটাগরি লোড করতে সমস্যা হয়েছে',
-                'general': 'সার্ভার সংযোগ সমস্যা'
+                'general': 'ডাটা লোড করতে সমস্যা হয়েছে'
             };
 
-            const container = document.getElementById(type === 'tests' ? 'tests-grid' : 
-                                                     type === 'categories' ? 'desktop-category-list' : 
-                                                     'main-content');
+            const errorMsg = messages[type] || messages.general;
+            const fullMessage = `${errorMsg}: ${message}`;
             
-            if (container) {
-                container.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>${messages[type] || messages.general}</h3>
-                        <p>পৃষ্ঠাটি রিলোড করুন</p>
-                    </div>
-                `;
-            }
+            console.error(fullMessage);
+            
+            const debugInfo = document.getElementById('debug-info');
+            debugInfo.innerHTML = fullMessage;
+            debugInfo.style.display = 'block';
         }
-
-        // Helper for contains selector
-        document.querySelectorAll = function(selector) {
-            const elements = Element.prototype.querySelectorAll.call(this, selector);
-            if (selector.includes(':contains(')) {
-                const text = selector.match(/:contains\("([^"]+)"\)/)[1];
-                return Array.from(elements).filter(el => 
-                    el.textContent.includes(text)
-                );
-            }
-            return elements;
-        };
 
     </script>
 </body>
